@@ -1,3 +1,59 @@
+<style>
+    .assessment-container {
+        text-align: center;
+    }
+
+    /* Clubs grid layout */
+    .clubs {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); /* 3 columns */
+        gap: 20px; /* Space between items */
+        margin-top: 20px;
+    }
+
+    /* Club card styling */
+    .club-card {
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        text-align: center;
+    }
+
+    .club-card img {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+    }
+
+    .assessment-btn {
+        margin-top: 10px;
+        background-color: #000;
+        color: #fff;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    h1 {
+        margin: 0;
+    }
+
+    /* Responsive styling: for smaller screens, adjust column count */
+    @media (max-width: 1024px) {
+        .clubs {
+            grid-template-columns: repeat(2, 1fr); /* 2 columns */
+        }
+    }
+
+    @media (max-width: 768px) {
+        .clubs {
+            grid-template-columns: 1fr; /* 1 column */
+        }
+    }
+</style>
+
 <x-layout>
     <x-slot name="header">
         <h2>Assessment</h2>
@@ -33,59 +89,5 @@
         </div>
     </div>
 
-    <style>
-        .assessment-container {
-            text-align: center;
-        }
-
-        /* Clubs grid layout */
-        .clubs {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr); /* 3 columns */
-            gap: 20px; /* Space between items */
-            margin-top: 20px;
-        }
-
-        /* Club card styling */
-        .club-card {
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            text-align: center;
-        }
-
-        .club-card img {
-            width: 100%;
-            height: auto;
-            border-radius: 8px;
-        }
-
-        .assessment-btn {
-            margin-top: 10px;
-            background-color: #000;
-            color: #fff;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        h1 {
-            margin: 0;
-        }
-
-        /* Responsive styling: for smaller screens, adjust column count */
-        @media (max-width: 1024px) {
-            .clubs {
-                grid-template-columns: repeat(2, 1fr); /* 2 columns */
-            }
-        }
-
-        @media (max-width: 768px) {
-            .clubs {
-                grid-template-columns: 1fr; /* 1 column */
-            }
-        }
-    </style>
+    
 </x-layout>
