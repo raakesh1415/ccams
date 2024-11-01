@@ -13,3 +13,11 @@ Route::get('/assessment', function () {
 Route::get('/assessment/add', function () {
     return view('assessment.create');
 });
+
+Route::get('/activity', function () {
+    return view('activity.index');
+});
+
+Route::get('/activity/add', function () {
+    return view('activity.create');
+});
