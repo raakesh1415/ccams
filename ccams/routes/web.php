@@ -9,3 +9,7 @@ Route::get('/', function () {
 Route::get('/assessment', function () {
     return view('assessment.index');
 });
+
+Route::get('/assessment/add', function () {
+    return view('assessment.create');
+});
