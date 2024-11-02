@@ -1,5 +1,5 @@
 <style>
-    .assessment-container {
+    .attendance-container {
         text-align: center;
     }
 
@@ -26,7 +26,7 @@
         border-radius: 8px;
     }
 
-    .assessment-btn {
+    .attendance-btn {
         margin-top: 10px;
         background-color: #000;
         color: #fff;
@@ -62,7 +62,7 @@
         </div>
     </x-slot>
 
-    <div class="assessment-container">
+    <div class="attendance-container">
         <h2>My Clubs</h2>
         <div class="clubs">
             <!-- Club 1 -->
@@ -70,24 +70,23 @@
                 <img src="{{ asset('images/testimg1.png') }}" alt="St John's Ambulance">
                 <h3>St John's Ambulance</h3>
                 <p>Uniform Body</p>
-                <button class="assessment-btn">Assessment</button>
+                <a href="/attendance/stjohns" class="attendance-btn">View Attendance</a>
             </div>
             <!-- Club 2 -->
             <div class="club-card">
                 <img src="{{ asset('images/testimg2.png') }}" alt="Coding & Robotics">
                 <h3>Coding & Robotics</h3>
                 <p>Society</p>
-                <button class="assessment-btn">Assessment</button>
+                <a href="/attendance/coding-robotics" class="attendance-btn">View Attendance</a>
             </div>
             <!-- Club 3 -->
             <div class="club-card">
                 <img src="{{ asset('images/testimg3.png') }}" alt="Badminton">
                 <h3>Badminton</h3>
                 <p>Sports & Games</p>
-                <button class="assessment-btn">Assessment</button>
+                <a href="/attendance/badminton" class="attendance-btn">View Attendance</a>
             </div>
         </div>
     </div>
-
-    
 </x-layout>
+
