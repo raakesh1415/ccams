@@ -19,7 +19,7 @@
                 <p>Encompasses a variety of clubs and associations, including academic, arts, and cultural clubs,
                     allowing students to develop their interests and talents beyond the classroom while fostering
                     teamwork and leadership values. </p>
-                <a href="{{ route('registration.kelab') }}" class="club-btn">See more</a>
+                <a href="{{ route('registration.kelab') }}" class="club-btn">Explore</a>
             </div>
             <!-- Sukan / Permainan -->
             <div class="club-card">
@@ -27,7 +27,7 @@
                 <h3>Sukan / Permainan</h3>
                 <p> Activities involving sports and games to encourage students to stay active, healthy, and build
                     sportsmanship. Through sports, students learn discipline, strategy, and teamwork. </p>
-                <a href="{{ route('registration.sukan') }}" class="club-btn">See more</a>
+                <a href="{{ route('registration.sukan') }}" class="club-btn">Explore</a>
             </div>
             <!-- Unit Beruniform -->
             <div class="club-card">
@@ -36,7 +36,7 @@
                 <p>Includes units like Scouts, Cadets, and St. John Ambulance that provide training in physical
                     endurance, leadership, and life skills while instilling patriotism and discipline among students.
                 </p>
-                <a href="{{ route('registration.beruniform') }}" class="club-btn">See more</a>
+                <a href="{{ route('registration.beruniform') }}" class="club-btn">Explore</a>
             </div>
         </div>
     </div>
