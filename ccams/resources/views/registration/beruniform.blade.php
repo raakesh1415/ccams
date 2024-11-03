@@ -118,6 +118,7 @@
             color: #666;
             font-size: 0.9rem;
             line-height: 1.5;
+            text-align: justify;
         }
 
         @media (max-width: 768px) {

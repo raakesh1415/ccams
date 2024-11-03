@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,7 +33,8 @@
             top: 0;
             bottom: 0;
             overflow-y: auto;
-            scrollbar-width: none; /* Firefox: Hide scrollbar */
+            scrollbar-width: none;
+            /* Firefox: Hide scrollbar */
         }
 
         /* Hide scrollbar for Chrome, Safari, and Edge */
@@ -107,11 +109,14 @@
         /* Content scrollable area */
         .content {
             background-color: #ededed;
-            margin-top: 70px; /* Adjust for header height */
+            margin-top: 70px;
+            /* Adjust for header height */
             padding: 0 20px 20px 20px;
             overflow-y: auto;
-            height: calc(100vh - 80px); /* Full height minus header */
-            scrollbar-width: none; /* Firefox: Hide scrollbar */
+            height: calc(100vh - 80px);
+            /* Full height minus header */
+            scrollbar-width: none;
+            /* Firefox: Hide scrollbar */
         }
 
         /* Hide scrollbar for Chrome, Safari, and Edge */
@@ -120,6 +125,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <!-- Sidebar -->
@@ -136,6 +142,11 @@
                 <li class="menu-item {{ request()->is('club') ? 'active' : '' }}">
                     <a href="/club">
                         <i class="fas fa-university"></i> Club
+                    </a>
+                </li>
+                <li class="menu-item {{ request()->is('registration') ? 'active' : '' }}">
+                    <a href="/registration">
+                        <i class="fas fa-clipboard-list"></i> Registration
                     </a>
                 </li>
                 <li class="menu-item {{ request()->is('activity') ? 'active' : '' }}">
@@ -175,4 +186,5 @@
         </div>
     </div>
 </body>
+
 </html>

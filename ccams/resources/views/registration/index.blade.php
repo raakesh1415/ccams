@@ -16,18 +16,26 @@
             <div class="club-card">
                 <img src="{{ asset('images/persatuan.jpg') }}" alt="Kelab / Persatuan">
                 <h3>Kelab / Persatuan</h3>
+                <p>Encompasses a variety of clubs and associations, including academic, arts, and cultural clubs,
+                    allowing students to develop their interests and talents beyond the classroom while fostering
+                    teamwork and leadership values. </p>
                 <a href="{{ route('registration.kelab') }}" class="club-btn">See more</a>
             </div>
             <!-- Sukan / Permainan -->
             <div class="club-card">
                 <img src="{{ asset('images/sukanpermainan.jpg') }}" alt="Sukan / Permainan">
                 <h3>Sukan / Permainan</h3>
+                <p> Activities involving sports and games to encourage students to stay active, healthy, and build
+                    sportsmanship. Through sports, students learn discipline, strategy, and teamwork. </p>
                 <a href="{{ route('registration.sukan') }}" class="club-btn">See more</a>
             </div>
             <!-- Unit Beruniform -->
             <div class="club-card">
                 <img src="{{ asset('images/unitberuniform.jpg') }}" alt="Unit Beruniform">
                 <h3>Unit Beruniform</h3>
+                <p>Includes units like Scouts, Cadets, and St. John Ambulance that provide training in physical
+                    endurance, leadership, and life skills while instilling patriotism and discipline among students.
+                </p>
                 <a href="{{ route('registration.beruniform') }}" class="club-btn">See more</a>
             </div>
         </div>
@@ -41,6 +49,7 @@
         }
 
         .clubs {
+            /* using display: flex */
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             /* 3 columns */
@@ -73,6 +82,11 @@
             border-radius: 5px;
             text-decoration: none;
             cursor: pointer;
+        }
+
+        p {
+            text-align: center;
+            text-align: justify;
         }
 
         /* Responsive styling: for smaller screens, adjust column count */
