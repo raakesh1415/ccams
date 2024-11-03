@@ -21,7 +21,7 @@
                                 alt="Rukun Negara">
                         </div>
                         <div class="club-details">
-                            <h3>Rukun Negara</h3>
+                            <h3>St. Johns</h3>
                             <div class="member-count">
                                 <i class="fas fa-users"></i>
                                 <span>200 Members</span>
@@ -37,6 +37,9 @@
                     </div>
                 </div>
             @endfor
+            <div class="return-button">
+                <a href="{{ route('registration.index') }}" class="return-btn">Return </a>
+            </div>
         </div>
     </div>
 
@@ -101,6 +104,21 @@
             padding: 8px 20px;
             border-radius: 4px;
             cursor: pointer;
+        }
+
+        .return-button {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .return-btn {
+            background: #000;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration-line: none;
         }
 
         h3 {
