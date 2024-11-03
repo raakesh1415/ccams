@@ -1,4 +1,6 @@
-<!-- clubs/index.blade.php -->
+<!-- registration/index.blade.php -->
+<!-- http://localhost:8000/clubs  -->
+
 <x-layout>
     <x-slot name="header">
         <h2>Club Registration</h2>
@@ -10,23 +12,24 @@
     <div class="club-container">
         <h2>Club Type</h2>
         <div class="clubs">
-            <!-- Club Type 1 -->
+            <!-- Kelab / Persatuan-->
             <div class="club-card">
                 <img src="{{ asset('images/persatuan.jpg') }}" alt="Kelab / Persatuan">
                 <h3>Kelab / Persatuan</h3>
-                <a href="{{ route('club.kelab') }}" class="club-btn">See more</a>
+                <a href="{{ route('registration.kelab') }}" class="club-btn">See more</a>
             </div>
-            <!-- Club Type 2 -->
+            <!-- Sukan / Permainan -->
             <div class="club-card">
                 <img src="{{ asset('images/sukanpermainan.jpg') }}" alt="Sukan / Permainan">
                 <h3>Sukan / Permainan</h3>
-                <a href="{{ route('club.sukan') }}" class="club-btn">See more</a>
+                <a href="{{ route('club.sukan') }}" class="club-btn">See more</a> <!-- change registration.sukan -->
             </div>
-            <!-- Club Type 3 -->
+            <!-- Unit Beruniform -->
             <div class="club-card">
                 <img src="{{ asset('images/unitberuniform.jpg') }}" alt="Unit Beruniform">
                 <h3>Unit Beruniform</h3>
                 <a href="{{ route('club.unitberuniform') }}" class="club-btn">See more</a>
+                <!-- change registration.berunifrom -->
             </div>
         </div>
     </div>
@@ -34,7 +37,7 @@
     <style>
         /* Styling for consistent layout and image sizing */
         .club-container {
-            text-align: center;
+            text-align: left;
             margin-top: 20px;
         }
 
