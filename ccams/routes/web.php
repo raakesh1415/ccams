@@ -50,8 +50,13 @@ Route::get('/club/unitberuniform', function () {
     return view('club.unitberuniform');
 })->name('club.unitberuniform');
 
+// registration routes starts
 Route::get('/registration', function () {
     return view('registration.index');
 })->name('registration.index');
 
+Route::get('/registration/kelab', function () {
+    return view('registration.kelab');
+})->name('registration.kelab');
+// registration routes ends
 
