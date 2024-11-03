@@ -49,3 +49,16 @@ Route::get('/club/sukan', function () {
 Route::get('/club/unitberuniform', function () {
     return view('club.unitberuniform');
 })->name('club.unitberuniform');
+
+Route::get('/registration', function () {
+    return view('registration.index');
+})->name('registration.index');
+
+/* cancel after this */
+Route::get('/registration', function () {
+    $categories = [
+        (object) ['name' => 'Art Club', 'description' => 'A club for art lovers', 'image_path' => null],
+        (object) ['name' => 'Science Club', 'description' => 'Explore the wonders of science', 'image_path' => null],
+    ];
+    return view('registration.index', compact('categories'));
+});
