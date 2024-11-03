@@ -9,19 +9,21 @@
 
     <div class="activity-container">
         <h2>Explore Activities</h2>
-        
+
         <!-- Check if activities exist (simulate with a Blade directive) -->
-        @if(false) <!-- Change to true to see the populated view -->
+        @if (false)
+            <!-- Change to true to see the populated view -->
             <!-- Activities List View -->
             <div class="activities">
                 <div class="add-activity-header">
                     <button class="add-activity-btn">Add Activity</button>
                 </div>
                 <div class="activity-list">
-                    @for ($i = 0; $i < 6; $i++) <!-- Simulate 6 activity cards -->
+                    @for ($i = 0; $i < 6; $i++)
+                        <!-- Simulate 6 activity cards -->
                         <div class="activity-card">
                             <img src="{{ asset('images/sample-activity.png') }}" alt="Activity Image">
-                            <h3>Activity Title {{ $i+1 }}</h3>
+                            <h3>Activity Title {{ $i + 1 }}</h3>
                             <p>Description of the activity goes here.</p>
                             <button class="edit-btn">Edit</button>
                             <button class="delete-btn">Delete</button>
@@ -33,7 +35,8 @@
             <!-- No Activity View -->
             <div class="no-activity">
                 <div class="no-activity-message">
-                    <img src="{{ asset('images/empty-icon.JPG') }}" alt="No Activities" style="width:100px; height:auto;">
+                    <img src="{{ asset('images/empty-icon.JPG') }}" alt="No Activities"
+                        style="width:100px; height:auto;">
                     <h3>No activity yet!</h3>
                     <p>Once activities are added, they will display here!</p>
                 </div>
@@ -43,18 +46,77 @@
     </div>
 
     <style>
-        
-        .activity-container { text-align: center; }
-        .no-activity { padding: 40px; background-color: #f8f9fa; border-radius: 8px; }
-        .no-activity-message h3 { font-size: 24px; color: #555; }
-        .activities { display: flex; flex-direction: column; align-items: center; }
-        .activity-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 20px; }
-        .activity-card { background: #fff; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); padding: 20px; text-align: center; }
-        .activity-card img { width: 100%; height: auto; border-radius: 8px; }
-        .edit-btn, .delete-btn { margin-top: 10px; padding: 8px 16px; border: none; border-radius: 5px; cursor: pointer; }
-        .edit-btn { background-color: #007bff; color: #fff; }
-        .delete-btn { background-color: #dc3545; color: #fff; }
-        @media (max-width: 1024px) { .activity-list { grid-template-columns: repeat(2, 1fr); } }
-        @media (max-width: 768px) { .activity-list { grid-template-columns: 1fr; } }
+        .activity-container {
+            text-align: center;
+        }
+
+        .no-activity {
+            padding: 40px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .no-activity-message h3 {
+            font-size: 24px;
+            color: #555;
+        }
+
+        .activities {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .activity-list {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .activity-card {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+        }
+
+        .activity-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .edit-btn,
+        .delete-btn {
+            margin-top: 10px;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .edit-btn {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .delete-btn {
+            background-color: #dc3545;
+            color: #fff;
+        }
+
+        @media (max-width: 1024px) {
+            .activity-list {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .activity-list {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </x-layout>
