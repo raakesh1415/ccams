@@ -29,3 +29,23 @@ Route::get('/activity', function () {
 Route::get('/activity/add', function () {
     return view('activity.create');
 });
+
+Route::get('/club', function () {
+    return view('club.index');
+});
+
+Route::get('/club/add', function () {
+    return view('club.create');
+});
+
+Route::get('/club/kelab', function () {
+    return view('club.kelab');
+})->name('club.kelab');
+
+Route::get('/club/sukan', function () {
+    return view('club.sukan');
+})->name('club.sukan');
+
+Route::get('/club/unitberuniform', function () {
+    return view('club.unitberuniform');
+})->name('club.unitberuniform');
