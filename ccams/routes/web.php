@@ -50,7 +50,7 @@ Route::get('/club/unitberuniform', function () {
     return view('club.unitberuniform');
 })->name('club.unitberuniform');
 
-// registration routes starts
+// registration routes start
 Route::get('/registration', function () {
     return view('registration.index');
 })->name('registration.index');
@@ -58,5 +58,13 @@ Route::get('/registration', function () {
 Route::get('/registration/kelab', function () {
     return view('registration.kelab');
 })->name('registration.kelab');
-// registration routes ends
+
+Route::get('/registration/sukan', function () {
+    return view('registration.sukan');
+})->name('registration.sukan');
+
+Route::get('/registration/berunifrom', function () {
+    return view('registration.beruniform');
+})->name('registration.beruniform');
+// registration routes end
 

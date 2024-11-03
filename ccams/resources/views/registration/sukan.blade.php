@@ -1,4 +1,4 @@
-<!-- registration/kelab.blade.php -->
+<!-- registration/sukan.blade.php -->
 
 <x-layout>
     <x-slot name="header">
@@ -9,7 +9,7 @@
     </x-slot>
 
     <div class="club-container">
-        <h2>Kelab / Persatuan</h2>
+        <h2>Sukan / Permainan</h2>
         <!-- Club Listings -->
         <div class="club-listings">
             <!-- Repeated Club Item -->
@@ -17,7 +17,7 @@
                 <div class="club-item">
                     <div class="club-content">
                         <div class="club-image">
-                            <img src="{{ asset('https://th.bing.com/th/id/OIP.OvaQCe3uNS_9-nGDXY-D7AHaFy?rs=1&pid=ImgDetMain') }}"
+                            <img src="{{ asset('https://png.pngtree.com/background/20210710/original/pngtree-running-sport-competition-poster-background-picture-image_1027728.jpg') }}"
                                 alt="Rukun Negara">
                         </div>
                         <div class="club-details">

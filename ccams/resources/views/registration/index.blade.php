@@ -22,14 +22,13 @@
             <div class="club-card">
                 <img src="{{ asset('images/sukanpermainan.jpg') }}" alt="Sukan / Permainan">
                 <h3>Sukan / Permainan</h3>
-                <a href="{{ route('club.sukan') }}" class="club-btn">See more</a> <!-- change registration.sukan -->
+                <a href="{{ route('registration.sukan') }}" class="club-btn">See more</a>
             </div>
             <!-- Unit Beruniform -->
             <div class="club-card">
                 <img src="{{ asset('images/unitberuniform.jpg') }}" alt="Unit Beruniform">
                 <h3>Unit Beruniform</h3>
-                <a href="{{ route('club.unitberuniform') }}" class="club-btn">See more</a>
-                <!-- change registration.berunifrom -->
+                <a href="{{ route('registration.beruniform') }}" class="club-btn">See more</a>
             </div>
         </div>
     </div>
