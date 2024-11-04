@@ -18,8 +18,12 @@ Route::get('/attendance', function () {
     return view('attendance.index');
 });
 
-Route::get('/attendance/add_attendance', function () {
-    return view('attendance.add_attendance');
+Route::get('/attendance/coding-robotics', function () {
+    return view('attendance.coding_robotics');
+});
+
+Route::get('/attendance/stjohns', function () {
+    return view('attendance.stjohns');
 });
 
 Route::get('/activity', function () {
