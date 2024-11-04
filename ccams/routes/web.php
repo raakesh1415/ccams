@@ -29,6 +29,7 @@ Route::get('/activity', function () {
 Route::get('/activity/add', function () {
     return view('activity.create');
 });
+<<<<<<< Updated upstream
 
 Route::get('/club', function () {
     return view('club.index');
@@ -68,3 +69,5 @@ Route::get('/registration/berunifrom', function () {
 })->name('registration.beruniform');
 // registration routes end
 
+=======
+>>>>>>> Stashed changes
