@@ -1,6 +1,3 @@
-<!-- registration/index.blade.php -->
-<!-- http://localhost:8000/clubs  -->
-
 <x-layout>
     <x-slot name="header">
         <h2>Club Registration</h2>

@@ -56,18 +56,19 @@ Route::get('/club/unitberuniform', function () {
 })->name('club.unitberuniform');
 
 // registration routes start
-Route::get('/registration', function () {
+Route::get('/registration', function (){
     return view('registration.index');
 })->name('registration.index');
 
-Route::get('/registration/kelab', function () {
+Route::get('/registration/kelab', function (){
     return view('registration.kelab');
 })->name('registration.kelab');
 
-Route::get('/registration/sukan', function () {
+Route::get('/registation/sukan', function () {
     return view('registration.sukan');
 })->name('registration.sukan');
 
-Route::get('/registration/berunifrom', function () {
+Route::get('/registaration/beruniform', function() {
     return view('registration.beruniform');
-})->name('registration.beruniform');
+});
+// registration routes end
