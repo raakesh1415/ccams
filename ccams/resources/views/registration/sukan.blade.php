@@ -1,156 +1,65 @@
-<!-- registration/sukan.blade.php -->
-
 <x-layout>
-    <x-slot name="header">
-        <h2>Club Registration</h2>
-        <div class="user-profile">
-            <img src="{{ asset('path-to-profile-picture.jpg') }}" alt="User Profile">
-        </div>
-    </x-slot>
+    <div class="container mt-5">
+        <h2 class="text-center">Sukan / Permainan</h2>
 
-    <div class="club-container">
-        <h2>Sukan / Permainan</h2>
         <!-- Club Listings -->
-        <div class="club-listings">
-            <!-- Repeated Club Item -->
-            @for ($i = 0; $i < 3; $i++)
-                <div class="club-item">
-                    <div class="club-content">
-                        <div class="club-image">
-                            <img src="{{ asset('https://png.pngtree.com/background/20210710/original/pngtree-running-sport-competition-poster-background-picture-image_1027728.jpg') }}"
-                                alt="Rukun Negara">
-                        </div>
-                        <div class="club-details">
-                            <h3>Badminton</h3>
-                            <div class="member-count">
-                                <i class="fas fa-users"></i>
-                                <span>200 Members</span>
+        <div class="row mt-4">
+            <!-- current clubs objects are assigned to club -->
+            @foreach ($clubs as $club)
+                <div class="col-md-6 mb-4">
+                    <div class="card shadow-sm h-100">
+                        <div class="row g-0">
+                            <!-- Club Image -->
+                            <div class="col-md-4">
+                                <img src="{{ asset($club->image_path) }}" class="img-fluid rounded-start"
+                                    alt="{{ $club->name }}">
                             </div>
-                            <h4>Description</h4>
-                            <p>Kelab Rukun Negara (KRN) is a Malaysian club that promotes the principles of the Rukun
-                                Negara to encourage unity, patriotism, and national values through educational programs
-                                and community activities.</p>
-                        </div>
-                        <div class="register-button">
-                            <button class="register-btn">Register</button>
+                            <div class="col-md-8">
+                                <div class="card-body d-flex flex-column">
+                                    <h3 class="card-title">{{ $club->name }}</h3>
+                                    <p class="text-muted">
+                                        <i class="fas fa-users"></i> {{ $club->members_count }} Members
+                                    </p>
+                                    <h5>Description</h5>
+                                    <p class="card-text text-justify">{{ $club->description }}</p>
+                                    <div class="mt-auto">
+                                        <a href="{{ route('registration.register', $club->id) }}"
+                                            class="btn btn-dark">Register</a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            @endfor
-            <div class="return-button">
-                <a href="{{ route('registration.index') }}" class="return-btn">Return </a>
-            </div>
+            @endforeach
+        </div>
+
+        <div class="text-center mt-4">
+            <a href="{{ route('registration.index') }}" class="btn btn-dark">Return</a>
         </div>
     </div>
 
     <style>
-        .club-container {
-            text-align: left;
-            margin-top: 20px;
-        }
-
-        .club-listings {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .club-item {
-            background: white;
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-        }
-
-        .club-content {
-            display: flex;
-            gap: 20px;
-        }
-
-        .club-image {
-            width: 120px;
-            height: 120px;
-            flex-shrink: 0;
-        }
-
-        .club-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 8px;
-        }
-
-        .club-details {
-            flex-grow: 1;
-        }
-
-        .member-count {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            color: #666;
-            margin: 10px 0;
-        }
-
-        .register-button {
-            display: flex;
-            align-items: flex-start;
-        }
-
-        .register-btn {
-            background: #000;
-            color: white;
-            border: none;
-            padding: 8px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        .return-button {
-            display: flex;
-            flex-direction: row;
-        }
-
-        .return-btn {
-            background: #000;
-            color: white;
-            border: none;
-            padding: 8px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-            text-decoration-line: none;
-        }
-
+        /* Additional styling to ensure layout structure */
         h3 {
             margin: 0;
             font-size: 1.25rem;
         }
 
-        h4 {
+        h5 {
             margin: 10px 0 5px;
             font-size: 1rem;
         }
 
-        p {
-            margin: 0;
+        .card-text {
             color: #666;
             font-size: 0.9rem;
             line-height: 1.5;
-            text-align: justify;
         }
 
         @media (max-width: 768px) {
-            .club-content {
-                flex-direction: column;
-            }
-
-            .club-image {
-                width: 100%;
-                height: 200px;
-            }
-
-            .register-button {
-                margin-top: 20px;
+            .card-body {
+                text-align: center;
             }
         }
     </style>
