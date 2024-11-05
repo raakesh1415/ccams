@@ -71,3 +71,15 @@ Route::get('/registration/sukan', function () {
 Route::get('/registration/berunifrom', function () {
     return view('registration.beruniform');
 })->name('registration.beruniform');
+
+Route::get('/profile', function () {
+    return view('profile.index');
+})->name('profile.index');
+
+Route::get('/login', function () {
+    return view('login.index');
+})->name('login.index');
+
+Route::get('/assessment', function () {
+    return view('assessment.index');
+})->name('assessment.index');
