@@ -64,11 +64,11 @@ Route::get('/registration/kelab', function (){
     return view('registration.kelab');
 })->name('registration.kelab');
 
-Route::get('/registation/sukan', function () {
+Route::get('/registration/sukan', function () {
     return view('registration.sukan');
 })->name('registration.sukan');
 
-Route::get('/registaration/beruniform', function() {
+Route::get('/registration/beruniform', function() {
     return view('registration.beruniform');
-});
+})->name('registration.beruniform');
 // registration routes end
