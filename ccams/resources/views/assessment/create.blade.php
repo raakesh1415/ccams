@@ -1,292 +1,346 @@
 <x-layout>
-    <x-slot name="header">
-        <h2>Assessment</h2>
-        <div class="user-profile">
-            <img src="{{ asset('path-to-profile-picture.jpg') }}" alt="User Profile">
+    <div class="container mt-4 mb-4">
+        <div class="card">
+            <div class="card-body">
+                <form action="" method="POST">
+                    @csrf
+                    <h2 class="text-center mb-4">Assessment Form</h2>
+
+                    <!-- Student Section -->
+                    <h3 class="mb-3">Student Details <small class="text-muted"></small></h3>
+                    <div class="row mb-3">
+                        <div class="col-md-4 mb-2">
+                            <label for="name" class="form-label">Name:</label>
+                            <input type="text" class="form-control" id="name" name="name" value="Ali Bin Abu">
+                        </div>
+                        <div class="col-md-4 mb-2">
+                            <label for="year" class="form-label">Year:</label>
+                            <input type="text" class="form-control" id="year" name="year" value="2024">
+                        </div>
+                        <div class="col-md-4 mb-2">
+                            <label for="ic" class="form-label">IC No:</label>
+                            <input type="text" class="form-control" id="ic" name="ic" value="070925101909">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-4 mb-2">
+                            <label for="id" class="form-label">ID No:</label>
+                            <input type="text" class="form-control" id="id" name="id" value="B22AE007">
+                        </div>
+                        <div class="col-md-4 mb-2">
+                            <label for="level" class="form-label">Level:</label>
+                            <input type="text" class="form-control" id="level" name="level" value="Form 5">
+                        </div>
+                        <div class="col-md-4 mb-2">
+                            <label for="email" class="form-label">Email:</label>
+                            <input type="email" class="form-control" id="email" name="email" value="aliabu@gmail.com">
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <!-- Position Section -->
+                    <h3 class="mb-3">Position <small class="text-muted">/ 10</small></h3>
+                    <div class="row mb-4">
+                        <div class="col-md-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="position" id="president" value="President">
+                                <label class="form-check-label" for="president">President (10)</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="position" id="vicePresident" value="Vice President">
+                                <label class="form-check-label" for="vicePresident">Vice President (8)</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="position" id="secretary" value="Secretary">
+                                <label class="form-check-label" for="secretary">Secretary (8)</label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="position" id="treasurer" value="Treasurer">
+                                <label class="form-check-label" for="treasurer">Treasurer (8)</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="position" id="viceSecretary" value="Vice Secretary">
+                                <label class="form-check-label" for="viceSecretary">Vice Secretary (6)</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="position" id="viceTreasurer" value="Vice Treasurer">
+                                <label class="form-check-label" for="viceTreasurer">Vice Treasurer (6)</label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="position" id="ajk" value="AJK">
+                                <label class="form-check-label" for="ajk">AJK (6)</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="position" id="activeMember" value="Active Member">
+                                <label class="form-check-label" for="activeMember">Active Member (4)</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="position" id="ordinaryMember" value="Ordinary Member">
+                                <label class="form-check-label" for="ordinaryMember">Ordinary Member (2)</label>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <!-- Engagement Level Section -->
+                    <h3 class="mb-3">Engagement Level <small class="text-muted">/ 20</small></h3>
+                    <div class="row mb-4">
+                        <div class="col-md-4">
+                            <h4 class="h5">Engagement 1</h4>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="engagement_1" id="eng1International" value="International">
+                                <label class="form-check-label" for="eng1International">International (20)</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="engagement_1" id="eng1National" value="National">
+                                <label class="form-check-label" for="eng1National">National (17)</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="engagement_1" id="eng1Country" value="Country">
+                                <label class="form-check-label" for="eng1Country">Country (14)</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="engagement_1" id="eng1District" value="District/Zone">
+                                <label class="form-check-label" for="eng1District">District/Zone (11)</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="engagement_1" id="eng1School" value="School/None">
+                                <label class="form-check-label" for="eng1School">School/None (0)</label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <h4 class="h5">Engagement 2</h4>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="engagement_2" id="eng2International" value="International">
+                                <label class="form-check-label" for="eng2International">International (15)</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="engagement_2" id="eng2National" value="National">
+                                <label class="form-check-label" for="eng2National">National ( 12)</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="engagement_2" id="eng2Country" value="Country">
+                                <label class="form-check-label" for="eng2Country">Country (10)</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="engagement_2" id="eng2District" value="District/Zone">
+                                <label class="form-check-label" for="eng2District">District/Zone (8)</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="engagement_2" id="eng2School" value="School/None">
+                                <label class="form-check-label" for="eng2School">School/None (0)</label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <h4 class="h5">Engagement 3</h4>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="engagement_3" id="eng3International" value="International">
+                                <label class="form-check-label" for="eng3International">International (10)</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="engagement_3" id="eng3National" value="National">
+                                <label class="form-check-label" for="eng3National">National (8)</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="engagement_3" id="eng3Country" value="Country">
+                                <label class="form-check-label" for="eng3Country">Country (6)</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="engagement_3" id="eng3District" value="District/Zone">
+                                <label class="form-check-label" for="eng3District">District/Zone (4)</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="engagement_3" id="eng3School" value="School/None">
+                                <label class="form-check-label" for="eng3School">School/None (0)</label>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <!-- Achievement Level Section -->
+                    <h3 class="mb-3">Achievement Level <small class="text-muted">/ 20</small></h3>
+                    <div class="row mb-4">
+                        <div class="col-md-3">
+                            <h4 class="h5">Engagement</h4>
+                            <p class="mb-0">International</p>
+                            <p class="mb-0">National</p>
+                            <p class="mb-0">Country</p>
+                            <p class="mb-0">District / Zone</p>
+                            <p class="mb-0">School</p>
+                        </div>
+                        <div class="col-md-3">
+                            <h4 class="h5">Champion</h4>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="achievement" id="champInt" value="C-I">
+                                <label class="form-check-label" for="champInt">20</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="achievement" id="champNat" value="C-N">
+                                <label class="form-check-label" for="champNat">17</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="achievement" id="champCountry" value="C-C">
+                                <label class="form-check-label" for="champCountry">14</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="achievement" id="champDist" value="C-D">
+                                <label class="form-check-label" for="champDist">11</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="achievement" id="champSchool" value="C-S">
+                                <label class="form-check-label" for="champSchool">8</label>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <h4 class="h5">1st Runner Up</h4>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="achievement" id="runnerUp1Int" value="1-I">
+                                <label class="form-check-label" for="runnerUp1Int">19</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="achievement" id="runnerUp1Nat" value="1-N">
+                                <label class="form-check-label" for="runnerUp1Nat">16</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="achievement" id="runnerUp1Country" value="1-C">
+                                <label class="form-check-label" for="runnerUp1Country">13</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="achievement" id="runnerUp1Dist" value="1-D">
+                                <label class="form-check-label" for="runnerUp1Dist">10</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="achievement" id="runnerUp1School" value="1-S">
+                                <label class="form-check-label" for="runnerUp1School">7</label>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <h4 class="h5">2nd Runner Up</h4>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="achievement" id="runnerUp2Int" value="2-I">
+                                <label class="form-check-label" for="runnerUp2Int">18</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="achievement" id="runnerUp2Nat" value="2-N">
+                                <label class="form-check-label" for="runnerUp2Nat">15</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="achievement" id="runnerUp2Country" value="2-C">
+                                <label class="form-check-label" for="runnerUp2Country">12</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="achievement" id="runnerUp2Dist" value="2-D">
+                                <label class="form-check-label" for="runnerUp2Dist">9</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="achievement" id="runnerUp2School" value="2-S">
+                                <label class="form-check-label" for="runnerUp2School">6</label>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <!-- Commitment Section -->
+                    <h3 class="mb-3">Commitment <small class="text-muted">/ 10</small></h3>
+                    <div class="row mb-4">
+                        <div class="col-md-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="commitment" id="leadership" value="Demonstrate leadership">
+                                <label class="form-check-label" for="leadership">Demonstrate leadership (3)</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="commitment" id="manageActivities" value="Manage activities">
+                                <label class="form-check-label" for="manageActivities">Manage activities (3)</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="commitment" id="helpTeachers" value="Helping teachers/friends">
+                                <label class="form-check-label" for="helpTeachers">Helping teachers/friends (2)</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="commitment" id="provideEquipment" value="Provide equipment">
+                                <label class="form-check-label" for="provideEquipment">Provide equipment (2)</label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="commitment" id="cleanArea" value="Clean the area">
+                                <label class="form-check-label" for="cleanArea">Clean the area (2)</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="commitment" id="punctual" value="Punctual">
+                                <label class="form-check-label" for="punctual">Punctual (2)</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="commitment" id="showInterest" value="Show interest">
+                                <label class="form-check-label" for="showInterest">Show interest (2)</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="commitment" id="showSeriousness" value="Show seriousness">
+                                <label class="form-check-label" for="showSeriousness">Show seriousness (2)</label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="commitment" id="followInstructions" value="Follow Instructions">
+                                <label class="form-check-label" for="followInstructions">Follow Instructions (2)</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="commitment" id="trying" value="Trying">
+                                <label class="form-check-label" for="trying">Trying (2)</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="commitment" id="giveCooperation" value="Give cooperation">
+                                <label class="form-check-label" for="giveCooperation">Give cooperation (2)</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="commitment" id="observableValue" value="Any observable pure value">
+                                <label class="form-check-label" for="observableValue">Any observable pure value (2)</label>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <!-- Contribution Service Section -->
+                    <h3 class="mb-3">Contribution Service (School Level) <small class="text-muted">/ 10</small></h3>
+                    <div class="mb-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="contribution" id="cs1" value="CS1">
+                            <label class="form-check-label" for="cs1">Students who are registered as program / tournament / competition / carnival / course participants (10)</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="contribution" id="cs2" value="CS2">
+                            <label class="form-check-label" for="cs2">Involves specific skills-judge/umpire, team coach/technical aspects (10)</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="contribution" id="cs3" value="CS3">
+                            <label class="form-check-label" for="cs3">Involvement of students involved in activities such as interlude performances (8)</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="contribution" id="cs4" value="CS4">
+                            <label class="form-check-label" for="cs4">Helping in terms of making unit activities successful such as participating in performances, cheerleading and related (5)</label>
+                        </div>
+                    </div>
+                    <hr>
+                    <!-- Attendance and Comment Section -->
+                    <h3 class="mb-3">Attendance & Comment <small class="text-muted">/ 40</small></h3>
+                    <div class="row mb-4">
+                        <div class="col-md-6 mb-2">
+                            <label for="attendance" class="form-label">Attendance:</label>
+                            <input type="text" class="form-control" id="attendance" name="attendance" value="12">
+                        </div>
+                        <div class="col-md-6 mb-2">
+                            <label for="comment" class="form-label">Comment:</label>
+                            <textarea class="form-control" id="comment" name="comment" rows="1" placeholder="Enter your comment here"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary">Submit Assessment</button>
+                    </div>
+                </form>
+            </div>
         </div>
-    </x-slot>
-
-    <div class="assessment-container">
-        {{-- <form action="{{ route('assessment.submit') }}" method="POST"> --}}
-        <form action="" method="POST">
-            @csrf
-            <h2>Assessment Form</h2>
-
-            <!-- Student Section -->
-            <h3>Student Details <span class="score-info"></span></h3>
-            <div class="text-section">
-                <div class="attendance-section">
-                    <label>Name:  <input type="text" name="name" value="Ali Bin Abu"></label><br>
-                    <label>Year:&nbsp;&nbsp; <input type="text" name="year" value="2024"></label><br>
-                </div>
-                <div class="attendance-section">
-                    <label>IC No: <input type="text" name="ic" value="070925101909"></label><br>
-                    <label>ID No: <input type="text" name="id" value="B22AE007"></label><br>
-                </div>
-                <div class="attendance-section">
-                    <label>Level: <input type="text" name="level" value="Form 5"></label><br>
-                    <label>Email: <input type="text" name="email" value="aliabu@gmail.com"></label>
-                </div>
-            </div>
-
-            <hr>
-
-            <!-- Position Section -->
-            <h3>Position <span class="score-info">/ 10</span></h3>
-            <div class="form-group">
-                <!-- Left Column Positions -->
-                <div class="position-column">
-                    <label><input type="radio" name="position" value="President"> President (10)</label><br>
-                    <label><input type="radio" name="position" value="Vice President"> Vice President (8)</label><br>
-                    <label><input type="radio" name="position" value="Secretary"> Secretary (8)</label><br>
-                </div>
-                <!-- Center Column Positions -->
-                <div class="position-column">
-                    <label><input type="radio" name="position" value="Treasurer"> Treasurer (8)</label><br>
-                    <label><input type="radio" name="position" value="Vice Secretary"> Vice Secretary (6)</label><br>
-                    <label><input type="radio" name="position" value="Vice Treasurer"> Vice Treasurer (6)</label><br>
-                </div>
-                <!-- Right Column Positions -->
-                <div class="position-column">
-                    <label><input type="radio" name="position" value="AJK"> AJK (6)</label><br>
-                    <label><input type="radio" name="position" value="Active Member"> Active Member (4)</label><br>
-                    <label><input type="radio" name="position" value="Ordinary Member"> Ordinary Member(2)</label><br>
-                </div>
-            </div>
-
-            <!-- Engagement Level Section -->
-            <h3>Engagement Level <span class="score-info">/ 20</span></h3>
-            <div class="form-group">
-                <!-- Engagement 1 -->
-                <div class="position-column">
-                    <h4>Engagement 1</h4>
-                    <label><input type="radio" name="engagement_1" value="International"> International (20)</label><br>
-                    <label><input type="radio" name="engagement_1" value="National"> National (17)</label><br>
-                    <label><input type="radio" name="engagement_1" value="Country"> Country (14)</label><br>
-                    <label><input type="radio" name="engagement_1" value="District/Zone"> District/Zone (11)</label><br>
-                    <label><input type="radio" name="engagement_1" value="School/None"> School/None (0)</label><br>
-                </div>
-                <!-- Engagement 2 -->
-                <div class="position-column">
-                    <h4>Engagement 2</h4>
-                    <label><input type="radio" name="engagement_2" value="International"> International (15)</label><br>
-                    <label><input type="radio" name="engagement_2" value="National"> National (12)</label><br>
-                    <label><input type="radio" name="engagement_2" value="Country"> Country (10)</label><br>
-                    <label><input type="radio" name="engagement_2" value="District/Zone"> District/Zone (8)</label><br>
-                    <label><input type="radio" name="engagement_2" value="School/None"> School/None (0)</label><br>
-                </div>
-                <!-- Engagement 3 -->
-                <div class="position-column">
-                    <h4>Engagement 3</h4>
-                    <label><input type="radio" name="engagement_3" value="International"> International (10)</label><br>
-                    <label><input type="radio" name="engagement_3" value="National"> National (8)</label><br>
-                    <label><input type="radio" name="engagement_3" value="Country"> Country (6)</label><br>
-                    <label><input type="radio" name="engagement_3" value="District/Zone"> District/Zone (4)</label><br>
-                    <label><input type="radio" name="engagement_3" value="School/None"> School/None (0)</label><br>
-                </div>
-            </div>
-
-            <!-- Achievement Level Section -->
-            <h3>Achievement Level <span class="score-info">/ 20</span></h3>
-            <div class="form-group">
-                <div class="position-column-achieve">
-                    <h4>Engagement</h4>
-                    <label> International </label><br>
-                    <label> National </label><br>
-                    <label> Country </label><br>
-                    {{-- <label> Division* </label><br> --}}
-                    <label> District/Zone </label><br>
-                    <label> School </label><br>
-                </div>
-                <!-- Champion -->
-                <div class="position-column-achieve">
-                    <h4>Champion</h4>
-                    <label><input type="checkbox" name="achievement" value="C-I"> 20</label><br>
-                    <label><input type="checkbox" name="achievement" value="C-N"> 17</label><br>
-                    <label><input type="checkbox" name="achievement" value="C-C"> 14</label><br>
-                    <label><input type="checkbox" name="achievement" value="C-D"> 11</label><br>
-                    <label><input type="checkbox" name="achievement" value="C-S"> 8</label><br>
-                </div>
-                <!-- 1st Runner Up -->
-                <div class="position-column-achieve">
-                    <h4>1st Runner Up</h4>
-                    <label><input type="checkbox" name="achievement" value="1-I"> 19</label><br>
-                    <label><input type="checkbox" name="achievement" value="1-N"> 16</label><br>
-                    <label><input type="checkbox" name="achievement" value="1-C"> 13</label><br>
-                    <label><input type="checkbox" name="achievement" value="1-D"> 10</label><br>
-                    <label><input type="checkbox" name="achievement" value="1-S"> 7</label><br>
-                </div>
-                <!-- 2nd Runner Up -->
-                <div class="position-column-achieve">
-                    <h4>2nd Runner Up</h4>
-                    <label><input type="checkbox" name="achievement" value="2-I"> 18</label><br>
-                    <label><input type="checkbox" name="achievement" value="2-N"> 15</label><br>
-                    <label><input type="checkbox" name="achievement" value="2-C"> 12</label><br>
-                    <label><input type="checkbox" name="achievement" value="2-D"> 9</label><br>
-                    <label><input type="checkbox" name="achievement" value="2-S"> 6</label><br>
-                </div>
-            </div>
-
-            <!-- Commitment Section -->
-            <h3>Commitment <span class="score-info">/ 10</span></h3>
-            <div class="form-group commitment-grid">
-                <div class="position-column">
-                    <label><input type="checkbox" name="commitment" value="Demonstrate leadership"> Demonstrate leadership (3)</label><br>
-                    <label><input type="checkbox" name="commitment" value="Manage activities"> Manage activities (3)</label><br>
-                    <label><input type="checkbox" name="commitment" value="Helping teachers/friends"> Helping teachers/friends (2)</label><br>
-                    <label><input type="checkbox" name="commitment" value="Provide equipment"> Provide equipment (2)</label><br>
-                </div>
-                <div class="position-column">
-                    <label><input type="checkbox" name="commitment" value="Clean the area"> Clean the area (2)</label><br>
-                    <label><input type="checkbox" name="commitment" value="Punctual"> Punctual (2)</label><br>
-                    <label><input type="checkbox" name="commitment" value="Show interest"> Show interest (2)</label><br>
-                    <label><input type="checkbox" name="commitment" value="Show seriousness"> Show seriousness (2)</label><br>
-                </div>
-                <div class="position-column">
-                    <label><input type="checkbox" name="commitment" value="Follow Instructions"> Follow Instructions (2)</label><br>
-                    <label><input type="checkbox" name="commitment" value="Trying"> Trying (2)</label><br>
-                    <label><input type="checkbox" name="commitment" value="Give cooperation"> Give cooperation (2)</label><br>
-                    <label><input type="checkbox" name="commitment" value="Any observable pure value"> Any observable pure value (2)</label><br>
-                </div>
-            </div>
-
-            <h3>Contribution Service (School Level) <span class="score-info">/ 10</span></h3>
-            <div class="form-group">
-                <div class="position-column-contribution">
-                    <label><input type="radio" name="contribution" value="CS1"> Students who are registered as program/tournament/competition/carnival/course participants (10)</label><br>
-                    <label><input type="radio" name="contribution" value="CS2"> Involves specific skills-judge/umpire, team coach/technical aspects (10)</label><br>
-                    <label><input type="radio" name="contribution" value="CS3"> Involvement of students involved in activities such as interlude performances (8)</label><br>
-                    <label><input type="radio" name="contribution" value="CS4"> Helping in terms of making unit activities successful such as participating in performances, cheerleading and related (5)</label><br>
-                </div>
-            </div>
-
-            <!-- Attendance and Comment Section -->
-            <h3>Attendance & Comment <span class="score-info">/ 40</span></h3>
-            <div class="text-section">
-                <div class="attendance-section">
-                    <label>Attendance:</label>
-                    <input type="text" name="attendance" value="12">
-                </div>
-                <div class="comment-section">
-                    <label>Comment:</label>
-                    <textarea name="comment" placeholder="Enter your comment here" rows="1"></textarea>
-                </div>
-            </div>
-
-            <!-- Submit Button -->
-            <button type="submit" class="submit-btn">Submit Assessment</button>
-
-        </form>
     </div>
-
-    <style>
-        .assessment-container {
-            text-align: center;
-            min-width: 500px;
-            margin: auto;
-            padding: 10px 20px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            margin-top: 20px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-            text-align: left;
-        }
-
-        .position-column {
-            display: inline-block;
-            width: 30%;
-            vertical-align: top;
-            padding: 10px;
-        }
-
-        .position-column-achieve {
-            display: inline-block;
-            width: 20%;
-            vertical-align: top;
-            padding: 10px;
-        }
-
-        .position-column-contribution {
-            display: inline-block;
-            width: 100%;
-            vertical-align: top;
-            padding: 10px;
-        }
-
-        h2 {
-            text-align: center;
-        }
-
-        h3 {
-            margin-top: 20px;
-            margin-bottom: 10px;
-            text-align: left;
-        }
-
-        h4 {
-            margin: 8px 0px 8px 0px;
-            font-weight: normal;
-            color: #555;
-            text-align: left;
-        }
-
-        .score-info {
-            font-size: 0.9em;
-            color: #777;
-        }
-
-        .submit-btn {
-            background-color: #007bff;
-            color: #fff;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin: 20px 0 20px 0;
-            transition: background-color 0.3s;
-        }
-
-        .commitment-grid {
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .submit-btn:hover {
-            background-color: #0056b3;
-        }
-
-        .text-section {
-            display: flex;
-            gap: 20px;
-            text-align: left;
-            justify-content: space-between;
-            padding: 10px;
-        }
-
-        .attendance-section, .comment-section {
-            display: flex;
-            flex-direction: column;
-            width: 48%;
-        }
-
-        .attendance-section input[type="text"] {
-            padding: 8px;
-            font-size: 1em;
-            border: 1px solid #ced4da;
-            border-radius: 4px;
-        }
-
-        .comment-section textarea {
-            padding: 8px;
-            font-size: 1em;
-            border: 1px solid #ced4da;
-            border-radius: 4px;
-            /* height: 60px; */
-            /* resize: vertical; */
-        }
-    </style>
 </x-layout>
