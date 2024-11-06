@@ -4,24 +4,24 @@
 
         <!-- Sukan Listings -->
         <div class="row mt-4">
-            @foreach ($sukan as $sukans)
+            @foreach ($sukan as $club)
                 <div class="col-md-6 mb-4">
                     <div class="card shadow-sm h-100">
                         <div class="row g-0">
                             <div class="col-md-4">
-                                <img src="{{ asset($sukans->image) }}" class="img-fluid rounded-start"
-                                    alt="{{ $sukans->name }}">
+                                <img src="{{ asset($club->image) }}" class="img-fluid rounded-start"
+                                    alt="{{ $club->name }}">
                             </div>
                             <div class="col-md-8">
                                 <div class="card-body d-flex flex-column">
-                                    <h3 class="card-title">{{ $sukans->name }}</h3>
+                                    <h3 class="card-title">{{ $club->name }}</h3>
                                     <p class="text-muted">
-                                        <i class="fas fa-users"></i> {{ $sukans->members_count }} Members
+                                        <i class="fas fa-users"></i> {{ $club->members_count }} Members
                                     </p>
                                     <h5>Description</h5>
-                                    <p class="card-text text-justify">{{ $sukans->description }}</p>
+                                    <p class="card-text text-justify">{{ $club->description }}</p>
                                     <div class="mt-auto">
-                                        <a href="{{ route('registration.register', $sukans->id) }}"
+                                        <a href="{{ route('registration.register', $club->id) }}"
                                             class="btn btn-dark">Register</a>
                                     </div>
                                 </div>
