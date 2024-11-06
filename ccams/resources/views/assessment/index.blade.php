@@ -17,7 +17,7 @@
                     <div class="card-body">
                         <h5 class="card-title">St John's Ambulance</h5>
                         <p class="card-text">Uniform Body</p>
-                        <button class="btn btn-dark">Assessment</button>
+                        <a href="{{ route('assessment.list') }}" class="btn btn-dark">Assessment</a>
                     </div>
                 </div>
             </div>
@@ -28,7 +28,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Coding & Robotics</h5>
                         <p class="card-text">Society</p>
-                        <button class="btn btn-dark">Assessment</button>
+                        <a href="{{ route('assessment.list') }}" class="btn btn-dark">Assessment</a>
                     </div>
                 </div>
             </div>
@@ -39,7 +39,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Badminton</h5>
                         <p class="card-text">Sports & Games</p>
-                        <button class="btn btn-dark">Assessment</button>
+                        <a href="{{ route('assessment.list') }}" class="btn btn-dark">Assessment</a>
                     </div>
                 </div>
             </div>

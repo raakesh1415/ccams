@@ -1,19 +1,26 @@
 <?php
 
+use App\Http\Controllers\AssessmentController;
 use Illuminate\Support\Facades\Route;
 
+
+//Dashboard
 Route::get('/', function () {
     return view('assessment.index');
 });
 
-Route::get('/assessment', function () {
-    return view('assessment.index');
-});
 
-Route::get('/assessment/add', function () {
-    return view('assessment.create');
-});
+// Assessment
+Route::get('/assessment', [AssessmentController::class, 'index'])->name('assessment.index');
+Route::get('/assessment/list/create', [AssessmentController::class, 'create'])->name('assessment.create');
+Route::get('/assessment/list', [AssessmentController::class, 'index'])->name('assessment.list');
+Route::post('/assessment/list', [AssessmentController::class, 'store'])->name('assessment.store');
 
+Route::resource('assessment', AssessmentController::class);
+
+
+
+// Attendance 
 Route::get('/attendance', function () {
     return view('attendance.index');
 });
@@ -26,6 +33,8 @@ Route::get('/attendance/stjohns', function () {
     return view('attendance.stjohns');
 });
 
+
+// Activity 
 Route::get('/activity', function () {
     return view('activity.index');
 });
@@ -35,6 +44,7 @@ Route::get('/activity/add', function () {
 });
 
 
+// Club 
 Route::get('/club', function () {
     return view('club.index');
 });
@@ -55,6 +65,7 @@ Route::get('/club/unitberuniform', function () {
     return view('club.unitberuniform');
 })->name('club.unitberuniform');
 
+
 // registration routes start
 Route::get('/registration', function (){
     return view('registration.index');
@@ -73,6 +84,8 @@ Route::get('/registration/beruniform', function() {
 })->name('registration.beruniform');
 // registration routes end
 
+
+// Profile 
 Route::get('/profile', function () {
     return view('profile.index');
 })->name('profile.index');
