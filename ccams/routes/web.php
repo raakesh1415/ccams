@@ -71,7 +71,7 @@ Route::get('/registration/sukan', function () {
 Route::get('/registration/beruniform', function() {
     return view('registration.beruniform');
 })->name('registration.beruniform');
-
+// registration routes end
 
 Route::get('/profile', function () {
     return view('profile.index');
