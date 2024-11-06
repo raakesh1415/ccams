@@ -10,7 +10,7 @@ class CreateRegistrationTable extends Migration
 
     public function up()
     {
-        Schema::create('registration', function (Blueprint $table) {
+        Schema::create('registrations', function (Blueprint $table) {
             $table->id();
             $table->string('user_id');
             $table->string('club_id');
