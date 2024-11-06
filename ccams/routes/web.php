@@ -66,7 +66,7 @@ Route::get('/club/unitberuniform', function () {
 })->name('club.unitberuniform');
 
 
-// registration routes start
+// Registration
 Route::get('/registration', function (){
     return view('registration.index');
 })->name('registration.index');
@@ -82,7 +82,6 @@ Route::get('/registration/sukan', function () {
 Route::get('/registration/beruniform', function() {
     return view('registration.beruniform');
 })->name('registration.beruniform');
-// registration routes end
 
 
 // Profile 
