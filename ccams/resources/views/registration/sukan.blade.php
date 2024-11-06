@@ -3,6 +3,7 @@
         <h2 class="text-center">SUKAN / PERMAINAN</h2>
 
         <!-- Sukan Listings -->
+        <!-- Image, member_count,...variable have to be same as Club Model variable -->
         <div class="row mt-4">
             @foreach ($sukan as $club)
                 <div class="col-md-6 mb-4">

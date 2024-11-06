@@ -3,6 +3,7 @@
         <h2 class="text-center">UNIT BERUNIFORM</h2>
 
         <!-- Beruniform Listings -->
+        <!-- Image, member_count,...variable have to be same as Club Model variable -->
         <div class="row mt-4">
             @foreach ($beruniform as $club)
                 <div class="col-md-6 mb-4">

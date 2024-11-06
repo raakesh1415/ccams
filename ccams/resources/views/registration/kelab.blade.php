@@ -3,12 +3,14 @@
         <h2 class="text-center">KELAB / PERSATUAN</h2>
 
         <!-- Kelab Listings -->
+        <!-- Image, member_count,...variable have to be same as Club Model variable -->
         <div class="row mt-4">
             @foreach ($kelab as $club)
                 <div class="col-md-6 mb-4">
                     <div class="card shadow-sm h-100">
                         <div class="row g-0">
                             <div class="col-md-4">
+
                                 <img src="{{ asset($club->image) }}" class="img-fluid rounded-start"
                                     alt="{{ $club->name }}">
                             </div>

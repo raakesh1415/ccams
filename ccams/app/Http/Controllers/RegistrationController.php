@@ -10,10 +10,11 @@ use Illuminate\Support\Facades\Auth;
 
 class RegistrationController extends Controller
 {
-    // Modify variable based on Club Models
+    //Modify variable based on Club Models
     public function kelabIndex(){
         $kelab = Club::where('type', 'kelab')->get();
-        return view('registration.kelab', compact('kelab'));
+        return view('registration.kelab', compact('kelab'));   
+        // kelab => $kelab (assigne $kelab(value) to kelab (key))
     }
 
     public function sukanIndex() {
@@ -36,12 +37,28 @@ class RegistrationController extends Controller
             return redirect()->back()->with('error', 'You have already registered for'.$clubType );
         }
 
-        //Register student to club if yet register
+        //Register student to club
         Registration::create([
-            'user_id' => $userId,
+            'user_id' => $userId,   // Assign $userId (value) to user_id (key)
             'club_id' => $clubId,
         ]);
 
         return redirect()->back()->with('success','You have successfully registered for thi club');
     }
+
+    //Unregister student from club
+    /*
+    public function unregister($clubId)
+    {
+        $userId = Auth::id();
+
+        $registration = Registration::where('user_id', $userId)->where('club_id', $clubId)->first();
+
+        if ($registration) {
+            $registration->delete();
+            return redirect()->back()->with('success', 'Successfully unregistered from the club.');
+        }
+
+        return redirect()->back()->with('error', 'You are not registered for this club.');
+    }*/
 }
