@@ -11,7 +11,7 @@ class CreateRegistrationsTable extends Migration
     public function up()
     {
         Schema::create('registrations', function (Blueprint $table) {
-            $table->id();
+            $table->string('registrations_id');
             $table->string('user_id');
             $table->string('club_id');
             $table->string('club_type');
