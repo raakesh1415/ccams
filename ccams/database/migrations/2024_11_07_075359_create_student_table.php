@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUsersTable extends Migration
+class CreateStudentTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->id('userID'); // Primary Key
+        Schema::create('student', function (Blueprint $table) {
+            $table->id('studentID'); // Primary Key
             $table->string('username');
             $table->string('email')->unique();
             $table->string('password');
@@ -24,9 +24,9 @@ class CreateUsersTable extends Migration
             $table->string('level')->nullable();
             $table->text('about_me')->nullable();
             $table->string('timezone')->nullable();
-            $table->foreignId('club_id')->nullable()->constrained('clubs'); // Foreign Key to Clubs table
-            $table->foreignId('activity_id')->nullable()->constrained('activities'); // Foreign Key to Activities table
-            $table->foreignId('assessment_id')->nullable()->constrained('assessments'); // Foreign Key to Assessments table
+            $table->foreignId('club_id')->nullable(); //->constrained('clubs'); // Foreign Key to Clubs table
+            $table->foreignId('activity_id')->nullable(); //->constrained('activities'); // Foreign Key to Activities table
+            $table->foreignId('assessment_id')->nullable(); //->constrained('assessments'); // Foreign Key to Assessments table
             $table->timestamps(); // created_at and updated_at columns
         });
     }

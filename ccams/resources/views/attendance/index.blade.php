@@ -1,92 +1,47 @@
-<style>
-    .attendance-container {
-        text-align: center;
-    }
-
-    /* Clubs grid layout */
-    .clubs {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr); /* 3 columns */
-        gap: 20px; /* Space between items */
-        margin-top: 20px;
-    }
-
-    /* Club card styling */
-    .club-card {
-        background: #fff;
-        border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        padding: 20px;
-        text-align: center;
-    }
-
-    .club-card img {
-        width: 100%;
-        height: auto;
-        border-radius: 8px;
-    }
-
-    .attendance-btn {
-        margin-top: 10px;
-        background-color: #000;
-        color: #fff;
-        padding: 10px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-
-    h1 {
-        margin: 0;
-    }
-
-    /* Responsive styling: for smaller screens, adjust column count */
-    @media (max-width: 1024px) {
-        .clubs {
-            grid-template-columns: repeat(2, 1fr); /* 2 columns */
-        }
-    }
-
-    @media (max-width: 768px) {
-        .clubs {
-            grid-template-columns: 1fr; /* 1 column */
-        }
-    }
-</style>
-
 <x-layout>
-    <x-slot name="header">
-        <h2>Attendance</h2>
+    {{-- <x-slot name="header">
         <div class="user-profile">
-            <img src="{{ asset('path-to-profile-picture.jpg') }}" alt="User Profile"> <!-- Replace with actual profile picture path -->
+            <img src="{{ asset('path-to-profile-picture.jpg') }}" alt="User Profile" class="img-fluid rounded-circle" style="width: 100px; height: 100px;">
         </div>
-    </x-slot>
+    </x-slot> --}}
 
-    <div class="attendance-container">
-        <h2>My Clubs</h2>
-        <div class="clubs">
-            <!-- Club 1 -->
-            <div class="club-card">
-                <img src="{{ asset('images/testimg1.png') }}" alt="St John's Ambulance">
-                <h3>St John's Ambulance</h3>
-                <p>Uniform Body</p>
-                <a href="/attendance/stjohns" class="attendance-btn">View Attendance</a>
+    <div class="text-center pt-3 pb-4">
+        <h2 class="text-start">Attendance</h2>
+        <h4 class="text-start pt-4">My Clubs</h4>
+        <div class="row g-4 mt-0">
+            <!-- Club 1: St John's Ambulance (Uniform Body) -->
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="card club-card">
+                    <img src="{{ asset('images/unitberuniform.jpg') }}" alt="St John's Ambulance" class="card-img-top p-0">
+                    <div class="card-body">
+                        <h5 class="card-title">St John's Ambulance</h5>
+                        <p class="card-text">Uniform Body</p>
+                        <a href="{{ route('attendance.show', ['club' => 'stjohns']) }}" class="btn btn-dark">View Attendance</a>
+                    </div>
+                </div>
             </div>
-            <!-- Club 2 -->
-            <div class="club-card">
-                <img src="{{ asset('images/testimg2.png') }}" alt="Coding & Robotics">
-                <h3>Coding & Robotics</h3>
-                <p>Society</p>
-                <a href="/attendance/coding-robotics" class="attendance-btn">View Attendance</a>
+            <!-- Club 2: Coding & Robotics (Society) -->
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="card club-card">
+                    <img src="{{ asset('images/persatuan.jpg') }}" alt="Coding & Robotics" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">Coding & Robotics</h5>
+                        <p class="card-text">Society</p>
+                        <a href="{{ route('attendance.show', ['club' => 'coding_robotics']) }}" class="btn btn-dark">View Attendance</a>
+                    </div>
+                </div>
             </div>
-            <!-- Club 3 -->
-            <div class="club-card">
-                <img src="{{ asset('images/testimg3.png') }}" alt="Badminton">
-                <h3>Badminton</h3>
-                <p>Sports & Games</p>
-                <a href="/attendance/badminton" class="attendance-btn">View Attendance</a>
+            <!-- Club 3: Badminton (Sports & Games) -->
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="card club-card">
+                    <img src="{{ asset('images/sukanpermainan.jpg') }}" alt="Badminton" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">Badminton</h5>
+                        <p class="card-text">Sports & Games</p>
+                        <a href="{{ route('attendance.show', ['club' => 'badminton']) }}" class="btn btn-dark">View Attendance</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </x-layout>
-
