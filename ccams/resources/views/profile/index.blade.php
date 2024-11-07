@@ -8,7 +8,7 @@
                 <h3>HANK A22EC1234</h3>
                 <button class="edit-profile-btn">Edit profile</button>
                 <div class="about-me">
-                    <h4>About me</h4>
+                    <h4>About Me</h4>
                     <p>STUDENT AT VIRTUAL UNIVERSITY</p>
                 </div>
             </div>
@@ -31,16 +31,16 @@
 
             <!-- Course Details Section -->
             <div class="card">
-                <h4>Course details</h4>
-                <p>Course profiles</p>
+                <h4>Activity details</h4>
+                <p>Activity profiles</p>
                 <ul>
-                    <li>CS101-01 INTRODUCTION TO COMPUTER SCIENCE</li>
-                    <li>MATH102-02 CALCULUS I</li>
-                    <li>ENG201-03 PROFESSIONAL WRITING</li>
-                    <li>PHY101-01 GENERAL PHYSICS</li>
-                    <li>HIST202-02 MODERN WORLD HISTORY</li>
-                    <li>CS202-04 DATA STRUCTURES</li>
-                    <li>CS303-05 INTERNET PROGRAMMING</li>
+                    <li>.................</li>
+                    <li>.................</li>
+                    <li>.................</li>
+                    <li>.................</li>
+                    <li>.................</li>
+                    <li>.................</li>
+                    <li>.................</li>
                 </ul>
             </div>
 
@@ -67,13 +67,13 @@
                 <p>Last access to site: Thursday, 7 November 2024, 3:45 PM (2 mins ago)</p>
             </div>
 
-            <!-- Mobile App Section -->
+            <!-- Club Details Section (Modified from Mobile App) -->
             <div class="card">
-                <h4>Mobile app</h4>
-                <p>QR code for mobile app access</p>
-                <img src="{{ asset('path-to-qr-code.png') }}" alt="QR Code" class="qr-code">
-                <p>This site has mobile app access enabled.</p>
-                <a href="#" class="download-link">Download the mobile app</a>
+                <h4>Club details</h4>
+                <p>Club profiles</p>
+                <p>Sukan / Permainan club</p>
+                <p>Kelab / Persatuan club</p>
+                <p>Unit Beruniform club</p>
             </div>
         </div>
     </div>
@@ -171,4 +171,3 @@
         }
     </style>
 </x-layout>
- 
