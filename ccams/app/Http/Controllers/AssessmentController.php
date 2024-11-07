@@ -52,7 +52,7 @@ class AssessmentController extends Controller
             'contribution' => $data['contribution'],
             'attendance' => $data['attendance'],
             'comment' => $data['comment'],
-            'totalMarks' => $data['total_mark'], // Ensure this matches the column name in your database
+            'total_mark' => $data['total_mark'], // Ensure this matches the column name in your database
         ];
     
         // Create new assessment record in the database
