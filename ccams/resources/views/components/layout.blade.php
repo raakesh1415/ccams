@@ -69,7 +69,7 @@
                             <div class="sb-nav-link-icon"><i class="fas fa-clipboard-list"></i></div>
                             Registration
                         </a>
-                        <a class="nav-link {{ request()->is('activity') ? 'active' : '' }}" href="/activity">
+                        <a class="nav-link {{ request()->is('activities') ? 'active' : '' }}" href="/activities">
                             <div class="sb-nav-link-icon"><i class="fas fa-tasks"></i></div>
                             Activity
                         </a>

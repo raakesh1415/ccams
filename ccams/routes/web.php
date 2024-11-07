@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClubController;
 
 
+use App\Http\Controllers\ActivityController;
 
 
 //Dashboard
@@ -39,13 +40,23 @@ Route::get('/attendance/stjohns', function () {
 
 
 // Activity 
-Route::get('/activity', function () {
-    return view('activity.index');
-});
+//Route::get('/activity', function () {
+    //return view('activity.index');
+//});
 
-Route::get('/activity/add', function () {
-    return view('activity.create');
-});
+//Route::get('/activity/add', function () {
+  //  return view('activity.create');
+//});
+
+// Route to display the list of activities
+Route::get('/activities', [ActivityController::class, 'index'])->name('activities.index');
+
+// Route to display the add activity form
+Route::get('/activities/create', [ActivityController::class, 'create'])->name('activities.create');
+Route::post('/activities', [ActivityController::class, 'store'])->name('activities.store');
+
+
+
 
 
 // Club 

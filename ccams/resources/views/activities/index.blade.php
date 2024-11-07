@@ -1,4 +1,4 @@
-<!-- index.blade.php -->
+<!-- resources/views/activity/index.blade.php -->
 <x-layout>
     <x-slot name="header">
         <h2>Activities</h2>
@@ -10,37 +10,38 @@
     <div class="activity-container">
         <h2>Explore Activities</h2>
 
-        <!-- Check if activities exist (simulate with a Blade directive) -->
-        @if (false)
-            <!-- Change to true to see the populated view -->
-            <!-- Activities List View -->
-            <div class="activities">
-                <div class="add-activity-header">
-                    <button class="add-activity-btn">Add Activity</button>
-                </div>
-                <div class="activity-list">
-                    @for ($i = 0; $i < 6; $i++)
-                        <!-- Simulate 6 activity cards -->
-                        <div class="activity-card">
-                            <img src="{{ asset('images/sample-activity.png') }}" alt="Activity Image">
-                            <h3>Activity Title {{ $i + 1 }}</h3>
-                            <p>Description of the activity goes here.</p>
-                            <button class="edit-btn">Edit</button>
-                            <button class="delete-btn">Delete</button>
-                        </div>
-                    @endfor
-                </div>
-            </div>
-        @else
+        <!-- Check if activities exist -->
+        @if ($activities->isEmpty())
             <!-- No Activity View -->
             <div class="no-activity">
                 <div class="no-activity-message">
-                    <img src="{{ asset('images/empty-icon.JPG') }}" alt="No Activities"
-                        style="width:100px; height:auto;">
+                    <img src="{{ asset('images/empty-icon.JPG') }}" alt="No Activities" style="width:100px; height:auto;">
                     <h3>No activity yet!</h3>
                     <p>Once activities are added, they will display here!</p>
                 </div>
-                <button class="add-activity-btn">Add Activity</button>
+                <a href="{{ route('activities.create') }}" class="add-activity-btn">Add Activity</a>
+            </div>
+        @else
+            <!-- Activities List View -->
+            <div class="activities">
+                <div class="add-activity-header">
+                    <a href="{{ route('activities.create') }}" class="add-activity-btn">Add Activity</a>
+                </div>
+                <div class="activity-list">
+                    @foreach ($activities as $activity)
+                        <div class="activity-card">
+                            <img src="{{ $activity->poster ? asset('storage/' . $activity->poster) : asset('images/sample-activity.png') }}" alt="Activity Image">
+                            <h3>{{ $activity->activity_name }}</h3>
+                            <p>{{ Str::limit($activity->description, 100) }}</p>
+                            <a href="{}" class="edit-btn">Edit</a>
+                            <form action="{}" method="POST" style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="delete-btn">Delete</button>
+                            </form>
+                        </div>
+                    @endforeach
+                </div>
             </div>
         @endif
     </div>
