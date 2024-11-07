@@ -118,6 +118,7 @@
         <input type="text" class="input-field" id="username" placeholder="Username" required>
         <input type="password" class="input-field" id="password" placeholder="Password" required>
         <button class="login-btn" id="loginButton" disabled>Log In</button>
+        <button class="Signin-btn" id="SigninButton" onclick="window.location.href='/login/signin'" >Sign In</button>
     </div>
 
     <script>
