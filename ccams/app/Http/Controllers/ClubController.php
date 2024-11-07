@@ -26,10 +26,10 @@ class ClubController extends Controller
 
         // Create a new club record in the database
         Club::create([
-            'clubName' => $validated['club_name'],
-            'clubDescription' => $validated['description'],
-            'participantTotal' => $validated['participants'],
-            'clubCategory' => $validated['category'],
+            'club_name' => $validated['club_name'],
+            'club_description' => $validated['description'],
+            'participant_total' => $validated['participants'],
+            'club_category' => $validated['category'],
         ]);
 
         // Redirect back with a success message

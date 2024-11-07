@@ -8,6 +8,7 @@ class CreateClubsTable extends Migration
 {
     public function up(): void
     {
+        
         Schema::create('clubs', function (Blueprint $table) {
             $table->id('club_id');
             $table->string('club_name');
