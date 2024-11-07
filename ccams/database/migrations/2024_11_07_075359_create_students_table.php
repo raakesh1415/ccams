@@ -15,10 +15,7 @@ class CreateStudentsTable extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
             $table->id('studentID'); // Primary Key
-            $table->string('username');
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->string('role');
+            $table->foreignId('user_id')->nullable(); //->constrained('users'); // Foreign Key to Users table
             $table->string('ic_number')->nullable();
             $table->year('year')->nullable();
             $table->string('level')->nullable();
