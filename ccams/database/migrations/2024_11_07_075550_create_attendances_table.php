@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('attendance', function (Blueprint $table) {
+        Schema::create('attendances', function (Blueprint $table) {
             $table->id('attendanceID'); // Primary Key
             $table->foreignId('student_id'); //->constrained('students'); // Foreign Key referencing students table
             $table->foreignId('club_id'); //->constrained('clubs'); // Foreign Key referencing clubs table
