@@ -6,7 +6,7 @@
             <div class="profile-card">
                 <img src="{{ asset('images/profile.png') }}" class="profile-image">
                 <h3>HANK A22EC1234</h3>
-                <button class="edit-profile-btn">Edit profile</button>
+                <button class="edit-profile-btn" onclick="window.location.href='/profile/edit'">Edit profile</button>
                 <div class="about-me">
                     <h4>About Me</h4>
                     <p>STUDENT AT VIRTUAL UNIVERSITY</p>
@@ -18,7 +18,7 @@
         <div class="right-column">
             <!-- User Details Section -->
             <div class="card">
-                <h4>User details <a href="#" class="edit-link">Edit profile</a></h4>
+                <h4>User details <a href="{{ route('profile.edit') }}" class="edit-link">Edit profile</a></h4>
                 <p>Email address: hank@example.com (Visible to other course participants)</p>
                 <p>Timezone: America/New_York</p>
             </div>
@@ -67,7 +67,7 @@
                 <p>Last access to site: Thursday, 7 November 2024, 3:45 PM (2 mins ago)</p>
             </div>
 
-            <!-- Club Details Section (Modified from Mobile App) -->
+            <!-- Club Details Section -->
             <div class="card">
                 <h4>Club details</h4>
                 <p>Club profiles</p>

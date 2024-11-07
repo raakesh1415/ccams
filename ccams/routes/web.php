@@ -101,3 +101,6 @@ Route::get('/assessment', function () {
     return view('assessment.index');
 })->name('assessment.index');
 
+Route::get('/profile/edit', function () {
+    return view('profile.edit');
+})->name('profile.edit');
