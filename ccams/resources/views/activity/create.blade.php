@@ -40,6 +40,7 @@
                 <input type="text" id="duration" required>
 
                 <button type="submit" class="submit-btn">Add Activity</button>
+                
             </div>
         </form>
     </div>
