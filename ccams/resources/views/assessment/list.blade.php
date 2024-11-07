@@ -24,7 +24,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($assessment as $as)
+                        @foreach ($assessments as $as)
                         <tr>
                             <td>{{ $as->position }}</td>
                             <td>{{ $as->engagement }}</td>
@@ -33,10 +33,10 @@
                             <td>{{ $as->contribution }}</td>
                             <td>{{ $as->total_mark }}</td>
                             <td>
-                                {{-- <a href="{{ route('assessment.create', $as->id) }}" class="btn btn-sm btn-success"><span class="fa fa-plus"></i>"></span></a> --}}
-                                <a href="{{ route('assessment.show', $as->id) }}" class="btn btn-sm btn-info"><span class="fa fa-eye"></a>
-                                <a href="{{ route('assessment.edit', $as->id) }}" class="btn btn-sm btn-warning"><span class="fa fa-edit"></a>
-                                <a href="{{ route('assessment.destroy', $as->id) }}" class="btn btn-sm btn-danger"><span class="fa fa-trash"></span></a>
+                                {{-- <a href="{{ route('assessment.create', $as->assessment_id) }}" class="btn btn-sm btn-success"><span class="fa fa-plus"></i>"></span></a> --}}
+                                <a href="{{ route('assessment.show', $as->assessment_id) }}" class="btn btn-sm btn-info"><span class="fa fa-eye"></a>
+                                <a href="{{ route('assessment.edit', $as->assessment_id) }}" class="btn btn-sm btn-warning"><span class="fa fa-edit"></a>
+                                <a href="{{ route('assessment.destroy', $as->assessment_id) }}" class="btn btn-sm btn-danger"><span class="fa fa-trash"></span></a>
                             </td>
                         </tr>
                         @endforeach

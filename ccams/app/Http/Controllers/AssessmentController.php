@@ -9,8 +9,11 @@ use Illuminate\Routing\Controller;
 class AssessmentController extends Controller
 {
     public function index()
-    {
-        return view("assessment.list");
+    {   
+        $assessments = Assessment::all();
+        return view("assessment.list", [
+            'assessments' => $assessments]
+        );
     }
 
     public function create()

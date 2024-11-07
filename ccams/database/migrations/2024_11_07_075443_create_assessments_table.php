@@ -21,11 +21,11 @@ return new class extends Migration
             $table->integer('attendance');
             $table->text('comment');
             $table->integer('total_mark');
-            $table->string('user_id');
-            $table->string('attendance_id');
+            // $table->string('user_id');
+            // $table->string('attendance_id');
             // $table->foreign('user_id')->references('user_id')->on('users')->onDelete('cascade');
             // $table->foreign('attendance_id')->references('attendance_id')->on('attendances')->onDelete('cascade');
-            // $table->timestamps();
+            $table->timestamps();
         });
     }
 
