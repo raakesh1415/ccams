@@ -19,6 +19,6 @@ class Assessment extends Model
         'contribution',
         'attendance',
         'comment',
-        'totalMarks', // Add this line
+        'total_mark', // Add this line
     ];
 }

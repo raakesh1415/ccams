@@ -31,7 +31,7 @@
                             <td>{{ $as->commitment }}</td>
                             <td>{{ $as->achievement }}</td>
                             <td>{{ $as->contribution }}</td>
-                            <td>{{ $as->totalMarks }}</td>
+                            <td>{{ $as->total_mark }}</td>
                             <td>
                                 {{-- <a href="{{ route('assessment.create', $as->id) }}" class="btn btn-sm btn-success"><span class="fa fa-plus"></i>"></span></a> --}}
                                 <a href="{{ route('assessment.show', $as->id) }}" class="btn btn-sm btn-info"><span class="fa fa-eye"></a>
