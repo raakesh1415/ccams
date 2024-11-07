@@ -15,8 +15,8 @@ class CreateClubsTable extends Migration
             $table->text('club_description');
             $table->integer('participant_total');
             $table->string('club_category');
-            $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
+            $table->string('club_pic');
+            $table->timestamps();
         });
     }
 
