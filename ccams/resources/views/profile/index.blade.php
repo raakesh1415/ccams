@@ -9,8 +9,8 @@
                 <button class="edit-profile-btn" onclick="window.location.href='/profile/edit'">Edit profile</button>
                 <div class="about-me">
                     <h4>About Me</h4>
-                    <p>STUDENT AT VIRTUAL UNIVERSITY</p>
-                </div>
+                    <p>STUDENT AT UNIVERSITI TEKNOLOGI MALAYSIA</p>
+                </div>  
             </div>
         </div>
 
