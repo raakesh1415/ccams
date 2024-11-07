@@ -9,11 +9,11 @@ class CreateClubsTable extends Migration
     public function up(): void
     {
         Schema::create('clubs', function (Blueprint $table) {
-            $table->id('clubID');
-            $table->string('clubName');
-            $table->text('clubDescription');
-            $table->integer('participantTotal');
-            $table->string('clubCategory');
+            $table->id('club_id');
+            $table->string('club_name');
+            $table->text('club_description');
+            $table->integer('participant_total');
+            $table->string('club_category');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });

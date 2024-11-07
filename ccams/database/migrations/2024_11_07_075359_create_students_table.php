@@ -14,7 +14,7 @@ class CreateStudentsTable extends Migration
     public function up()
     {
         Schema::create('students', function (Blueprint $table) {
-            $table->id('studentID'); // Primary Key
+            $table->id('student_id'); // Primary Key
             $table->foreignId('user_id')->nullable(); //->constrained('users'); // Foreign Key to Users table
             $table->string('ic_number')->nullable();
             $table->year('year')->nullable();

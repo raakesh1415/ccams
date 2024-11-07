@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('attendances', function (Blueprint $table) {
-            $table->id('attendanceID'); // Primary Key
+            $table->id('attendance_id'); // Primary Key
             $table->foreignId('student_id'); //->constrained('students'); // Foreign Key referencing students table
             $table->foreignId('club_id'); //->constrained('clubs'); // Foreign Key referencing clubs table
             $table->integer('week_number'); // Week number

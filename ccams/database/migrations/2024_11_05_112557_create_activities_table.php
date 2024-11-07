@@ -12,7 +12,7 @@ class CreateActivitiesTable extends Migration
     public function up(): void
     {
         Schema::create('activities', function (Blueprint $table) {
-            $table->id();
+            $table->id("activity_id");
             $table->string('activity_name');
             $table->string('location');
             $table->dateTime('date_time');
