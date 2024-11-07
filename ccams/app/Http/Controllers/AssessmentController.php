@@ -10,10 +10,7 @@ class AssessmentController extends Controller
 {
     public function index()
     {
-        $assessment = Assessment::paginate(10);
-        return view("assessment.list", [
-            'assessment' => $assessment
-        ]);
+        return view("assessment.list");
     }
 
     public function create()
