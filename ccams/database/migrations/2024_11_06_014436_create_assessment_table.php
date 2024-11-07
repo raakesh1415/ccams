@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('assessment', function (Blueprint $table) {
-            $table->id();
+            $table->id("as_id");
             $table->integer('position');
             $table->integer('engagement');
             $table->integer('achievement');
@@ -20,8 +20,8 @@ return new class extends Migration
             $table->integer('contribution');
             $table->integer('attendance');
             $table->text('comment');
-            $table->integer('totalMarks');
-            $table->timestamps();
+            $table->integer('total_mark');
+            // $table->timestamps();
         });
     }
 
