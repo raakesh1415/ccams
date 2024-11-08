@@ -38,6 +38,9 @@ Route::get('/attendance/stjohns', function () {
     return view('attendance.stjohns');
 });
 
+Route::get('/attendance/{club}', [AttendanceController::class, 'show'])->name('attendance.show');
+
+
 
 // Activity 
 //Route::get('/activity', function () {

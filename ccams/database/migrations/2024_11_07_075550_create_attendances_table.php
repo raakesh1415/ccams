@@ -4,28 +4,26 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreateAttendancesTable extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
+    public function up()
     {
         Schema::create('attendances', function (Blueprint $table) {
             $table->id('attendance_id'); // Primary Key
-            $table->foreignId('student_id'); //->constrained('students'); // Foreign Key referencing students table
-            $table->foreignId('club_id'); //->constrained('clubs'); // Foreign Key referencing clubs table
-            $table->integer('week_number'); // Week number
-            $table->enum('status', ['present', 'absent', 'late']); // Attendance status
+            $table->unsignedBigInteger('student_id'); // Foreign Key to Students table
+            $table->unsignedBigInteger('club_id');    // Foreign Key to Clubs table
+            $table->unsignedTinyInteger('week_number'); // Week 1-12
+            $table->enum('status', ['Present', 'Absent', 'Excused']); // Attendance status
             $table->timestamps();
+
+            // Set up foreign keys
+            $table->foreign('student_id')->references('student_id')->on('students')->onDelete('cascade');
+            $table->foreign('club_id')->references('club_id')->on('clubs')->onDelete('cascade');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
+    public function down()
     {
-        Schema::dropIfExists('attendance');
+        Schema::dropIfExists('attendances');
     }
-};
+}
