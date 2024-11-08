@@ -15,7 +15,7 @@ class CreateClubsTable extends Migration
             $table->text('club_description');
             $table->integer('participant_total');
             $table->string('club_category');
-            $table->string('club_pic');
+            $table->string('club_pic')->nullable();
             $table->timestamps();
         });
     }
