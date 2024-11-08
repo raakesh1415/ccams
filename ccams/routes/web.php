@@ -3,8 +3,7 @@
 use App\Http\Controllers\AssessmentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClubController;
-
-
+use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\ActivityController;
 
 
@@ -38,6 +37,7 @@ Route::get('/attendance/stjohns', function () {
     return view('attendance.stjohns');
 });
 
+Route::get('/attendance', [AttendanceController::class, 'index'])->name('attendance.index');
 Route::get('/attendance/{club}', [AttendanceController::class, 'show'])->name('attendance.show');
 
 
