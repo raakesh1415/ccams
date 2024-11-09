@@ -7,6 +7,9 @@
     </x-slot>
 
     <div class="container">
+        <!-- Centered Title -->
+        <h3 class="text-center mb-4">Club Details</h3>
+
         <div class="card shadow-sm p-4">
             <form action="{{ route('clubs.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
@@ -16,7 +19,7 @@
                     <div class="col-md-6 mb-4">
                         <!-- Club Name -->
                         <div class="mb-3">
-                            <label for="club_name" class="form-label"><b>Club Name</b></label>
+                            <label for="club_name" class="form-label">Club Name</label>
                             <input type="text" id="club_name" name="club_name" class="form-control" required placeholder="Enter club name">
                         </div>
 
@@ -57,7 +60,7 @@
 
                 <!-- Submit Button -->
                 <div class="d-grid gap-2 d-md-flex justify-content-md-center mt-4">
-                    <button type="submit" class="btn btn-primary btn-lg px-4 py-2">Add Club</button>
+                    <button type="submit" class="btn btn-dark btn-lg px-4 py-2">Add Club</button>
                 </div>
             </form>
         </div>

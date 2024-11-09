@@ -7,8 +7,8 @@
         <h2>Explore Sukan / Permainan Clubs</h2>
         
         <!-- Add Club Button -->
-        <div class="add-club-button mb-4">
-            <button type="button" class="btn btn-primary" onclick="window.location.href='/club/add'">
+        <br><div class="add-club-button mb-4">
+            <button type="button" class="btn btn-dark" onclick="window.location.href='/club/add'">
                 Add Club
             </button>
         </div>
@@ -26,7 +26,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">{{ $club->club_name }}</h5>
                                 <p class="card-text">{{ Str::limit($club->club_description, 100) }}</p>
-                                <a href="#" class="btn btn-primary">View Details</a>
+                                <a href="#" class="btn btn-dark">View Details</a>
                             </div>
                         </div>
                     </div>
