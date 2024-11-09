@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClubController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\StudentController;
 
 
 //Dashboard
@@ -21,23 +22,14 @@ Route::post('/assessment/list', [AssessmentController::class, 'store'])->name('a
 
 Route::resource('assessment', AssessmentController::class);
 
+//Students
+Route::resource('students', StudentController::class);
 
 
-// Attendance 
-Route::get('/attendance', function () {
-    return view('attendance.index');
-});
-
-Route::get('/attendance/coding-robotics', function () {
-    return view('attendance.coding_robotics');
-});
-
-Route::get('/attendance/stjohns', function () {
-    return view('attendance.stjohns');
-});
-
+// Attendance
 Route::get('/attendance', [AttendanceController::class, 'index'])->name('attendance.index');
 Route::get('/attendance/{club}', [AttendanceController::class, 'show'])->name('attendance.show');
+Route::post('/attendance/{club}/store', [AttendanceController::class, 'store'])->name('attendance.store'); // Define store route
 
 
 
@@ -57,17 +49,11 @@ Route::get('/activities', [ActivityController::class, 'index'])->name('activitie
 Route::get('/activities/create', [ActivityController::class, 'create'])->name('activities.create');
 Route::post('/activities', [ActivityController::class, 'store'])->name('activities.store');
 
-
-
-
-
 // Club 
 Route::get('/club/kelab', [ClubController::class, 'showKelabClubs'])->name('club.kelab');
 Route::post('/club/add', [ClubController::class, 'store'])->name('clubs.store');
 Route::get('/club/sukan', [ClubController::class, 'showSukanClubs'])->name('club.sukan');
 Route::get('/club/unitberuniform', [ClubController::class, 'showUnitBeruniformClubs'])->name('club.unitberuniform');
-
-
 
 Route::get('/club', function () {
     return view('club.index');
@@ -75,8 +61,6 @@ Route::get('/club', function () {
 
 Route::get('/club/add', function () { 
     return view('club.create'); })->name('club.create');
-
-
 
 // Registration
 Route::get('/registration', function (){

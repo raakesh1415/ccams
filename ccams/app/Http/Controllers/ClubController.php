@@ -2,19 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Club; // Import the Club model
+use App\Models\Club;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
 
 class ClubController extends Controller
 {
     /**
-     * Store a newly created club in storage.
+     * Display a listing of the clubs categorized as 'Kelab / Persatuan'.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\View\View
      */
-    
+
      public function showKelabClubs()
      {
          // Fetch clubs in the 'Kelab / Persatuan' category
@@ -40,9 +38,17 @@ public function showUnitBeruniformClubs()
     // Pass clubs to the view
     return view('club.unitberuniform', compact('clubs'));
 }
+
+    /**
+     * Store a newly created club in the database.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    
     public function store(Request $request)
     {
-        // Validate the incoming request data
+        // Validate incoming data
         $validated = $request->validate([
             'club_name' => 'required|string|max:255',
             'club_description' => 'required|string',
@@ -50,26 +56,33 @@ public function showUnitBeruniformClubs()
             'club_category' => 'required|string|in:Kelab / Persatuan,Sukan / Permainan,Unit Beruniform',
             'club_pic' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
-    
-        // Handle the file upload
+
+        // Handle the file upload if an image is provided
         $clubPicPath = null;
         if ($request->hasFile('club_pic')) {
             $clubPicPath = $request->file('club_pic')->store('club_pics', 'public');
         }
-    
-        // Create a new club record in the database
+
+        // Create a new club record
         Club::create([
             'club_name' => $validated['club_name'],
             'club_description' => $validated['club_description'],
             'participant_total' => $validated['participant_total'],
             'club_category' => $validated['club_category'],
-            'club_pic' => $clubPicPath ?? 'default_image.jpg', // Use default if no image is uploaded
+            'club_pic' => $clubPicPath ?? 'default_image.jpg',
         ]);
-    
-        // Flash success message and redirect to index
-        session()->flash('success', 'Club successfully added!');
-        return redirect(url('/club'));
 
+        // Redirect back with success message
+        return redirect()->back()->with('success', 'Club added successfully!');
     }
-    
+
+    /**
+     * Show the form for creating a new club.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function create()
+    {
+        return view('club.create');
+    }
 }
