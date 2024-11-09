@@ -16,6 +16,7 @@ class Club extends Model
         'club_name',
         'club_description',
         'participant_total',
-        'club_category'
+        'club_category',
+        'club_pic'
     ];
 }
