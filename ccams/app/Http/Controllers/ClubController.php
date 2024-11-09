@@ -15,6 +15,31 @@ class ClubController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      */
     
+     public function showKelabClubs()
+     {
+         // Fetch clubs in the 'Kelab / Persatuan' category
+         $clubs = Club::where('club_category', 'Kelab / Persatuan')->get();
+         
+         return view('club.kelab', compact('clubs'));
+     }
+
+     public function showSukanClubs()
+{
+    // Fetch clubs in the 'Sukan / Permainan' category
+    $clubs = Club::where('club_category', 'Sukan / Permainan')->get();
+
+    // Pass clubs to the view
+    return view('club.sukan', compact('clubs'));
+}
+
+public function showUnitBeruniformClubs()
+{
+    // Fetch clubs in the 'Unit Beruniform' category
+    $clubs = Club::where('club_category', 'Unit Beruniform')->get();
+
+    // Pass clubs to the view
+    return view('club.unitberuniform', compact('clubs'));
+}
     public function store(Request $request)
     {
         // Validate the incoming request data

@@ -62,10 +62,10 @@ Route::post('/activities', [ActivityController::class, 'store'])->name('activiti
 
 
 // Club 
-
+Route::get('/club/kelab', [ClubController::class, 'showKelabClubs'])->name('club.kelab');
 Route::post('/club/add', [ClubController::class, 'store'])->name('clubs.store');
-Route::get('/club', [ClubController::class, 'index'])->name('club.index');
-Route::get('/club/add', function () { return view('club.create'); })->name('club.create'); // Create form route
+Route::get('/club/sukan', [ClubController::class, 'showSukanClubs'])->name('club.sukan');
+Route::get('/club/unitberuniform', [ClubController::class, 'showUnitBeruniformClubs'])->name('club.unitberuniform');
 
 
 
@@ -73,21 +73,9 @@ Route::get('/club', function () {
     return view('club.index');
 });
 
-Route::get('/club/add', function () {
-    return view('club.create');
-});
+Route::get('/club/add', function () { 
+    return view('club.create'); })->name('club.create');
 
-Route::get('/club/kelab', function () {
-    return view('club.kelab');
-})->name('club.kelab');
-
-Route::get('/club/sukan', function () {
-    return view('club.sukan');
-})->name('club.sukan');
-
-Route::get('/club/unitberuniform', function () {
-    return view('club.unitberuniform');
-})->name('club.unitberuniform');
 
 
 // Registration
