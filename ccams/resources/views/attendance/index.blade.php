@@ -7,7 +7,11 @@
             @forelse($clubs as $club)
                 <div class="col-lg-4 col-md-6 col-sm-12">
                     <div class="card club-card">
-                        <img src="{{ asset('images/' . strtolower(str_replace(' ', '', $club->club_category)) . '.jpg') }}" alt="{{ $club->club_name }}" class="card-img-top p-0">
+                        @if($club->club_pic && file_exists(storage_path('app/public/' . $club->club_pic)))
+                            <img src="{{ asset('storage/' . $club->club_pic) }}" alt="{{ $club->club_name }}" class="img-fluid">
+                        @else
+                            <div class="text-muted py-3">No Image Available</div>
+                        @endif
                         <div class="card-body">
                             <h5 class="card-title">{{ $club->club_name }}</h5>
                             <p class="card-text">{{ $club->club_category }}</p>
