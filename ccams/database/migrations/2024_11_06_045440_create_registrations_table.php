@@ -27,4 +27,8 @@ class CreateRegistrationsTable extends Migration
             */
         });
     }
+    public function down(): void
+    {
+        Schema::dropIfExists('registrations');
+    }
 };

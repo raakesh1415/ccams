@@ -6,9 +6,8 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateClubsTable extends Migration
 {
-    public function up(): void
+    public function up()
     {
-        
         Schema::create('clubs', function (Blueprint $table) {
             $table->id('club_id');
             $table->string('club_name');
@@ -16,14 +15,13 @@ class CreateClubsTable extends Migration
             $table->integer('participant_total');
             $table->string('club_category');
             $table->string('club_pic')->nullable();
+            $table->unsignedBigInteger('teacher_id'); // Foreign Key to Teachers table
             $table->timestamps();
         });
     }
 
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('clubs');
     }
-
-    
-};
+}

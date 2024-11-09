@@ -6,35 +6,27 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateStudentsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('students', function (Blueprint $table) {
             $table->id('student_id'); // Primary Key
-            $table->foreignId('user_id')->nullable(); //->constrained('users'); // Foreign Key to Users table
+            $table->unsignedBigInteger('user_id'); // Foreign Key to Users table
             $table->string('ic_number')->nullable();
             $table->year('year')->nullable();
             $table->string('level')->nullable();
             $table->text('about_me')->nullable();
             $table->string('timezone')->nullable();
-            $table->foreignId('club_id')->nullable(); //->constrained('clubs'); // Foreign Key to Clubs table
-            $table->foreignId('activity_id')->nullable(); //->constrained('activities'); // Foreign Key to Activities table
-            $table->foreignId('assessment_id')->nullable(); //->constrained('assessments'); // Foreign Key to Assessments table
-            $table->timestamps(); // created_at and updated_at columns
+            $table->unsignedBigInteger('club_id'); // Foreign Key to Clubs table
+            $table->timestamps();
+
+            // Set up foreign keys
+            $table->foreign('user_id')->references('user_id')->on('users')->onDelete('cascade');
+            $table->foreign('club_id')->references('club_id')->on('clubs')->onDelete('cascade');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('students');
     }
 }
