@@ -84,9 +84,10 @@
         }
 
         .activity-card img {
-            width: 100%;
-            height: auto;
-            border-radius: 8px;
+             width: 100%;
+             height: 350px; /* Adjust height as needed */
+             object-fit: cover;
+             border-radius: 8px;
         }
 
         .edit-btn,
