@@ -9,6 +9,8 @@ class Attendance extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'attendance_id'; // Set custom primary key
+
     protected $fillable = [
         'user_id',  // References the user (student)
         'club_id',

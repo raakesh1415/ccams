@@ -40,4 +40,9 @@ class User extends Model
     {
         return $this->role === 'student';
     }
+
+    public function attendances()
+    {
+        return $this->hasMany(Attendance::class, 'user_id'); // Assuming 'user_id' is the foreign key in the attendances table
+    }
 }

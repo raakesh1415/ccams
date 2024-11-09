@@ -29,7 +29,7 @@ Route::resource('students', StudentController::class);
 // Attendance
 Route::get('/attendance', [AttendanceController::class, 'index'])->name('attendance.index');
 Route::get('/attendance/{club}', [AttendanceController::class, 'show'])->name('attendance.show');
-Route::post('/attendance/{club}/store', [AttendanceController::class, 'store'])->name('attendance.store'); // Define store route
+Route::post('/attendance/{club}/store', [AttendanceController::class, 'store'])->name('attendance.store');
 
 
 
