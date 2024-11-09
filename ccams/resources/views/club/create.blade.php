@@ -60,4 +60,13 @@
             </div>
         </form>
     </div>
+    <!-- Success Message JavaScript -->
+    @if(session('success'))
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                alert('{{ session('success') }}');
+                window.location.href = "{{ url('/club') }}";
+            });
+        </script>
+    @endif
 </x-layout>

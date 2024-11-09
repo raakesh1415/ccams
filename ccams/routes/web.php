@@ -18,7 +18,6 @@ Route::get('/assessment', [AssessmentController::class, 'index'])->name('assessm
 Route::get('/assessment/list/create', [AssessmentController::class, 'create'])->name('assessment.create');
 Route::get('/assessment/list', [AssessmentController::class, 'index'])->name('assessment.list');
 Route::post('/assessment/list', [AssessmentController::class, 'store'])->name('assessment.store');
-Route::post('/club/add', [ClubController::class, 'store'])->name('clubs.store');
 
 Route::resource('assessment', AssessmentController::class);
 
@@ -63,6 +62,13 @@ Route::post('/activities', [ActivityController::class, 'store'])->name('activiti
 
 
 // Club 
+
+Route::post('/club/add', [ClubController::class, 'store'])->name('clubs.store');
+Route::get('/club', [ClubController::class, 'index'])->name('club.index');
+Route::get('/club/add', function () { return view('club.create'); })->name('club.create'); // Create form route
+
+
+
 Route::get('/club', function () {
     return view('club.index');
 });

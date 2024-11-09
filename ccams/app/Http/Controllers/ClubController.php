@@ -14,6 +14,7 @@ class ClubController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse
      */
+    
     public function store(Request $request)
     {
         // Validate the incoming request data
@@ -24,13 +25,13 @@ class ClubController extends Controller
             'club_category' => 'required|string|in:Kelab / Persatuan,Sukan / Permainan,Unit Beruniform',
             'club_pic' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
-
+    
         // Handle the file upload
         $clubPicPath = null;
         if ($request->hasFile('club_pic')) {
             $clubPicPath = $request->file('club_pic')->store('club_pics', 'public');
         }
-
+    
         // Create a new club record in the database
         Club::create([
             'club_name' => $validated['club_name'],
@@ -39,8 +40,11 @@ class ClubController extends Controller
             'club_category' => $validated['club_category'],
             'club_pic' => $clubPicPath ?? 'default_image.jpg', // Use default if no image is uploaded
         ]);
+    
+        // Flash success message and redirect to index
+        session()->flash('success', 'Club successfully added!');
+        return redirect(url('/club'));
 
-        // Redirect back with a success message
-        return redirect()->back()->with('success', 'Club added successfully!');
     }
+    
 }
