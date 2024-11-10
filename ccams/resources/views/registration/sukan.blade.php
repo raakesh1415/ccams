@@ -11,15 +11,17 @@
             <div class="alert alert-success">{{ session('success') }}</div>
         @endif
 
-        <!-- Kelab Listings -->
+        <!-- Sukan Listings -->
         <div class="row mt-4">
             @foreach ($sukan as $club)
                 <div class="col-md-6 mb-4">
                     <div class="card shadow-sm h-100">
-                        <div class="row g-0">
-                            <div class="col-md-4">
-                                <img src="{{ asset($club->club_pic) }}" class="img-fluid rounded-start"
-                                    alt="{{ $club->club_name }}">
+                        <div class="row g-0 h-100">
+                            <div class="col-md-4 h-100">
+                                <div class="image-container h-100">
+                                    <img src="{{ asset($club->club_pic) }}" class="img-fluid rounded-start w-100 h-100"
+                                        alt="{{ $club->club_name }}" style="object-fit: cover;">
+                                </div>
                             </div>
                             <div class="col-md-8">
                                 <div class="card-body d-flex flex-column">
@@ -51,6 +53,11 @@
     </div>
 
     <style>
+        .image-container {
+            position: relative;
+            overflow: hidden;
+        }
+
         h3 {
             font-size: 1.25rem;
             margin: 0;
@@ -64,6 +71,11 @@
         @media (max-width: 768px) {
             .card-body {
                 text-align: center;
+            }
+
+            .image-container {
+                height: 200px;
+                /* Fixed height for mobile */
             }
         }
     </style>
