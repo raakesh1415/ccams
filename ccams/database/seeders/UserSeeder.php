@@ -2,39 +2,35 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
+use App\Models\User;
 
 class UserSeeder extends Seeder
 {
-    public function run()
+    /**
+     * Run the database seeds.
+     */
+    public function run(): void
     {
-        // Create 10 students
-        User::create([
-            'name' => 'John Doe',
-            'email' => 'johndoe@example.com',
-            'password' => bcrypt('password123'), // You can change the password here
-            'role' => 'student',
-        ]);
+        // Create 5 students
+        for ($i = 1; $i <= 5; $i++) {
+            User::create([
+                'name' => "Student $i",
+                'email' => "student$i@example.com",
+                'password' => Hash::make('password'), // use a secure password
+                'role' => 'student',
+            ]);
+        }
 
-        User::create([
-            'name' => 'Jane Smith',
-            'email' => 'janesmith@example.com',
-            'password' => bcrypt('password123'), // You can change the password here
-            'role' => 'student',
-        ]);
-
-        // Add more students as needed
-        User::create([
-            'name' => 'Mark Johnson',
-            'email' => 'markjohnson@example.com',
-            'password' => bcrypt('password123'),
-            'role' => 'student',
-        ]);
-
-        // You can use a loop to generate more students if you need
-        User::factory(10)->create([
-            'role' => 'student',  // Assuming you're using factories
-        ]);
+        // Create 5 teachers
+        for ($i = 1; $i <= 5; $i++) {
+            User::create([
+                'name' => "Teacher $i",
+                'email' => "teacher$i@example.com",
+                'password' => Hash::make('password'), // use a secure password
+                'role' => 'teacher',
+            ]);
+        }
     }
 }
