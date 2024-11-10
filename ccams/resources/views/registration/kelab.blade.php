@@ -22,7 +22,7 @@
                                     <h5>Description</h5>
                                     <p class="card-text text-justify">{{ $club->club_description }}</p>
                                     <div class="mt-auto">
-                                        <a href="{{ route('registration.register', $club->club_id, $club->club_category) }}"
+                                        <a href="{{ route('registration.register', ['clubId' => $club->club_id, 'clubType' => $club->club_category]) }}"
                                             class="btn btn-dark">Register</a>
                                     </div>
                                 </div>
