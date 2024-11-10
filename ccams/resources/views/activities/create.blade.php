@@ -10,8 +10,7 @@
     <div class="add-activity-container">
         <a href="{{ url()->previous() }}" class="go-back">Go Back</a>
 
-        <!-- create.blade.php -->
-<form action="{{ route('activities.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('activities.store') }}" method="POST" enctype="multipart/form-data">
     @csrf
     <!-- Form fields go here -->
     <label for="activity_name">Activity Name</label>
@@ -33,7 +32,10 @@
     <input type="file" name="poster" id="poster" accept="image/*">
 
     <label for="category">Category</label>
-    <input type="text" name="category" id="category" required>
+    <select name="category" id="category" required>
+        <option value="Open to All">Open to All</option>
+        <option value="Club">Club</option>
+    </select>
 
     <label for="duration">Duration</label>
     <input type="text" name="duration" id="duration" required>

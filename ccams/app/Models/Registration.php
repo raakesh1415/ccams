@@ -3,13 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Registration extends Model
 {
-    //Fillable field
-    //Can assign multiple attributes to a model instance at once
-
+    // Set the table name explicitly (optional if following Laravel's convention)
     protected $table = 'registrations';
+
+    // Set the primary key explicitly (optional if following Laravel's convention)
+    protected $primaryKey = 'registration_id';
     protected $fillable = [
         'user_id',
         'club_id',

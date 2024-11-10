@@ -10,25 +10,37 @@ use Illuminate\Support\Facades\Auth;
 
 class RegistrationController extends Controller
 {
-    //Modify variable based on Club Models
     public function kelabIndex(){
-        $kelab = Club::where('type', 'kelab')->get();
+        $kelab = Club::where('club_category', 'KelabPersatuan')->get();
         return view('registration.kelab', compact('kelab'));   
         // kelab => $kelab (assigne $kelab(value) to kelab (key))
     }
 
     public function sukanIndex() {
-        $sukan = Club::where('type', 'sukan')->get();
+        $sukan = Club::where('club_category', 'SukanPermainan')->get();
         return view('registration.sukan', compact('sukan'));
     }
 
     public function beruniformIndex() {
-        $beruniform = Club::where('type', 'unitberunifrom')->get();
-        return view('registration.beruniform', compact('bernuniform'));
+        $beruniform = Club::where('club_category', 'UnitBeruniform')->get();
+        return view('registration.beruniform', compact('beruniform'));
     }
 
     public function register(Request $request, $clubId, $clubType){
         $userId = Auth::id();
+
+        // Fetch the club to check its capacity
+        $club = Club::find($clubId);
+
+        if (!$club) {
+        return redirect()->back()->with('error', 'Club not found.');
+        }
+
+        // Check if the club is already at capacity
+        $currentRegistrations = Registration::where('club_id', $clubId)->count();
+        if ($currentRegistrations >= $club->participant_total) {
+            return redirect()->back()->with('error', 'Registration failed: Club capacity reached.');
+        }
 
         //Check if user is already registerd for this club type
         $existingRegistration = Registration::where('user_id', $userId)->where('club_type', $clubType)->first();
