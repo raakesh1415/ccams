@@ -28,6 +28,18 @@ class RegistrationController extends Controller
 
     public function register(Request $request, $clubId, $clubType){
         $userId = Auth::id();
+        // Fetch the club to check its capacity
+        $club = Club::find($clubId);
+
+        if (!$club) {
+        return redirect()->back()->with('error', 'Club not found.');
+        }
+
+        // Check if the club is already at capacity
+        $currentRegistrations = Registration::where('club_id', $clubId)->count();
+        if ($currentRegistrations >= $club->participant_total) {
+            return redirect()->back()->with('error', 'Registration failed: Club capacity reached.');
+        }
 
         //Check if user is already registerd for this club type
         $existingRegistration = Registration::where('user_id', $userId)->where('club_type', $clubType)->first();
