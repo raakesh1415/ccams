@@ -6,6 +6,7 @@ use App\Http\Controllers\ClubController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\RegistrationController;
 
 
 //Dashboard
@@ -67,18 +68,17 @@ Route::get('/registration', function (){
     return view('registration.index');
 })->name('registration.index');
 
-Route::get('/registration/kelab', function (){
-    return view('registration.kelab');
-})->name('registration.kelab');
+Route::get('/registration/kelab', [RegistrationController::class, 'kelabIndex'])
+    ->name('registration.kelab');
 
-Route::get('/registration/sukan', function () {
-    return view('registration.sukan');
-})->name('registration.sukan');
+Route::get('/registration/sukan', [RegistrationController::class, 'sukanIndex'])
+    ->name('registration.sukan');
 
-Route::get('/registration/beruniform', function() {
-    return view('registration.beruniform');
-})->name('registration.beruniform');
+Route::get('/registration/beruniform', [RegistrationController::class, 'beruniformIndex'])
+    ->name('registration.beruniform');
 
+Route::post('/registration/{clubId}/{clubType}', [RegistrationController::class, 'register'])
+    ->name('registration.register');
 
 // Profile 
 Route::get('/profile', function () {

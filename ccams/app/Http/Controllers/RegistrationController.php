@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Auth;
 
 class RegistrationController extends Controller
 {
-    //Modify variable based on Club Models
     public function kelabIndex(){
         $kelab = Club::where('club_category', 'Kelab / Persatuan')->get();
         return view('registration.kelab', compact('kelab'));   
@@ -23,8 +22,8 @@ class RegistrationController extends Controller
     }
 
     public function beruniformIndex() {
-        $beruniform = Club::where('club_category', 'Unit beruniform')->get();
-        return view('registration.beruniform', compact('bernuniform'));
+        $beruniform = Club::where('club_category', 'Unit Beruniform')->get();
+        return view('registration.beruniform', compact('beruniform'));
     }
 
     public function register(Request $request, $clubId, $clubType){
