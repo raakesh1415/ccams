@@ -22,7 +22,7 @@ Route::post('/assessment/list', [AssessmentController::class, 'store'])->name('a
 Route::resource('assessment', AssessmentController::class);
 
 //Students
-Route::resource('students', StudentController::class);
+//Route::resource('students', StudentController::class);
 
 // Attendance
 Route::get('/attendance', [AttendanceController::class, 'index'])->name('attendance.index');
