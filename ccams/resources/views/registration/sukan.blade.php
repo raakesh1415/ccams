@@ -1,6 +1,6 @@
 <x-layout>
     <div class="container mt-5">
-        <h2 class="text-center">SUKAN / PERMAINAN</h2>
+        <h2 class="text-center"><b>SUKAN / PERMAINAN</b></h2>
 
         <!-- Sukan Listings -->
         <div class="row mt-4">

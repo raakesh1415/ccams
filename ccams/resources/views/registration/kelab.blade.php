@@ -1,6 +1,6 @@
 <x-layout>
     <div class="container mt-5">
-        <h2 class="text-center">KELAB / PERSATUAN</h2>
+        <h2 class="text-center"><b>KELAB / PERSATUAN<b></h2>
 
         <!-- Kelab Listings -->
         <div class="row mt-4">

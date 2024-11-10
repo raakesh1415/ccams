@@ -1,6 +1,6 @@
 <x-layout>
     <div class="container mt-5">
-        <h2 class="text-center">UNIT BERUNIFORM</h2>
+        <h2 class="text-center"><b>UNIT BERUNIFORM</b></h2>
 
         <!-- Beruniform Listings -->
         <div class="row mt-4">
