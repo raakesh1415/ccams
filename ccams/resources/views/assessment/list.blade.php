@@ -18,6 +18,8 @@
                             <th>Commitment</th>
                             <th>Achievement</th>
                             <th>Contribution</th>
+                            <th>Attendance</th>
+                            <th>Comment</th>
                             <th>Total Mark</th>
                             <th>Action</th>
                             {{-- <th>Comment</th> --}}
@@ -31,6 +33,8 @@
                             <td>{{ $as->commitment }}</td>
                             <td>{{ $as->achievement }}</td>
                             <td>{{ $as->contribution }}</td>
+                            <td>{{ $as->attendance }}</td>
+                            <td>{{ $as->comment }}</td>
                             <td>{{ $as->total_mark }}</td>
                             <td>
                                 {{-- <a href="{{ route('assessment.create', $as->assessment_id) }}" class="btn btn-sm btn-success"><span class="fa fa-plus"></i>"></span></a> --}}
