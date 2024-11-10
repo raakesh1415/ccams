@@ -1,7 +1,7 @@
 <x-layout>
     <div class="text-center pt-3 pb-4">
         <h2 class="text-start">Explore Club</h2>
-        <h4 class="text-start pt-4">Club Type</h4>
+        <h2 class="text-center mb-4">Club Type</h2>
         <div class="row g-4 mt-0">
             <!-- Club Type 1 -->
             <div class="col-lg-4 col-md-6 col-sm-12">
