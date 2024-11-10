@@ -52,7 +52,7 @@ class RegistrationController extends Controller
         Registration::create([
             'user_id' => $userId,   // Assign $userId (value) to user_id (key)
             'club_id' => $clubId,
-            'club_type' => $clubType,
+            'club_type' => urlencode($clubType),
         ]);
 
         return redirect()->back()->with('success','You have successfully registered for this club');
