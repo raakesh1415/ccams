@@ -11,8 +11,8 @@ class CreateRegistrationsTable extends Migration
     {
         Schema::create('registrations', function (Blueprint $table) {
             $table->id('registration_id');
-            $table->id('user_id');
-            $table->id('club_id');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('club_id');
             $table->string('club_type');
 
             //Foreign key
