@@ -15,7 +15,6 @@ class CreateClubsTable extends Migration
             $table->integer('participant_total');
             $table->string('club_category');
             $table->string('club_pic')->nullable();
-            $table->unsignedBigInteger('teacher_id'); // Foreign Key to Teachers table
             $table->timestamps();
         });
     }
