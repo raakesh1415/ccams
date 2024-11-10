@@ -2,15 +2,15 @@
     <x-slot name="header">
         <h2 class="mb-4 text-center">Club Details</h2>
         <div class="user-profile mb-4 text-center">
-            <img src="{{ asset('path-to-profile-picture.jpg') }}" alt="User Profile" class="img-fluid rounded-circle" style="max-width: 100px;">
+            <img src="{{ asset('path-to-profile-picture.jpg') }}" alt="User Profile" class="img-fluid rounded-circle shadow" style="max-width: 100px;">
         </div>
     </x-slot>
 
-    <div class="container">
+    <div class="container my-5">
         <!-- Centered Title -->
-        <h3 class="text-center mb-4">Club Details</h3>
+        <h3 class="text-center mb-4">Create a New Club</h3>
 
-        <div class="card shadow-sm p-4">
+        <div class="card shadow-lg border-0 rounded-3 p-4">
             <form action="{{ route('clubs.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
 
@@ -20,19 +20,29 @@
                         <!-- Club Name -->
                         <div class="mb-3">
                             <label for="club_name" class="form-label">Club Name</label>
-                            <input type="text" id="club_name" name="club_name" class="form-control" required placeholder="Enter club name">
+                            <div class="input-group">
+                                <span class="input-group-text bg-dark text-white">
+                                    <i class="fas fa-users"></i>
+                                </span>
+                                <input type="text" id="club_name" name="club_name" class="form-control" required placeholder="Enter club name">
+                            </div>
                         </div>
 
                         <!-- Club Description -->
                         <div class="mb-3">
                             <label for="club_description" class="form-label">Description</label>
-                            <textarea id="club_description" name="club_description" rows="4" class="form-control" required placeholder="Enter description" style="resize: none;"></textarea>
+                            <textarea id="club_description" name="club_description" rows="4" class="form-control" required placeholder="Enter club description" style="resize: none;"></textarea>
                         </div>
 
                         <!-- Participant Total -->
                         <div class="mb-3">
                             <label for="participant_total" class="form-label">Participants</label>
-                            <input type="number" id="participant_total" name="participant_total" class="form-control" required placeholder="Enter total participants">
+                            <div class="input-group">
+                                <span class="input-group-text bg-dark text-white">
+                                    <i class="fas fa-user-friends"></i>
+                                </span>
+                                <input type="number" id="participant_total" name="participant_total" class="form-control" required placeholder="Enter total participants">
+                            </div>
                         </div>
                     </div>
 
@@ -60,7 +70,7 @@
 
                 <!-- Submit Button -->
                 <div class="d-grid gap-2 d-md-flex justify-content-md-center mt-4">
-                    <button type="submit" class="btn btn-dark btn-lg px-4 py-2">Add Club</button>
+                    <button type="submit" class="btn btn-dark btn-lg px-4 py-2 shadow-sm rounded-pill">Add Club</button>
                 </div>
             </form>
         </div>
