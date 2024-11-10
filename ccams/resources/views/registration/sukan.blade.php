@@ -21,8 +21,12 @@
                                     <h5>Description</h5>
                                     <p class="card-text text-justify">{{ $club->club_description }}</p>
                                     <div class="mt-auto">
-                                        <a href="{{ route('registration.register', ['clubId' => $club->club_id, 'clubType' => $club->club_category]) }}"
-                                            class="btn btn-dark">Register</a>
+                                        <form
+                                            action="{{ route('registration.register', ['clubId' => $club->club_id, 'clubType' => $club->club_category]) }}"
+                                            method="POST">
+                                            @csrf
+                                            <button type="submit" class="btn btn-dark">Register</button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
