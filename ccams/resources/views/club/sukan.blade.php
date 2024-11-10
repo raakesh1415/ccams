@@ -1,17 +1,17 @@
 <x-layout>
     <x-slot name="header">
-        <h2>Sukan / Permainan</h2>
+        <h2>Sukan</h2>
     </x-slot>
 
     <div class="club-details-container">
-        <h2>Explore Sukan / Permainan Clubs</h2>
+        <h2>Explore Sukan Clubs</h2>
 
         <!-- Add spacing between Explore title and the rest of the content -->
-        <div class="mt-4"></div> <!-- Creates the spacing between the title and the message -->
+        <div class="mt-4"></div>
 
-        <!-- Check if there are clubs in the 'Sukan / Permainan' category -->
+        <!-- Check if there are clubs in the 'Sukan' category -->
         @if($clubs->isEmpty())
-            <p>No clubs available in the "Sukan / Permainan" category yet. Be the first to add one!</p>
+            <p>No clubs available in the "Sukan" category yet. Be the first to add one!</p>
 
             <!-- Add Club Button positioned below the message on the left -->
             <div class="add-club-button mb-4" style="text-align: left;">
@@ -40,20 +40,72 @@
 
         <!-- Loop through each club and display it -->
         @if(!$clubs->isEmpty())
-            <div class="row">
+            <div class="club-list">
                 @foreach($clubs as $club)
-                    <div class="col-md-4 mb-4">
-                        <div class="card">
-                            <img src="{{ asset('storage/' . $club->club_pic) }}" class="card-img-top" alt="Club Image">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ $club->club_name }}</h5>
-                                <p class="card-text">{{ Str::limit($club->club_description, 100) }}</p>
-                                <a href="#" class="btn btn-dark">View Details</a>
-                            </div>
-                        </div>
+                    <div class="club-card">
+                        <img src="{{ asset('storage/' . $club->club_pic) }}" class="card-img-top" alt="Club Image">
+                        <h3 class="card-title">{{ $club->club_name }}</h3>
+                        <p class="card-text">{{ Str::limit($club->club_description, 100) }}</p>
+                        <a href="#" class="btn btn-dark">View Details</a>
                     </div>
                 @endforeach
             </div>
         @endif
     </div>
+
+    <style>
+        .club-card {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.2s;
+            border: 1px solid #e2e6ea;
+        }
+
+        .club-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .club-card img {
+            width: 100%;
+            height: 200px; /* Fixed height for consistent image size */
+            object-fit: cover; /* Ensures the image fits without being distorted */
+            border-radius: 8px;
+        }
+
+        .club-card h3 {
+            font-size: 1.5em;
+            color: #333;
+            margin: 10px 0;
+        }
+
+        .club-card p {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .club-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        @media (max-width: 1024px) {
+            .club-list {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .club-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </x-layout>
