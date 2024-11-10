@@ -146,30 +146,56 @@
 </head>
 <body>
 
-<div class="container">
-    <!-- Left Section -->
-    <div class="left-section">
-        <h1>Join Our Platform</h1>
-        <p>Activate your learning</p>
-        <p>Log in to get started!</p>
+    <div class="container">
+        <!-- Left Section -->
+        <div class="left-section">
+            <h1>Join Our Platform</h1>
+            <p>Activate your learning</p>
+            <p>Log in to get started!</p>
+        </div>
+
+        <!-- Right Section (Sign Up Form) -->
+        <div class="right-section">
+            <h2>Sign up</h2>
+            <p>Join our platform for free as a</p>
+            
+            <!-- Role Selection -->
+            <!-- Role Selection -->
+    <div class="role-selection">
+        <button onclick="selectRole(this)">Admin</button>
+        <button onclick="selectRole(this)">Teacher</button>
+        <button onclick="selectRole(this)">Student</button>
     </div>
 
-    <!-- Right Section (Sign Up Form) -->
-    <div class="right-section">
-        <h2>Sign up</h2>
-        <p>Join our platform for free as a</p>
-        
-        <!-- Role Selection -->
-        <div class="role-selection">
-            <button class="active">Learner</button>
-            <button>Teacher</button>
-            <button>Parent</button>
-        </div>
+    <style>
+        .role-selection button {
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+        }
+        .role-selection button.selected {
+            background-color: #007bff;
+            color: white;
+        }
+    </style>
+
+    <script>
+        function selectRole(button) {
+            // 获取所有按钮，移除 selected 样式
+            const buttons = document.querySelectorAll('.role-selection button');
+            buttons.forEach(btn => btn.classList.remove('selected'));
+            
+            // 为点击的按钮添加 selected 样式
+            button.classList.add('selected');
+        }
+</script>
+
 
         <!-- Date of Birth Section -->
         <label for="dob">What is your date of birth?</label>
         <div class="dob-section">
             <select name="month" id="month">
+                <option value="null"></option>
                 <option value="January">January</option>
                 <option value="February">February</option>
                 <option value="March">March</option>
@@ -184,6 +210,7 @@
                 <option value="December">December</option>
             </select>
             <select name="day" id="day">
+                <option value="null"></option>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -197,11 +224,15 @@
                 <!-- Add more days as needed -->
             </select>
             <select name="year" id="year">
+                <option value="null"></option>
+                <option value="2009">2003</option>
+                <option value="2009">2004</option>
                 <option value="2005">2005</option>
                 <option value="2006">2006</option>
                 <option value="2007">2007</option>
                 <option value="2008">2008</option>
                 <option value="2009">2009</option>
+                <option value="2009">2010</option>
                 <!-- Add more years as needed -->
             </select>
         </div>
