@@ -1,28 +1,27 @@
 <x-layout>
     <div class="container mt-5">
-        <h2 class="text-center">SUKAN / PERMAINAN</h2>
+        <h2 class="text-center"><b>SUKAN / PERMAINAN</b></h2>
 
         <!-- Sukan Listings -->
-        <!-- Image, member_count,...variable have to be same as Club Model variable -->
         <div class="row mt-4">
             @foreach ($sukan as $club)
                 <div class="col-md-6 mb-4">
                     <div class="card shadow-sm h-100">
                         <div class="row g-0">
                             <div class="col-md-4">
-                                <img src="{{ asset($club->image) }}" class="img-fluid rounded-start"
-                                    alt="{{ $club->name }}">
+                                <img src="{{ asset($club->club_pic) }}" class="img-fluid rounded-start"
+                                    alt="{{ $club->club_name }}">
                             </div>
                             <div class="col-md-8">
                                 <div class="card-body d-flex flex-column">
-                                    <h3 class="card-title">{{ $club->name }}</h3>
+                                    <h3 class="card-title">{{ $club->club_name }}</h3>
                                     <p class="text-muted">
-                                        <i class="fas fa-users"></i> {{ $club->members_count }} Members
+                                        <i class="fas fa-users"></i> {{ $club->participant_total }} Members
                                     </p>
                                     <h5>Description</h5>
-                                    <p class="card-text text-justify">{{ $club->description }}</p>
+                                    <p class="card-text text-justify">{{ $club->club_description }}</p>
                                     <div class="mt-auto">
-                                        <a href="{{ route('registration.register', $club->id) }}"
+                                        <a href="{{ route('registration.register', ['clubId' => $club->club_id, 'clubType' => $club->club_category]) }}"
                                             class="btn btn-dark">Register</a>
                                     </div>
                                 </div>

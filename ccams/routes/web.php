@@ -6,6 +6,7 @@ use App\Http\Controllers\ClubController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\RegistrationController;
 
 
 //Dashboard
@@ -13,25 +14,20 @@ Route::get('/', function () {
     return view('assessment.index');
 });
 
-
 // Assessment
 Route::get('/assessment', [AssessmentController::class, 'index'])->name('assessment.index');
 Route::get('/assessment/list/create', [AssessmentController::class, 'create'])->name('assessment.create');
 Route::get('/assessment/list', [AssessmentController::class, 'index'])->name('assessment.list');
 Route::post('/assessment/list', [AssessmentController::class, 'store'])->name('assessment.store');
-
 Route::resource('assessment', AssessmentController::class);
 
 //Students
 Route::resource('students', StudentController::class);
 
-
 // Attendance
 Route::get('/attendance', [AttendanceController::class, 'index'])->name('attendance.index');
 Route::get('/attendance/{club}', [AttendanceController::class, 'show'])->name('attendance.show');
 Route::post('/attendance/{club}/store', [AttendanceController::class, 'store'])->name('attendance.store');
-
-
 
 // Activity 
 //Route::get('/activity', function () {
@@ -67,18 +63,17 @@ Route::get('/registration', function (){
     return view('registration.index');
 })->name('registration.index');
 
-Route::get('/registration/kelab', function (){
-    return view('registration.kelab');
-})->name('registration.kelab');
+Route::get('/registration/kelab', [RegistrationController::class, 'kelabIndex'])
+    ->name('registration.kelab');
 
-Route::get('/registration/sukan', function () {
-    return view('registration.sukan');
-})->name('registration.sukan');
+Route::get('/registration/sukan', [RegistrationController::class, 'sukanIndex'])
+    ->name('registration.sukan');
 
-Route::get('/registration/beruniform', function() {
-    return view('registration.beruniform');
-})->name('registration.beruniform');
+Route::get('/registration/beruniform', [RegistrationController::class, 'beruniformIndex'])
+    ->name('registration.beruniform');
 
+Route::post('/registration/{clubId}/{clubType}', [RegistrationController::class, 'register'])
+    ->name('registration.register');
 
 // Profile 
 Route::get('/profile', function () {
