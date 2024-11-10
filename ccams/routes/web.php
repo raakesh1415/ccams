@@ -14,25 +14,20 @@ Route::get('/', function () {
     return view('assessment.index');
 });
 
-
 // Assessment
 Route::get('/assessment', [AssessmentController::class, 'index'])->name('assessment.index');
 Route::get('/assessment/list/create', [AssessmentController::class, 'create'])->name('assessment.create');
 Route::get('/assessment/list', [AssessmentController::class, 'index'])->name('assessment.list');
 Route::post('/assessment/list', [AssessmentController::class, 'store'])->name('assessment.store');
-
 Route::resource('assessment', AssessmentController::class);
 
 //Students
 Route::resource('students', StudentController::class);
 
-
 // Attendance
 Route::get('/attendance', [AttendanceController::class, 'index'])->name('attendance.index');
 Route::get('/attendance/{club}', [AttendanceController::class, 'show'])->name('attendance.show');
 Route::post('/attendance/{club}/store', [AttendanceController::class, 'store'])->name('attendance.store');
-
-
 
 // Activity 
 //Route::get('/activity', function () {
