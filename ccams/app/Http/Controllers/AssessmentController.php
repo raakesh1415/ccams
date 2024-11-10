@@ -23,8 +23,6 @@ class AssessmentController extends Controller
     }
 
     public function store(Request $request) { 
-        // dd($request->all()); // Check what data is being received
-
         // Validate incoming request data
         $data = $request->validate([
             'position' => 'required',
@@ -36,12 +34,21 @@ class AssessmentController extends Controller
             'comment' => 'required|string',
         ]);
     
-        // Calculate values
-        $data['achievement'] = array_sum($request->input('achievement'));
-        $data['commitment'] = array_sum($request->input('commitment'));
-        $data['engagement'] = array_sum($request->input('engagement'));
-        $data['contribution'] = array_sum($request->input('contribution'));
-        $data['total_mark'] = $data['position'] + $data['engagement'] + $data['achievement'] + $data['commitment'] + $data['contribution'] + $data['attendance'];
+        // Calculate values with maximum limits
+        $data['engagement'] = min(array_sum($request->input('engagement')), 20); // Max is 20
+        $data['achievement'] = min(array_sum($request->input('achievement')), 20); // Max is 20
+        $data['commitment'] = min(array_sum($request->input('commitment')), 10); // Max is 10
+        $data['contribution'] = min(array_sum($request->input('contribution')), 10); // Max is 10
+        $data['attendance'] = $request->input('attendance'); // Raw attendance input
+    
+        // Calculate attendance score based on the formula provided
+        $attendanceScore = min(($data['attendance'] / 12) * 40, 40); // Max attendance score is 40
+    
+        // Calculate total mark
+        $data['total_mark'] = $data['position'] + $data['engagement'] + $data['achievement'] + $data['commitment'] + $data['contribution'] + $attendanceScore;
+    
+        // Ensure total_mark does not exceed 110
+        $data['total_mark'] = min($data['total_mark'], 110);
     
         // Prepare data for database insertion
         $assessmentData = [
@@ -50,7 +57,7 @@ class AssessmentController extends Controller
             'achievement' => $data['achievement'],
             'commitment' => $data['commitment'],
             'contribution' => $data['contribution'],
-            'attendance' => $data['attendance'],
+            'attendance' => $attendanceScore,
             'comment' => $data['comment'],
             'total_mark' => $data['total_mark'], // Ensure this matches the column name in your database
         ];
