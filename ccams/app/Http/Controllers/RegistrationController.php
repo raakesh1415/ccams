@@ -12,18 +12,18 @@ class RegistrationController extends Controller
 {
     //Modify variable based on Club Models
     public function kelabIndex(){
-        $kelab = Club::where('type', 'kelab')->get();
+        $kelab = Club::where('club_category', 'Kelab / Persatuan')->get();
         return view('registration.kelab', compact('kelab'));   
         // kelab => $kelab (assigne $kelab(value) to kelab (key))
     }
 
     public function sukanIndex() {
-        $sukan = Club::where('type', 'sukan')->get();
+        $sukan = Club::where('club_category', 'Sukan / Permainan')->get();
         return view('registration.sukan', compact('sukan'));
     }
 
     public function beruniformIndex() {
-        $beruniform = Club::where('type', 'unitberunifrom')->get();
+        $beruniform = Club::where('club_category', 'Unit beruniform')->get();
         return view('registration.beruniform', compact('bernuniform'));
     }
 
