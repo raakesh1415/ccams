@@ -29,6 +29,11 @@ class RegistrationController extends Controller
     public function register(Request $request, $clubId, $clubType){
         $userId = Auth::id();
 
+        // Ensure the user is logged in
+        if (!$userId) {
+            return redirect()->route('login.index')->with('error', 'You need to be logged in to register.');
+        }
+
         // Fetch the club to check its capacity
         $club = Club::find($clubId);
 

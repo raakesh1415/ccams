@@ -80,10 +80,6 @@ Route::get('/profile', function () {
     return view('profile.index');
 })->name('profile.index');
 
-Route::get('/login', function () {
-    return view('login.index');
-})->name('login.index');
-
 Route::get('/assessment', function () {
     return view('assessment.index');
 })->name('assessment.index');
@@ -91,3 +87,13 @@ Route::get('/assessment', function () {
 Route::get('/profile/edit', function () {
     return view('profile.edit');
 })->name('profile.edit');
+
+// login
+
+Route::get('/login', function () {
+    return view('login.index');
+})->name('login.index');
+
+Route::get('/login/signin', function () {
+    return view('login.signin');
+})->name('longin.signin');

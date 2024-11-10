@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,7 +12,8 @@
             height: 100vh;
             margin: 0;
             font-family: Arial, sans-serif;
-            overflow: hidden; /* Disable page scrolling */
+            overflow: hidden;
+            /* Disable page scrolling */
         }
 
         .left-panel {
@@ -31,13 +33,16 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            opacity: 0; /* Default to invisible */
+            opacity: 0;
+            /* Default to invisible */
             transition: opacity 0.5s ease-in-out;
         }
 
         .carousel-image.active {
-            opacity: 1; /* Visible when active */
-            z-index: 1; /* Ensure it is on top */
+            opacity: 1;
+            /* Visible when active */
+            z-index: 1;
+            /* Ensure it is on top */
         }
 
         .right-panel {
@@ -78,13 +83,17 @@
             font-size: 16px;
             cursor: pointer;
             transition: background-color 0.3s;
-            opacity: 0.6; /* Default to not clickable */
-            cursor: not-allowed; /* Cursor style */
+            opacity: 0.6;
+            /* Default to not clickable */
+            cursor: not-allowed;
+            /* Cursor style */
         }
 
         .login-btn.enabled {
-            opacity: 1; /* Set to clickable */
-            cursor: pointer; /* Change cursor style */
+            opacity: 1;
+            /* Set to clickable */
+            cursor: pointer;
+            /* Change cursor style */
         }
 
         .login-btn:hover.enabled {
@@ -92,6 +101,7 @@
         }
 
         @media (max-width: 768px) {
+
             .input-field,
             .select-role,
             .login-btn {
@@ -100,6 +110,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="left-panel">
         <div class="carousel">
@@ -118,7 +129,7 @@
         <input type="text" class="input-field" id="username" placeholder="Username" required>
         <input type="password" class="input-field" id="password" placeholder="Password" required>
         <button class="login-btn" id="loginButton" disabled>Log In</button>
-        <button class="Signin-btn" id="SigninButton" onclick="window.location.href='/login/signin'" >Sign In</button>
+        <!-- <button class="Signin-btn" id="SigninButton" onclick="window.location.href='/login/signin'" >Sign In</button> -->
     </div>
 
     <script>
@@ -154,10 +165,11 @@
         passwordInput.addEventListener('input', updateButtonState);
 
         // Handle login button click event
-        loginButton.addEventListener('click', function () {
+        loginButton.addEventListener('click', function() {
             // Here you can add an AJAX request for login validation, currently redirecting directly
             window.location.href = "{{ route('assessment.index') }}"; // Redirect to assessment/index.blade.php
         });
     </script>
 </body>
+
 </html>
