@@ -1,7 +1,17 @@
 <x-layout>
     <div class="container mt-5">
         <h2 class="text-center"><b>CLUB TYPES</b></h2>
+
+        <!-- Display prompt messages -->
+        @if (session('error'))
+            <div class="alert alert-danger">{{ session('error') }}</div>
+        @endif
+
+        @if (session('success'))
+            <div class="alert alert-success">{{ session('success') }}</div>
+        @endif
         <div class="row mt-4">
+
             <!-- Kelab / Persatuan-->
             <div class="col-md-4 mb-4">
                 <div class="card h-100 shadow-sm">

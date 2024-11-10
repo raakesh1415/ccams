@@ -31,7 +31,7 @@ class RegistrationController extends Controller
 
         // Ensure the user is logged in
         if (!$userId) {
-            return redirect()->route('login.index')->with('error', 'You need to be logged in to register.');
+            return redirect()->route('registration.index')->with('error', 'You need to be logged in to register.');
         }
 
         // Fetch the club to check its capacity
