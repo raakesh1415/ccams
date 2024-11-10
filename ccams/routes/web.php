@@ -89,6 +89,15 @@ Route::get('/profile/edit', function () {
 })->name('profile.edit');
 
 // login
+use App\Http\Controllers\AuthController;
+
+
+// 登录路由
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login.show'); // 显示登录表单
+Route::post('/login', [AuthController::class, 'login'])->name('login.submit'); // 处理登录请求
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout'); // 处理注销请求
+
+
 
 Route::get('/login', function () {
     return view('login.index');
@@ -97,3 +106,12 @@ Route::get('/login', function () {
 Route::get('/login/signin', function () {
     return view('login.signin');
 })->name('longin.signin');
+
+Route::get('/signin', function () {
+    return view('login.signin');
+})->name('login.signin');
+
+use App\Http\Controllers\SignUpController;
+
+Route::post('/signup', [SignUpController::class, 'store'])->name('signup.store');
+
