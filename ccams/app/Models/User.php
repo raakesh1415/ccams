@@ -21,9 +21,9 @@ class User extends Authenticatable
         'email',
         'password',
         'ic',
-        'year',
-        'level',
-        'dob',
+        // 'year',
+        // 'level',
+        // 'dob',
         'role', // 'student' or 'teacher'
     ];
 

@@ -5,16 +5,17 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 class UserController extends Controller
 {
     /**
      * Display a listing of users.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
-    public function index()
+    public function index(): View
     {
         $users = User::all(); // Get all users
         return view('users.index', compact('users')); // Return a view with all users
@@ -23,20 +24,20 @@ class UserController extends Controller
     /**
      * Show the form for creating a new user.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
-    public function create()
+    public function create(): View
     {
-        return view('users.create'); // Return the create user view
+        return view('login.index'); // Return the create user view
     }
 
     /**
      * Store a newly created user in the database.
      *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         // Validate the incoming request
         $validated = $request->validate([
@@ -47,23 +48,23 @@ class UserController extends Controller
         ]);
 
         // Create the new user
-        $user = User::create([
+        User::create([
             'username' => $validated['username'],
             'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
             'role' => $validated['role'],
         ]);
 
-        return redirect()->route('users.index')->with('success', 'User created successfully');
+        return redirect()->route('login.index')->with('success', 'User created successfully');
     }
 
     /**
      * Display the specified user.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return View
      */
-    public function show($id)
+    public function show(int $id): View
     {
         $user = User::findOrFail($id); // Find the user by ID
         return view('users.show', compact('user')); // Return a view with the user details
@@ -73,9 +74,9 @@ class UserController extends Controller
      * Show the form for editing the specified user.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return View
      */
-    public function edit($id)
+    public function edit(int $id): View
     {
         $user = User::findOrFail($id); // Find the user by ID
         return view('users.edit', compact('user')); // Return the edit user view
@@ -84,11 +85,11 @@ class UserController extends Controller
     /**
      * Update the specified user in the database.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, int $id): RedirectResponse
     {
         // Validate the incoming request
         $validated = $request->validate([
@@ -115,9 +116,9 @@ class UserController extends Controller
      * Remove the specified user from the database.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return RedirectResponse
      */
-    public function destroy($id)
+    public function destroy(int $id): RedirectResponse
     {
         $user = User::findOrFail($id); // Find the user by ID
         $user->delete(); // Delete the user from the database

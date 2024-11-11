@@ -9,8 +9,8 @@
         <!-- Add spacing between Explore title and the rest of the content -->
         <div class="mt-4"></div>
 
-        <!-- Check if there are clubs in the 'Sukan' category -->
-        @if($clubs->isEmpty())
+        <!-- Check if there are club in the 'Sukan' category -->
+        @if($club->isEmpty())
             <p>No clubs available in the "Sukan" category yet. Be the first to add one!</p>
 
             <!-- Add Club Button positioned below the message on the left -->
@@ -39,9 +39,9 @@
         @endif
 
         <!-- Loop through each club and display it -->
-        @if(!$clubs->isEmpty())
+        @if(!$club->isEmpty())
             <div class="club-list">
-                @foreach($clubs as $club)
+                @foreach($club as $club)
                     <div class="club-card">
                         <img src="{{ asset('storage/' . $club->club_pic) }}" class="card-img-top" alt="Club Image">
                         <h3 class="card-title">{{ $club->club_name }}</h3>

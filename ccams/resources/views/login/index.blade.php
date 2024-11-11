@@ -240,7 +240,7 @@
             <h2>Log in</h2>
 
             <!-- Social Login Buttons -->
-            <a href="#" class="login-option">Continue with Google</a>
+            <!-- <a href="#" class="login-option">Continue with Google</a> -->
 
             <!-- Login Form -->
             <form action="{{ route('assessment.index') }}" method="POST">
