@@ -1,6 +1,7 @@
 <x-layout>
     <div class="container mt-5">
         <h2 class="text-center"><b>SUKAN / PERMAINAN</b></h2>
+
         <!-- Display prompt messages -->
         @if (session('error'))
             <div class="alert alert-danger">{{ session('error') }}</div>
@@ -10,8 +11,7 @@
             <div class="alert alert-success">{{ session('success') }}</div>
         @endif
 
-
-        <!-- Sukan Listings -->
+        <!-- Kelab Listings -->
         <div class="row mt-4">
             @foreach ($sukan as $club)
                 <div class="col-md-6 mb-4">
@@ -23,16 +23,20 @@
                             </div>
                             <div class="col-md-8">
                                 <div class="card-body d-flex flex-column">
-                                    <h3 class="card-title">{{ $club->club_name }}</h3>
-                                    <p class="text-muted">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <h3 class="card-title m-0">{{ $club->club_name }}</h3>
+                                        <form
+                                            action="{{ route('registration.register', ['clubId' => $club->club_id, 'clubType' => $club->club_category]) }}"
+                                            method="POST">
+                                            @csrf
+                                            <button type="submit" class="btn btn-dark btn-sm">Register</button>
+                                        </form>
+                                    </div>
+                                    <p class="text-muted mt-2">
                                         <i class="fas fa-users"></i> {{ $club->participant_total }} Members
                                     </p>
                                     <h5>Description</h5>
                                     <p class="card-text text-justify">{{ $club->club_description }}</p>
-                                    <div class="mt-auto">
-                                        <a href="{{ route('registration.register', ['clubId' => $club->club_id, 'clubType' => $club->club_category]) }}"
-                                            class="btn btn-dark">Register</a>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -47,10 +51,9 @@
     </div>
 
     <style>
-        /* Additional styling to ensure layout structure */
         h3 {
-            margin: 0;
             font-size: 1.25rem;
+            margin: 0;
         }
 
         h5 {
