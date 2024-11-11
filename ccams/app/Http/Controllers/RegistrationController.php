@@ -47,7 +47,7 @@ class RegistrationController extends Controller
         $existingRegistration = Registration::where('user_id', $userId)->where('club_type', $clubType)->first();
 
         if($existingRegistration){
-            return redirect()->back()->with('error', 'You have already registered for'.$clubType );
+            return redirect()->back()->with('error', 'You have already registered for '.$clubType );
         }
 
         //Register student to club
