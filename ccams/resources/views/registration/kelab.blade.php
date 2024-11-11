@@ -13,7 +13,7 @@
 
         <!-- Kelab Listings -->
         <div class="row mt-4">
-            @foreach ($beruniform as $club)
+            @foreach ($kelab as $club)
                 <div class="col-md-6 mb-4">
                     <div class="card shadow-sm h-100">
                         <div class="row g-0 h-100">
