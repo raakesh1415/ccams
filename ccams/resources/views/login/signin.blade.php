@@ -129,6 +129,11 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="role">role:</label>
+                    <input type="text" id="role" name="role" required>
+                </div>
+
+                <!-- <div class="form-group">
                     <label for="year">Year:</label>
                     <input type="text" id="year" name="year" required>
                 </div>
@@ -167,7 +172,7 @@
                             <option value="{{ $i }}">{{ $i }}</option>
                         @endfor
                     </select>
-                </div>
+                </div> -->
 
                 <button type="submit" class="signup-button">Sign Up</button>
             </form>
