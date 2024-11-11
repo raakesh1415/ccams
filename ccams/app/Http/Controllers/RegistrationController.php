@@ -27,7 +27,8 @@ class RegistrationController extends Controller
     }
 
     public function register(Request $request, $clubId, $clubType){
-        $userId = Auth::id();
+        //$userId = Auth::id();
+        $userId = 1;
 
         // Fetch the club to check its capacity
         $club = Club::find($clubId);
