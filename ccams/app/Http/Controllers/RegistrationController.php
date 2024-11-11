@@ -27,7 +27,8 @@ class RegistrationController extends Controller
     }
 
     public function register(Request $request, $clubId, $clubType){
-        $userId = Auth::id();
+        //$userId = Auth::id();
+        $userId = 1;
 
         // Fetch the club to check its capacity
         $club = Club::find($clubId);
@@ -46,7 +47,7 @@ class RegistrationController extends Controller
         $existingRegistration = Registration::where('user_id', $userId)->where('club_type', $clubType)->first();
 
         if($existingRegistration){
-            return redirect()->back()->with('error', 'You have already registered for'.$clubType );
+            return redirect()->back()->with('error', 'You have already registered for '.$clubType );
         }
 
         //Register student to club

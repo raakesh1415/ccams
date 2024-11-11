@@ -8,7 +8,7 @@ class SignUpController extends Controller
 {
     public function store(Request $request)
     {
-        // 验证传入的数据
+        // 验证传入的数据 Validating incoming data
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
@@ -21,7 +21,7 @@ class SignUpController extends Controller
             'birth_year' => 'required|integer',
         ]);
 
-        // 创建新用户
+        // 创建新用户 Create User
         $user = new User();
         $user->name = $validatedData['name'];
         $user->email = $validatedData['email'];

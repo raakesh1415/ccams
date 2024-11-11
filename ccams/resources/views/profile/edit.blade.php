@@ -29,10 +29,6 @@
                     <input type="email" id="email" name="email" value="hank@example.com" readonly>
                     <small>Email visible to other course participants</small>
                 </div>
-                <div class="form-group">
-                    <label for="timezone">Timezone</label>
-                    <input type="text" id="timezone" name="timezone" value="America/New_York" readonly>
-                </div>
             </div>
 
             <!-- Contact Information Section -->
