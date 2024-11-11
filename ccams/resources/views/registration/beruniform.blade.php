@@ -1,6 +1,15 @@
 <x-layout>
     <div class="container mt-5">
         <h2 class="text-center"><b>UNIT BERUNIFORM</b></h2>
+        <!-- Display prompt messages -->
+        @if (session('error'))
+            <div class="alert alert-danger">{{ session('error') }}</div>
+        @endif
+
+        @if (session('success'))
+            <div class="alert alert-success">{{ session('success') }}</div>
+        @endif
+
 
         <!-- Beruniform Listings -->
         <div class="row mt-4">
