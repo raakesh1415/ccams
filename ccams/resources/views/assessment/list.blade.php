@@ -13,11 +13,13 @@
                         <span class="fa fa-plus"></span> Add Assessment</a>
                     <thead>
                         <tr>
-                            <th>Position</th>
+                            {{-- <th>Position</th>
                             <th>Engagement</th>
                             <th>Commitment</th>
                             <th>Achievement</th>
-                            <th>Contribution</th>
+                            <th>Contribution</th> --}}
+                            <th>Name</th>
+                            <th>Comment</th>
                             <th>Total Mark</th>
                             <th>Action</th>
                             {{-- <th>Comment</th> --}}
@@ -26,12 +28,14 @@
                     <tbody>
                         @foreach ($assessments as $as)
                         <tr>
-                            <td>{{ $as->position }}</td>
+                            {{-- <td>{{ $as->position }}</td>
                             <td>{{ $as->engagement }}</td>
                             <td>{{ $as->commitment }}</td>
                             <td>{{ $as->achievement }}</td>
-                            <td>{{ $as->contribution }}</td>
-                            <td>{{ $as->total_mark }}</td>
+                            <td>{{ $as->contribution }}</td> --}}
+                            <td>{{ $as->user->name ?? 'N/A' }}</td>
+                            <td>{{ $as->comment }}</td>
+                            <td>{{ $as->total_mark }}%</td>
                             <td>
                                 {{-- <a href="{{ route('assessment.create', $as->assessment_id) }}" class="btn btn-sm btn-success"><span class="fa fa-plus"></i>"></span></a> --}}
                                 <a href="{{ route('assessment.show', $as->assessment_id) }}" class="btn btn-sm btn-info"><span class="fa fa-eye"></a>

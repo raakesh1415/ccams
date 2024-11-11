@@ -8,6 +8,17 @@
                     <h2 class="text-center mb-4">Assessment Form</h2>
 
                     <!-- Student Section -->
+                    <div class="row mb-3">
+                        <div class="col-md-4 mb-2">
+                            <label for="user_id" class="form-label">Select Student:</label>
+                            <select class="form-select" id="user_id" name="user_id" required>
+                                <option value="">-- Select Student --</option>
+                                @foreach($users as $user)
+                                    <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
                     {{-- <h3 class="mb-3">Student Details <small class="text-muted"></small></h3>
                     <div class="row mb-3">
                         <div class="col-md-4 mb-2">
@@ -22,8 +33,8 @@
                             <label for="ic" class="form-label">IC No:</label>
                             <input type="text" class="form-control" id="ic" name="ic" value="070925101909">
                         </div>
-                    </div>
-                    <div class="row mb-3">
+                    </div> --}}
+                    {{-- <div class="row mb-3">
                         <div class="col-md-4 mb-2">
                             <label for="id" class="form-label">ID No:</label>
                             <input type="text" class="form-control" id="id" name="id" value="B22AE007">

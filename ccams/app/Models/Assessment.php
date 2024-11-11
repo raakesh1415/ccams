@@ -12,6 +12,7 @@ class Assessment extends Model
 
     protected $table = 'assessments';
     protected $fillable = [
+        'user_id',
         'position',
         'engagement',
         'achievement',
@@ -21,4 +22,9 @@ class Assessment extends Model
         'comment',
         'total_mark', // Add this line
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

@@ -4,47 +4,62 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Assessment;
+use App\Models\User;
 use Illuminate\Routing\Controller;
 
 class AssessmentController extends Controller
 {
     public function index()
     {   
-        $assessments = Assessment::all();
+        // $assessments = Assessment::all();
+        $assessments = Assessment::with('user')->get();
         return view("assessment.list", [
             'assessments' => $assessments]
         );
+        
     }
 
     public function create()
     {
         // dd('ok');
-        return view("assessment.create");
+        // return view("assessment.create");
+        $users = User::all(); // Fetch all users
+        return view('assessment.create', compact('users')); // Pass users to the view
     }
 
-    public function store(Request $request) { 
-        // dd($request->all()); // Check what data is being received
 
+    public function store(Request $request) { 
         // Validate incoming request data
         $data = $request->validate([
+            'user_id' => 'required|exists:users,id', // Ensure user_id exists in users table
             'position' => 'required',
             'engagement' => 'array|required',
-            'achievement' => 'array|required', // Ensure it's an array
-            'commitment' => 'array|required',   // Ensure it's an array
+            'achievement' => 'array|required',
+            'commitment' => 'array|required',
             'contribution' => 'array|required',
             'attendance' => 'required|numeric',
             'comment' => 'required|string',
         ]);
     
-        // Calculate values
-        $data['achievement'] = array_sum($request->input('achievement'));
-        $data['commitment'] = array_sum($request->input('commitment'));
-        $data['engagement'] = array_sum($request->input('engagement'));
-        $data['contribution'] = array_sum($request->input('contribution'));
+        // Cap the scores at their respective maximum values
+        $data['position'] = min($data['position'], 10); // Max 10 marks
+        $data['engagement'] = min($data['engagement'], 20); // Max 20 marks
+        $data['achievement'] = min($data['achievement'], 20); // Max 20 marks
+        $data['commitment'] = min($data['commitment'], 10); // Max 10 marks
+        $data['contribution'] = min($data['contribution'], 10); // Max 10 marks
+
+        // Calculate attendance score using the formula
+        $data['attendance'] = ($data['attendance'] / 12) * 40; // Attendance formula
+
+        // Calculate total marks
         $data['total_mark'] = $data['position'] + $data['engagement'] + $data['achievement'] + $data['commitment'] + $data['contribution'] + $data['attendance'];
-    
+
+        // Cap the total marks at 110
+        $data['total_mark'] = min($data['total_mark'], 110); // Max 110 marks
+
         // Prepare data for database insertion
         $assessmentData = [
+            'user_id' => $data['user_id'], // Save user_id
             'position' => $data['position'],
             'engagement' => $data['engagement'],
             'achievement' => $data['achievement'],
@@ -52,7 +67,7 @@ class AssessmentController extends Controller
             'contribution' => $data['contribution'],
             'attendance' => $data['attendance'],
             'comment' => $data['comment'],
-            'total_mark' => $data['total_mark'], // Ensure this matches the column name in your database
+            'total_mark' => $data['total_mark'],
         ];
     
         // Create new assessment record in the database
