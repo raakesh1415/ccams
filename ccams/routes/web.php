@@ -28,15 +28,9 @@ Route::resource('assessment', AssessmentController::class);
 Route::get('/attendance', [AttendanceController::class, 'index'])->name('attendance.index');
 Route::get('/attendance/{club}', [AttendanceController::class, 'show'])->name('attendance.show');
 Route::post('/attendance/{club}/store', [AttendanceController::class, 'store'])->name('attendance.store');
+// Route to update a student's attendance
+Route::put('/attendance/{studentId}', [AttendanceController::class, 'update'])->name('attendance.update');
 
-// Activity 
-//Route::get('/activity', function () {
-    //return view('activity.index');
-//});
-
-//Route::get('/activity/add', function () {
-  //  return view('activity.create');
-//});
 
 // Route to display the list of activities
 Route::get('/activities', [ActivityController::class, 'index'])->name('activities.index');

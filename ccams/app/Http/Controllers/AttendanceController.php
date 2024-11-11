@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User; // Import the User model
-use App\Models\Club; // Import the Club model
-use App\Models\Attendance; // Import the Attendance model
+use App\Models\User;
+use App\Models\Club;
+use App\Models\Attendance;
 use Illuminate\Http\Request;
 
 class AttendanceController extends Controller
@@ -24,24 +24,25 @@ class AttendanceController extends Controller
     {
         $club = Club::findOrFail($clubId);
 
-        // Fetch only users with the role 'student' and their attendance records for the specified club
+        // Fetch students with their attendance records for the specified club
         $students = User::where('role', 'student')
-                        ->with(['attendances' => function ($query) use ($clubId) {
-                            $query->where('club_id', $clubId);
-                        }])
-                        ->get();
+            ->with(['attendances' => function ($query) use ($clubId) {
+                $query->where('club_id', $clubId);
+            }])
+            ->get();
 
         // Status symbols mapping
         $statusSymbols = [
             'Present' => '✅',
             'Absent' => '❌',
-            'Excused' => '🟡'
+            'Excused' => '🟡',
+            'N/A' => 'N/A'
         ];
 
         return view('attendance.show', compact('club', 'students', 'statusSymbols'));
     }
 
-
+    // Store attendance for multiple students
     public function store(Request $request, $clubId)
     {
         // Validate the form data
@@ -55,29 +56,55 @@ class AttendanceController extends Controller
             // Find the student
             $student = User::findOrFail($studentId);
 
-            // Loop through weeks (1 to 12)
+            // Loop through weeks (1 to 12) and update attendance
             foreach ($weeks as $week => $status) {
                 // Extract the week number from the key (week_1, week_2, etc.)
                 preg_match('/week_(\d+)/', $week, $matches);
-                $weekNumber = $matches[1];
+                $weekNumber = (int) $matches[1];
 
-                // Update or create the attendance record
+                // Use updateOrCreate to handle attendance
                 Attendance::updateOrCreate(
                     [
-                        'user_id' => $studentId, // Reference to the student
-                        'club_id' => $clubId,    // Reference to the club
-                        'week_number' => $weekNumber, // Week number (1 to 12)
+                        'user_id' => $studentId,
+                        'club_id' => $clubId,
+                        'week_number' => $weekNumber,
                     ],
-                    [
-                        'status' => $status, // Status: Present, Absent, or Excused
-                    ]
+                    ['status' => $status]
                 );
             }
         }
 
-        // Add a success message to the session
-    return redirect()->route('attendance.show', ['club' => $clubId])
-    ->with('success', 'Attendance updated successfully!');
+        // Redirect with success message
+        return redirect()->route('attendance.show', ['club' => $clubId])
+            ->with('success', 'Attendance updated successfully!');
     }
 
+    // Update individual student's attendance
+    public function update(Request $request, $studentId)
+    {
+        $data = $request->input('attendance');
+        $student = User::findOrFail($studentId); // Use User model here
+
+        foreach ($data as $week => $status) {
+            $weekNumber = (int) filter_var($week, FILTER_SANITIZE_NUMBER_INT);
+            $attendance = Attendance::where('user_id', $studentId)
+                                    ->where('week_number', $weekNumber)
+                                    ->first();
+            
+            if ($attendance) {
+                $attendance->status = $status;
+                $attendance->save();
+            } else {
+                Attendance::create([
+                    'user_id' => $studentId,
+                    'club_id' => $request->club_id,
+                    'week_number' => $weekNumber,
+                    'status' => $status,
+                ]);
+            }
+        }
+
+        return redirect()->route('attendance.show', ['club' => $request->club_id])
+                        ->with('success', 'Attendance updated successfully!');
+    }
 }
