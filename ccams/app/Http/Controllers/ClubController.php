@@ -2,53 +2,47 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Club;
+use App\Models\Club; // Import the Club model
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 
 class ClubController extends Controller
 {
     /**
-     * Display a listing of the clubs categorized as 'Kelab / Persatuan'.
-     *
-     * @return \Illuminate\View\View
-     */
-
-     public function showKelabClubs()
-     {
-         // Fetch clubs in the 'Kelab / Persatuan' category
-         $clubs = Club::where('club_category', 'Kelab / Persatuan')->get();
-         
-         return view('club.kelab', compact('clubs'));
-     }
-
-     public function showSukanClubs()
-{
-    // Fetch clubs in the 'Sukan / Permainan' category
-    $clubs = Club::where('club_category', 'Sukan / Permainan')->get();
-
-    // Pass clubs to the view
-    return view('club.sukan', compact('clubs'));
-}
-
-public function showUnitBeruniformClubs()
-{
-    // Fetch clubs in the 'Unit Beruniform' category
-    $clubs = Club::where('club_category', 'Unit Beruniform')->get();
-
-    // Pass clubs to the view
-    return view('club.unitberuniform', compact('clubs'));
-}
-
-    /**
-     * Store a newly created club in the database.
+     * Store a newly created club in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse
      */
     
+     public function showKelabClubs()
+     {
+         // Fetch clubs in the 'Kelab / Persatuan' category
+         $club = Club::where('club_category', 'Kelab / Persatuan')->get();
+         
+         return view('club.kelab', compact('club'));
+     }
+
+     public function showSukanClubs()
+    {
+    // Fetch clubs in the 'Sukan / Permainan' category
+    $club = Club::where('club_category', 'Sukan / Permainan')->get();
+
+    // Pass clubs to the view
+    return view('club.sukan', compact('club'));
+    }
+
+public function showUnitBeruniformClubs()
+{
+    // Fetch clubs in the 'Unit Beruniform' category
+    $club = Club::where('club_category', 'Unit Beruniform')->get();
+
+    // Pass clubs to the view
+    return view('club.unitberuniform', compact('club'));
+}
     public function store(Request $request)
     {
-        // Validate incoming data
+        // Validate the incoming request data
         $validated = $request->validate([
             'club_name' => 'required|string|max:255',
             'club_description' => 'required|string',
@@ -56,33 +50,26 @@ public function showUnitBeruniformClubs()
             'club_category' => 'required|string|in:Kelab / Persatuan,Sukan / Permainan,Unit Beruniform',
             'club_pic' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
-
-        // Handle the file upload if an image is provided
+    
+        // Handle the file upload
         $clubPicPath = null;
         if ($request->hasFile('club_pic')) {
             $clubPicPath = $request->file('club_pic')->store('club_pics', 'public');
         }
-
-        // Create a new club record
+    
+        // Create a new club record in the database
         Club::create([
             'club_name' => $validated['club_name'],
             'club_description' => $validated['club_description'],
             'participant_total' => $validated['participant_total'],
             'club_category' => $validated['club_category'],
-            'club_pic' => $clubPicPath ?? 'default_image.jpg',
+            'club_pic' => $clubPicPath ?? 'default_image.jpg', // Use default if no image is uploaded
         ]);
+    
+        // Flash success message and redirect to index
+        session()->flash('success', 'Club successfully added!');
+        return redirect(url('/club'));
 
-        // Redirect back with success message
-        return redirect()->back()->with('success', 'Club added successfully!');
     }
-
-    /**
-     * Show the form for creating a new club.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function create()
-    {
-        return view('club.create');
-    }
+    
 }

@@ -4,11 +4,11 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateClubsTable extends Migration
+class CreateClubTable extends Migration
 {
     public function up()
     {
-        Schema::create('clubs', function (Blueprint $table) {
+        Schema::create('club', function (Blueprint $table) {
             $table->id('club_id');
             $table->string('club_name');
             $table->text('club_description');
@@ -21,6 +21,6 @@ class CreateClubsTable extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('clubs');
+        Schema::dropIfExists('club');
     }
 }
