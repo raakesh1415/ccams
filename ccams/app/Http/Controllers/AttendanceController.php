@@ -22,24 +22,22 @@ class AttendanceController extends Controller
     // Show attendance for a specific club
     public function show($clubId)
     {
-        // Fetch the club
         $club = Club::findOrFail($clubId);
 
-        // Fetch the students and their attendance for the club
-        $students = User::where('role', 'student')  // Assuming you have a 'role' field in the users table
+        // Fetch only users with the role 'student' and their attendance records for the specified club
+        $students = User::where('role', 'student')
                         ->with(['attendances' => function ($query) use ($clubId) {
                             $query->where('club_id', $clubId);
                         }])
                         ->get();
 
-        // Map the status to symbols
+        // Status symbols mapping
         $statusSymbols = [
             'Present' => '✅',
             'Absent' => '❌',
             'Excused' => '🟡'
         ];
 
-        // Pass the students and the status symbols to the view
         return view('attendance.show', compact('club', 'students', 'statusSymbols'));
     }
 
@@ -77,8 +75,9 @@ class AttendanceController extends Controller
             }
         }
 
-        // Redirect back with a success message
-        return redirect()->route('attendance.show', ['club' => $clubId])->with('success', 'Attendance updated successfully!');
+        // Add a success message to the session
+    return redirect()->route('attendance.show', ['club' => $clubId])
+    ->with('success', 'Attendance updated successfully!');
     }
 
 }
