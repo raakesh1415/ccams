@@ -20,7 +20,7 @@
         <div class="action-buttons">
             <!-- Edit Button (dummy link) -->
            <!-- Edit Button -->
-<a href="{{ route('club.edit', ['id' => $club->club_id]) }}" class="btn btn-edit">
+<a href="{{ route('club.edit', ['club_id' => $club->club_id]) }}" class="btn btn-edit">
     <i class="fas fa-edit"></i> Edit
 </a>
 

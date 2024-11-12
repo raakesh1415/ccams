@@ -84,35 +84,51 @@ public function showDetails($club_id)
     }
     // ClubController.php
 
-public function edit($id)
+public function edit($club_id)
 {
     // Retrieve club by 'club_id' instead of 'id'
-    $club = Club::where('club_id', $id)->firstOrFail();
+   $club = Club::findOrFail($club_id);
     return view('club.create', compact('club'));
 }
 
-public function update(Request $request, $id)
+public function update(Request $request, $club_id)
 {
-    // Use 'club_id' to find the specific club record
-    $club = Club::where('club_id', $id)->firstOrFail();
+    // Find the club by club_id
+    $club = Club::findOrFail($club_id);
 
-    // Update the club fields here
-    $club->club_name = $request->input('club_name');
-    $club->club_category = $request->input('club_category');
-    $club->club_description = $request->input('club_description');
-    $club->participant_total = $request->input('participant_total');
+    // Validate the input, including the image
+    $request->validate([
+        'club_name' => 'required|string|max:255',
+        'club_description' => 'required|string',
+        'participant_total' => 'required|integer',
+        'club_category' => 'required|string',
+        'club_pic' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',  // Validate the image
+    ]);
 
+    // Handle the image upload
     if ($request->hasFile('club_pic')) {
+        // Delete the old image if it exists
         if ($club->club_pic) {
             Storage::delete('public/' . $club->club_pic);
         }
-        $imagePath = $request->file('club_pic')->store('images', 'public');
+
+        // Store the new image
+        $imagePath = $request->file('club_pic')->store('clubs', 'public');
+
+        // Update the image path in the database
         $club->club_pic = $imagePath;
     }
 
-    $club->save(); // Save the updated club record
+    // Update other fields
+    $club->club_name = $request->club_name;
+    $club->club_description = $request->club_description;
+    $club->participant_total = $request->participant_total;
+    $club->club_category = $request->club_category;
 
-    return redirect()->route('club.details', ['id' => $club->club_id])->with('success', 'Club updated successfully!');
+    // Save the updated club
+    $club->save();
+
+    return redirect()->route('club.edit', ['club_id' => $club->club_id])->with('success', 'Club updated successfully!');
 }
 
     

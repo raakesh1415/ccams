@@ -46,9 +46,9 @@ Route::get('/club/sukan', [ClubController::class, 'showSukanClubs'])->name('club
 Route::get('/club/unitberuniform', [ClubController::class, 'showUnitBeruniformClubs'])->name('club.unitberuniform');
 Route::get('/club/details/{club_id}', [ClubController::class, 'showDetails'])->name('club.details');
 
-Route::get('/club/{id}/edit', [ClubController::class, 'edit'])->name('club.edit');
+Route::get('/club/{club_id}/edit', [ClubController::class, 'edit'])->name('club.edit');
 Route::post('/club', [ClubController::class, 'store'])->name('club.store');
-Route::put('/club/{id}', [ClubController::class, 'update'])->name('club.update');
+Route::put('/club/{club_id}', [ClubController::class, 'update'])->name('club.update');
 
 
 
