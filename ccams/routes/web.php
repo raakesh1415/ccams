@@ -44,10 +44,13 @@ Route::get('/club/kelab', [ClubController::class, 'showKelabClubs'])->name('club
 Route::post('/club/add', [ClubController::class, 'store'])->name('clubs.store');
 Route::get('/club/sukan', [ClubController::class, 'showSukanClubs'])->name('club.sukan');
 Route::get('/club/unitberuniform', [ClubController::class, 'showUnitBeruniformClubs'])->name('club.unitberuniform');
+Route::get('/club/details/{club_id}', [ClubController::class, 'showDetails'])->name('club.details');
+
+
 
 Route::get('/club', function () {
     return view('club.index');
-});
+})->name('club.index');
 
 Route::get('/club/add', function () { 
     return view('club.create'); })->name('club.create');

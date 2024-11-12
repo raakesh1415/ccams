@@ -42,12 +42,13 @@
         @if(!$club->isEmpty())
             <div class="club-list">
                 @foreach($club as $club)
-                    <div class="club-card">
-                        <img src="{{ asset('storage/' . $club->club_pic) }}" class="card-img-top" alt="Club Image">
-                        <h3 class="card-title">{{ $club->club_name }}</h3>
-                        <p class="card-text">{{ Str::limit($club->club_description, 100) }}</p>
-                        <a href="#" class="btn btn-dark">View Details</a>
-                    </div>
+                <div class="club-card">
+                    <img src="{{ asset('storage/' . $club->club_pic) }}" class="card-img-top" alt="Club Image">
+                    <h3 class="card-title">{{ $club->club_name }}</h3>
+                    <p class="card-text">{{ Str::limit($club->club_description, 100) }}</p>
+                    <a href="{{ route('club.details', ['club_id' => $club->club_id]) }}" class="btn btn-dark">View Details</a>
+
+                </div>
                 @endforeach
             </div>
         @endif

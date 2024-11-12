@@ -40,6 +40,15 @@ public function showUnitBeruniformClubs()
     // Pass clubs to the view
     return view('club.unitberuniform', compact('club'));
 }
+
+public function showDetails($club_id)
+{
+    // Fetch the club based on `club_id` from the database
+    $club = Club::where('club_id', $club_id)->firstOrFail();
+    
+    // Return the view with the club data
+    return view('club.clubdetails', compact('club'));
+}
     public function store(Request $request)
     {
         // Validate the incoming request data
