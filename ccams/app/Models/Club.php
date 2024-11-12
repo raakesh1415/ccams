@@ -10,6 +10,7 @@ class Club extends Model
     use HasFactory;
 
     protected $table = 'club';
+    
 
     protected $fillable = [
         'club_name',

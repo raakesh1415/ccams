@@ -11,7 +11,7 @@
         <h3 class="text-center mb-4">Create a New Club</h3>
 
         <div class="card shadow-lg border-0 rounded-3 p-4">
-            <form action="{{ route('clubs.store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('club.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
 
                 <div class="row">
