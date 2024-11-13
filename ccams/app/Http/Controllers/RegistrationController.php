@@ -10,23 +10,27 @@ use Illuminate\Support\Facades\Auth;
 
 class RegistrationController extends Controller
 {
-    public function kelabIndex(){
+    public function kelabIndex()
+    {
         $kelab = Club::where('club_category', 'KelabPersatuan')->get();
-        return view('registration.kelab', compact('kelab'));   
+        return view('registration.kelab', compact('kelab'));
         // kelab => $kelab (assigne $kelab(value) to kelab (key))
     }
 
-    public function sukanIndex() {
+    public function sukanIndex()
+    {
         $sukan = Club::where('club_category', 'SukanPermainan')->get();
         return view('registration.sukan', compact('sukan'));
     }
 
-    public function beruniformIndex() {
+    public function beruniformIndex()
+    {
         $beruniform = Club::where('club_category', 'UnitBeruniform')->get();
         return view('registration.beruniform', compact('beruniform'));
     }
 
-    public function register(Request $request, $clubId, $clubType){
+    public function register(Request $request, $clubId, $clubType)
+    {
         //$userId = Auth::id();
         $userId = 1;
 
@@ -34,7 +38,7 @@ class RegistrationController extends Controller
         $club = Club::find($clubId);
 
         if (!$club) {
-        return redirect()->back()->with('error', 'Club not found.');
+            return redirect()->back()->with('error', 'Club not found.');
         }
 
         // Check if the club is already at capacity
@@ -46,8 +50,8 @@ class RegistrationController extends Controller
         //Check if user is already registerd for this club type
         $existingRegistration = Registration::where('user_id', $userId)->where('club_type', $clubType)->first();
 
-        if($existingRegistration){
-            return redirect()->back()->with('error', 'You have already registered for '.$clubType );
+        if ($existingRegistration) {
+            return redirect()->back()->with('error', 'You have already registered for ' . $clubType);
         }
 
         //Register student to club
@@ -57,8 +61,20 @@ class RegistrationController extends Controller
             'club_type' => $clubType,
         ]);
 
-        return redirect()->back()->with('success','You have successfully registered for this club');
+        return redirect()->back()->with('success', 'You have successfully registered for this club');
     }
+
+    public function viewRegister()
+    {
+        // Assuming Auth::id() gets the authenticated user's ID
+        $userId = 1;
+
+        // Fetch all registered clubs for the user
+        $registrations = Registration::where('user_id', $userId)->with('club')->get();
+
+        return view('registration.viewRegister', compact('registrations'));
+    }
+
 
     //Unregister student from club
     /*

@@ -19,4 +19,9 @@ class Registration extends Model
         'club_id',
         'club_type',
     ];
+
+    public function club()
+    {
+    return $this->belongsTo(Club::class, 'club_id');
+    }
 }

@@ -79,6 +79,9 @@ Route::get('/registration/beruniform', [RegistrationController::class, 'berunifo
 Route::post('/registration/{clubId}/{clubType}', [RegistrationController::class, 'register'])
     ->name('registration.register');
 
+Route::get('/registration/viewRegister', [RegistrationController::class, 'viewRegister'])
+    ->name('registration.viewRegister');
+
 // Profile 
 Route::get('/profile', function () {
     return view('profile.index');
