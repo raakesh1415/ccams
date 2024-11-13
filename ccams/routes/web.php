@@ -20,6 +20,8 @@ Route::get('/assessment/list/create', [AssessmentController::class, 'create'])->
 Route::get('/assessment/list', [AssessmentController::class, 'index'])->name('assessment.list');
 Route::post('/assessment/list', [AssessmentController::class, 'store'])->name('assessment.store');
 Route::resource('assessment', AssessmentController::class);
+Route::get('assessment/{assessment_id}/edit', [AssessmentController::class, 'edit'])->name('assessment.edit');
+Route::put('assessment/{assessment_id}', [AssessmentController::class, 'update'])->name('assessment.update');
 
 //Students
 //Route::resource('students', StudentController::class);
