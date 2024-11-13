@@ -7,10 +7,10 @@
             @foreach ($registrations as $registration)
                 <div class="col-md-6 mb-4">
                     <div class="card shadow-sm h-100">
-                        <div class="card-body d-flex justify-content-between align-items-center">
+                        <div class="card-body d-flex justify-content-between align-items-start">
                             <div>
                                 <h4 class="card-title">{{ $registration->club->club_name }}</h4>
-                                <p class="text-muted">{{ $registration->club_type }}</p>
+                                <p class="text-muted mb-1">{{ $registration->club_type }}</p>
                                 <p>{{ $registration->club->club_description }}</p>
                             </div>
                             <!-- Delete Button with Trash Icon -->
@@ -24,5 +24,4 @@
         </div>
     </div>
 
-    </div>
 </x-layout>
