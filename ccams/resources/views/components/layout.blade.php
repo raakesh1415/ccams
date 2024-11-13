@@ -65,6 +65,7 @@
                             <div class="sb-nav-link-icon"><i class="fas fa-university"></i></div>
                             Club
                         </a>
+                        <!-- Need modification -->
                         <!-- Dropdown for Registration -->
                         <a class="nav-link collapsed {{ request()->is('registration') || request()->is('registration/register') || request()->is('registration/view') ? 'active' : '' }}"
                             href="#" data-bs-toggle="collapse" data-bs-target="#registrationCollapse"

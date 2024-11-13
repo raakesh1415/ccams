@@ -1,23 +1,28 @@
 <x-layout>
     <div class="container mt-5">
-        <h2 class="text-center"><b>REGISTERED CLUBS</h2>
+        <h2 class="text-center"><b>Your Registered Clubs</b></h2>
 
-        @if ($registrations->isEmpty())
-            <p class="text-center">You have not registered for any clubs yet.</p>
-        @else
-            <div class="row mt-4">
-                @foreach ($registrations as $registration)
-                    <div class="col-md-6 mb-4">
-                        <div class="card shadow-sm h-100">
-                            <div class="card-body">
-                                <h3 class="card-title">{{ $registration->club->club_name }}</h3>
-                                <p><strong>Type:</strong> {{ $registration->club_type }}</p>
+        <!-- Registered Clubs List -->
+        <div class="row mt-4">
+            @foreach ($registrations as $registration)
+                <div class="col-md-6 mb-4">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-body d-flex justify-content-between align-items-center">
+                            <div>
+                                <h4 class="card-title">{{ $registration->club->club_name }}</h4>
+                                <p class="text-muted">{{ $registration->club_type }}</p>
                                 <p>{{ $registration->club->club_description }}</p>
                             </div>
+                            <!-- Delete Button with Trash Icon -->
+                            <button type="button" class="btn btn-danger" title="Unregister">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
                         </div>
                     </div>
-                @endforeach
-            </div>
-        @endif
+                </div>
+            @endforeach
+        </div>
+    </div>
+
     </div>
 </x-layout>
