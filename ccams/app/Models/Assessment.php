@@ -10,7 +10,9 @@ class Assessment extends Model
 {
     use HasFactory; 
 
-    protected $table = 'assessments';
+    protected $table = 'assessment';
+    protected $primaryKey = 'assessment_id'; // Specify your primary key here
+
     protected $fillable = [
         'user_id',
         'position',
@@ -21,6 +23,13 @@ class Assessment extends Model
         'attendance',
         'comment',
         'total_mark', // Add this line
+    ];
+
+    protected $casts = [
+        'engagement' => 'array', // Cast to array
+        'achievement' => 'array', // Cast to array
+        'commitment' => 'array', // Cast to array
+        'contribution' => 'array', // Cast to array
     ];
 
     public function user()

@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
-    
+
 </head>
 
 <body class="sb-nav-fixed">
@@ -65,10 +65,24 @@
                             <div class="sb-nav-link-icon"><i class="fas fa-university"></i></div>
                             Club
                         </a>
-                        <a class="nav-link {{ request()->is('registration') ? 'active' : '' }}" href="/registration">
+                        <!-- Need modification -->
+                        <!-- Dropdown for Registration -->
+                        <a class="nav-link collapsed {{ request()->is('registration') || request()->is('registration/register') || request()->is('registration/view') ? 'active' : '' }}"
+                            href="#" data-bs-toggle="collapse" data-bs-target="#registrationCollapse"
+                            aria-expanded="false" aria-controls="registrationCollapse">
                             <div class="sb-nav-link-icon"><i class="fas fa-clipboard-list"></i></div>
                             Registration
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
+                        <div class="collapse {{ request()->is('registration') || request()->is('registration/register') || request()->is('registration/view') ? 'show' : '' }}"
+                            id="registrationCollapse" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link {{ request()->is('registration/register') ? 'active' : '' }}"
+                                    href="{{ route('registration.index') }}">Register Club</a>
+                                <a class="nav-link {{ request()->is('registration/view') ? 'active' : '' }}"
+                                    href="{{ route('registration.viewRegister') }}">View Registration</a>
+                            </nav>
+                        </div>
                         <a class="nav-link {{ request()->is('activities') ? 'active' : '' }}" href="/activities">
                             <div class="sb-nav-link-icon"><i class="fas fa-tasks"></i></div>
                             Activity
@@ -115,9 +129,11 @@
             </footer>
         </div>
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
+        </script>
         <script src="{{ asset('js/scripts.js') }}"></script>
-        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
+            crossorigin="anonymous"></script>
         <script src="{{ asset('js/datatables-simple-demo.js') }}"></script>
         {{-- <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap5.min.js"></script>
