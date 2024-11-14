@@ -14,6 +14,7 @@ class UserSeeder extends Seeder
             'name' => 'John Doe',
             'email' => 'johndoe@example.com',
             'password' => bcrypt('password123'), // You can change the password here
+            'ic' => '02102412931',
             'role' => 'student',
         ]);
 
@@ -21,6 +22,7 @@ class UserSeeder extends Seeder
             'name' => 'Jane Smith',
             'email' => 'janesmith@example.com',
             'password' => bcrypt('password123'), // You can change the password here
+            'ic' => '4398438232',
             'role' => 'student',
         ]);
 
@@ -29,6 +31,7 @@ class UserSeeder extends Seeder
             'name' => 'Mark Johnson',
             'email' => 'markjohnson@example.com',
             'password' => bcrypt('password123'),
+            'ic' => '5433535341',
             'role' => 'student',
         ]);
 
