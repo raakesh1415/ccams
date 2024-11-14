@@ -219,7 +219,7 @@
             <img src="images/logo-name.png" alt="Logo">
         </div>
         <div class="navbar-right">
-            <a href="{{ route('assessment.index') }}">Log in</a>
+            <a >Log in</a>
             <a href="{{ route('login.signin') }}" class="signup">Sign up</a>
 
         </div>

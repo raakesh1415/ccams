@@ -65,7 +65,7 @@ class UserController extends Controller
         $request->session()->regenerate();
 
         // 登录成功后重定向到用户原先尝试访问的页面，或默认重定向到 'assessment.index'
-        return redirect()->intended(route('assessment.index'));
+        return redirect()->intended(route('club.index'));
     }
 
     // 登录失败，返回并附带错误信息
