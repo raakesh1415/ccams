@@ -43,7 +43,7 @@
 
         .signup-card {
             background-color: rgba(255, 255, 255, 0.9);
-            padding: 40px;
+            padding: 10px;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             max-width: 400px;
@@ -60,7 +60,7 @@
         .form-control {
             margin-bottom: 1rem;
             border-radius: 8px;
-            padding: 10px;
+            padding: 5px;
         }
 
         .form-group label {
@@ -97,7 +97,7 @@
 <body>
     <!-- Header with Logo at the Top -->
     <div class="header">
-        <img src="images/logo-name.png" alt="Logo">
+        <img src="../images/logo-name.png" alt="Logo">
     </div>
 
     <!-- Overlay and Sign-Up Form -->
@@ -129,9 +129,8 @@
                 <div class="form-group">
                     <label for="role">You are:</label>
                     <select id="role" name="role" class="form-control" required>
-                        <option value="NULL"></option>
-                        <option value="teacher">Teacher</option>
                         <option value="student">Student</option>
+                        <option value="teacher">Teacher</option>
                     </select>
                 </div>
                 <button type="submit" class="btn btn-signup">Sign Up</button>
