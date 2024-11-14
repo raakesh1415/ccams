@@ -34,12 +34,14 @@ Route::post('/attendance/{club}/store', [AttendanceController::class, 'store'])-
 Route::put('/attendance/{studentId}', [AttendanceController::class, 'update'])->name('attendance.update');
 
 
-// Route to display the list of activities
+// Activities
 Route::get('/activities', [ActivityController::class, 'index'])->name('activities.index');
-
-// Route to display the add activity form
 Route::get('/activities/create', [ActivityController::class, 'create'])->name('activities.create');
 Route::post('/activities', [ActivityController::class, 'store'])->name('activities.store');
+Route::get('/activities/{activity:activity_id}/edit', [ActivityController::class, 'edit'])->name('activities.edit');
+Route::put('/activities/{activity:activity_id}', [ActivityController::class, 'update'])->name('activities.update');
+
+
 
 // Club 
 Route::get('/club/kelab', [ClubController::class, 'showKelabClubs'])->name('club.kelab');
