@@ -27,73 +27,341 @@
                     <!-- Position Section -->
                     <h3 class="mb-3">Position <small class="text-muted">/ 10</small></h3>
                     <div class="row mb-4">
-                        @foreach([10 => 'President', 8 => 'Vice President', 8 => 'Secretary', 8 => 'Treasurer', 6 => 'Vice Secretary', 6 => 'Vice Treasurer', 6 => 'AJK',  4 => 'Active Member', 2 => 'Ordinary Member'] as $value => $label)
-                            <div class="col-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="position" id="{{ strtolower(str_replace(' ', '', $label)) }}" value="{{ $value }}" {{ $assessment->position == $value ? 'checked' : '' }}>
-                                    <label class="form-check-label" for="{{ strtolower(str_replace(' ', '', $label)) }}">{{ $label }} ({{ $value }})</label>
-                                </div>
+                        <div class="col-md-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="position" id="president" value="President" 
+                                    {{ $assessment->position === 'President' ? 'checked' : '' }}>
+                                <label class="form-check-label" for="president">President (10)</label>
                             </div>
-                        @endforeach
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="position" id="vicePresident" value="Vice President" 
+                                    {{ $assessment->position === 'Vice President' ? 'checked' : '' }}>
+                                <label class="form-check-label" for="vicePresident">Vice President (8)</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="position" id="secretary" value="Secretary" 
+                                    {{ $assessment->position === 'Secretary' ? 'checked' : '' }}>
+                                <label class="form-check-label" for="secretary">Secretary (8)</label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="position" id="treasurer" value="Treasurer" 
+                                    {{ $assessment->position === 'Treasurer' ? 'checked' : '' }}>
+                                <label class="form-check-label" for="treasurer">Treasurer (8)</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="position" id="viceSecretary" value="Vice Secretary" 
+                                    {{ $assessment->position === 'Vice Secretary' ? 'checked' : '' }}>
+                                <label class="form-check-label" for="viceSecretary">Vice Secretary (6)</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="position" id="viceTreasurer" value="Vice Treasurer" 
+                                    {{ $assessment->position === 'Vice Treasurer' ? 'checked' : '' }}>
+                                <label class="form-check-label" for="viceTreasurer">Vice Treasurer (6)</label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="position" id="ajk" value="AJK" 
+                                    {{ $assessment->position === 'AJK' ? 'checked' : '' }}>
+                                <label class="form-check-label" for="ajk">AJK (6)</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="position" id="activeMember" value="Active Member" 
+                                    {{ $assessment->position === 'Active Member' ? 'checked' : '' }}>
+                                <label class="form-check-label" for="activeMember">Active Member (4)</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="position" id="ordinaryMember" value="Ordinary Member" 
+                                    {{ $assessment->position === 'Ordinary Member' ? 'checked' : '' }}>
+                                <label class="form-check-label" for="ordinaryMember">Ordinary Member (2)</label>
+                            </div>
+                        </div>
                     </div>
                     <hr>
-
                     <!-- Engagement Level Section -->
                     <h3 class="mb-3">Engagement Level <small class="text-muted">/ 20</small></h3>
                     <div class="row mb-4">
-                        @for ($i = 1; $i <= 3; $i++)
-                            <div class="col-md-4">
-                                <h4 class="h5">Engagement {{ $i }}</h4>
-                                @foreach([20 => 'International', 17 => 'National', 14 => 'Country', 11 => 'District/Zone', 0 => 'School/None'] as $value => $label)
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="engagement[]" id="eng{{ $i }}{{ strtolower(str_replace(' ', '', $label)) }}" value="{{ $value }}" {{ is_array($assessment->engagement) && in_array($value, $assessment->engagement) ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="eng{{ $i }}{{ strtolower(str_replace(' ', '', $label)) }}">{{ $label }} ({{ $value }})</label>
-                                    </div>
-                                @endforeach
+                        <div class="col-md-4">
+                            <h4 class="h5">Engagement 1</h4>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="engagement[]" id="eng1International" value="I1" 
+                                    {{ is_array($assessment->engagement) && in_array('I1', $assessment->engagement) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="eng1International">International (20)</label>
                             </div>
-                        @endfor
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="engagement[]" id="eng1National" value="N1"
+                                    {{ is_array($assessment->engagement) && in_array('N1', $assessment->engagement) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="eng1National">National (17)</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="engagement[]" id="eng1Country" value="C1"
+                                    {{ is_array($assessment->engagement) && in_array('C1', $assessment->engagement) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="eng1Country">Country (14)</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="engagement[]" id="eng1District" value="D1"
+                                    {{ is_array($assessment->engagement) && in_array('D1', $assessment->engagement) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="eng1District">District/Zone (11)</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="engagement[]" id="eng1School" value="S1"
+                                    {{ is_array($assessment->engagement) && in_array('S1', $assessment->engagement) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="eng1School">School/None (0)</label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <h4 class="h5">Engagement 2</h4>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="engagement[]" id="eng2International" value="I2"
+                                    {{ is_array($assessment->engagement) && in_array('I2', $assessment->engagement) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="eng2International">International (15)</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="engagement[]" id="eng2National" value="N2"
+                                    {{ is_array($assessment->engagement) && in_array('N2', $assessment->engagement) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="eng2National">National ( 12)</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="engagement[]" id="eng2Country" value="C2"
+                                    {{ is_array($assessment->engagement) && in_array('C2', $assessment->engagement) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="eng2Country">Country (10)</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="engagement[]" id="eng2District" value="D2"
+                                    {{ is_array($assessment->engagement) && in_array('D2', $assessment->engagement) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="eng2District">District/Zone (8)</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="engagement[]" id="eng2School" value="S2"
+                                    {{ is_array($assessment->engagement) && in_array('S2', $assessment->engagement) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="eng2School">School/None (0)</label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <h4 class="h5">Engagement 3</h4>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="engagement[]" id="eng3International" value="I3"
+                                    {{ is_array($assessment->engagement) && in_array('I3', $assessment->engagement) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="eng3International">International (10)</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="engagement[]" id="eng3National" value="N3"
+                                    {{ is_array($assessment->engagement) && in_array('N3', $assessment->engagement) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="eng3National">National (8)</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="engagement[]" id="eng3Country" value="C3"
+                                    {{ is_array($assessment->engagement) && in_array('C3', $assessment->engagement) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="eng3Country">Country (6)</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="engagement[]" id="eng3District" value="D3"
+                                    {{ is_array($assessment->engagement) && in_array('D3', $assessment->engagement) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="eng3District">District/Zone (4)</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="engagement[]" id="eng3School" value="S3"
+                                    {{ is_array($assessment->engagement) && in_array('S3', $assessment->engagement) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="eng3School">School/None (0)</label>
+                            </div>
+                        </div>
                     </div>
-
-                    {{-- <!-- Achievement Level Section -->
+                    <hr>
+                    <!-- Achievement Level Section -->
                     <h3 class="mb-3">Achievement Level <small class="text-muted">/ 20</small></h3>
                     <div class="row mb-4">
                         <div class="col-md-3">
                             <h4 class="h5">Engagement</h4>
-                            @foreach(['International' => 20, 'National' => 17, 'Country' => 14, 'District/Zone' => 11, 'School' => 8] as $label => $value)
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="achievement[]" id="champ{{ strtolower($label) }}" value="{{ $value }}" {{ is_array($assessment->achievement) && in_array($value, $assessment->achievement) ? 'checked' : '' }}>
-                                    <label class="form-check-label" for="champ{{ strtolower($label) }}">{{ $value }}</label>
-                                </div>
-                            @endforeach
+                            <p class="mb-0">International</p>
+                            <p class="mb-0">National</p>
+                            <p class="mb-0">Country</p>
+                            <p class="mb-0">District / Zone</p>
+                            <p class="mb-0">School</p>
+                        </div>
+                        <div class="col-md-3">
+                            <h4 class="h5">Champion</h4>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="achievement[]" id="champInt" value="IC"
+                                    {{ is_array($assessment->achievement) && in_array('IC', $assessment->achievement) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="champInt">20</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="achievement[]" id="champNat" value="NC"
+                                    {{ is_array($assessment->achievement) && in_array('NC', $assessment->achievement) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="champNat">17</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="achievement[]" id="champCountry" value="CC"
+                                    {{ is_array($assessment->achievement) && in_array('CC', $assessment->achievement) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="champCountry">14</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="achievement[]" id="champDist" value="DC"
+                                    {{ is_array($assessment->achievement) && in_array('DC', $assessment->achievement) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="champDist">11</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="achievement[]" id="champSchool" value="SC"
+                                    {{ is_array($assessment->achievement) && in_array('SC', $assessment->achievement) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="champSchool">8</label>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <h4 class="h5">1st Runner Up</h4>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="achievement[]" id="runnerUp1Int" value="I1"
+                                    {{ is_array($assessment->achievement) && in_array('I1', $assessment->achievement) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="runnerUp1Int">19</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="achievement[]" id="runnerUp1Nat" value="N1"
+                                    {{ is_array($assessment->achievement) && in_array('N1', $assessment->achievement) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="runnerUp1Nat">16</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="achievement[]" id="runnerUp1Country" value="C1"
+                                    {{ is_array($assessment->achievement) && in_array('C1', $assessment->achievement) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="runnerUp1Country">13</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="achievement[]" id="runnerUp1Dist" value="D1"
+                                    {{ is_array($assessment->achievement) && in_array('D1', $assessment->achievement) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="runnerUp1Dist">10</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="achievement[]" id="runnerUp1School" value="S1"
+                                    {{ is_array($assessment->achievement) && in_array('S1', $assessment->achievement) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="runnerUp1School">7</label>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <h4 class="h5">2nd Runner Up</h4>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="achievement[]" id="runnerUp2Int" value="I2"
+                                    {{ is_array($assessment->achievement) && in_array('I2', $assessment->achievement) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="runnerUp2Int">18</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="achievement[]" id="runnerUp2Nat" value="N2"
+                                    {{ is_array($assessment->achievement) && in_array('N2', $assessment->achievement) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="runnerUp2Nat">15</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="achievement[]" id="runnerUp2Country" value="C2"
+                                    {{ is_array($assessment->achievement) && in_array('C2', $assessment->achievement) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="runnerUp2Country">12</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="achievement[]" id="runnerUp2Dist" value="D2"
+                                    {{ is_array($assessment->achievement) && in_array('D2', $assessment->achievement) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="runnerUp2Dist">9</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="achievement[]" id="runnerUp2School" value="S2"
+                                    {{ is_array($assessment->achievement) && in_array('S2', $assessment->achievement) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="runnerUp2School">6</label>
+                            </div>
                         </div>
                     </div>
-                    <hr> --}}
-
-                    {{-- <!-- Commitment Section -->
+                    <hr>
+                    <!-- Commitment Section -->
                     <h3 class="mb-3">Commitment <small class="text-muted">/ 10</small></h3>
                     <div class="row mb-4">
-                        @foreach(['Demonstrate leadership' => 3, 'Manage activities' => 3, 'Helping teachers/friends' => 2, 'Provide equipment' => 2] as $label => $value)
-                            <div class="col-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="commitment[]" id="{{ strtolower(str_replace(' ', '', $label)) }}" value="{{ $value }}" {{ is_array($assessment->commitment) && in_array($value, $assessment->commitment) ? 'checked' : '' }}>
-                                    <label class="form-check-label" for="{{ strtolower(str_replace(' ', '', $label)) }}">{{ $label }} ({{ $value }})</label>
-                                </div>
+                        <div class="col-md-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="commitment[]" id="leadership" value="C1"
+                                    {{ is_array($assessment->commitment) && in_array('C1', $assessment->commitment) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="leadership">Demonstrate leadership (3)</label>
                             </div>
-                        @endforeach
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="commitment[]" id="manageActivities" value="C2"
+                                    {{ is_array($assessment->commitment) && in_array('C2', $assessment->commitment) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="manageActivities">Manage activities (3)</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="commitment[]" id="helpTeachers" value="C3"
+                                    {{ is_array($assessment->commitment) && in_array('C3', $assessment->commitment) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="helpTeachers">Helping teachers/friends (2)</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="commitment[]" id="provideEquipment" value="C4"
+                                    {{ is_array($assessment->commitment) && in_array('C4', $assessment->commitment) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="provideEquipment">Provide equipment (2)</label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="commitment[]" id="cleanArea" value="C5"
+                                    {{ is_array($assessment->commitment) && in_array('C5', $assessment->commitment) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="cleanArea">Clean the area (2)</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="commitment[]" id="punctual" value="C6"
+                                    {{ is_array($assessment->commitment) && in_array('C6', $assessment->commitment) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="punctual">Punctual (2)</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="commitment[]" id="showInterest" value="C7"
+                                    {{ is_array($assessment->commitment) && in_array('C7', $assessment->commitment) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="showInterest">Show interest (2)</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="commitment[]" id="showSeriousness" value="C8"
+                                    {{ is_array($assessment->commitment) && in_array('C8', $assessment->commitment) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="showSeriousness">Show seriousness (2)</label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="commitment[]" id="followInstructions" value="C9"
+                                    {{ is_array($assessment->commitment) && in_array('C9', $assessment->commitment) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="followInstructions">Follow Instructions (2)</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="commitment[]" id="trying" value="C10"
+                                    {{ is_array($assessment->commitment) && in_array('C10', $assessment->commitment) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="trying">Trying (2)</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="commitment[]" id="giveCooperation" value="C11"
+                                    {{ is_array($assessment->commitment) && in_array('C11', $assessment->commitment) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="giveCooperation">Give cooperation (2)</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="commitment[]" id="observableValue" value="C12"
+                                    {{ is_array($assessment->commitment) && in_array('C12', $assessment->commitment) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="observableValue">Any observable pure value (2)</label>
+                            </div>
+                        </div>
                     </div>
-                    <hr> --}}
-
-                    {{-- <!-- Contribution Service Section -->
+                    <hr>
+                    <!-- Contribution Service Section -->
                     <h3 class="mb-3">Contribution Service (School Level) <small class="text-muted">/ 10</small></h3>
                     <div class="mb-4">
-                        @foreach(['Students who are registered as program participants' => 10, 'Involves specific skills' => 10, 'Involvement of students in activities' => 8, 'Helping in unit activities' => 5] as $label => $value)
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="contribution[]" id="{{ strtolower(str_replace(' ', '', $label)) }}" value="{{ $value }}" {{ is_array($assessment->contribution) && in_array($value, $assessment->contribution) ? 'checked' : '' }}>
-                                <label class="form-check-label" for="{{ strtolower(str_replace(' ', '', $label)) }}">{{ $label }} ({{ $value }})</label>
-                            </div>
-                        @endforeach
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="contribution[]" id="cs1" value="CS1"
+                                {{ is_array($assessment->contribution) && in_array('CS1', $assessment->contribution) ? 'checked' : '' }}>
+                            <label class="form-check-label" for="cs1">Students who are registered as program / tournament / competition / carnival / course participants (10)</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="contribution[]" id="cs2" value="CS2"
+                                {{ is_array($assessment->contribution) && in_array('CS2', $assessment->contribution) ? 'checked' : '' }}>
+                            <label class="form-check-label" for="cs2">Involves specific skills-judge/umpire, team coach/technical aspects (10)</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="contribution[]" id="cs3" value="CS3"
+                                {{ is_array($assessment->contribution) && in_array('CS3', $assessment->contribution) ? 'checked' : '' }}>
+                            <label class="form-check-label" for="cs3">Involvement of students involved in activities such as interlude performances (8)</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="contribution[]" id="cs4" value="CS4"
+                                {{ is_array($assessment->contribution) && in_array('CS4', $assessment->contribution) ? 'checked' : '' }}>
+                            <label class="form-check-label" for="cs4">Helping in terms of making unit activities successful such as participating in performances, cheerleading and related (5)</label>
+                        </div>
                     </div>
-                    <hr> --}}
+                    <hr>
 
                     <!-- Attendance and Comment Section -->
                     <h3 class="mb-3">Attendance & Comment <small class="text-muted">/ 40</small></h3>

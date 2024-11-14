@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('assessment', function (Blueprint $table) {
             $table->id("assessment_id");
-            $table->integer('position');
-            $table->integer('engagement');
-            $table->integer('achievement');
-            $table->integer('commitment');
-            $table->integer('contribution');
-            $table->integer('attendance');
+            $table->string('position');
+            $table->string('engagement');
+            $table->string('achievement');
+            $table->string('commitment');
+            $table->string('contribution');
+            $table->string('attendance');
             $table->text('comment');
             $table->integer('total_mark');
             $table->unsignedBigInteger('user_id');
