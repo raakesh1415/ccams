@@ -122,58 +122,21 @@
                     <label for="password">Password:</label>
                     <input type="password" id="password" name="password" required>
                 </div>
-
+                <div class="form-group">
+                    <label for="password_confirmation">Confirm Password:</label>
+                    <input type="password" id="password_confirmation" name="password_confirmation" required>
+                </div>
                 <div class="form-group">
                     <label for="ic">IC Number:</label>
                     <input type="text" id="ic" name="ic" required>
                 </div>
-
                 <div class="form-group">
-                    <label for="role">role:</label>
-                    <input type="text" id="role" name="role" required>
-                </div>
-
-                <!-- <div class="form-group">
-                    <label for="year">Year:</label>
-                    <input type="text" id="year" name="year" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="level">Level:</label>
-                    <input type="text" id="level" name="level" required>
-                </div>
-
-                <label for="dob">What is your date of birth?</label>
-                <div class="dob-section">
-                    <select name="month" id="month" required>
-                        <option value=""></option>
-                        <option value="January">January</option>
-                        <option value="February">February</option>
-                        <option value="March">March</option>
-                        <option value="April">April</option>
-                        <option value="May">May</option>
-                        <option value="June">June</option>
-                        <option value="July">July</option>
-                        <option value="August">August</option>
-                        <option value="September">September</option>
-                        <option value="October">October</option>
-                        <option value="November">November</option>
-                        <option value="December">December</option>
+                    <label for="role">Role:</label>
+                    <select id="role" name="role" required>
+                        <option value="teacher">Teacher</option>
+                        <option value="student">Student</option>
                     </select>
-                    <select name="day" id="day" required>
-                        <option value=""></option>
-                        @for ($i = 1; $i <= 31; $i++)
-                            <option value="{{ $i }}">{{ $i }}</option>
-                        @endfor
-                    </select>
-                    <select name="birth_year" id="birth_year" required>
-                        <option value=""></option>
-                        @for ($i = date('Y') - 100; $i <= date('Y'); $i++)
-                            <option value="{{ $i }}">{{ $i }}</option>
-                        @endfor
-                    </select>
-                </div> -->
-
+                </div>
                 <button type="submit" class="signup-button">Sign Up</button>
             </form>
         </div>

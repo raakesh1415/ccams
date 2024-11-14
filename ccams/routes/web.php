@@ -7,7 +7,7 @@ use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\RegistrationController;
-
+use App\Http\Controllers\UserController;
 
 //Dashboard
 Route::get('/', function () {
@@ -82,38 +82,22 @@ Route::get('/profile', function () {
     return view('profile.index');
 })->name('profile.index');
 
-Route::get('/assessment', function () {
-    return view('assessment.index');
-})->name('assessment.index');
 
 Route::get('/profile/edit', function () {
     return view('profile.edit');
 })->name('profile.edit');
 
 // login
-use App\Http\Controllers\AuthController;
+Route::get('/login/index', [UserController::class, 'showLoginForm'])->name('login.index');
+Route::get('/login', [UserController::class, 'showLoginForm'])->name('login.index'); // 显示登录表单
+Route::post('/login', [UserController::class, 'login'])->name('login.submit'); // 处理登录请求
+// Route::get('/logout', [UserController::class, 'logout'])->name('login.index'); // 处理注销请求
+
+Route::get('/login/signup', [UserController::class, 'showSignupForm'])->name('login.signin');
+Route::post('/login/signup', [UserController::class, 'store'])->name('signup.store');
+// Route::post('/signup', [UserController::class, 'store'])->name('signup.store');
 
 
-// 登录路由
-Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login.show'); // 显示登录表单
-Route::post('/login', [AuthController::class, 'login'])->name('login.submit'); // 处理登录请求
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout'); // 处理注销请求
 
 
-
-Route::get('/login', function () {
-    return view('login.index');
-})->name('login.index');
-
-Route::get('/login/signin', function () {
-    return view('login.signin');
-})->name('longin.signin');
-
-Route::get('/signin', function () {
-    return view('login.signin');
-})->name('login.signin');
-
-use App\Http\Controllers\SignUpController;
-
-Route::post('/signup', [SignUpController::class, 'store'])->name('signup.store');
 
