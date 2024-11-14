@@ -11,7 +11,7 @@ use App\Http\Controllers\UserController;
 
 //Dashboard
 Route::get('/', function () {
-    return view('assessment.index');
+    return view('login.index');
 });
 
 // Assessment
@@ -94,12 +94,12 @@ Route::get('/profile/edit', function () {
 
 // login
 Route::get('/login/index', [UserController::class, 'showLoginForm'])->name('login.index');
-Route::get('/login', [UserController::class, 'showLoginForm'])->name('login.index'); // 显示登录表单
-Route::post('/login', [UserController::class, 'login'])->name('login.submit'); // 处理登录请求
+Route::get('/login', [UserController::class, 'showLoginForm'])->name('login.index'); // 
+Route::post('/login', [UserController::class, 'login'])->name('login.submit'); // 
 // Route::get('/logout', [UserController::class, 'logout'])->name('login.index'); // 处理注销请求
 
-Route::get('/login/signup', [UserController::class, 'showSignupForm'])->name('login.signin');
-Route::post('/login/signup', [UserController::class, 'store'])->name('signup.store');
+Route::get('/login/signin', [UserController::class, 'create'])->name('login.signin');
+Route::post('/login/signin', [UserController::class, 'store'])->name('signin.store');
 // Route::post('/signup', [UserController::class, 'store'])->name('signup.store');
 
 

@@ -243,7 +243,7 @@
             <!-- <a href="#" class="login-option">Continue with Google</a> -->
 
             <!-- Login Form -->
-            <form action="{{ route('assessment.index') }}" method="POST">
+            <form action="{{ route('login.submit') }}" method="POST">
                 @csrf
                 <div class="form-group">
                     <label for="email">Email or username *</label>

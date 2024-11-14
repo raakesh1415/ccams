@@ -108,7 +108,7 @@
 
         <div class="right-section">
             <h2>Sign Up</h2>
-            <form method="POST" action="{{ route('signup.store') }}">
+            <form method="POST" action="{{ route('signin.store') }}">
                 @csrf
                 <div class="form-group">
                     <label for="name">Name:</label>
