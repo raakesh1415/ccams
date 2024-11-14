@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Forgot Password</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
@@ -42,7 +42,7 @@
             flex: 1;
         }
 
-        .login-card {
+        .forgot-password-card {
             background-color: rgba(255, 255, 255, 0.9);
             padding: 60px;
             border-radius: 8px;
@@ -53,7 +53,7 @@
             margin-top: 1px;
         }
 
-        .login-card h2 {
+        .forgot-password-card h2 {
             margin-bottom: 1.5rem;
             font-weight: bold;
             color: #333;
@@ -65,7 +65,7 @@
             padding: 10px;
         }
 
-        .btn-login {
+        .btn-reset {
             background-color: #f0b429;
             border: none;
             color: #fff;
@@ -76,17 +76,17 @@
             transition: background-color 0.3s ease;
         }
 
-        .btn-login:hover {
+        .btn-reset:hover {
             background-color: #f0a500;
         }
 
-        .login-links {
+        .forgot-password-links {
             margin-top: 1rem;
             font-size: 0.9rem;
             color: #007bff;
         }
 
-        .login-links a {
+        .forgot-password-links a {
             color: #007bff;
         }
     </style>
@@ -97,19 +97,18 @@
         <img src="images/logo-name.png" alt="Logo">
     </div>
 
-    <!-- Overlay and Login Form -->
+    <!-- Overlay and Forgot Password Form -->
     <div class="overlay">
-        <!-- Login Card -->
-        <div class="login-card">
-            <h2>Login</h2>
-            <form action="{{ route('login.submit') }}" method="POST" novalidate>
+        <!-- Forgot Password Card -->
+        <div class="forgot-password-card">
+            <h2>Forgot Password</h2>
+            <form action="{{ route('password.reset') }}" method="POST" novalidate>
                 @csrf
-                <input type="text" id="email" name="email" class="form-control" placeholder="Email" required>
-                <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
-                <button type="submit" class="btn btn-login">SIGN IN</button>
+                <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email" required>
+                <button type="submit" class="btn btn-reset">Send Reset Link</button>
             </form>
-            <div class="login-links">
-                <a href="#">Forgot password</a>|<a href="{{ route('login.signin') }}">Create an account</a>
+            <div class="forgot-password-links">
+                <a href="{{ route('login.signin') }}">Back to Login</a>
             </div>
         </div>
     </div>
