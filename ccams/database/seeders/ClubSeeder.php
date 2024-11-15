@@ -84,5 +84,10 @@ class ClubSeeder extends Seeder
                 'updated_at' => now(),
             ]);
         }
+
+//      You guys can seed the club table. Just copy the image inside the 'public\sample_images' into 'public/storage/club_pics' folder. then run command:
+//      php artisan db:seed --class=ClubSeeder
+//      If error, make sure to link the storage first by running
+//      php artisan storage:link
     }
 }
