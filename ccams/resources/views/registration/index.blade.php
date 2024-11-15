@@ -2,6 +2,7 @@
     <div class="container mt-5">
         <h2 class="text-center"><b>CLUB TYPES</b></h2>
         <div class="row mt-4">
+
             <!-- Kelab / Persatuan-->
             <div class="col-md-4 mb-4">
                 <div class="card h-100 shadow-sm">
@@ -15,6 +16,7 @@
                     </div>
                 </div>
             </div>
+
             <!-- Sukan / Permainan -->
             <div class="col-md-4 mb-4">
                 <div class="card h-100 shadow-sm">
@@ -28,6 +30,7 @@
                     </div>
                 </div>
             </div>
+
             <!-- Unit Beruniform -->
             <div class="col-md-4 mb-4">
                 <div class="card h-100 shadow-sm">
