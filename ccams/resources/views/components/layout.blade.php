@@ -65,16 +65,16 @@
                             <div class="sb-nav-link-icon"><i class="fas fa-university"></i></div>
                             Club
                         </a>
-                        <!-- Need modification -->
                         <!-- Dropdown for Registration -->
-                        <a class="nav-link collapsed {{ request()->is('registration') || request()->is('registration/register') || request()->is('registration/view') ? 'active' : '' }}"
+                        <!-- request()->is() checks are testing if the current URL matches any of url listed -->
+                        <a class="nav-link collapsed {{ request()->is('registration') || request()->is('registration/viewRegister') ? 'active' : '' }}"
                             href="#" data-bs-toggle="collapse" data-bs-target="#registrationCollapse"
                             aria-expanded="false" aria-controls="registrationCollapse">
                             <div class="sb-nav-link-icon"><i class="fas fa-clipboard-list"></i></div>
                             Registration
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
-                        <div class="collapse {{ request()->is('registration') || request()->is('registration/register') || request()->is('registration/view') ? 'show' : '' }}"
+                        <div class="collapse {{ request()->is('registration') || request()->is('registration/viewRegister') ? 'show' : '' }}"
                             id="registrationCollapse" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
                                 <a class="nav-link {{ request()->is('registration/register') ? 'active' : '' }}"
