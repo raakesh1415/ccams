@@ -31,7 +31,10 @@
                                             action="{{ route('registration.register', ['clubId' => $club->club_id, 'clubType' => $club->club_category]) }}"
                                             method="POST">
                                             @csrf
-                                            <button type="submit" class="btn btn-dark">Register</button>
+                                            <button type="submit" class="btn btn-dark" title="Register"
+                                                onclick="return confirm('Are you sure you want to register for this club?');">
+                                                Register
+                                            </button>
                                         </form>
                                     </div>
                                     <p class="text-muted mt-2">

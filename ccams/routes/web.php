@@ -84,6 +84,9 @@ Route::post('/registration/{clubId}/{clubType}', [RegistrationController::class,
 Route::get('/registration/viewRegister', [RegistrationController::class, 'viewRegister'])
     ->name('registration.viewRegister');
 
+Route::delete('/registration/{registrationId}', [RegistrationController::class, 'unregister'])
+    ->name('registration.unregister');
+
 // Profile 
 Route::get('/profile', function () {
     return view('profile.index');

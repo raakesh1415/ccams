@@ -74,21 +74,16 @@ class RegistrationController extends Controller
 
         return view('registration.viewRegister', compact('registrations'));
     }
-
-
-    //Unregister student from club
-    /*
-    public function unregister($clubId)
+    public function unregister($registrationId)
     {
-        $userId = Auth::id();
-
-        $registration = Registration::where('user_id', $userId)->where('club_id', $clubId)->first();
-
+        $registration = Registration::find($registrationId);
+    
         if ($registration) {
             $registration->delete();
             return redirect()->back()->with('success', 'Successfully unregistered from the club.');
         }
-
-        return redirect()->back()->with('error', 'You are not registered for this club.');
-    }*/
+    
+        return redirect()->back()->with('error', 'Registration not found.');
+    }
+    
 }
