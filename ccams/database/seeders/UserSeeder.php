@@ -2,42 +2,49 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+use App\Models\User;
 
 class UserSeeder extends Seeder
 {
-    public function run()
+    /**
+     * Run the database seeds.
+     */
+    public function run(): void
     {
-        // Create 10 students
-        User::create([
-            'name' => 'John Doe',
-            'email' => 'johndoe@example.com',
-            'password' => bcrypt('password123'), // You can change the password here
-            'ic' => '02102412931',
-            'role' => 'student',
-        ]);
+        // Generate 5 students
+        for ($i = 1; $i <= 5; $i++) {
+            $student = User::create([
+                'name' => 'Student ' . $i,
+                'email' => 'student' . $i . '@example.com',
+                'password' => Hash::make('password123'), // Same password for simplicity
+                'ic' => Str::random(12), // Random 12-character string
+                'role' => 'student',
+            ]);
 
-        User::create([
-            'name' => 'Jane Smith',
-            'email' => 'janesmith@example.com',
-            'password' => bcrypt('password123'), // You can change the password here
-            'ic' => '4398438232',
-            'role' => 'student',
-        ]);
+            echo "Created Student: {$student->email} / Password: password123\n";
+        }
 
-        // Add more students as needed
-        User::create([
-            'name' => 'Mark Johnson',
-            'email' => 'markjohnson@example.com',
-            'password' => bcrypt('password123'),
-            'ic' => '5433535341',
-            'role' => 'student',
-        ]);
+        // Generate 5 teachers
+        for ($i = 1; $i <= 5; $i++) {
+            $teacher = User::create([
+                'name' => 'Teacher ' . $i,
+                'email' => 'teacher' . $i . '@example.com',
+                'password' => Hash::make('password123'), // Same password for simplicity
+                'ic' => Str::random(12), // Random 12-character string
+                'role' => 'teacher',
+            ]);
 
-        // You can use a loop to generate more students if you need
-        User::factory(10)->create([
-            'role' => 'student',  // Assuming you're using factories
-        ]);
+            echo "Created Teacher: {$teacher->email} / Password: password123\n";
+        }
+
+        // Login Credentials
+        // student1@example.com
+        // password123
+
+        // teacher1@example.com
+        // password123
     }
 }
