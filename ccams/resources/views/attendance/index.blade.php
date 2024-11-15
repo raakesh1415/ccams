@@ -8,7 +8,7 @@
                 <div class="col-lg-4 col-md-6 col-sm-12">
                     <div class="card club-card">
                         @if($club->club_pic && file_exists(storage_path('app/public/' . $club->club_pic)))
-                            <img src="{{ asset('storage/' . $club->club_pic) }}" alt="{{ $club->club_name }}" class="img-fluid">
+                            <img src="{{ asset('storage/' . $club->club_pic) }}" alt="{{ $club->club_name }}" class="img-fluid fixed-club-img">
                         @else
                             <div class="text-muted py-3">No Image Available</div>
                         @endif
@@ -25,3 +25,36 @@
         </div>
     </div>
 </x-layout>
+
+
+<style>
+    .fixed-club-img {
+    height: 300px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.card {
+    border-radius: 8px;
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card-body {
+    text-align: center;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    color: #333;
+}
+
+.card-text {
+    font-size: 0.9rem;
+    color: #666;
+}
+</style>
