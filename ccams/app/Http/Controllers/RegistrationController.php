@@ -61,7 +61,7 @@ class RegistrationController extends Controller
             'club_type' => $clubType,
         ]);
 
-        return redirect()->back()->with('success', 'You have successfully registered for this club');
+        return redirect()->back()->with('success', 'Successfully registered for this club');
     }
 
     public function viewRegister()
@@ -74,13 +74,14 @@ class RegistrationController extends Controller
 
         return view('registration.viewRegister', compact('registrations'));
     }
+
     public function unregister($registrationId)
     {
         $registration = Registration::find($registrationId);
     
         if ($registration) {
             $registration->delete();
-            return redirect()->back()->with('success', 'Successfully unregistered from the club.');
+            return redirect()->back()->with('success', 'Successfully unregistered from this club');
         }
     
         return redirect()->back()->with('error', 'Registration not found.');
