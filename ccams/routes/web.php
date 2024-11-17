@@ -107,7 +107,10 @@ Route::get('/login/signin', [UserController::class, 'create'])->name('login.sign
 Route::post('/login/signin', [UserController::class, 'store'])->name('signin.store');
 // Route::post('/signup', [UserController::class, 'store'])->name('signup.store');
 
-
+//reset password
+Route::get('/login/reset', function () {
+    return view('login/reset');
+})->name('login.reset');
 
 
 

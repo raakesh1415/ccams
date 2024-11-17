@@ -94,7 +94,7 @@
 <body>
     <!-- Header with Logo at the Top -->
     <div class="header">
-        <img src="images/logo-name.png" alt="Logo">
+        <img src="../images/logo-name.png" alt="Logo">
     </div>
 
     <!-- Overlay and Forgot Password Form -->
@@ -102,13 +102,13 @@
         <!-- Forgot Password Card -->
         <div class="forgot-password-card">
             <h2>Forgot Password</h2>
-            <form action="{{ route('password.reset') }}" method="POST" novalidate>
+            <form action="{{ route('login.reset') }}" method="POST" novalidate>
                 @csrf
                 <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email" required>
                 <button type="submit" class="btn btn-reset">Send Reset Link</button>
             </form>
             <div class="forgot-password-links">
-                <a href="{{ route('login.signin') }}">Back to Login</a>
+                <a href="{{ route('login.index') }}">Back to Login</a>
             </div>
         </div>
     </div>

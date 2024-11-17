@@ -56,7 +56,7 @@
             <div class="section">
                 <h4>About Me</h4>
                 <div class="form-group">
-                    <textarea name="about_me" id="about_me" rows="4" placeholder="Briefly describe yourself">Student at Virtual University</textarea>
+                    <textarea name="about_me" id="about_me" rows="4" placeholder="Briefly describe yourself">Student at UNIVERSITI TEKNOLOGI MALAYSIA</textarea>
                 </div>
             </div>
 

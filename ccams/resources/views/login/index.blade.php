@@ -109,7 +109,7 @@
                 <button type="submit" class="btn btn-login">SIGN IN</button>
             </form>
             <div class="login-links">
-                <a href="#">Forgot password</a>|<a href="{{ route('login.signin') }}">Create an account</a>
+                <a href="{{ route('login.reset') }}">Forgot password</a>|<a href="{{ route('login.signin') }}">Create an account</a>
             </div>
         </div>
     </div>
