@@ -69,7 +69,7 @@ class ClubSeeder extends Seeder
             'club_description' => 'Latihan ketahanan.', 
             'participant_total' => 18, 
             'club_category' => 'Unit Beruniform', 
-            'club_pic' => 'club_pics/kadet_remaja.PNG'],
+            'club_pic' => 'club_pics/kadet_remaja.jpg'],
         ];
 
         // Insert data into the database
