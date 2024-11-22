@@ -88,14 +88,15 @@ Route::delete('/registration/{registrationId}', [RegistrationController::class, 
     ->name('registration.unregister');
 
 // Profile 
-Route::get('/profile', function () {
-    return view('profile.index');
-})->name('profile.index');
-
-
+// Route::get('/profile', function () {
+//     return view('profile.index');
+// })->name('profile.index');
 Route::get('/profile/edit', function () {
     return view('profile.edit');
 })->name('profile.edit');
+
+Route::get('/profile', [UserController::class, 'showprofile'])->name('profile.index');
+Route::post('/profile/edit', [UserController::class, 'editprofile'])->name('profile.edit');
 
 // login
 Route::get('/login/index', [UserController::class, 'showLoginForm'])->name('login.index');

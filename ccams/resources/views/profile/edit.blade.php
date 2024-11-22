@@ -2,31 +2,26 @@
     <div class="edit-profile-container">
         <!-- Profile Header with Avatar, Name, and Role -->
         <div class="profile-header">
-            <img src="{{ asset('images/profile.png') }}" class="profile-avatar">
-            <h2>HANK A22EC1234</h2>
-            <span class="user-role">Student at UNIVERSITI TEKNOLOGI MALAYSIA</span>
+            <img src="{{ asset('images/profile.png') }}" class="profile-avatar" alt="Profile Avatar">
+            <h2>{{ Auth::user()->username }}</h2>
+            <span class="user-role">{{ Auth::user()->role }}</span>
         </div>  
 
         <!-- Edit Profile Form -->
-        <form>
+        <form method="POST" action="{{ route('profile.edit') }}">
+            @csrf
+            @method('POST')
+
             <!-- User Information Section -->
             <div class="section">
                 <h4>User Information</h4>
                 <div class="form-group">
                     <label for="username">Username</label>
-                    <input type="text" id="username" name="username" value="Hank A22EC1234" readonly>
-                </div>
-                <div class="form-group">
-                    <label for="first_name">First Name</label>
-                    <input type="text" id="first_name" name="first_name" value="Hank" required>
-                </div>
-                <div class="form-group">
-                    <label for="last_name">Last Name</label>
-                    <input type="text" id="last_name" name="last_name" value="A22EC1234" required>
+                    <input type="text" id="username" name="username" value="{{ Auth::user()->name }}" readonly>
                 </div>
                 <div class="form-group">
                     <label for="email">Email Address</label>
-                    <input type="email" id="email" name="email" value="hank@example.com" readonly>
+                    <input type="email" id="email" name="email" value="{{ Auth::user()->email }}" readonly>
                     <small>Email visible to other course participants</small>
                 </div>
             </div>
@@ -36,19 +31,19 @@
                 <h4>Contact Information</h4>
                 <div class="form-group">
                     <label for="address">Address</label>
-                    <input type="text" id="address" name="address" placeholder="Enter your address">
+                    <input type="text" id="address" name="address" value="{{ Auth::user()->address }}" placeholder="Enter your address">
                 </div>
                 <div class="form-group">
                     <label for="city">City</label>
-                    <input type="text" id="city" name="city" placeholder="Enter your city">
+                    <input type="text" id="city" name="city" value="{{ Auth::user()->city }}" placeholder="Enter your city">
                 </div>
                 <div class="form-group">
                     <label for="country">Country</label>
-                    <input type="text" id="country" name="country" placeholder="Enter your country">
+                    <input type="text" id="country" name="country" value="{{ Auth::user()->country }}" placeholder="Enter your country">
                 </div>
                 <div class="form-group">
                     <label for="postal_code">Postal Code</label>
-                    <input type="text" id="postal_code" name="postal_code" placeholder="Enter your postal code">
+                    <input type="text" id="postal_code" name="postal_code" value="{{ Auth::user()->postal_code }}" placeholder="Enter your postal code">
                 </div>
             </div>
 
@@ -56,7 +51,7 @@
             <div class="section">
                 <h4>About Me</h4>
                 <div class="form-group">
-                    <textarea name="about_me" id="about_me" rows="4" placeholder="Briefly describe yourself">Student at UNIVERSITI TEKNOLOGI MALAYSIA</textarea>
+                    <textarea name="about_me" id="about_me" rows="4" placeholder="Briefly describe yourself">{{ Auth::user()->about_me }}</textarea>
                 </div>
             </div>
 
@@ -73,12 +68,12 @@
                 </div>
                 <div class="form-group">
                     <label for="confirm_password">Confirm New Password</label>
-                    <input type="password" id="confirm_password" name="confirm_password">php artisan migrate
+                    <input type="password" id="confirm_password" name="confirm_password">
                 </div>
             </div>
 
             <!-- Save Button -->
-            <button type="button" class="save-button"onclick="window.location.href='/profile'">Save</button>
+            <button type="submit" class="save-button">Save</button>
         </form>
     </div>
 

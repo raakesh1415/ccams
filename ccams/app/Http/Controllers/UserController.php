@@ -197,6 +197,48 @@ public function login(Request $request)
             return response()->json(['match' => false]);
         }
     }
+    //profile:
+
+    public function showprofile()
+    {
+        $user = Auth::user();
+        return view('profile.index', compact('user'));
+    }
+
+    // Update the profile
+    public function editprofile(Request $request)
+    {
+        $request->validate([
+            'address' => 'nullable|string',
+            'city' => 'nullable|string',
+            'country' => 'nullable|string',
+            'postal_code' => 'nullable|string',
+            'about_me' => 'nullable|string',
+            'current_password' => 'nullable|string',
+            'new_password' => 'nullable|string|confirmed|min:8',
+        ]);
+
+        $user = Auth::user();
+        
+        // Update user info
+        $user->address = $request->address;
+        $user->city = $request->city;
+        $user->country = $request->country;
+        $user->postal_code = $request->postal_code;
+        $user->about_me = $request->about_me;
+
+        // Update password if provided
+        if ($request->new_password) {
+            if (!Hash::check($request->current_password, $user->password)) {
+                return back()->withErrors(['current_password' => 'Current password is incorrect']);
+            }
+            $user->password = Hash::make($request->new_password);
+        }
+
+        $user->save();
+
+        return redirect()->route('profile.index')->with('success', 'Profile updated successfully');
+    }
 
     
 }

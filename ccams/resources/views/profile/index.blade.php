@@ -1,15 +1,19 @@
-<!-- resources/views/profile/index.blade.php -->
 <x-layout>
     <div class="profile-container">
         <!-- Left Column: User Info and Profile Photo -->
         <div class="left-column">
             <div class="profile-card">
-                <img src="{{ asset('images/profile.png') }}" class="profile-image">
-                <h3>HANK A22EC1234</h3>
+                <!-- Display Profile Image and User Info -->
+                <img src="{{ asset('images/profile.png') }}" class="profile-image" alt="Profile Image">
+                
+                <!-- Student's Name (with larger font size) -->
+                <h2 class="student-name">{{ $user->name }}</h2>
+
                 <button class="edit-profile-btn" onclick="window.location.href='/profile/edit'">Edit profile</button>
+                
                 <div class="about-me">
                     <h4>About Me</h4>
-                    <p>STUDENT AT UNIVERSITI TEKNOLOGI MALAYSIA</p>
+                    <p>{{ $user->about_me ?? 'No information provided' }}</p>
                 </div>  
             </div>
         </div>
@@ -19,8 +23,17 @@
             <!-- User Details Section -->
             <div class="card">
                 <h4>User details <a href="{{ route('profile.edit') }}" class="edit-link">Edit profile</a></h4>
-                <p>Email address: hank@example.com (Visible to other course participants)</p>
-                <p>Timezone: America/New_York</p>
+                <p>Email address: {{ $user->email }} (Visible to other course participants)</p>
+                <p>Timezone: {{ $user->timezone ?? 'Not set' }}</p>
+            </div>
+
+            <!-- Address Section -->
+            <div class="card">
+                <h4>Address Details</h4>
+                <p>Country: {{ $user->country ?? 'Not provided' }}</p>
+                <p>City: {{ $user->city ?? 'Not provided' }}</p>
+                <p>Address: {{ $user->address ?? 'Not provided' }}</p>
+                <p>Postal Code: {{ $user->postal_code ?? 'Not provided' }}</p>
             </div>
 
             <!-- Privacy and Policies Section -->
@@ -33,15 +46,6 @@
             <div class="card">
                 <h4>Activity details</h4>
                 <p>Activity profiles</p>
-                <ul>
-                    <li>.................</li>
-                    <li>.................</li>
-                    <li>.................</li>
-                    <li>.................</li>
-                    <li>.................</li>
-                    <li>.................</li>
-                    <li>.................</li>
-                </ul>
             </div>
 
             <!-- Miscellaneous Section -->
@@ -63,17 +67,14 @@
             <!-- Login Activity Section -->
             <div class="card">
                 <h4>Login activity</h4>
-                <p>First access to site: Monday, 10 October 2024, 9:30 AM (31 days 11 hours)</p>
-                <p>Last access to site: Thursday, 7 November 2024, 3:45 PM (2 mins ago)</p>
+                <!-- <p>First access to site: {{ $user->first_access_at }}</p>
+                <p>Last access to site: {{ $user->last_access_at }}</p> -->
             </div>
 
             <!-- Club Details Section -->
             <div class="card">
                 <h4>Club details</h4>
                 <p>Club profiles</p>
-                <p>Sukan / Permainan club</p>
-                <p>Kelab / Persatuan club</p>
-                <p>Unit Beruniform club</p>
             </div>
         </div>
     </div>
@@ -116,6 +117,14 @@
             border-radius: 50%;
             margin-bottom: 15px;
             border: 2px solid #b5003c;
+        }
+
+        /* Styling for Student's Name */
+        .student-name {
+            font-size: 34px; /* Adjust the font size as needed */
+            font-weight: normal;
+            color: #333;
+            margin-bottom: 15px;
         }
 
         .edit-profile-btn {
