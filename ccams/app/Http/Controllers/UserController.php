@@ -33,6 +33,21 @@ class UserController extends Controller
 
         return redirect()->route('login.index')->with('success', 'Sign up successfully');
     }
+    public function checkEmail(Request $request)
+    {
+        $exists = User::where('email', $request->email)->exists();
+        return response()->json(['exists' => $exists]);
+    }
+    public function checkName(Request $request)
+    {
+        $exists = User::where('name', $request->name)->exists();
+        return response()->json(['exists' => $exists]);
+    }
+    public function checkIC(Request $request)
+    {
+        $exists = User::where('ic', $request->ic)->exists();
+        return response()->json(['exists' => $exists]);
+    }      
 
 
     public function create()
@@ -51,28 +66,42 @@ class UserController extends Controller
         return view('users.index', compact('users')); // 返回包含所有用户的视图
     }
 
-    public function login(Request $request)
-    {
-    // 对请求进行验证
+public function login(Request $request)
+{
+    // 验证请求数据
     $request->validate([
         'email' => ['required', 'email'],
         'password' => ['required'],
     ]);
 
-    // 使用 Auth::attempt 进行用户认证
-    if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-        // 登录成功，重新生成 session ID 防止会话固定攻击
-        $request->session()->regenerate();
+    // 查找用户是否存在
+    $user = User::where('email', $request->email)->first();
 
-        // 登录成功后重定向到用户原先尝试访问的页面，或默认重定向到 'assessment.index'
-        return redirect()->intended(route('club.index'));
+    if (!$user) {
+        // 邮箱不存在
+        return back()->withErrors([
+            'email' => 'The email address does not exist.',
+        ]);
     }
 
-    // 登录失败，返回并附带错误信息
-    return back()->withErrors([
-        'email' => 'These credentials do not match our records.',
-    ]);
+    // 验证密码是否正确
+    if (!Hash::check($request->password, $user->password)) {
+        // 密码错误
+        return back()->withErrors([
+            'password' => 'The password you entered is incorrect.',
+        ]);
     }
+
+    // 用户认证成功，使用 Auth 登录
+    Auth::login($user);
+
+    // 防止会话固定攻击
+    $request->session()->regenerate();
+
+    // 重定向到目标页面
+    return redirect()->intended(route('club.index'))->with('success', 'Login successful!');
+}
+
 
 
 
@@ -127,4 +156,47 @@ class UserController extends Controller
 
         return redirect()->route('users.index')->with('success', '用户删除成功');
     }
+    //reset password
+    public function resetPassword(Request $request)
+    {
+        // Validate the incoming data
+        $validatedData = $request->validate([
+            'email' => 'required|email|exists:users,email', // Ensure email exists in the users table
+            'ic' => 'required|string|max:12|exists:users,ic', // Ensure IC exists in the users table
+            'Newpassword' => 'required|min:8|confirmed', // Password rules and confirmation
+        ]);
+
+        // Retrieve the user based on email and IC
+        $user = User::where('email', $validatedData['email'])
+                    ->where('ic', $validatedData['ic'])
+                    ->first();
+
+        if (!$user) {
+            // If the user is not found with the provided email and IC
+            return redirect()->back()->withErrors(['email' => 'Email or IC is incorrect.'])->withInput();
+        }
+
+        // Update the password
+        $user->password = Hash::make($validatedData['Newpassword']); // Hash the new password
+        $user->save();
+
+        // Redirect to the login page or display success
+        return redirect()->route('login.index')->with('success', 'Password has been reset successfully!');
+    }
+    public function checkEmailAndICMatch(Request $request)
+    {
+        $email = $request->input('email');
+        $ic = $request->input('ic');
+
+        // Check if the email and IC match the same user
+        $user = User::where('email', $email)->where('ic', $ic)->first();
+
+        if ($user) {
+            return response()->json(['match' => true]);
+        } else {
+            return response()->json(['match' => false]);
+        }
+    }
+
+    
 }

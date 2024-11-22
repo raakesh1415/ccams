@@ -91,7 +91,6 @@
         .signup-links a {
             color: #007bff;
         }
-
     </style>
 </head>
 <body>
@@ -104,19 +103,22 @@
     <div class="overlay">
         <div class="signup-card">
             <h2 class="font-weight-bold mb-4">Sign Up</h2>
-            <form method="POST" action="{{ route('signin.store') }}">
+            <form id="signupForm" method="POST" action="{{ route('signin.store') }}">
                 @csrf
                 <div class="form-group">
                     <label for="name">Name:</label>
                     <input type="text" id="name" name="name" class="form-control" required>
+                    <small id="nameFeedback" class="form-text text-danger"></small>
                 </div>
                 <div class="form-group">
                     <label for="email">Email:</label>
                     <input type="email" id="email" name="email" class="form-control" required>
+                    <small id="emailFeedback" class="form-text text-danger"></small>
                 </div>
                 <div class="form-group">
                     <label for="password">Password:</label>
                     <input type="password" id="password" name="password" class="form-control" required>
+                    <small id="passwordFeedback" class="form-text text-warning"></small>
                 </div>
                 <div class="form-group">
                     <label for="password_confirmation">Confirm Password:</label>
@@ -125,6 +127,7 @@
                 <div class="form-group">
                     <label for="ic">IC Number:</label>
                     <input type="text" id="ic" name="ic" class="form-control" required>
+                    <small id="icFeedback" class="form-text text-danger"></small>
                 </div>
                 <div class="form-group">
                     <label for="role">You are:</label>
@@ -141,7 +144,91 @@
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Check if email exists
+            $('#email').on('blur', function () {
+                const email = $(this).val();
+                if (email) {
+                    $.ajax({
+                        url: "{{ route('check.email') }}",
+                        method: 'POST',
+                        data: { _token: '{{ csrf_token() }}', email },
+                        success: function (response) {
+                            if (response.exists) {
+                                $('#emailFeedback').text('Email already exists.');
+                            } else {
+                                $('#emailFeedback').text('');
+                            }
+                        }
+                    });
+                }
+            });
+
+            // Check if name exists
+            $('#name').on('blur', function () {
+                const name = $(this).val();
+                if (name) {
+                    $.ajax({
+                        url: "{{ route('check.name') }}", // The route to handle name validation
+                        method: 'POST',
+                        data: { _token: '{{ csrf_token() }}', name },
+                        success: function (response) {
+                            if (response.exists) {
+                                $('#nameFeedback').text('Name already exists.');
+                            } else {
+                                $('#nameFeedback').text('');
+                            }
+                        }
+                    });
+                }
+            });
+
+            // Validate password length
+            $('#password').on('input', function () {
+                const password = $(this).val();
+                if (password.length < 8) {
+                    $('#passwordFeedback').text('Password must be at least 8 characters.');
+                } else {
+                    $('#passwordFeedback').text('');
+                }
+            });
+
+            // Check if IC exists
+            $('#ic').on('blur', function () {
+                const ic = $(this).val();
+                if (ic && ic.length !== 12) {
+                    $('#icFeedback').text('IC number must be exactly 12 characters.');
+                }
+                else{
+                    if (ic) {
+                    $.ajax({
+                        url: "{{ route('check.ic') }}", // The route to handle IC validation
+                        method: 'POST',
+                        data: { _token: '{{ csrf_token() }}', ic },
+                        success: function (response) {
+                            if (response.exists) {
+                                $('#icFeedback').text('IC already exists.');
+                            } else {
+                                $('#icFeedback').text('');
+                            }
+                        }
+                    });
+                }
+                }       
+            });
+            // Validate password confirmation
+            $('#signupForm').on('submit', function (e) {
+                const password = $('#password').val();
+                const passwordConfirmation = $('#password_confirmation').val();
+
+                if (password !== passwordConfirmation) {
+                    e.preventDefault(); // Prevent form submission
+                    alert('Passwords do not match! Please re-enter.');
+                }
+            });
+        });
+    </script>
 </body>
 </html>

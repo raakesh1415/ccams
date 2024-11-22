@@ -112,5 +112,11 @@ Route::get('/login/reset', function () {
     return view('login/reset');
 })->name('login.reset');
 
+Route::post('/reset-password', [UserController::class, 'resetPassword'])->name('login.resetp');
 
+
+Route::post('/check-email', [UserController::class, 'checkEmail'])->name('check.email');
+Route::post('/check-name', [UserController::class, 'checkName'])->name('check.name');
+Route::post('/check-ic', [UserController::class, 'checkIC'])->name('check.ic');
+Route::post('/check/email/ic/match', [UserController::class, 'checkEmailAndICMatch'])->name('check.email.ic.match');
 

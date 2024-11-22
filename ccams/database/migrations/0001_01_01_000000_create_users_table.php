@@ -21,7 +21,10 @@ return new class extends Migration
             $table->string('ic');
             $table->enum('role', ['student', 'teacher']); // 'student' or 'teacher'
             $table->rememberToken();
-            $table->timestamps();   
+            $table->timestamps();  
+            $table->string('About_me')->nullable();
+            $table->string('profile_pic')->nullable(); // For storing file path
+
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {

@@ -99,17 +99,35 @@
 
     <!-- Overlay and Login Form -->
     <div class="overlay">
+        <!-- Display Success or Error Messages -->
+        @if (session('success'))
+            <div class="alert alert-success" role="alert">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        @if ($errors->any())
+            <div class="alert alert-danger" role="alert">
+                <ul class="mb-0">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <!-- Login Card -->
         <div class="login-card">
             <h2>Login</h2>
             <form action="{{ route('login.submit') }}" method="POST" novalidate>
                 @csrf
-                <input type="text" id="email" name="email" class="form-control" placeholder="Email" required>
+                <input type="email" id="email" name="email" class="form-control" placeholder="Email" value="{{ old('email') }}" required>
                 <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
                 <button type="submit" class="btn btn-login">SIGN IN</button>
             </form>
             <div class="login-links">
-                <a href="{{ route('login.reset') }}">Forgot password</a>|<a href="{{ route('login.signin') }}">Create an account</a>
+                <a href="{{ route('login.reset') }}">Forgot password</a> | 
+                <a href="{{ route('login.signin') }}">Create an account</a>
             </div>
         </div>
     </div>
