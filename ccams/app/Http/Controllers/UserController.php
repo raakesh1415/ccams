@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Carbon\Carbon;
 use App\Models\User;
+use App\Models\Activity;
+use App\Models\Club;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\RedirectResponse;
@@ -73,17 +75,14 @@ public function login(Request $request)
         'email' => ['required', 'email'],
         'password' => ['required'],
     ]);
-
     // 查找用户是否存在
     $user = User::where('email', $request->email)->first();
-
     if (!$user) {
         // 邮箱不存在
         return back()->withErrors([
             'email' => 'The email address does not exist.',
         ]);
     }
-
     // 验证密码是否正确
     if (!Hash::check($request->password, $user->password)) {
         // 密码错误
@@ -91,9 +90,11 @@ public function login(Request $request)
             'password' => 'The password you entered is incorrect.',
         ]);
     }
-
     // 用户认证成功，使用 Auth 登录
     Auth::login($user);
+    $user->last_login_at = now('UTC');  // 设定为 UTC 时间
+    $user->save();
+
 
     // 防止会话固定攻击
     $request->session()->regenerate();
@@ -117,7 +118,6 @@ public function login(Request $request)
         $user = User::findOrFail($id); // 根据 ID 查找用户
         return view('users.show', compact('user')); // 返回包含用户信息的视图
     }
-
     public function edit(int $id)
     {
         $user = User::findOrFail($id); // 根据 ID 查找用户
@@ -134,9 +134,7 @@ public function login(Request $request)
             'password' => 'nullable|string|min:8|confirmed',
             'role' => 'required|string',
         ]);
-
         $user = User::findOrFail($id); // 根据 ID 查找用户
-
         // 更新用户信息，如果密码被更改，则进行哈希加密
         $user->update([
             'name' => $validated['name'],
@@ -144,7 +142,6 @@ public function login(Request $request)
             'password' => $validated['password'] ? Hash::make($validated['password']) : $user->password,
             'role' => $validated['role'],
         ]);
-
         return redirect()->route('login.index')->with('success', 'successful saved');
     }
 
@@ -153,9 +150,11 @@ public function login(Request $request)
     {
         $user = User::findOrFail($id); // 根据 ID 查找用户
         $user->delete(); // 从数据库删除用户
-
         return redirect()->route('users.index')->with('success', '用户删除成功');
     }
+
+
+
     //reset password
     public function resetPassword(Request $request)
     {
@@ -165,21 +164,17 @@ public function login(Request $request)
             'ic' => 'required|string|max:12|exists:users,ic', // Ensure IC exists in the users table
             'Newpassword' => 'required|min:8|confirmed', // Password rules and confirmation
         ]);
-
         // Retrieve the user based on email and IC
         $user = User::where('email', $validatedData['email'])
                     ->where('ic', $validatedData['ic'])
                     ->first();
-
         if (!$user) {
             // If the user is not found with the provided email and IC
             return redirect()->back()->withErrors(['email' => 'Email or IC is incorrect.'])->withInput();
         }
-
         // Update the password
         $user->password = Hash::make($validatedData['Newpassword']); // Hash the new password
         $user->save();
-
         // Redirect to the login page or display success
         return redirect()->route('login.index')->with('success', 'Password has been reset successfully!');
     }
@@ -187,22 +182,26 @@ public function login(Request $request)
     {
         $email = $request->input('email');
         $ic = $request->input('ic');
-
         // Check if the email and IC match the same user
         $user = User::where('email', $email)->where('ic', $ic)->first();
-
         if ($user) {
             return response()->json(['match' => true]);
         } else {
             return response()->json(['match' => false]);
         }
     }
-    //profile:
 
+
+
+    //profile:
     public function showprofile()
     {
         $user = Auth::user();
-        return view('profile.index', compact('user'));
+        $user->last_login_at = Carbon::parse($user->last_login_at)->format('Y-m-d H:i:s');
+        $activities = Activity::all();
+        $clubs = Club::all();
+        return view('profile.index', compact('user', 'activities', 'clubs'));
+
     }
 
     // Update the profile

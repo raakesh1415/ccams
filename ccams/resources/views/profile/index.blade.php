@@ -45,7 +45,19 @@
             <!-- Course Details Section -->
             <div class="card">
                 <h4>Activity details</h4>
-                <p>Activity profiles</p>
+                @if($activities->isEmpty())
+                    <p>No activities available.</p>
+                @else
+                    @foreach ($activities as $activity)
+                        <p>Activity: {{ $activity->activity_name ?? 'Not provided' }}</p>
+                        <p>Location: {{ $activity->location ?? 'Not provided' }}</p>
+                        <p>Date/Time: {{ $activity->date_time ?? 'Not provided' }}</p>
+                        <p>Category: {{ $activity->category ?? 'Not provided' }}</p>
+                        <p>Participants: {{ $activity->participants ?? 'Not provided' }}</p>
+                        <p>Duration: {{ $activity->duration ?? 'Not provided' }}</p>
+                    @endforeach
+                @endif
+
             </div>
 
             <!-- Miscellaneous Section -->
@@ -67,15 +79,22 @@
             <!-- Login Activity Section -->
             <div class="card">
                 <h4>Login activity</h4>
+                <p>Last login: {{ \Carbon\Carbon::parse($user->last_login_at)->format('Y-m-d H:i:s') ?? 'Not available' }}</p>
                 <!-- <p>First access to site: {{ $user->first_access_at }}</p>
                 <p>Last access to site: {{ $user->last_access_at }}</p> -->
             </div>
 
             <!-- Club Details Section -->
             <div class="card">
-                <h4>Club details</h4>
-                <p>Club profiles</p>
-            </div>
+            <h4>Club details</h4>
+                @if($clubs->isEmpty())
+                    <p>No clubs available.</p>
+                @else
+                    @foreach ($clubs as $club)
+                        <p>Club Name: {{ !empty($club->club_name) ? $club->club_name : 'Not provided' }}</p>
+                    @endforeach
+                @endif
+        </div>
         </div>
     </div>
 
