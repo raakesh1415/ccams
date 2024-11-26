@@ -17,7 +17,7 @@ Route::get('/', function () {
 // Assessment
 Route::get('/assessment', [AssessmentController::class, 'index'])->name('assessment.index');
 Route::get('/assessment/list/create', [AssessmentController::class, 'create'])->name('assessment.create');
-Route::get('/assessment/list', [AssessmentController::class, 'index'])->name('assessment.list');
+Route::get('/assessment/list', [AssessmentController::class, 'list'])->name('assessment.list');
 Route::post('/assessment/list', [AssessmentController::class, 'store'])->name('assessment.store');
 Route::resource('assessment', AssessmentController::class);
 Route::get('assessment/{assessment_id}/edit', [AssessmentController::class, 'edit'])->name('assessment.edit');

@@ -11,6 +11,10 @@ class AssessmentController extends Controller
 {
     public function index()
     {   
+        return view("assessment.index");
+    }
+    public function list()
+    {   
         // $assessments = Assessment::all();
         $assessment = Assessment::with('user')->get();
         return view("assessment.list", [

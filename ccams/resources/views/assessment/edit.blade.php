@@ -378,10 +378,21 @@
 
                     <!-- Submit Button -->
                     <div class="text-center">
-                        <button type="submit" class="btn btn-primary">Update Assessment</button>
+                        <button type="submit" class="btn btn-dark">Update Assessment</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+
+    <style>
+        .form-check-input:checked {
+            background-color: #343a40; /* Dark background color */
+            border-color: #343a40; /* Dark border color */
+        }
+        
+        .form-check-input:checked:focus {
+            box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.25); /* Optional: focus shadow */
+        }
+    </style>
 </x-layout>
