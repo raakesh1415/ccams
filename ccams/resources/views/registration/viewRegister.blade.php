@@ -22,7 +22,7 @@
                         <div class="card shadow-sm h-100">
                             <div class="card-body d-flex align-items-start">
                                 <!-- Club Image -->
-                                <img src="{{ asset($registration->club->club_pic) }}" alt="Club Image"
+                                <img src="{{ asset('storage/' . $registration->club->club_pic) }}" alt="Club Image"
                                     class="img-thumbnail me-3" style="width: 180px; height: 180px; object-fit: cover;">
 
                                 <!-- Club Details -->
