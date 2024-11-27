@@ -1,6 +1,6 @@
 <x-layout>
     <div class="container mt-5">
-        <h2 class="text-center"><b>SUKAN / PERMAINAN</b></h2>
+        <h2 class="text-center"><b>UNIT BERUNIFORM</b></h2>
 
         <!-- Display prompt messages -->
         @if (session('error'))
@@ -24,21 +24,24 @@
                             <div class="row g-0 h-100">
                                 <div class="col-md-4 h-100">
                                     <div class="image-container h-100">
-                                    <img src="{{ asset('storage/' . $club->club_pic) }}" class="img-fluid rounded-start w-100 h-100" alt="{{ $club->club_name }}" style="object-fit: cover;">
-                                             class="img-fluid rounded-start w-100 h-100"
-                                             alt="{{ $club->club_name }}" 
-                                             style="object-fit: cover;">
+                                        <img src="{{ asset('storage/' . $club->club_pic) }}"
+                                            class="img-fluid rounded-start w-100 h-100" alt="{{ $club->club_name }}"
+                                            style="object-fit: cover;">
+                                        class="img-fluid rounded-start w-100 h-100"
+                                        alt="{{ $club->club_name }}"
+                                        style="object-fit: cover;">
                                     </div>
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body d-flex flex-column">
                                         <div class="d-flex justify-content-between align-items-center">
                                             <h3 class="card-title m-0">{{ $club->club_name }}</h3>
-                                            <form action="{{ route('registration.register', ['clubId' => $club->club_id, 'clubType' => $club->club_category]) }}"
-                                                  method="POST">
+                                            <form
+                                                action="{{ route('registration.register', ['clubId' => $club->club_id, 'clubType' => $club->club_category]) }}"
+                                                method="POST">
                                                 @csrf
                                                 <button type="submit" class="btn btn-dark" title="Register"
-                                                        onclick="return confirm('Are you sure you want to register for this club?');">
+                                                    onclick="return confirm('Are you sure you want to register for this club?');">
                                                     Register
                                                 </button>
                                             </form>
