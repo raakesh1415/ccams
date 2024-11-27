@@ -10,7 +10,7 @@ class Assessment extends Model
 {
     use HasFactory; 
 
-    protected $table = 'assessment';
+    protected $table = 'assessments';
     protected $primaryKey = 'assessment_id'; // Specify your primary key here
 
     protected $fillable = [
