@@ -7,37 +7,35 @@
     </x-slot>
 
     <div class="activity-container">
-        <h2>Explore Activities</h2>
+        <h2 style="text-align: center; font-size: 28px; margin-bottom: 20px;">Explore Activities</h2>
 
-        <!-- Check if activities exist -->
         @if ($activities->isEmpty())
-            <!-- No Activity View -->
-            <div class="no-activity">
-                <div class="no-activity-message">
-                    <img src="{{ asset('images/empty-icon.JPG') }}" alt="No Activities" style="width:100px; height:auto;">
-                    <h3>No activity yet!</h3>
-                    <p>Once activities are added, they will display here!</p>
-                </div>
-                <a href="{{ route('activities.create') }}" class="add-activity-btn">Add Activity</a>
+            <!-- No Activities View -->
+            <div class="no-activity" style="text-align: center; margin-top: 50px;">
+                <img src="{{ asset('images/empty-icon.JPG') }}" alt="No Activities" style="width: 150px; height: auto; margin-bottom: 20px;">
+                <h3 style="font-size: 22px; color: #555;">No activity yet!</h3>
+                <p style="font-size: 16px; color: #888;">Once activities are added, they will display here.</p>
+                <a href="{{ route('activities.create') }}" 
+                   style="background-color: #007bff; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none; font-size: 16px;">Add Activity</a>
             </div>
         @else
-            <!-- Activities List View -->
-            <div class="activities">
-                <div class="add-activity-header">
-                    <a href="{{ route('activities.create') }}" class="add-activity-btn">Add Activity</a>
-                </div>
-                <div class="activity-list">
+            <!-- Activities List -->
+            <div class="activity-list-container" style="display: flex; justify-content: center; margin-top: 20px;">
+                <div class="activity-list" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 30px; width: 80%;">
                     @foreach ($activities as $activity)
-                        <div class="activity-card">
-                            <img src="{{ $activity->poster ? asset('storage/' . $activity->poster) : asset('images/sample-activity.png') }}" alt="Activity Image">
-                            <h3>{{ $activity->activity_name }}</h3>
-                            <p>{{ Str::limit($activity->description, 100) }}</p>
-                            <a href="{{ route('activities.edit', $activity->activity_id) }}" class="edit-btn">Edit</a>
-                            <form action="{}" method="POST" style="display:inline;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="delete-btn">Delete</button>
-                            </form>
+                        <div class="activity-card" style="background-color: #fff; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); padding: 20px; text-align: center;">
+                            <img src="{{ $activity->poster ? asset('storage/' . $activity->poster) : asset('images/sample-activity.png') }}" 
+                                 alt="Activity Poster" 
+                                 style="width: 100%; height: 450px; object-fit: cover; border-radius: 10px; margin-bottom: 15px;">
+                            <h3 style="font-size: 22px; font-weight: bold; color: #333; margin-bottom: 10px;">{{ $activity->activity_name }}</h3>
+                            <p style="font-size: 16px; color: #666; margin-bottom: 20px;">{{ Str::limit($activity->description, 100) }}</p>
+                            <div style="display: flex; justify-content: center; gap: 15px;">
+                                <a href="{{ route('activities.edit', $activity->activity_id) }}" 
+                                   style="background-color: #17a2b8; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none; font-size: 16px;">Edit</a>
+                                <button type="button" 
+                                        onclick="confirmDelete('{{ route('activities.destroy', $activity->activity_id) }}')" 
+                                        style="background-color: #dc3545; color: white; padding: 10px 20px; border-radius: 5px; border: none; font-size: 16px; cursor: pointer;">Delete</button>
+                            </div>
                         </div>
                     @endforeach
                 </div>
@@ -45,89 +43,56 @@
         @endif
     </div>
 
-    <style>
-        .activity-container {
-            text-align: center;
-        }
+    <!-- Delete Confirmation Modal -->
+    <div id="deleteModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); justify-content: center; align-items: center; z-index: 10;">
+        <div style="background: white; padding: 30px; border-radius: 10px; text-align: center; width: 300px;">
+            <h3 style="font-size: 20px; margin-bottom: 20px;">Are you sure?</h3>
+            <p style="font-size: 14px; color: #666; margin-bottom: 30px;">Do you really want to delete this activity? This process cannot be undone.</p>
+            <div style="display: flex; justify-content: center; gap: 10px;">
+                <button id="cancelDelete" style="background-color: #6c757d; color: white; padding: 10px 20px; border-radius: 5px; border: none; font-size: 14px; cursor: pointer;">Cancel</button>
+                <button id="confirmDelete" style="background-color: #dc3545; color: white; padding: 10px 20px; border-radius: 5px; border: none; font-size: 14px; cursor: pointer;">Delete</button>
+            </div>
+        </div>
+    </div>
 
-        .no-activity {
-            padding: 40px;
-            background-color: #f8f9fa;
-            border-radius: 8px;
-        }
+    <script>
+        function confirmDelete(url) {
+            const modal = document.getElementById('deleteModal');
+            const confirmButton = document.getElementById('confirmDelete');
+            const cancelButton = document.getElementById('cancelDelete');
 
-        .no-activity-message h3 {
-            font-size: 24px;
-            color: #555;
-        }
+            modal.style.display = 'flex';
 
-        .activities {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+            confirmButton.onclick = function() {
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = url;
 
-        .activity-list {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin-top: 20px;
-        }
+                const csrfField = document.createElement('input');
+                csrfField.type = 'hidden';
+                csrfField.name = '_token';
+                csrfField.value = '{{ csrf_token() }}';
 
-        .activity-card {
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            text-align: center;
-        }
+                const methodField = document.createElement('input');
+                methodField.type = 'hidden';
+                methodField.name = '_method';
+                methodField.value = 'DELETE';
 
-        .activity-card img {
-             width: 100%;
-             height: 350px; /* Adjust height as needed */
-             object-fit: cover;
-             border-radius: 8px;
-        }
+                form.appendChild(csrfField);
+                form.appendChild(methodField);
+                document.body.appendChild(form);
+                form.submit();
+            };
 
-        .add-activity-btn {
-            background-color: #000;
-            color: #fff;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            text-decoration: none;
-        }
+            cancelButton.onclick = function() {
+                modal.style.display = 'none';
+            };
 
-        .edit-btn,
-        .delete-btn {
-            margin-top: 10px;
-            padding: 8px 16px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            text-decoration: none; /* Remove underline from Edit button */
+            window.onclick = function(event) {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
+            };
         }
-
-        .edit-btn {
-            background-color: #17a2b8;
-            color: #fff;
-        }
-
-        .delete-btn {
-            background-color: #dc3545;
-            color: #fff;
-        }
-
-        @media (max-width: 1024px) {
-            .activity-list {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .activity-list {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    </script>
 </x-layout>
