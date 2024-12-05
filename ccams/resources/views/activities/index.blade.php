@@ -19,6 +19,12 @@
                    style="background-color: #007bff; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none; font-size: 16px;">Add Activity</a>
             </div>
         @else
+            <!-- Add Activity Button -->
+            <div style="text-align: center; margin-bottom: 20px;">
+                <a href="{{ route('activities.create') }}" 
+                   style="background-color: #007bff; color: white; padding: 12px 24px; border-radius: 5px; text-decoration: none; font-size: 18px;">Add Activity</a>
+            </div>
+
             <!-- Activities List -->
             <div class="activity-list-container" style="display: flex; justify-content: center; margin-top: 20px;">
                 <div class="activity-list" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 30px; width: 80%;">
