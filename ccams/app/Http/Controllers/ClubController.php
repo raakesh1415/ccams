@@ -131,5 +131,22 @@ public function update(Request $request, $club_id)
     return redirect()->route('club.edit', ['club_id' => $club->club_id])->with('success', 'Club updated successfully!');
 }
 
+public function destroy($id)
+{
+    // Find the club by 'club_id'
+    $club = Club::where('club_id', $id)->firstOrFail();
+
+    // Delete associated image if exists
+    if ($club->club_pic) {
+        Storage::delete('public/' . $club->club_pic);
+    }
+
+    // Delete the club
+    $club->delete();
+
+    // Redirect to the clubs list with a success message
+    return redirect()->route('club.index')->with('success', 'Club deleted successfully!');
+}
+
     
 }
