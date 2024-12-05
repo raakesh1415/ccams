@@ -64,20 +64,20 @@ class AssessmentController extends Controller
         // Define scores for engagement
         $engagementScores = [
             'I1' => 20,
-            'N1' => 18,
-            'C1' => 16,
-            'D1' => 14,
-            'S1' => 12,
+            'N1' => 17,
+            'C1' => 14,
+            'D1' => 11,
+            'S1' => 0,
             'I2' => 15,
-            'N2' => 13,
-            'C2' => 11,
-            'D2' => 9,
-            'S2' => 7,
+            'N2' => 12,
+            'C2' => 10,
+            'D2' => 8,
+            'S2' => 0,
             'I3' => 10,
             'N3' => 8,
             'C3' => 6,
             'D3' => 4,
-            'S3' => 2,
+            'S3' => 0,
         ];
     
         // Calculate total engagement score
@@ -85,7 +85,7 @@ class AssessmentController extends Controller
         foreach ($request->engagement as $engagement) {
             $eng += $engagementScores[$engagement] ?? 0; // Default to 0 if not found
         }
-        $eng = min($data['engagement'], 20); // Cap at 20 marks
+        $eng = min($eng, 20); // Cap at 20 marks
     
         // Define scores for achievement
         $achievementScores = [
@@ -109,9 +109,9 @@ class AssessmentController extends Controller
         // Calculate total achievement score
         $ach = 0;
         foreach ($request->achievement as $achievement) {
-            $ach += $commitmentScores[$achievement] ?? 0; // Default to 0 if not found
+            $ach += $achievementScores[$achievement] ?? 0; // Default to 0 if not found
         }
-        $ach = min($data['achievement'], 10); // Cap at 10 marks
+        $ach = min($ach, 10); // Cap at 10 marks
 
         // Define scores for commitment
         $commitmentScores = [
@@ -134,7 +134,7 @@ class AssessmentController extends Controller
         foreach ($request->commitment as $commitment) {
             $com += $commitmentScores[$commitment] ?? 0; // Default to 0 if not found
         }
-        $com = min($data['commitment'], 10); // Cap at 10 marks
+        $com = min($com, 10); // Cap at 10 marks
     
         // Define scores for contribution
         $contributionScores = [
@@ -149,16 +149,17 @@ class AssessmentController extends Controller
         foreach ($request->contribution as $contribution) {
             $con += $contributionScores[$contribution] ?? 0; // Default to 0 if not found
         }
-        $con = min($data['contribution'], 10); // Cap at 10 marks
+        $con = min($con, 10); // Cap at 10 marks
     
         // Calculate attendance score using the formula
         $attend = ($data['attendance'] / 12) * 40; // Attendance formula
-    
+        $attend = min($attend, 40);
+
         // Calculate total marks
-        $data['total_mark'] = $pos + $eng + $ach + $con + $com  + $attend;
+        $total = $pos + $eng + $ach + $com + $con + $attend;
     
         // Cap the total marks at 110
-        $data['total_mark'] = min($data['total_mark'], 110); // Max 110 marks
+        $data['total_mark'] = min($total, 110); // Max 110 marks
     
         // Prepare data for database insertion
         $assessmentData = [
@@ -332,5 +333,7 @@ class AssessmentController extends Controller
     public function destroy(Assessment $assessment)
     {
         // return view("assessment.delete");
+        $assessment->delete();
+        return redirect()->route('assessment.list')->with('success', 'Assessment updated successfully!');
     }
 }
