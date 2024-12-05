@@ -51,7 +51,7 @@ Route::post('/club/add', [ClubController::class, 'store'])->name('clubs.store');
 Route::get('/club/sukan', [ClubController::class, 'showSukanClubs'])->name('club.sukan');
 Route::get('/club/unitberuniform', [ClubController::class, 'showUnitBeruniformClubs'])->name('club.unitberuniform');
 Route::get('/club/details/{club_id}', [ClubController::class, 'showDetails'])->name('club.details');
-
+Route::delete('/club/{club_id}', [ClubController::class, 'destroy'])->name('club.destroy');
 Route::get('/club/{club_id}/edit', [ClubController::class, 'edit'])->name('club.edit');
 Route::post('/club', [ClubController::class, 'store'])->name('club.store');
 Route::put('/club/{club_id}', [ClubController::class, 'update'])->name('club.update');

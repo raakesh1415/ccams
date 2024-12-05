@@ -16,26 +16,53 @@
             <p>{{ $club->participant_total }}</p>
         </div>
 
-        <!-- Action Buttons Section (Dummy Links) -->
+        <!-- Action Buttons -->
         <div class="action-buttons">
-            <!-- Edit Button (dummy link) -->
-           <!-- Edit Button -->
-<a href="{{ route('club.edit', ['club_id' => $club->club_id]) }}" class="btn btn-edit">
-    <i class="fas fa-edit"></i> Edit
-</a>
-
-            <!-- Delete Button (dummy link) -->
-            <a href="#" class="btn btn-delete" onclick="alert('Delete functionality not implemented yet'); return false;">
-                <i class="fas fa-trash-alt"></i> Delete
+            <!-- Edit Button -->
+            <a href="{{ route('club.edit', ['club_id' => $club->club_id]) }}" class="btn btn-edit">
+                <i class="fas fa-edit"></i> Edit
             </a>
+
+            <!-- Delete Button to Trigger Modal -->
+            <button type="button" class="btn btn-delete" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                <i class="fas fa-trash"></i> Delete
+            </button>
         </div>
 
         <!-- Back Button -->
-        <a href="#" class="btn btn-back mt-4"><i class="fas fa-arrow-left"></i> Go Back</a>
+        <a href="{{ route('club.index') }}" class="btn btn-back mt-4"><i class="fas fa-arrow-left"></i> Go Back</a>
     </div>
 
-    <!-- Include Font Awesome CDN for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMB25l7qH/rfvcbET3z5Qfqg5eU5c5kzv5O3r4n" crossorigin="anonymous">
+    <!-- Delete Confirmation Modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Are you sure?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <i class="fas fa-times-circle text-danger" style="font-size: 50px;"></i>
+                    <p class="mt-3">Do you really want to delete this Club?<br>This process cannot be undone.</p>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <form action="{{ route('club.destroy', ['club_id' => $club->club_id]) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include Bootstrap CSS and JS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <style>
         .club-details-container {
@@ -63,7 +90,6 @@
             color: #666;
         }
 
-        /* Button Styles */
         .action-buttons {
             margin-top: 20px;
             display: flex;
@@ -110,10 +136,6 @@
             background-color: #6c757d;
             color: #fff;
             border: none;
-            display: inline-flex;
-            align-items: center;
-            margin-top: 20px;
-            text-align: center;
         }
 
         .btn-back:hover {
