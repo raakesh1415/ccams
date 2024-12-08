@@ -22,6 +22,7 @@ class AttendanceController extends Controller
     // Show attendance for a specific club
     public function show($clubId)
     {
+        // Fetch the club with the given ID
         $club = Club::findOrFail($clubId);
 
         // Fetch students with their attendance records for the specified club
@@ -39,6 +40,7 @@ class AttendanceController extends Controller
             'N/A' => 'N/A'
         ];
 
+        // Pass the required data to the view
         return view('attendance.show', compact('club', 'students', 'statusSymbols'));
     }
 
@@ -107,4 +109,15 @@ class AttendanceController extends Controller
         return redirect()->route('attendance.show', ['club' => $request->club_id])
                         ->with('success', 'Attendance updated successfully!');
     }
+
+    public function viewDetails($user_id, $club_id)
+    {
+        $student = User::with('attendances')->findOrFail($user_id);
+        $club = Club::findOrFail($club_id);
+
+        $attendances = $student->attendances->where('club_id', $club_id);
+
+        return view('attendance.details', compact('student', 'club', 'attendances'));
+    }
+
 }

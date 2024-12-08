@@ -33,6 +33,7 @@ Route::get('/attendance/{club}', [AttendanceController::class, 'show'])->name('a
 Route::post('/attendance/{club}/store', [AttendanceController::class, 'store'])->name('attendance.store');
 // Route to update a student's attendance
 Route::put('/attendance/{studentId}', [AttendanceController::class, 'update'])->name('attendance.update');
+Route::get('/attendance/details/{user_id}/{club_id}', [AttendanceController::class, 'viewDetails'])->name('attendance.viewDetails');
 
 
 // Activities

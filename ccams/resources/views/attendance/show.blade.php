@@ -30,7 +30,8 @@
                     @for ($i = 1; $i <= 12; $i++)
                         <th>Week {{ $i }}</th>
                     @endfor
-                    <th>Update</th> <!-- Add Update column -->
+                    <th>Update</th> 
+                    <th>View Details</th> <!-- Add Update column -->
                 </tr>
             </thead>
             <tbody>
@@ -61,6 +62,11 @@
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updateAttendanceModal{{ $student->id }}">
                                 Update
                             </button>
+                        </td>
+                        <td>
+                            <a href="{{ route('attendance.viewDetails', ['user_id' => $student->id, 'club_id' => $club->club_id]) }}" class="btn btn-info">
+                                View Details
+                            </a>
                         </td>
                     </tr>
 

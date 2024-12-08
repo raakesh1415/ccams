@@ -26,35 +26,34 @@
     </div>
 </x-layout>
 
-
 <style>
     .fixed-club-img {
-    height: 300px;
-    width: 100%;
-    object-fit: cover;
-}
+        height: 300px;
+        width: 100%;
+        object-fit: cover;
+    }
 
-.card {
-    border-radius: 8px;
-    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s;
-}
+    .card {
+        border-radius: 8px;
+        box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s;
+    }
 
-.card:hover {
-    transform: translateY(-5px);
-}
+    .card:hover {
+        transform: translateY(-5px);
+    }
 
-.card-body {
-    text-align: center;
-}
+    .card-body {
+        text-align: center;
+    }
 
-.card-title {
-    font-size: 1.25rem;
-    color: #333;
-}
+    .card-title {
+        font-size: 1.25rem;
+        color: #333;
+    }
 
-.card-text {
-    font-size: 0.9rem;
-    color: #666;
-}
+    .card-text {
+        font-size: 0.9rem;
+        color: #666;
+    }
 </style>
