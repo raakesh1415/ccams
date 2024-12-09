@@ -1,12 +1,15 @@
 <x-layout>
-    <div class="edit-profile-container">
-        <!-- Profile Header with Avatar, Name, and Role -->
+    <!-- Taskbar Section -->
+    <div class="taskbar">
         <div class="profile-header">
             <img src="{{ asset('images/profile.png') }}" class="profile-avatar" alt="Profile Avatar">
             <h2>{{ Auth::user()->username }}</h2>
             <span class="user-role">{{ Auth::user()->role }}</span>
         </div>  
+    </div>
 
+    <!-- Edit Profile Container -->
+    <div class="edit-profile-container">
         <!-- Edit Profile Form -->
         <form method="POST" action="{{ route('profile.edit') }}">
             @csrf
@@ -79,20 +82,23 @@
 
     <!-- Inline CSS for styling -->
     <style>
-        .edit-profile-container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
             background-color: #f8f9fa;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .taskbar {
+            background-color: white; /* Dark background for the taskbar */
+            padding: 15px;
+            color: white;
         }
 
         .profile-header {
             display: flex;
             align-items: center;
             gap: 15px;
-            margin-bottom: 20px;
         }
 
         .profile-avatar {
@@ -103,7 +109,15 @@
         }
 
         .user-role {
-            color: #888;
+            color: #ccc;
+        }
+
+        .edit-profile-container {
+            width: 100%;
+            padding: 20px;
+            background-color: white; /* White background for the profile section */
+            border-radius: 0;
+            box-shadow: none;
         }
 
         .section {
