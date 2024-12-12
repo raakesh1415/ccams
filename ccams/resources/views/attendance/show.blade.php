@@ -79,18 +79,24 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
+                                @php
+                                    $max_week = 12; // Adjust as necessary.
+                                @endphp
+
                                 <form action="{{ route('attendance.update', ['studentId' => $student->id]) }}" method="POST">
                                     @csrf
                                     @method('PUT') <!-- Ensure PUT method is used for updating -->
                                     <input type="hidden" name="club_id" value="{{ $club->club_id }}">
 
-                                    @for ($week = 1; $week <= 12; $week++)
+                                    @for ($week = 1; $week <= $max_week; $week++)
                                         <div class="mb-3">
-                                            <label for="week_{{ $week }}" class="form-label">Week {{ $week }}</label>
+                                            <label for="week_{{ $week }}">Week {{ $week }}</label>
                                             @php
-                                                $status = $student->attendances->where('week_number', $week)->first()->status ?? 'Absent';
+                                                $attendance = $student->attendances->where('week_number', $week)->first();
+                                                $status = $attendance ? $attendance->status : null; // Set to null if no attendance record
                                             @endphp
-                                            <select name="attendance[week_{{ $week }}]" id="week_{{ $week }}" class="form-select">
+                                            <select name="attendance[{{ $week }}][status]" id="week_{{ $week }}" class="form-select">
+                                                <option value="" {{ is_null($status) ? 'selected' : '' }}>- Select Status -</option>
                                                 <option value="Present" {{ $status == 'Present' ? 'selected' : '' }}>✅ Present</option>
                                                 <option value="Absent" {{ $status == 'Absent' ? 'selected' : '' }}>❌ Absent</option>
                                                 <option value="Excused" {{ $status == 'Excused' ? 'selected' : '' }}>🟡 Excused</option>

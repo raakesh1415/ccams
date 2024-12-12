@@ -84,31 +84,38 @@ class AttendanceController extends Controller
     // Update individual student's attendance
     public function update(Request $request, $studentId)
     {
-        $data = $request->input('attendance');
-        $student = User::findOrFail($studentId); // Use User model here
+        $validated = $request->validate([
+            'club_id' => 'required|exists:club,club_id',
+            'attendance' => 'required|array',
+        ]);
 
-        foreach ($data as $week => $status) {
-            $weekNumber = (int) filter_var($week, FILTER_SANITIZE_NUMBER_INT);
-            $attendance = Attendance::where('user_id', $studentId)
-                                    ->where('week_number', $weekNumber)
-                                    ->first();
+        $clubId = $validated['club_id'];
+        $attendanceData = $validated['attendance'];
+
+        foreach ($attendanceData as $weekNumber => $data) {
+
+            $status = $data['status'];
             
-            if ($attendance) {
-                $attendance->status = $status;
-                $attendance->save();
-            } else {
-                Attendance::create([
-                    'user_id' => $studentId,
-                    'club_id' => $request->club_id,
-                    'week_number' => $weekNumber,
-                    'status' => $status,
-                ]);
-            }
+                // Skip if no status is selected
+                if (is_null($status) || $status === '') {
+                    continue;
+                }
+
+                // Update or create attendance record for the specified week
+                Attendance::updateOrCreate(
+                    [
+                        'user_id' => $studentId,
+                        'club_id' => $clubId,
+                        'week_number' => $weekNumber,
+                    ],
+                    ['status' => $status]
+                );
         }
 
-        return redirect()->route('attendance.show', ['club' => $request->club_id])
+        return redirect()->route('attendance.show', ['club' => $clubId])
                         ->with('success', 'Attendance updated successfully!');
     }
+
 
     public function viewDetails($user_id, $club_id)
     {
