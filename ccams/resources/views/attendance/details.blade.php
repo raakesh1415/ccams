@@ -9,28 +9,41 @@
         </div>
 
         <h4>Attendance</h4>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Week</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($attendances as $attendance)
+        @if($attendances->isEmpty())
+            <p class="text-muted">No available record of attendance.</p>
+        @else
+            <table class="table table-striped">
+                <thead>
                     <tr>
-                        <td>Week {{ $attendance->week_number }}</td>
-                        <td>
-                            <span class="badge 
-                                @if($attendance->status == 'Present') bg-success 
-                                @elseif($attendance->status == 'Absent') bg-danger 
-                                @else bg-warning @endif">
-                                {{ $attendance->status }}
-                            </span>
-                        </td>
+                        <th>Week</th>
+                        <th>Status</th>
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach($attendances as $attendance)
+                        <tr>
+                            <td>Week {{ $attendance->week_number }}</td>
+                            <td>
+                                <span class="badge 
+                                    @if($attendance->status == 'Present') bg-success 
+                                    @elseif($attendance->status == 'Absent') bg-danger 
+                                    @else bg-warning @endif">
+                                    {{ $attendance->status }}
+                                </span>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+
+            <div class="mt-4">
+                <h5>Attendance Summary:</h5>
+                <ul class="list-group">
+                    <li class="list-group-item">Total Present: <strong>{{ $totalPresent }}</strong></li>
+                    <li class="list-group-item">Total Absent: <strong>{{ $totalAbsent }}</strong></li>
+                    <li class="list-group-item">Total Excused: <strong>{{ $totalExcused }}</strong></li>
+                </ul>
+            </div>
+        @endif
     </div>
 </x-layout>

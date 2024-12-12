@@ -121,10 +121,15 @@ class AttendanceController extends Controller
     {
         $student = User::with('attendances')->findOrFail($user_id);
         $club = Club::findOrFail($club_id);
-
+        
         $attendances = $student->attendances->where('club_id', $club_id);
 
-        return view('attendance.details', compact('student', 'club', 'attendances'));
-    }
+        // Calculate totals
+        $totalPresent = $attendances->where('status', 'Present')->count();
+        $totalAbsent = $attendances->where('status', 'Absent')->count();
+        $totalExcused = $attendances->where('status', 'Excused')->count();
 
+        return view('attendance.details', compact('student', 'club', 'attendances', 'totalPresent', 'totalAbsent', 'totalExcused'));
+    }
+    
 }
