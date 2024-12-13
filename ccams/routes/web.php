@@ -10,8 +10,8 @@ use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\UserController;
 
 //Dashboard
-Route::get('/', function () {
-    return view('login.index');
+Route::get('/dashboard', function () {
+    return view('dashboard.index');
 });
 
 // Assessment

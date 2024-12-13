@@ -57,7 +57,7 @@
                 <div class="sb-sidenav-menu">
                     <div class="nav">
                         <div class="sb-sidenav-menu-heading">Menu</div>
-                        <a class="nav-link {{ request()->is('dashboard') ? 'active' : '' }}" href="/dashbaord">
+                        <a class="nav-link {{ request()->is('dashboard') ? 'active' : '' }}" href="/dashboard">
                             <div class="sb-nav-link-icon"><i class="fas fa-th-large"></i></div>
                             Dashboard
                         </a>
