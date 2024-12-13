@@ -1,13 +1,17 @@
 <x-layout>
-    <div class="container mt-4 mb-4">
+    <div class="container-fluid px-4 py-4">
         <div class="card">
+            <div class="card-header text-center">
+                <h3>Edit Assessment</h3>
+            </div>
             <div class="card-body">
                 <form action="{{ route('assessment.update', $assessment->assessment_id) }}" method="POST">
                     @csrf
                     @method('PUT') <!-- Use PUT method for updating -->
-                    <h2 class="text-center mb-4">Edit Assessment</h2>
+                    {{-- <h2 class="text-center mb-4">Edit Assessment</h2> --}}
 
                     <!-- Student Section -->
+                    <h3 class="mb-3">Student Details <small class="text-muted"></small></h3>
                     <div class="row mb-3">
                         <div class="col-md-4 mb-2">
                             <label for="user_id" class="form-label">Select Student:</label>

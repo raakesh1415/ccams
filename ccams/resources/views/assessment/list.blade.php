@@ -1,6 +1,6 @@
 <x-layout>
-    <div class="container-fluid px-4">
-        <h1 class="mt-4">Tables</h1>
+    <div class="container-fluid px-4 py-4">
+        <h1>Tables</h1>
         <div class="card mb-4">
             <div class="card-header">
                 <i class="fas fa-table me-1"></i>
@@ -27,7 +27,7 @@
                             <td>{{ $as->total_mark }}%</td>
                             <td>
                                 {{-- <a href="{{ route('assessment.create', $as->assessment_id) }}" class="btn btn-sm btn-success"><span class="fa fa-plus"></i>"></span></a> --}}
-                                <a href="{{ route('assessment.show', 'assessment_id') }}" class="btn btn-sm btn-info"><span class="fa fa-eye"></a>
+                                <a href="{{ route('assessment.show', ['assessment_id' => $as->assessment_id]) }}" class="btn btn-sm btn-info"><span class="fa fa-eye"></a>
                                 <a href="{{ route('assessment.edit', ['assessment_id' => $as->assessment_id]) }}" class="btn btn-sm btn-warning"><span class="fa fa-edit"></span></a>
                                 {{-- <a href="{{ route('assessment.destroy', ['assessment_id' => $as->assessment_id]) }}" class="btn btn-sm btn-danger"><span class="fa fa-trash"></span></a> --}}
                                 {{-- <form action="{{ route('assessment.destroy', $as->assessment_id) }}" method="POST" style="display:inline;">
@@ -37,8 +37,11 @@
                                         <span class="fa fa-trash"></span>
                                     </button>
                                 </form>     --}}
-                                <button type="button" class="btn btn-sm btn-danger" onclick="confirmDelete('{{ route('assessment.destroy', $as->assessment_id) }}')">
+                                {{-- <button type="button" class="btn btn-sm btn-danger" onclick="confirmDelete('{{ route('assessment.destroy', $as->assessment_id) }}')">
                                     <span class="fa fa-trash"></span>
+                                </button> --}}
+                                <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                                    <i class="fas fa-trash"></i>
                                 </button>
                                 
                             </td>
@@ -49,56 +52,30 @@
             </div>
             
             <!-- Delete Confirmation Modal -->
-            <div id="deleteModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); justify-content: center; align-items: center; z-index: 10;">
-                <div style="background: white; padding: 30px; border-radius: 10px; text-align: center; width: 300px;">
-                    <h3 style="font-size: 20px; margin-bottom: 20px;">Are you sure?</h3>
-                    <p style="font-size: 14px; color: #666; margin-bottom: 30px;">Do you really want to delete this student assessment mark? This process cannot be undone.</p>
-                    <div style="display: flex; justify-content: center; gap: 10px;">
-                        <button id="cancelDelete" style="background-color: #6c757d; color: white; padding: 10px 20px; border-radius: 5px; border: none; font-size: 14px; cursor: pointer;">Cancel</button>
-                        <button id="confirmDelete" style="background-color: #dc3545; color: white; padding: 10px 20px; border-radius: 5px; border: none; font-size: 14px; cursor: pointer;">Delete</button>
+            <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        {{-- <div class="modal-header">
+                            
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div> --}}
+                        <div class="modal-body text-center">
+                            <i class="fas fa-times-circle text-danger" style="font-size: 50px;"></i>
+                            <h5 class="modal-title" id="deleteModalLabel">Are you sure?</h5>
+                            <p class="mt-3">Do you really want to delete this student assessment mark?<br>This process cannot be undone.</p>
+                            <div class="d-flex justify-content-center mt-4">
+                                <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">Cancel</button>
+                                <form action="{{ route('assessment.destroy', $as->assessment_id) }}" method="POST" class="mb-0">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <script>
-                function confirmDelete(url) {
-                    const modal = document.getElementById('deleteModal');
-                    const confirmButton = document.getElementById('confirmDelete');
-                    const cancelButton = document.getElementById('cancelDelete');
-        
-                    modal.style.display = 'flex';
-        
-                    confirmButton.onclick = function() {
-                        const form = document.createElement('form');
-                        form.method = 'POST';
-                        form.action = url;
-        
-                        const csrfField = document.createElement('input');
-                        csrfField.type = 'hidden';
-                        csrfField.name = '_token';
-                        csrfField.value = '{{ csrf_token() }}';
-        
-                        const methodField = document.createElement('input');
-                        methodField.type = 'hidden';
-                        methodField.name = '_method';
-                        methodField.value = 'DELETE';
-        
-                        form.appendChild(csrfField);
-                        form.appendChild(methodField);
-                        document.body.appendChild(form);
-                        form.submit();
-                    };
-        
-                    cancelButton.onclick = function() {
-                        modal.style.display = 'none';
-                    };
-        
-                    window.onclick = function(event) {
-                        if (event.target === modal) {
-                            modal.style.display = 'none';
-                        }
-                    };
-                }
-            </script>
+
         </div>
     </div>
 </x-layout>

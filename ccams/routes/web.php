@@ -23,6 +23,8 @@ Route::resource('assessment', AssessmentController::class);
 Route::get('assessment/{assessment_id}/edit', [AssessmentController::class, 'edit'])->name('assessment.edit');
 Route::put('assessment/{assessment_id}', [AssessmentController::class, 'update'])->name('assessment.update');
 Route::delete('assessment/{assessment}', [AssessmentController::class, 'destroy'])->name('assessment.destroy');
+Route::get('assessment/{assessment_id}/view', [AssessmentController::class, 'show'])->name('assessment.show');
+
 
 //Students
 //Route::resource('students', StudentController::class);
