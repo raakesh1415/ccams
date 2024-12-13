@@ -37,13 +37,11 @@
                                         class="club-image"
                                         style="width: 100%; height: 100%; object-fit: cover; padding: 0;">
                                 </div>
-
                                 <!-- Club Details -->
                                 <div class="flex-grow-1 p-3">
                                     <h4 class="card-title">{{ $registration->club->club_name }}</h4>
-                                    <p class="card-">{{ $registration->club_type }}</p>
+                                    <p style="font-size: 1.1rem;">{{ $registration->club_type }}</p>
                                 </div>
-
                                 <!-- Delete Button with Trash Icon -->
                                 <form
                                     action="{{ route('registration.unregister', ['registrationId' => $registration->registration_id]) }}"
@@ -62,9 +60,6 @@
                 @endforeach
             </div>
 
-
-
-
             <!-- Card View -->
             <div id="club-card-view" class="row mt-4" style="display: none;">
                 @foreach ($registrations as $registration)
@@ -72,7 +67,7 @@
                         <div class="card shadow-sm h-100 position-relative">
                             <!-- Badge for Club Type -->
                             <div class="position-absolute" style="top: 10px; left: 10px;">
-                                <span class="bg-dark text-white p-2 rounded small">
+                                <span class="bg-dark text-white p-2 rounded" style="font-size: 1rem;">
                                     {{ $registration->club_type }}
                                 </span>
                             </div>
@@ -81,7 +76,7 @@
                                 class="card-img-top" style="height: 180px; object-fit: cover;">
                             <!-- Card Body -->
                             <div class="card-body d-flex flex-column justify-content-between">
-                                <h5 class="card-title">{{ $registration->club->club_name }}</h5>
+                                <h4 class="card-title">{{ $registration->club->club_name }}</h4>
                                 <div class="d-flex justify-content-end">
                                     <!-- Trash Icon Button -->
                                     <form
