@@ -28,24 +28,26 @@
                 <!-- List View -->
                 @foreach ($registrations as $registration)
                     <div class="col-12 mb-4 list-view">
-                        <div class="card shadow-sm h-100">
-                            <div class="card-body d-flex align-items-start">
+                        <div class="card shadow-sm h-100 rounded-3">
+                            <div class="card-body d-flex align-items-start p-0">
                                 <!-- Club Image -->
-                                <div class="image-container" style="flex-shrink: 0; margin-right: 1rem;">
+                                <div class="image-container"
+                                    style="flex-shrink: 0; margin-right: 1rem; padding: 0; width: 200px; height: 130px; overflow: hidden; border-radius: 5px">
                                     <img src="{{ asset('storage/' . $registration->club->club_pic) }}" alt="Club Image"
-                                        class="club-image" style="width: 170px; height: 100px; object-fit: cover;">
+                                        class="club-image"
+                                        style="width: 100%; height: 100%; object-fit: cover; padding: 0;">
                                 </div>
 
                                 <!-- Club Details -->
-                                <div class="flex-grow-1">
+                                <div class="flex-grow-1 p-3">
                                     <h4 class="card-title">{{ $registration->club->club_name }}</h4>
-                                    <p class="mb-1">{{ $registration->club_type }}</p>
+                                    <p class="card-">{{ $registration->club_type }}</p>
                                 </div>
 
                                 <!-- Delete Button with Trash Icon -->
                                 <form
                                     action="{{ route('registration.unregister', ['registrationId' => $registration->registration_id]) }}"
-                                    method="POST" style="display: inline;">
+                                    method="POST" style="display: inline; padding: 20px;">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger" title="Unregister"
@@ -59,6 +61,9 @@
                     </div>
                 @endforeach
             </div>
+
+
+
 
             <!-- Card View -->
             <div id="club-card-view" class="row mt-4" style="display: none;">
