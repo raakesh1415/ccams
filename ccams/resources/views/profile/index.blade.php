@@ -10,6 +10,7 @@
                 <h2 class="student-name">{{ $user->name }}</h2>
 
                 <button class="edit-profile-btn" onclick="window.location.href='/profile/edit'">Edit profile</button>
+                <button class="edit-profile-btn" onclick="window.location.href='/users'">view profile</button>
                 
                 <div class="about-me">
                     <h4>About Me</h4>

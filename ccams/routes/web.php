@@ -124,3 +124,6 @@ Route::post('/check-name', [UserController::class, 'checkName'])->name('check.na
 Route::post('/check-ic', [UserController::class, 'checkIC'])->name('check.ic');
 Route::post('/check/email/ic/match', [UserController::class, 'checkEmailAndICMatch'])->name('check.email.ic.match');
 
+//view profile by list
+Route::get('users', [UserController::class, 'index'])->name('users.list');
+Route::get('users/{id}', [UserController::class, 'show'])->name('users.show');
