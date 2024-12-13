@@ -3,21 +3,29 @@
         <div class="row">
             <!-- Left Section: Registered Clubs -->
             <div class="col-md-8">
-                <h1 class="text-left"><b><i>WELCOME, USER!</i></b></h1>
+                <h1 class="text-left"><b><i>WELCOME, AMY!</i></b></h1>
+                <p class="text-left" style="font-size: 1.2rem;">Have a great day! Good Luck!</p><br>
+                <h2 class="text-left"><b>Your Registered Club</b></h2>
                 <div class="row">
                     @forelse ($registrations as $registration)
                         <div class="col-md-6 mb-4">
                             <div class="card shadow-sm h-100">
-                                <!-- Club Image -->
-                                <img src="{{ asset('storage/' . $registration->club->club_pic) }}" alt="Club Image"
-                                    class="card-img-top" style="height: 150px; object-fit: cover;">
+                                <!-- Club Image with Badge -->
+                                <div class="position-relative">
+                                    <img src="{{ asset('storage/' . $registration->club->club_pic) }}" alt="Club Image"
+                                        class="card-img-top" style="height: 150px; object-fit: cover;">
+                                    <div class="position-absolute top-0 start-0 m-2">
+                                        <span
+                                            class="bg-dark text-white p-2 rounded">{{ $registration->club_type }}</span>
+                                    </div>
+                                </div>
 
                                 <div class="card-body">
                                     <!-- Club Name -->
                                     <h4 class="card-title text-center">{{ $registration->club->club_name }}</h4>
 
-                                    <!-- Club Type Badge -->
-                                    <div class="text-center mb-3">
+                                    <!-- Club Registered Status -->
+                                    <div class="text-center mb-3 p-1">
                                         <span class="bg-success text-white p-2 rounded">Registered
                                         </span>
                                     </div>
@@ -32,8 +40,13 @@
                             </div>
                         </div>
                     @endforelse
+
+                    <h2 class="text-left"><b>Your Planned Activities</b></h2>
                 </div>
             </div>
+
+
+
 
             <!-- Right Section: Calendar -->
             <div class="col-md-4">
