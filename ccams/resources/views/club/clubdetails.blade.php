@@ -37,22 +37,31 @@
     <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header">
+                {{-- <div class="modal-header">
                     <h5 class="modal-title" id="deleteModalLabel">Are you sure?</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
+                </div> --}}
                 <div class="modal-body text-center">
                     <i class="fas fa-times-circle text-danger" style="font-size: 50px;"></i>
+                    <h5 class="modal-title" id="deleteModalLabel">Are you sure?</h5>
                     <p class="mt-3">Do you really want to delete this Club?<br>This process cannot be undone.</p>
+                    <div class="d-flex justify-content-center mt-4">
+                        <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">Cancel</button>
+                        <form action="{{ route('club.destroy', ['club_id' => $club->club_id]) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </div>
                 </div>
-                <div class="modal-footer justify-content-center">
+                {{-- <div class="modal-footer justify-content-center">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                     <form action="{{ route('club.destroy', ['club_id' => $club->club_id]) }}" method="POST">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger">Delete</button>
                     </form>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>
