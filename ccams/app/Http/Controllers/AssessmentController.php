@@ -183,7 +183,7 @@ class AssessmentController extends Controller
 
     public function show(Assessment $assessment)
     {
-        // return view("assessment.show");
+        return view("assessment.show");
     }
 
     public function edit(Assessment $assessment)
