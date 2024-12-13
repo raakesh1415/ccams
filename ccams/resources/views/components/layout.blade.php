@@ -78,9 +78,11 @@
                             id="registrationCollapse" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
                                 <a class="nav-link {{ request()->is('registration/register') ? 'active' : '' }}"
-                                    href="{{ route('registration.index') }}">Register Club</a>
+                                    href="{{ route('registration.index') }}"><i class="fas fa-edit"></i>
+                                    Club Registration</a>
                                 <a class="nav-link {{ request()->is('registration/view') ? 'active' : '' }}"
-                                    href="{{ route('registration.viewRegister') }}">View Registration</a>
+                                    href="{{ route('registration.viewRegister') }}"><i class="fas fa-eye"></i>View
+                                    Registration</a>
                             </nav>
                         </div>
                         <a class="nav-link {{ request()->is('activities') ? 'active' : '' }}" href="/activities">
@@ -129,9 +131,11 @@
             </footer>
         </div>
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
+        </script>
         <script src="{{ asset('js/scripts.js') }}"></script>
-        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
+            crossorigin="anonymous"></script>
         <script src="{{ asset('js/datatables-simple-demo.js') }}"></script>
         {{-- <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap5.min.js"></script>

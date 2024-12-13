@@ -13,7 +13,7 @@
 
         <!-- Toggle View Dropdown -->
         <div class="d-flex justify-content-end mb-3">
-            <select id="view-toggle" class="form-select" style="width: 180px;">
+            <select id="view-toggle" class="form-select" style="width: 170px;">
                 <option value="list" selected>List</option>
                 <option value="card">Card</option>
             </select>
@@ -31,14 +31,15 @@
                         <div class="card shadow-sm h-100">
                             <div class="card-body d-flex align-items-start">
                                 <!-- Club Image -->
-                                <img src="{{ asset('storage/' . $registration->club->club_pic) }}" alt="Club Image"
-                                    class="img-thumbnail me-3" style="width: 180px; height: 180px; object-fit: cover;">
+                                <div class="image-container" style="flex-shrink: 0; margin-right: 1rem;">
+                                    <img src="{{ asset('storage/' . $registration->club->club_pic) }}" alt="Club Image"
+                                        class="club-image" style="width: 170px; height: 100px; object-fit: cover;">
+                                </div>
 
                                 <!-- Club Details -->
                                 <div class="flex-grow-1">
                                     <h4 class="card-title">{{ $registration->club->club_name }}</h4>
-                                    <p class="text-muted mb-1">{{ $registration->club_type }}</p>
-                                    <p style="text-align: justify;">{{ $registration->club->club_description }}</p>
+                                    <p class="mb-1">{{ $registration->club_type }}</p>
                                 </div>
 
                                 <!-- Delete Button with Trash Icon -->
@@ -48,7 +49,7 @@
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger" title="Unregister"
-                                        style="padding: 0.5rem 0.8rem"
+                                        style="font-size: 1.2rem; padding: 0.4rem 0.6rem;"
                                         onclick="return confirm('Are you sure you want to unregister from this club?');">
                                         <i class="fas fa-trash-alt"></i>
                                     </button>
@@ -63,31 +64,39 @@
             <div id="club-card-view" class="row mt-4" style="display: none;">
                 @foreach ($registrations as $registration)
                     <div class="col-md-4 mb-4">
-                        <div class="card shadow-sm h-100">
+                        <div class="card shadow-sm h-100 position-relative">
+                            <!-- Badge for Club Type -->
+                            <div class="position-absolute" style="top: 10px; left: 10px;">
+                                <span class="bg-dark text-white p-2 rounded small">
+                                    {{ $registration->club_type }}
+                                </span>
+                            </div>
+                            <!-- Club Image -->
                             <img src="{{ asset('storage/' . $registration->club->club_pic) }}" alt="Club Image"
-                                class="card-img-top" style="height: 200px; object-fit: cover;">
-                            <div class="card-body">
+                                class="card-img-top" style="height: 180px; object-fit: cover;">
+                            <!-- Card Body -->
+                            <div class="card-body d-flex flex-column justify-content-between">
                                 <h5 class="card-title">{{ $registration->club->club_name }}</h5>
-                                <p class="text-muted">{{ $registration->club_type }}</p>
-                                <p class="card-text" style="text-align: justify;">
-                                    {{ Str::limit($registration->club->club_description, 100, '...') }}
-                                </p>
-                                <!-- Delete Button with Trash Icon -->
-                                <form
-                                    action="{{ route('registration.unregister', ['registrationId' => $registration->registration_id]) }}"
-                                    method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm" title="Unregister"
-                                        onclick="return confirm('Are you sure you want to unregister from this club?');">
-                                        <i class="fas fa-trash-alt"></i>
-                                    </button>
-                                </form>
+                                <div class="d-flex justify-content-end">
+                                    <!-- Trash Icon Button -->
+                                    <form
+                                        action="{{ route('registration.unregister', ['registrationId' => $registration->registration_id]) }}"
+                                        method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm" title="Unregister"
+                                            style="font-size: 1.2rem; padding: 0.4rem 0.6rem;"
+                                            onclick="return confirm('Are you sure you want to unregister from this club?');">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
                 @endforeach
             </div>
+
         @endif
         <div class="text-center mt-4" style="padding: 10px">
             <a href="{{ route('registration.index') }}" class="btn btn-dark">Return</a>
