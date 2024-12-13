@@ -7,52 +7,68 @@
         </div>
     </x-slot>
 
-    <div class="add-activity-container">
-        <a href="{{ url()->previous() }}" class="go-back">Go Back</a>
+    <div class="container mt-5">
 
-        <form action="{{ route('activities.store') }}" method="POST" enctype="multipart/form-data">
-    @csrf
-    <!-- Form fields go here -->
-    <label for="activity_name">Activity Name</label>
-    <input type="text" name="activity_name" id="activity_name" required>
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h4 class="card-title mb-4">Add a New Activity</h4>
+                <form action="{{ route('activities.store') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
 
-    <label for="location">Location</label>
-    <input type="text" name="location" id="location" required>
+                    <!-- Activity Name -->
+                    <div class="mb-3">
+                        <label for="activity_name" class="form-label">Activity Name</label>
+                        <input type="text" name="activity_name" id="activity_name" class="form-control" required>
+                    </div>
 
-    <label for="date_time">Date & Time</label>
-    <input type="datetime-local" name="date_time" id="date_time" required>
+                    <!-- Location -->
+                    <div class="mb-3">
+                        <label for="location" class="form-label">Location</label>
+                        <input type="text" name="location" id="location" class="form-control" required>
+                    </div>
 
-    <label for="description">Description</label>
-    <textarea name="description" id="description" rows="4" required></textarea>
+                    <!-- Date & Time -->
+                    <div class="mb-3">
+                        <label for="date_time" class="form-label">Date & Time</label>
+                        <input type="datetime-local" name="date_time" id="date_time" class="form-control" required>
+                    </div>
 
-    <label for="participants">Participants</label>
-    <input type="number" name="participants" id="participants">
+                    <!-- Description -->
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <textarea name="description" id="description" class="form-control" rows="4" required></textarea>
+                    </div>
 
-    <label for="poster">Add Poster</label>
-    <input type="file" name="poster" id="poster" accept="image/*">
+                    <!-- Participants -->
+                    <div class="mb-3">
+                        <label for="participants" class="form-label">Participants</label>
+                        <input type="number" name="participants" id="participants" class="form-control">
+                    </div>
 
-    <label for="category">Category</label>
-    <select name="category" id="category" required>
-        <option value="Open to All">Open to All</option>
-        <option value="Club">Club</option>
-    </select>
+                    <!-- Poster -->
+                    <div class="mb-3">
+                        <label for="poster" class="form-label">Add Poster</label>
+                        <input type="file" name="poster" id="poster" class="form-control" accept="image/*">
+                    </div>
 
-    <label for="duration">Duration</label>
-    <input type="text" name="duration" id="duration" required>
+                    <!-- Category -->
+                    <div class="mb-3">
+                        <label for="category" class="form-label">Category</label>
+                        <select name="category" id="category" class="form-select" required>
+                            <option value="Open to All">Open to All</option>
+                            <option value="Club">Club</option>
+                        </select>
+                    </div>
 
-    <button type="submit" class="submit-btn">Add Activity</button>
-</form>
+                    <!-- Duration -->
+                    <div class="mb-3">
+                        <label for="duration" class="form-label">Duration</label>
+                        <input type="text" name="duration" id="duration" class="form-control" required>
+                    </div>
 
+                    <button type="submit" class="btn btn-primary">Add Activity</button>
+                </form>
+            </div>
+        </div>
     </div>
-
-    <style>
-    
-        .add-activity-container { padding: 20px; max-width: 800px; margin: 0 auto; background: #f9f9f9; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); }
-        .go-back { display: inline-block; margin-bottom: 20px; color: #007bff; text-decoration: none; }
-        .activity-form h3 { margin-bottom: 20px; font-size: 1.5em; }
-        label { display: block; margin-top: 15px; font-weight: bold; }
-        input[type="text"], input[type="datetime-local"], input[type="file"], textarea { width: 100%; padding: 8px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; }
-        .submit-btn { margin-top: 20px; padding: 10px 20px; background-color: #5a67d8; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 1em; }
-        .submit-btn:hover { background-color: #4c51bf; }
-    </style>
 </x-layout>

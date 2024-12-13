@@ -6,63 +6,72 @@
         </div>
     </x-slot>
 
-    <div class="add-activity-container">
-        <a href="{{ url()->previous() }}" class="go-back">Go Back</a>
+    <div class="container mt-5">
 
-        <form action="{{ route('activities.update', $activity->activity_id) }}" method="POST" enctype="multipart/form-data">
-            @csrf
-            @method('PUT')
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <form action="{{ route('activities.update', $activity->activity_id) }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
 
-            <!-- Activity Name -->
-            <label for="activity_name">Activity Name</label>
-            <input type="text" name="activity_name" id="activity_name" value="{{ old('activity_name', $activity->activity_name) }}" required>
+                    <!-- Activity Name -->
+                    <div class="mb-3">
+                        <label for="activity_name" class="form-label">Activity Name</label>
+                        <input type="text" name="activity_name" id="activity_name" class="form-control" value="{{ old('activity_name', $activity->activity_name) }}" required>
+                    </div>
 
-            <!-- Location -->
-            <label for="location">Location</label>
-            <input type="text" name="location" id="location" value="{{ old('location', $activity->location) }}" required>
+                    <!-- Location -->
+                    <div class="mb-3">
+                        <label for="location" class="form-label">Location</label>
+                        <input type="text" name="location" id="location" class="form-control" value="{{ old('location', $activity->location) }}" required>
+                    </div>
 
-            <!-- Date & Time -->
-            <label for="date_time">Date & Time</label>
-            <input type="datetime-local" name="date_time" id="date_time" 
-             value="{{ old('date_time', is_string($activity->date_time) ? $activity->date_time : $activity->date_time->format('Y-m-d\TH:i')) }}" required>
+                    <!-- Date & Time -->
+                    <div class="mb-3">
+                        <label for="date_time" class="form-label">Date & Time</label>
+                        <input type="datetime-local" name="date_time" id="date_time" class="form-control" 
+                            value="{{ old('date_time', is_string($activity->date_time) ? $activity->date_time : $activity->date_time->format('Y-m-d\TH:i')) }}" required>
+                    </div>
 
-            <!-- Description -->
-            <label for="description">Description</label>
-            <textarea name="description" id="description" rows="4" required>{{ old('description', $activity->description) }}</textarea>
+                    <!-- Description -->
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <textarea name="description" id="description" class="form-control" rows="4" required>{{ old('description', $activity->description) }}</textarea>
+                    </div>
 
-            <!-- Participants -->
-            <label for="participants">Participants</label>
-            <input type="number" name="participants" id="participants" value="{{ old('participants', $activity->participants) }}">
+                    <!-- Participants -->
+                    <div class="mb-3">
+                        <label for="participants" class="form-label">Participants</label>
+                        <input type="number" name="participants" id="participants" class="form-control" value="{{ old('participants', $activity->participants) }}">
+                    </div>
 
-            <!-- Poster -->
-            <label for="poster">Add Poster</label>
-            <input type="file" name="poster" id="poster" accept="image/*">
-            @if ($activity->poster)
-                <img src="{{ asset('storage/' . $activity->poster) }}" alt="Current Poster" width="100">
-            @endif
+                    <!-- Poster -->
+                    <div class="mb-3">
+                        <label for="poster" class="form-label">Add Poster</label>
+                        <input type="file" name="poster" id="poster" class="form-control" accept="image/*">
+                        @if ($activity->poster)
+                            <img src="{{ asset('storage/' . $activity->poster) }}" alt="Current Poster" class="img-fluid mt-3" style="max-width: 150px;">
+                        @endif
+                    </div>
 
-            <!-- Category -->
-            <label for="category">Category</label>
-            <select name="category" id="category" required>
-                <option value="Open to All" {{ $activity->category == 'Open to All' ? 'selected' : '' }}>Open to All</option>
-                <option value="Club" {{ $activity->category == 'Club' ? 'selected' : '' }}>Club</option>
-            </select>
+                    <!-- Category -->
+                    <div class="mb-3">
+                        <label for="category" class="form-label">Category</label>
+                        <select name="category" id="category" class="form-select" required>
+                            <option value="Open to All" {{ $activity->category == 'Open to All' ? 'selected' : '' }}>Open to All</option>
+                            <option value="Club" {{ $activity->category == 'Club' ? 'selected' : '' }}>Club</option>
+                        </select>
+                    </div>
 
-            <!-- Duration -->
-            <label for="duration">Duration</label>
-            <input type="text" name="duration" id="duration" value="{{ old('duration', $activity->duration) }}" required>
+                    <!-- Duration -->
+                    <div class="mb-3">
+                        <label for="duration" class="form-label">Duration</label>
+                        <input type="text" name="duration" id="duration" class="form-control" value="{{ old('duration', $activity->duration) }}" required>
+                    </div>
 
-            <button type="submit" class="submit-btn">Update Activity</button>
-        </form>
-
+                    <button type="submit" class="btn btn-primary">Update Activity</button>
+                </form>
+            </div>
+        </div>
     </div>
-
-    <style>
-        .add-activity-container { padding: 20px; max-width: 800px; margin: 0 auto; background: #f9f9f9; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); }
-        .go-back { display: inline-block; margin-bottom: 20px; color: #007bff; text-decoration: none; }
-        label { display: block; margin-top: 15px; font-weight: bold; }
-        input[type="text"], input[type="datetime-local"], input[type="file"], textarea, select { width: 100%; padding: 8px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; }
-        .submit-btn { margin-top: 20px; padding: 10px 20px; background-color: #5a67d8; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 1em; }
-        .submit-btn:hover { background-color: #4c51bf; }
-    </style>
 </x-layout>
