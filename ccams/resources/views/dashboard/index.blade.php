@@ -3,7 +3,7 @@
         <div class="row">
             <!-- Left Section: Registered Clubs -->
             <div class="col-md-8">
-                <h2 class="text-center"><b>MY REGISTERED CLUBS</b></h2>
+                <h1 class="text-left"><b><i>WELCOME, USER!</i></b></h1>
                 <div class="row">
                     @forelse ($registrations as $registration)
                         <div class="col-md-6 mb-4">
@@ -14,29 +14,12 @@
 
                                 <div class="card-body">
                                     <!-- Club Name -->
-                                    <h5 class="card-title text-center">{{ $registration->club->club_name }}</h5>
+                                    <h4 class="card-title text-center">{{ $registration->club->club_name }}</h4>
 
                                     <!-- Club Type Badge -->
                                     <div class="text-center mb-3">
-                                        <span class="badge bg-dark text-white p-2">
-                                            {{ $registration->club_type }}
+                                        <span class="bg-success text-white p-2 rounded">Registered
                                         </span>
-                                    </div>
-
-                                    <!-- Club Description -->
-                                    <p class="text-muted" style="text-align: justify;">
-                                        {{ Str::limit($registration->club->club_description, 100, '...') }}
-                                    </p>
-                                </div>
-
-                                <!-- Progress or Activity Indicator -->
-                                <div class="card-footer">
-                                    <small class="text-muted">Club Activities Progress</small>
-                                    <div class="progress" style="height: 10px;">
-                                        <div class="progress-bar bg-success" role="progressbar"
-                                            style="width: {{ rand(40, 100) }}%;" aria-valuenow="{{ rand(40, 100) }}"
-                                            aria-valuemin="0" aria-valuemax="100">
-                                        </div>
                                     </div>
                                 </div>
                             </div>
