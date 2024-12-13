@@ -13,7 +13,7 @@
 
         <!-- Toggle View Dropdown -->
         <div class="d-flex justify-content-end mb-3">
-            <select id="view-toggle" class="form-select" style="width: auto;">
+            <select id="view-toggle" class="form-select" style="width: 180px;">
                 <option value="list" selected>List</option>
                 <option value="card">Card</option>
             </select>
@@ -48,6 +48,7 @@
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger" title="Unregister"
+                                        style="padding: 0.5rem 0.8rem"
                                         onclick="return confirm('Are you sure you want to unregister from this club?');">
                                         <i class="fas fa-trash-alt"></i>
                                     </button>
@@ -88,6 +89,9 @@
                 @endforeach
             </div>
         @endif
+        <div class="text-center mt-4" style="padding: 10px">
+            <a href="{{ route('registration.index') }}" class="btn btn-dark">Return</a>
+        </div>
     </div>
 
     <!-- Add Script to Toggle Views -->
