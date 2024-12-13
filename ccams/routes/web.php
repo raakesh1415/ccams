@@ -8,11 +8,10 @@ use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\DashboardController;
 
 //Dashboard
-Route::get('/dashboard', function () {
-    return view('dashboard.index');
-});
+Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard.index');
 
 // Assessment
 Route::get('/assessment', [AssessmentController::class, 'index'])->name('assessment.index');
