@@ -108,10 +108,10 @@ class UserController extends Controller
     //     return redirect()->route('login.index'); // 注销后重定向到登录页面
     // }
 
-    // 显示所有用户列表
+
     public function index()
 {
-    $users = User::all(); // 查询所有用户
+    $users = User::all(); 
     foreach ($users as $user) {
         $user->last_login_at = Carbon::parse($user->last_login_at)->format('Y-m-d H:i:s');
     }
@@ -121,16 +121,16 @@ class UserController extends Controller
 }
 
 
-    // 显示单个用户的详细信息
+
     public function show(int $id)
     {
-        $user = User::findOrFail($id); // 根据 ID 查找用户
-        return view('profile.show', compact('user')); // 返回包含用户信息的视图
+        $user = User::findOrFail($id);
+        return view('profile.show', compact('user')); 
     }
     public function edit(int $id)
     {
-        $user = User::findOrFail($id); // 根据 ID 查找用户
-        return view('users.edit', compact('user')); // 返回编辑用户的视图
+        $user = User::findOrFail($id); 
+        return view('users.edit', compact('user')); 
     }
 
 
