@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\User;
 use App\Models\Club;
 use App\Models\Registration;
 use Illuminate\Http\Request;
@@ -12,9 +12,10 @@ class DashboardController extends Controller
 {
     public function viewRegistration()
     {
+        $user = auth()->user(); 
         $registrations = Registration::with('club')->where('user_id', 1)->get();
         //$registrations = Registration::with('club')->where('user_id', auth()->id())->get();
 
-        return view('dashboard.index', ['registrations' => $registrations]);
+        return view('dashboard.index', ['registrations' => $registrations,'user' => $user]);
     }
 }
