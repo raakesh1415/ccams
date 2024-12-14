@@ -1,26 +1,26 @@
 <x-layout>
     <x-slot name="header">
-        <h2>{{ $club->club_name }} - Club Details</h2>
+        <h2>{{ $clubs->club_name }} - Club Details</h2>
     </x-slot>
 
     <div class="container mt-4">
         <div class="row shadow-sm border rounded p-4">
             <!-- Image on the Left -->
             <div class="col-md-4 text-center">
-                <img src="{{ asset('storage/' . $club->club_pic) }}" class="img-fluid rounded" alt="Club Image" style="object-fit: cover; width: 100%; max-height: 300px;">
+                <img src="{{ asset('storage/' . $clubs->club_pic) }}" class="img-fluid rounded" alt="Club Image" style="object-fit: cover; width: 100%; max-height: 300px;">
             </div>
 
             <!-- Details on the Right -->
             <div class="col-md-8">
-                <h3 class="h4">{{ $club->club_name }}</h3>
-                <p class="text-muted"><strong>Category:</strong> {{ $club->club_category }}</p>
-                <p>{{ $club->club_description }}</p>
-                <p class="text-secondary"><strong>Total Participants:</strong> {{ $club->participant_total }}</p>
+                <h3 class="h4">{{ $clubs->club_name }}</h3>
+                <p class="text-muted"><strong>Category:</strong> {{ $clubs->club_category }}</p>
+                <p>{{ $clubs->club_description }}</p>
+                <p class="text-secondary"><strong>Total Participants:</strong> {{ $clubs->participant_total }}</p>
 
                 <!-- Action Buttons -->
                 <div class="d-flex gap-2 mt-3">
                     <!-- Edit Button -->
-                    <a href="{{ route('club.edit', ['club_id' => $club->club_id]) }}" class="btn btn-outline-success">
+                    <a href="{{ route('club.edit', ['club_id' => $clubs->club_id]) }}" class="btn btn-outline-success">
                         <i class="fas fa-edit"></i> Edit
                     </a>
 
@@ -42,7 +42,7 @@
                         <p class="mt-3">Do you really want to delete this Club?<br>This process cannot be undone.</p>
                         <div class="d-flex justify-content-center mt-4">
                             <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">Cancel</button>
-                            <form action="{{ route('club.destroy', ['club_id' => $club->club_id]) }}" method="POST">
+                            <form action="{{ route('club.destroy', ['club_id' => $clubs->club_id]) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger">Delete</button>
