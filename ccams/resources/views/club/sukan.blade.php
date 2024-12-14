@@ -7,7 +7,7 @@
         <h2 class="text-center">Explore Sukan Clubs</h2>
 
         <!-- Check if there are club in the 'Sukan' category -->
-        @if($club->isEmpty())
+        @if($clubs->isEmpty())
             <p class="text-muted text-center mt-4">No clubs available in the "Sukan" category yet. Be the first to add one!</p>
 
             <!-- Add Club Button positioned below the message on the left -->
@@ -26,16 +26,16 @@
         @endif
 
         <!-- Loop through each club and display it -->
-        @if(!$club->isEmpty())
+        @if(!$clubs->isEmpty())
             <div class="row g-4">
-                @foreach($club as $club)
+                @foreach($clubs as $clubs)
                 <div class="col-md-4">
                     <div class="card h-100 shadow-sm border">
-                        <img src="{{ asset('storage/' . $club->club_pic) }}" class="card-img-top" alt="Club Image" style="height: 200px; object-fit: cover;">
+                        <img src="{{ asset('storage/' . $clubs->club_pic) }}" class="card-img-top" alt="Club Image" style="height: 200px; object-fit: cover;">
                         <div class="card-body text-center">
-                            <h3 class="card-title h5">{{ $club->club_name }}</h3>
-                            <p class="card-text text-muted">{{ Str::limit($club->club_description, 100) }}</p>
-                            <a href="{{ route('club.details', ['club_id' => $club->club_id]) }}" class="btn btn-dark">View Details</a>
+                            <h3 class="card-title h5">{{ $clubs->club_name }}</h3>
+                            <p class="card-text text-muted">{{ Str::limit($clubs->club_description, 100) }}</p>
+                            <a href="{{ route('club.details', ['club_id' => $clubs->club_id]) }}" class="btn btn-dark">View Details</a>
                         </div>
                     </div>
                 </div>

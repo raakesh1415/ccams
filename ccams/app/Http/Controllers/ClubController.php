@@ -20,36 +20,36 @@ class ClubController extends Controller
      public function showKelabClubs()
      {
          // Fetch clubs in the 'Kelab / Persatuan' category
-         $club = Club::where('club_category', 'Kelab / Persatuan')->get();
+         $clubs = Club::where('club_category', 'Kelab / Persatuan')->get();
          
-         return view('club.kelab', compact('club'));
+         return view('club.kelab', compact('clubs'));
      }
 
      public function showSukanClubs()
     {
     // Fetch clubs in the 'Sukan / Permainan' category
-    $club = Club::where('club_category', 'Sukan / Permainan')->get();
+    $clubs = Club::where('club_category', 'Sukan / Permainan')->get();
 
     // Pass clubs to the view
-    return view('club.sukan', compact('club'));
+    return view('club.sukan', compact('clubs'));
     }
 
 public function showUnitBeruniformClubs()
 {
     // Fetch clubs in the 'Unit Beruniform' category
-    $club = Club::where('club_category', 'Unit Beruniform')->get();
+    $clubs = Club::where('club_category', 'Unit Beruniform')->get();
 
     // Pass clubs to the view
-    return view('club.unitberuniform', compact('club'));
+    return view('club.unitberuniform', compact('clubs'));
 }
 
-public function showDetails($club_id)
+public function showDetails($clubs_id)
 {
     // Fetch the club based on `club_id` from the database
-    $club = Club::where('club_id', $club_id)->firstOrFail();
+    $clubs = Club::where('club_id', $clubs_id)->firstOrFail();
     
     // Return the view with the club data
-    return view('club.clubdetails', compact('club'));
+    return view('club.clubdetails', compact('clubs'));
 }
     public function store(Request $request)
     {
@@ -63,9 +63,9 @@ public function showDetails($club_id)
         ]);
     
         // Handle the file upload
-        $clubPicPath = null;
+        $clubsPicPath = null;
         if ($request->hasFile('club_pic')) {
-            $clubPicPath = $request->file('club_pic')->store('club_pics', 'public');
+            $clubsPicPath = $request->file('club_pic')->store('club_pics', 'public');
         }
     
         // Create a new club record in the database
@@ -74,7 +74,7 @@ public function showDetails($club_id)
             'club_description' => $validated['club_description'],
             'participant_total' => $validated['participant_total'],
             'club_category' => $validated['club_category'],
-            'club_pic' => $clubPicPath ?? 'default_image.jpg', // Use default if no image is uploaded
+            'club_pic' => $clubsPicPath ?? 'default_image.jpg', // Use default if no image is uploaded
         ]);
     
         // Flash success message and redirect to index
@@ -84,17 +84,17 @@ public function showDetails($club_id)
     }
     // ClubController.php
 
-public function edit($club_id)
+public function edit($clubs_id)
 {
     // Retrieve club by 'club_id' instead of 'id'
-   $club = Club::findOrFail($club_id);
-    return view('club.create', compact('club'));
+   $clubs = Club::findOrFail($clubs_id);
+    return view('club.create', compact('clubs'));
 }
 
-public function update(Request $request, $club_id)
+public function update(Request $request, $clubs_id)
 {
     // Find the club by club_id
-    $club = Club::findOrFail($club_id);
+    $clubs = Club::findOrFail($clubs_id);
 
     // Validate the input, including the image
     $request->validate([
@@ -108,41 +108,41 @@ public function update(Request $request, $club_id)
     // Handle the image upload
     if ($request->hasFile('club_pic')) {
         // Delete the old image if it exists
-        if ($club->club_pic) {
-            Storage::delete('public/' . $club->club_pic);
+        if ($clubs->club_pic) {
+            Storage::delete('public/' . $clubs->club_pic);
         }
 
         // Store the new image
         $imagePath = $request->file('club_pic')->store('clubs', 'public');
 
         // Update the image path in the database
-        $club->club_pic = $imagePath;
+        $clubs->club_pic = $imagePath;
     }
 
     // Update other fields
-    $club->club_name = $request->club_name;
-    $club->club_description = $request->club_description;
-    $club->participant_total = $request->participant_total;
-    $club->club_category = $request->club_category;
+    $clubs->club_name = $request->club_name;
+    $clubs->club_description = $request->club_description;
+    $clubs->participant_total = $request->participant_total;
+    $clubs->club_category = $request->club_category;
 
     // Save the updated club
-    $club->save();
+    $clubs->save();
 
-    return redirect()->route('club.edit', ['club_id' => $club->club_id])->with('success', 'Club updated successfully!');
+    return redirect()->route('club.edit', ['club_id' => $clubs->club_id])->with('success', 'Club updated successfully!');
 }
 
 public function destroy($id)
 {
     // Find the club by 'club_id'
-    $club = Club::where('club_id', $id)->firstOrFail();
+    $clubs = Club::where('club_id', $id)->firstOrFail();
 
     // Delete associated image if exists
-    if ($club->club_pic) {
-        Storage::delete('public/' . $club->club_pic);
+    if ($clubs->club_pic) {
+        Storage::delete('public/' . $clubs->club_pic);
     }
 
     // Delete the club
-    $club->delete();
+    $clubs->delete();
 
     // Redirect to the clubs list with a success message
     return redirect()->route('club.index')->with('success', 'Club deleted successfully!');
