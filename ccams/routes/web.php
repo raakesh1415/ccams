@@ -10,6 +10,8 @@ use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
 
+
+Route::get('/', [UserController::class, 'showLoginForm'])->name('login.index'); // 
 //Dashboard
 Route::get('/dashboard', [DashboardController::class, 'viewRegistration'])->name('dashboard.index');
 

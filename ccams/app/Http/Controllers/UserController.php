@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Storage;
 class UserController extends Controller
 {
     public function store(Request $request)
@@ -23,6 +23,7 @@ class UserController extends Controller
             'ic' => 'required|string|max:12',
             'role' => 'required|string|in:student,teacher', // Ensure role is either student or teacher
         ]);
+        
 
         // Create and save the user to the database with a hashed password
         User::create([
@@ -90,8 +91,8 @@ class UserController extends Controller
     private function redirectToDashboard(User $user)
     {
         $routes = [
-            'teacher' => 'profile.edit',
-            'student' => 'profile.index',
+            'teacher' => 'dashboard.index',
+            'student' => 'dashboard.index',
         ];
 
         return isset($routes[$user->role])
@@ -213,42 +214,57 @@ class UserController extends Controller
 
     }
 
-    // Update the profile
-    public function editprofile(Request $request)
-    {
-        $request->validate([
-            'address' => 'nullable|string',
-            'city' => 'nullable|string',
-            'country' => 'nullable|string',
-            'postal_code' => 'nullable|string',
-            'about_me' => 'nullable|string',
-            'current_password' => 'nullable|string',
-            'new_password' => 'nullable|string|confirmed|min:8',
-        ]);
+// Update the profile
+public function editprofile(Request $request)
+{
+    // Validation for new fields (address, city, etc.)
+    $request->validate([
+        'address' => 'nullable|string',
+        'city' => 'nullable|string',
+        'country' => 'nullable|string',
+        'postal_code' => 'nullable|string',
+        'about_me' => 'nullable|string',
+        'current_password' => 'nullable|string',
+        'new_password' => 'nullable|string|confirmed|min:8',
+        'profile_pic' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Optional image upload for profile picture
+    ]);
 
-        $user = Auth::user();
-        
-        // Update user info
-        $user->address = $request->address;
-        $user->city = $request->city;
-        $user->country = $request->country;
-        $user->postal_code = $request->postal_code;
-        $user->about_me = $request->about_me;
+    // Get the current authenticated user
+    $user = Auth::user();
 
-        // Update password if provided
-        if ($request->new_password) {
-            if (!Hash::check($request->current_password, $user->password)) {
-                return back()->withErrors(['current_password' => 'Current password is incorrect']);
-            }
-            $user->password = Hash::make($request->new_password);
-        }
-
-        $user->save();
-
-        return redirect()->route('profile.index')->with('success', 'Profile updated successfully');
+    // Handle profile picture upload (if present)
+    if ($request->hasFile('profile_pic')) {
+        $profilePicPath = $request->file('profile_pic')->store('public/profiles');
+        $user->profile_pic = basename($profilePicPath); // Save the filename to the database
     }
 
-    
+    // Handle profile picture upload (if present)
+    $profilePicPath = null;
+    if ($request->hasFile('profile_pic')) {
+        $profilePicPath = $request->file('profile_pic')->store('profiles', 'public');
+        $user->profile_pic = basename($profilePicPath); // Save the filename to the database
+    }
+
+    // Update other fields (address, city, country, etc.)
+    $user->address = $request->address;
+    $user->city = $request->city;
+    $user->country = $request->country;
+    $user->postal_code = $request->postal_code;
+    $user->about_me = $request->about_me;
+
+    // If a new password is provided, check the current password and update the password field
+    if ($request->new_password) {
+        if (!Hash::check($request->current_password, $user->password)) {
+            return back()->withErrors(['current_password' => 'Current password is incorrect']);
+        }
+        $user->password = Hash::make($request->new_password);
+    }
+
+    // Save the changes to the user model
+    $user->save();
+
+    return redirect()->route('profile.index')->with('success', 'Profile updated successfully');
+}
 }
 
 // <?php
