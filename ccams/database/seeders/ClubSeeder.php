@@ -236,7 +236,7 @@ class ClubSeeder extends Seeder
 
         // Insert data into the database
         foreach ($clubs as $clubs) {
-            DB::table('club')->insert([
+            DB::table('clubs')->insert([
                 'club_name' => $clubs['club_name'],
                 'club_description' => $clubs['club_description'],
                 'participant_total' => $clubs['participant_total'],
