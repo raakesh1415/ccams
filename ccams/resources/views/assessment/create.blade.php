@@ -136,7 +136,7 @@
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" name="engagement[]" id="eng2National" value="N2">
-                                <label class="form-check-label" for="eng2National">National ( 12)</label>
+                                <label class="form-check-label" for="eng2National">National (12)</label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" name="engagement[]" id="eng2Country" value="C2">

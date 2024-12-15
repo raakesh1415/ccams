@@ -144,9 +144,12 @@ class AssessmentController extends Controller
         return redirect()->route('assessment.list')->with('success', 'Assessment saved successfully!');
     }
 
-    public function show(Assessment $assessment)
+    // AssessmentController.php
+    public function show($assessment_id)
     {
-        return view("assessment.show");
+        $assessment = Assessment::findOrFail($assessment_id);
+        $user = $assessment->user; // Assuming there's a relationship set up between Assessment and User
+        return view("assessment.show", compact('assessment', 'user'));
     }
 
     public function edit(Assessment $assessment)
