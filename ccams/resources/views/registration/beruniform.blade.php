@@ -15,7 +15,7 @@
         <div class="row mt-4">
             @if ($beruniform->isEmpty())
                 <div class="text-center">
-                    <p>No sports or games clubs are available for registration at the moment.</p>
+                    <p>No clubs are available for registration at the moment.</p>
                 </div>
             @else
                 @foreach ($beruniform as $club)
