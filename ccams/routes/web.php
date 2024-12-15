@@ -13,7 +13,7 @@ use App\Http\Controllers\DashboardController;
 
 Route::get('/', [UserController::class, 'showLoginForm'])->name('login.index'); // 
 //Dashboard
-Route::get('/dashboard', [DashboardController::class, 'viewRegistration'])->name('dashboard.index');
+Route::get('/dashboard', [DashboardController::class, 'showUserSummary'])->name('dashboard.index');
 
 // Assessment
 Route::get('/assessment', [AssessmentController::class, 'index'])->name('assessment.index');
