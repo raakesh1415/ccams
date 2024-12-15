@@ -4,7 +4,7 @@
             <!-- Left Section: Registered Clubs -->
             <div class="col-md-8">
                 <h1 class="text-left"><b><i>WELCOME, AMY!</i></b></h1>
-                <h1>Hello {{ $user->role }}</h1>
+                <!-- <h1>Hello {{ $user->role }}</h1> -->
                 <p class="text-left" style="font-size: 1.2rem;">Have a great day! Good Luck!</p><br>
                 <h2 class="text-left"><b>Your Registered Club</b></h2>
 
