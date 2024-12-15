@@ -55,10 +55,6 @@
             <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
-                        {{-- <div class="modal-header">
-                            
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div> --}}
                         <div class="modal-body text-center">
                             <i class="fas fa-times-circle text-danger" style="font-size: 50px;"></i>
                             <h5 class="modal-title" id="deleteModalLabel">Are you sure?</h5>
