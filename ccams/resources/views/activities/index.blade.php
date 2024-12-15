@@ -40,7 +40,7 @@
                                 <h5 class="card-title">{{ $activity->activity_name }}</h5>
                                 <p class="card-text text-truncate">{{ Str::limit($activity->description, 100) }}</p>
                                 <div class="d-flex justify-content-center gap-2">
-                                    <a href="{{ route('activities.edit', $activity->activity_id) }}" class="btn btn-info btn-sm">
+                                    <a href="{{ route('activities.edit', $activity->activity_id) }}" class="btn btn-outline-success">
                                         <i class="fas fa-edit"></i> Edit
                                     </a>
                                     <button type="button" 
