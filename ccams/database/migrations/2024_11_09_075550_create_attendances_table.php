@@ -18,7 +18,7 @@ class CreateAttendancesTable extends Migration
 
             // Set up foreign keys
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade'); // Foreign key to users table
-            $table->foreign('club_id')->references('club_id')->on('club')->onDelete('cascade');
+            $table->foreign('club_id')->references('club_id')->on('clubs')->onDelete('cascade');
         });
     }
 

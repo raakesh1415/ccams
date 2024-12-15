@@ -18,7 +18,7 @@ class CreateRegistrationsTable extends Migration
             //Foreign key
             //OnDelete('cascade') ensures if a user is deleted, all associated registration will deleted
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('club_id')->references('club_id')->on('club')->onDelete('cascade');
+            $table->foreign('club_id')->references('club_id')->on('clubs')->onDelete('cascade');
 
             //Ensures student can register one club for each club type
             $table->unique(['user_id', 'club_type']);
