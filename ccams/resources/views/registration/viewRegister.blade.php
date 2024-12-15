@@ -21,7 +21,9 @@
 
         <!-- Check if there are any registrations -->
         @if ($registrations->isEmpty())
-            <div class="alert alert-danger">You have not registered for any clubs yet.</div>
+            <div class="text-center">
+                <p>No clubs are are registered.</p>
+            </div>
         @else
             <!-- Registered Clubs View -->
             <div id="club-list-view" class="row mt-4">
