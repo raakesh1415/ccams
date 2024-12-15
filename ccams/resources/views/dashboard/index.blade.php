@@ -1,7 +1,7 @@
 <x-layout>
     <div class="container mt-5">
-        <h1 class="text-left"><b><i>WELCOME, {{ $user->name }} !</i></b></h1>
-        <p class="text-left" style="font-size: 1.2rem;">Have a great day! Good Luck!</p><br>
+        <h1 class="text-left" style="text-transform: uppercase;"><b><i>WELCOME, {{ $user->name }} !</i></b></h1>
+        <h5 class="text-left">Have a great day! Good Luck!</h5><br>
 
         <h2 class="text-left"><b>Your Registered Club</b></h2>
 
