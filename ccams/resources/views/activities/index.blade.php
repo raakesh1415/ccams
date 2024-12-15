@@ -44,12 +44,13 @@
                                         <i class="fas fa-edit"></i> Edit
                                     </a>
                                     <button type="button" 
-                                            class="btn btn-danger btn-sm" 
-                                            data-bs-toggle="modal" 
-                                            data-bs-target="#deleteModal" 
-                                            data-url="{{ route('activities.destroy', $activity->activity_id) }}">
-                                        <i class="fas fa-trash"></i> Delete
+                                        class="btn btn-outline-danger" 
+                                        data-bs-toggle="modal" 
+                                        data-bs-target="#deleteModal" 
+                                        data-url="{{ route('activities.destroy', $activity->activity_id) }}">
+                                    <i class="fas fa-trash"></i> Delete
                                     </button>
+
                                 </div>
                             </div>
                         </div>
