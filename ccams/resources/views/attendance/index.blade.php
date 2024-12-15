@@ -13,9 +13,9 @@
                             <div class="text-muted py-3">No Image Available</div>
                         @endif
                         <div class="card-body">
-                            <h5 class="card-title">{{ $club->club_name }}</h5>
+                            <h4 class="card-title">{{ $club->club_name }}</h4>
                             <p class="card-text">{{ $club->club_category }}</p>
-                            <a href="{{ route('attendance.show', ['club' => $club->club_id]) }}" class="btn btn-dark">View Attendance</a>
+                            <a href="{{ route('attendance.show', ['clubs' => $club->club_id]) }}" class="btn btn-dark">View Attendance</a>
                         </div>
                     </div>
                 </div>

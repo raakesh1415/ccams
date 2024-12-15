@@ -74,6 +74,7 @@ class AttendanceController extends Controller
                     ['status' => $status]
                 );
             }
+
         }
 
         // Redirect with success message
@@ -85,7 +86,7 @@ class AttendanceController extends Controller
     public function update(Request $request, $studentId)
     {
         $validated = $request->validate([
-            'club_id' => 'required|exists:club,club_id',
+            'club_id' => 'required|exists:clubs,club_id',
             'attendance' => 'required|array',
         ]);
 
@@ -112,7 +113,7 @@ class AttendanceController extends Controller
                 );
         }
 
-        return redirect()->route('attendance.show', ['club' => $clubId])
+        return redirect()->route('attendance.show', ['clubs' => $clubId])
                         ->with('success', 'Attendance updated successfully!');
     }
 

@@ -32,8 +32,8 @@ Route::get('assessment/{assessment_id}/view', [AssessmentController::class, 'sho
 
 // Attendance
 Route::get('/attendance', [AttendanceController::class, 'index'])->name('attendance.index');
-Route::get('/attendance/{club}', [AttendanceController::class, 'show'])->name('attendance.show');
-Route::post('/attendance/{club}/store', [AttendanceController::class, 'store'])->name('attendance.store');
+Route::get('/attendance/{clubs}', [AttendanceController::class, 'show'])->name('attendance.show');
+Route::post('/attendance/{clubs}/store', [AttendanceController::class, 'store'])->name('attendance.store');
 // Route to update a student's attendance
 Route::put('/attendance/{studentId}', [AttendanceController::class, 'update'])->name('attendance.update');
 Route::get('/attendance/details/{user_id}/{club_id}', [AttendanceController::class, 'viewDetails'])->name('attendance.viewDetails');
