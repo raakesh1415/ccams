@@ -83,7 +83,7 @@
                                     <p>No clubs available.</p>
                                 @else
                                     @foreach ($clubs as $club)
-                                        <p><strong>Club Name:</strong> {{ $club->club_name ?? 'Not provided' }}</p>
+                                        <p><strong>Club Name:</strong> {{ $clubs->club_name ?? 'Not provided' }}</p>
                                     @endforeach
                                 @endif
                             </div>
