@@ -5,126 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-        body {
-            background-image: url('/images/Background.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin: 0;
-            color: #fff;
-        }
-
-        .header {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            padding: 20px;
-            background-color: rgba(0, 0, 0, 0.7);
-        }
-
-        .header img {
-            width: 250px;
-        }
-
-        .overlay {
-            background-color: rgba(0, 0, 0, 0.5);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            height: 100vh;
-            padding-top: 20px;
-        }
-
-        .signup-card {
-            background-color: rgba(255, 255, 255, 0.9);
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            max-width: 900px;
-            width: 100%;
-        }
-
-        .signup-card h2 {
-            margin-bottom: 1.5rem;
-            font-weight: bold;
-            color: #333;
-            text-align: center;
-        }
-
-        .form-group label {
-            color: #000;
-        }
-
-        .form-control {
-            margin-bottom: 1rem;
-            border-radius: 8px;
-            padding: 5px;
-        }
-
-        .btn-signup {
-            background-color: #f0b429;
-            border: none;
-            color: #fff;
-            padding: 10px;
-            font-size: 1.1rem;
-            width: 100%;
-            border-radius: 8px;
-            transition: background-color 0.3s ease;
-        }
-
-        .btn-signup:hover {
-            background-color: #f0a500;
-        }
-
-        .signup-links {
-            margin-top: 1rem;
-            font-size: 0.9rem;
-            color: #007bff;
-        }
-
-        .signup-links a {
-            color: #007bff;
-        }
-
-        .form-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 30px;
-        }
-
-        .form-column {
-            flex: 1;
-        }
-
-        .separator {
-            margin: 20px 0;
-            border-top: 2px solid #ccc;
-        }
-    </style>
 </head>
-<body>
+<body class="bg-cover bg-center" style="background-image: url('/images/Background.jpg');">
     <!-- Header with Logo at the Top -->
-    <div class="header">
-        <img src="../images/logo-name.png" alt="Logo">
+    <div class="d-flex justify-content-center py-4 bg-dark bg-opacity-75">
+        <img src="../images/logo-name.png" alt="Logo" width="250">
     </div>
 
     <!-- Overlay and Sign-Up Form -->
-    <div class="overlay">
-        <div class="signup-card">
-            <h2>Sign Up</h2>
+    <div class="d-flex justify-content-center align-items-center vh-100">
+        <div class="card p-4" style="max-width: 900px; width: 100%; background-color: rgba(255, 255, 255, 0.9); border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+            <h2 class="text-center font-weight-bold text-dark mb-4">Sign Up</h2>
             <form id="signupForm" method="POST" action="{{ route('signin.store') }}">
                 @csrf
-                
-                <!-- 分为左右两部分 -->
-                <div class="form-row">
-                    <!-- 左边部分：个人信息 -->
-                    <div class="form-column">
+                <div class="row">
+                    <div class="col-md-6">
                         <div class="form-group">
                             <label for="name">Name:</label>
                             <input type="text" id="name" name="name" class="form-control" required>
@@ -147,7 +42,7 @@
                     </div>
 
                     <!-- 右边部分：额外信息 -->
-                    <div class="form-column">
+                    <div class="col-md-6">
                         <div class="form-group">
                             <label for="ic">IC Number:</label>
                             <input type="text" id="ic" name="ic" class="form-control" required>
@@ -239,17 +134,15 @@
                             <option value="5 DA VINCI"></option>
                             <option value="4 AL FIHRI"></option>
                             <option value="5 AL FIHRI"></option>
+
                             </datalist>
                         </div>
                     </div>
                 </div>
-
-                <div class="separator"></div>
-
-                <button type="submit" class="btn btn-signup">Sign Up</button>
+                <button type="submit" class="btn btn-warning w-100 py-2 mt-3">Sign Up</button>
             </form>
-            <div class="signup-links">
-                <a href="/">Already have an account?</a>
+            <div class="text-center mt-3">
+                <a href="/" class="text-primary">Already have an account?</a>
             </div>
         </div>
     </div>
@@ -310,23 +203,22 @@
                 const ic = $(this).val();
                 if (ic && ic.length !== 12) {
                     $('#icFeedback').text('IC number must be exactly 12 characters.');
-                }
-                else{
+                } else {
                     if (ic) {
-                    $.ajax({
-                        url: "{{ route('check.ic') }}", // The route to handle IC validation
-                        method: 'POST',
-                        data: { _token: '{{ csrf_token() }}', ic },
-                        success: function (response) {
-                            if (response.exists) {
-                                $('#icFeedback').text('IC already exists.');
-                            } else {
-                                $('#icFeedback').text('');
+                        $.ajax({
+                            url: "{{ route('check.ic') }}", // The route to handle IC validation
+                            method: 'POST',
+                            data: { _token: '{{ csrf_token() }}', ic },
+                            success: function (response) {
+                                if (response.exists) {
+                                    $('#icFeedback').text('IC already exists.');
+                                } else {
+                                    $('#icFeedback').text('');
+                                }
                             }
-                        }
-                    });
+                        });
+                    }
                 }
-                }       
             });
 
             // Validate password confirmation
