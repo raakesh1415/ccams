@@ -10,10 +10,10 @@
                 <div class="row">
                     <div class="col-md-6">
                         <p><strong>Name:</strong> {{ $user->name }}</p>
-                        <p><strong>IC No:</strong> {{ $user->ic_no }}</p> 
+                        <p><strong>IC No:</strong> {{ $user->ic }}</p> 
                     </div>
                     <div class="col-md-6">
-                        <p><strong>Level:</strong> {{ $user->level }}</p> 
+                        <p><strong>Address:</strong> {{ $user->address }}</p> 
                         <p><strong>Email:</strong> {{ $user->email }}</p>
                     </div>
                     <div class="col-md-6">
