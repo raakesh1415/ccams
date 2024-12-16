@@ -43,28 +43,28 @@
 
         .signup-card {
             background-color: rgba(255, 255, 255, 0.9);
-            padding: 10px;
+            padding: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            max-width: 400px;
+            max-width: 900px;
             width: 100%;
-            text-align: center;
         }
 
         .signup-card h2 {
             margin-bottom: 1.5rem;
             font-weight: bold;
             color: #333;
+            text-align: center;
+        }
+
+        .form-group label {
+            color: #000;
         }
 
         .form-control {
             margin-bottom: 1rem;
             border-radius: 8px;
             padding: 5px;
-        }
-
-        .form-group label {
-            color: #000; /* Set label color to black */
         }
 
         .btn-signup {
@@ -91,6 +91,21 @@
         .signup-links a {
             color: #007bff;
         }
+
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .form-column {
+            flex: 1;
+        }
+
+        .separator {
+            margin: 20px 0;
+            border-top: 2px solid #ccc;
+        }
     </style>
 </head>
 <body>
@@ -102,40 +117,67 @@
     <!-- Overlay and Sign-Up Form -->
     <div class="overlay">
         <div class="signup-card">
-            <h2 class="font-weight-bold mb-4">Sign Up</h2>
+            <h2>Sign Up</h2>
             <form id="signupForm" method="POST" action="{{ route('signin.store') }}">
                 @csrf
-                <div class="form-group">
-                    <label for="name">Name:</label>
-                    <input type="text" id="name" name="name" class="form-control" required>
-                    <small id="nameFeedback" class="form-text text-danger"></small>
+                
+                <!-- 分为左右两部分 -->
+                <div class="form-row">
+                    <!-- 左边部分：个人信息 -->
+                    <div class="form-column">
+                        <div class="form-group">
+                            <label for="name">Name:</label>
+                            <input type="text" id="name" name="name" class="form-control" required>
+                            <small id="nameFeedback" class="form-text text-danger"></small>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" name="email" class="form-control" required>
+                            <small id="emailFeedback" class="form-text text-danger"></small>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password:</label>
+                            <input type="password" id="password" name="password" class="form-control" required>
+                            <small id="passwordFeedback" class="form-text text-warning"></small>
+                        </div>
+                        <div class="form-group">
+                            <label for="password_confirmation">Confirm Password:</label>
+                            <input type="password" id="password_confirmation" name="password_confirmation" class="form-control" required>
+                        </div>
+                    </div>
+
+                    <!-- 右边部分：额外信息 -->
+                    <div class="form-column">
+                        <div class="form-group">
+                            <label for="ic">IC Number:</label>
+                            <input type="text" id="ic" name="ic" class="form-control" required>
+                            <small id="icFeedback" class="form-text text-danger"></small>
+                        </div>
+                        <div class="form-group">
+                            <label for="role">You are:</label>
+                            <select id="role" name="role" class="form-control" required>
+                                <option value="student">Student</option>
+                                <option value="teacher">Teacher</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="class">Please choose your class:</label>
+                            <input list="classes" id="class" name="class" class="form-control" placeholder="Type or select your Class" required>
+                            <datalist id="classes">
+                                <option value="1 AL ABQARIY"></option>
+                                <option value="2 AL ABQARIY"></option>
+                                <option value="3 AL ABQARIY"></option>
+                                <option value="1 ASTER"></option>
+                                <option value="2 ASTER"></option>
+                                <option value="3 ASTER"></option>
+                                <!-- 添加更多班级 -->
+                            </datalist>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" class="form-control" required>
-                    <small id="emailFeedback" class="form-text text-danger"></small>
-                </div>
-                <div class="form-group">
-                    <label for="password">Password:</label>
-                    <input type="password" id="password" name="password" class="form-control" required>
-                    <small id="passwordFeedback" class="form-text text-warning"></small>
-                </div>
-                <div class="form-group">
-                    <label for="password_confirmation">Confirm Password:</label>
-                    <input type="password" id="password_confirmation" name="password_confirmation" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label for="ic">IC Number:</label>
-                    <input type="text" id="ic" name="ic" class="form-control" required>
-                    <small id="icFeedback" class="form-text text-danger"></small>
-                </div>
-                <div class="form-group">
-                    <label for="role">You are:</label>
-                    <select id="role" name="role" class="form-control" required>
-                        <option value="student">Student</option>
-                        <option value="teacher">Teacher</option>
-                    </select>
-                </div>
+
+                <div class="separator"></div>
+
                 <button type="submit" class="btn btn-signup">Sign Up</button>
             </form>
             <div class="signup-links">
@@ -218,6 +260,7 @@
                 }
                 }       
             });
+
             // Validate password confirmation
             $('#signupForm').on('submit', function (e) {
                 const password = $('#password').val();
