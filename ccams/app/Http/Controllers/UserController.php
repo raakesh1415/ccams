@@ -213,6 +213,7 @@ class UserController extends Controller
         return view('profile.index', compact('user', 'activities', 'clubs'));
 
     }
+    
 
 // Update the profile
 public function editprofile(Request $request)
@@ -231,9 +232,10 @@ public function editprofile(Request $request)
 
     // Get the current authenticated user
     $user = Auth::user();
-
-    // Handle profile picture upload (if present)
     if ($request->hasFile('profile_pic')) {
+        if ($user->profile_pic) {
+            Storage::delete('public/' . $user->profile_pic);
+        }
         $profilePicPath = $request->file('profile_pic')->store('public/profiles');
         $user->profile_pic = basename($profilePicPath); // Save the filename to the database
     }
