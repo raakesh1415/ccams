@@ -26,7 +26,8 @@ class User extends Authenticatable
         // 'level',
         // 'dob',
         'role', // 'student' or 'teacher'
-        'peofile_pic'
+        'peofile_pic',
+        'class'
     ];
 
     /**
