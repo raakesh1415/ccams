@@ -26,7 +26,7 @@ class RegistrationController extends Controller
 
     public function beruniformIndex()
     {
-        $beruniform = Club::where('club_category', 'UnitBeruniform')->get();
+        $beruniform = Club::where('club_category', 'Unit Beruniform')->get();
         return view('registration.beruniform', compact('beruniform'));
     }
 
