@@ -6,7 +6,9 @@
         <h2 class="text-left"><b>Your Registered Club</b></h2>
 
         @if ($registrations->isEmpty())
-            <div class="alert alert-danger">You have not registered for any clubs yet.</div>
+            <div class="text-center">
+                <p><b>No clubs are registered.<b></p>
+            </div>
         @else
             <div class="row">
                 @foreach ($registrations as $registration)

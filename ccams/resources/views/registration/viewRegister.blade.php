@@ -22,7 +22,7 @@
         <!-- Check if there are any registrations -->
         @if ($registrations->isEmpty())
             <div class="text-center">
-                <p>No clubs are are registered.</p>
+                <p><b>No clubs are registered.<b></p>
             </div>
         @else
             <!-- Registered Clubs View -->

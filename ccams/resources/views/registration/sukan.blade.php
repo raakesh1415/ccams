@@ -15,7 +15,7 @@
         <div class="row mt-4">
             @if ($sukan->isEmpty())
                 <div class="text-center">
-                    <p>No clubs are available for registration at the moment.</p>
+                    <p><b>No clubs are available for registration at the moment.<b></p>
                 </div>
             @else
                 @foreach ($sukan as $club)
