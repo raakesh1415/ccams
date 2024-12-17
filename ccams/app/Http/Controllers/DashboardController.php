@@ -13,10 +13,10 @@ class DashboardController extends Controller
     public function showUserSummary()
     {
         // Retrieve registrations for the user
-        $registrations = Registration::with('club')->where('user_id', 1)->get();
+        $registrations = Registration::with('club')->where('user_id', Auth::id())->get();
         
         // Retrieve user details
-        $user = User::findOrFail(1); // Replace 1 with the actual user ID or use auth()->id()
+        $user = User::findOrFail(Auth::id());
         
         // Pass both registrations and user details to the view
         return view('dashboard.index', [

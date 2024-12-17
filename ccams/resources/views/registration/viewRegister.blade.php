@@ -52,7 +52,7 @@
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger" title="Unregister"
                                         style="font-size: 1.2rem; padding: 0.4rem 0.6rem;"
-                                        onclick="return confirm('Are you sure you want to unregister from this club?');">
+                                        onclick="return confirm('Adakah anda pasti mahu membatalkan pendaftaran daripada kelab ini?');">
                                         <i class="fas fa-trash-alt"></i>
                                     </button>
                                 </form>

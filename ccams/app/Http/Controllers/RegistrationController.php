@@ -32,8 +32,7 @@ class RegistrationController extends Controller
 
     public function register(Request $request, $clubId, $clubType)
     {
-        //$userId = Auth::id();
-        $userId = 1;
+        $userId = Auth::id();
 
         // Fetch the club to check its capacity
         $club = Club::find($clubId);
@@ -62,13 +61,12 @@ class RegistrationController extends Controller
             'club_type' => $clubType,
         ]);
 
-        return redirect()->back()->with('success', 'Berjaya mendaftar ke kelab ini.');
+        return redirect()->back()->with('success', 'Berjaya mendaftar ke ' . $club->club_name .'.');
     }
 
     public function viewRegister()
     {
-        // Assuming Auth::id() gets the authenticated user's ID
-        $userId = 1;
+        $userId = Auth::id();
 
         // Fetch all registered clubs for the user
         $registrations = Registration::where('user_id', $userId)->with('club')->get();
@@ -82,7 +80,7 @@ class RegistrationController extends Controller
     
         if ($registration) {
             $registration->delete();
-            return redirect()->back()->with('success', 'Berjaya dibatalkan pendaftaran daripada kelab ini.');
+            return redirect()->back()->with('success', 'Berjaya dibatalkan pendaftaran daripada ' . $registration->club->club_name . '.');
         }
     
         return redirect()->back()->with('error', 'Pendaftaran tidak ditemui.');
