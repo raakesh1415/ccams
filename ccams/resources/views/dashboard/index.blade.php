@@ -15,7 +15,7 @@
 
                     <div class="card-body">
                         <!-- Class Name -->
-                        <h4 class="card-title text-center">{{ $user->class }}</h4>
+                        <h4 class="card-title text-center">{{ $user->classroom }}</h4>
 
                         <!-- Class Registered Status -->
                         <div class="text-center mb-1 p-1">
