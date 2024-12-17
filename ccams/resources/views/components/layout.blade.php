@@ -26,12 +26,6 @@
         <!-- Sidebar Toggle-->
         <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i
                 class="fas fa-bars sb-sidenav-light"></i></button>
-        <!-- Navbar Search-->
-        <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-            <div class="input-group">
-                {{-- <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-                    <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button> --}}
-            </div>
         </form>
         <!-- Navbar-->
         <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
@@ -61,42 +55,58 @@
                             <div class="sb-nav-link-icon"><i class="fas fa-th-large"></i></div>
                             Papan Pemuka
                         </a>
-                        <a class="nav-link {{ request()->is('club') ? 'active' : '' }}" href="/club">
-                            <div class="sb-nav-link-icon"><i class="fas fa-university"></i></div>
-                            Kelab
-                        </a>
+
+                        @if (Auth::user()->role === 'teacher')
+                            <a class="nav-link {{ request()->is('club') ? 'active' : '' }}" href="/club">
+                                <div class="sb-nav-link-icon"><i class="fas fa-university"></i></div>
+                                Kelab
+                            </a>
+                        @endif
+
                         <!-- Dropdown for Registration -->
-                        <!-- request()->is() checks are testing if the current URL matches any of url listed -->
-                        <a class="nav-link collapsed {{ request()->is('registration') || request()->is('registration/viewRegister') ? 'active' : '' }}"
-                            href="#" data-bs-toggle="collapse" data-bs-target="#registrationCollapse"
-                            aria-expanded="false" aria-controls="registrationCollapse">
-                            <div class="sb-nav-link-icon"><i class="fas fa-clipboard-list"></i></div>
-                            Pendaftaran
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse {{ request()->is('registration') || request()->is('registration/viewRegister') ? 'show' : '' }}"
-                            id="registrationCollapse" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link {{ request()->is('registration/register') ? 'active' : '' }}"
-                                    href="{{ route('registration.index') }}"><i class="fas fa-edit"></i>
-                                    Kelab Pendaftaran</a>
-                                <a class="nav-link {{ request()->is('registration/view') ? 'active' : '' }}"
-                                    href="{{ route('registration.viewRegister') }}"><i class="fas fa-eye"></i>Melihat
-                                    Pendaftaran</a>
-                            </nav>
-                        </div>
-                        <a class="nav-link {{ request()->is('activities') ? 'active' : '' }}" href="/activities">
-                            <div class="sb-nav-link-icon"><i class="fas fa-tasks"></i></div>
-                            Aktiviti
-                        </a>
-                        <a class="nav-link {{ request()->is('attendance') ? 'active' : '' }}" href="/attendance">
-                            <div class="sb-nav-link-icon"><i class="fas fa-user-check"></i></div>
-                            Kehadiran
-                        </a>
-                        <a class="nav-link {{ request()->is('assessment') ? 'active' : '' }}" href="/assessment">
-                            <div class="sb-nav-link-icon"><i class="fas fa-clipboard-list"></i></div>
-                            Penilaian
-                        </a>
+                        @if (Auth::user()->role === 'student')
+                            <a class="nav-link collapsed {{ request()->is('registration') || request()->is('registration/viewRegister') ? 'active' : '' }}"
+                                href="#" data-bs-toggle="collapse" data-bs-target="#registrationCollapse"
+                                aria-expanded="false" aria-controls="registrationCollapse">
+                                <div class="sb-nav-link-icon"><i class="fas fa-clipboard-list"></i></div>
+                                Pendaftaran
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse {{ request()->is('registration') || request()->is('registration/viewRegister') ? 'show' : '' }}"
+                                id="registrationCollapse" aria-labelledby="headingOne"
+                                data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link {{ request()->is('registration/register') ? 'active' : '' }}"
+                                        href="{{ route('registration.index') }}"><i class="fas fa-edit"></i>
+                                        Kelab Pendaftaran</a>
+                                    <a class="nav-link {{ request()->is('registration/view') ? 'active' : '' }}"
+                                        href="{{ route('registration.viewRegister') }}"><i
+                                            class="fas fa-eye"></i>Melihat
+                                        Pendaftaran</a>
+                                </nav>
+                            </div>
+                        @endif
+
+                        @if (Auth::user()->role === 'teacher')
+                            <a class="nav-link {{ request()->is('activities') ? 'active' : '' }}" href="/activities">
+                                <div class="sb-nav-link-icon"><i class="fas fa-tasks"></i></div>
+                                Aktiviti
+                            </a>
+                        @endif
+
+                        @if (Auth::user()->role === 'teacher')
+                            <a class="nav-link {{ request()->is('attendance') ? 'active' : '' }}" href="/attendance">
+                                <div class="sb-nav-link-icon"><i class="fas fa-user-check"></i></div>
+                                Kehadiran
+                            </a>
+                        @endif
+
+                        @if (Auth::user()->role === 'teacher')
+                            <a class="nav-link {{ request()->is('assessment') ? 'active' : '' }}" href="/assessment">
+                                <div class="sb-nav-link-icon"><i class="fas fa-clipboard-list"></i></div>
+                                Penilaian
+                            </a>
+                        @endif
                     </div>
                 </div>
             </nav>
