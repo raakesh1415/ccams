@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Club;
 use App\Models\Registration;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class AutoAssignClub extends Command
 {
@@ -61,7 +62,7 @@ class AutoAssignClub extends Command
                 $club = $clubs->random();
 
                 Registration::create([
-                    'user_id' => $student->id,
+                    'user_id' => Auth::id(),
                     'club_id' => $club->id,
                 ]);
 

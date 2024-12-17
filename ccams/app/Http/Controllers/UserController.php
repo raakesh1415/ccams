@@ -22,10 +22,9 @@ class UserController extends Controller
             'password' => 'required|min:8',
             'ic' => 'required|string|max:12',
             'role' => 'required|string|in:student,teacher', // Ensure role is either student or teacher
-            'class'=> 'required|string|max:255'
+            'classroom'=> 'required|string|max:255'
         ]);
         
-
         // Create and save the user to the database with a hashed password
         User::create([
             'name' => $validatedData['name'],
@@ -33,27 +32,29 @@ class UserController extends Controller
             'password' => Hash::make($validatedData['password']), // Hash the password
             'ic' => $validatedData['ic'],
             'role' => $validatedData['role'],
-            'class' => $validatedData['class'],
+            'classroom' => $validatedData['classroom'],
         ]);
 
         return redirect()->route('login.index')->with('success', 'Sign up successfully');
     }
+
     public function checkEmail(Request $request)
     {
         $exists = User::where('email', $request->email)->exists();
         return response()->json(['exists' => $exists]);
     }
+
     public function checkName(Request $request)
     {
         $exists = User::where('name', $request->name)->exists();
         return response()->json(['exists' => $exists]);
     }
+
     public function checkIC(Request $request)
     {
         $exists = User::where('ic', $request->ic)->exists();
         return response()->json(['exists' => $exists]);
     }      
-
 
     public function create()
     {
@@ -89,7 +90,6 @@ class UserController extends Controller
         return $this->redirectToDashboard($user);
     }
     
-
     private function redirectToDashboard(User $user)
     {
         $routes = [
@@ -102,18 +102,13 @@ class UserController extends Controller
             : redirect()->route('login.index')->with('error', 'Invalid user role!');
     }
 
-
-
-
     public function logout(): RedirectResponse
     {
-        auth()->logout(); 
         return redirect()->route('login'); 
     }
 
-
     public function index()
-{
+    {
     $users = User::all(); 
     foreach ($users as $user) {
         $user->last_login_at = Carbon::parse($user->last_login_at)->format('Y-m-d H:i:s');
@@ -121,9 +116,7 @@ class UserController extends Controller
     $activities = Activity::all();
     $clubs = Club::all();
     return view('profile.list', compact('users', 'activities', 'clubs'));
-}
-
-
+    }
 
     public function show(int $id)
     {
@@ -135,7 +128,6 @@ class UserController extends Controller
         $user = User::findOrFail($id); 
         return view('users.edit', compact('user')); 
     }
-
 
     public function update(Request $request, int $id)
     {
@@ -156,7 +148,6 @@ class UserController extends Controller
         return redirect()->route('login.index')->with('success', 'successful saved');
     }
 
-
     public function destroy(int $id)
     {
         $user = User::findOrFail($id);
@@ -164,9 +155,7 @@ class UserController extends Controller
         return redirect()->route('users.index')->with('success', '用户删除成功');
     }
 
-
-
-    //reset password
+    // Reset password
     public function resetPassword(Request $request)
     {
         // Validate the incoming data
@@ -189,6 +178,7 @@ class UserController extends Controller
         // Redirect to the login page or display success
         return redirect()->route('login.index')->with('success', 'Password has been reset successfully!');
     }
+
     public function checkEmailAndICMatch(Request $request)
     {
         $email = $request->input('email');
@@ -202,12 +192,9 @@ class UserController extends Controller
         }
     }
 
-
-
-    //profile:
+    // Profile
     public function showprofile()
     {
-
         $user = Auth::user();
         $user->last_login_at = Carbon::parse($user->last_login_at)->format('Y-m-d H:i:s');
 
@@ -215,14 +202,11 @@ class UserController extends Controller
         $clubs = $user->clubs; 
 
         return view('profile.index', compact('user', 'activities', 'clubs'));
-    }
+    }    
 
-
-    
-
-// Update the profile
-public function editprofile(Request $request)
-{
+    // Update the profile
+    public function editprofile(Request $request)
+    {
     // Validation for new fields (address, city, etc.)
     $request->validate([
         'address' => 'nullable|string',
@@ -271,5 +255,5 @@ public function editprofile(Request $request)
     $user->save();
 
     return redirect()->route('profile.index')->with('success', 'Profile updated successfully');
-}
+    }
 }

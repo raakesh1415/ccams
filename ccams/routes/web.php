@@ -35,7 +35,7 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/attendance/{studentId}', [AttendanceController::class, 'update'])->name('attendance.update');
     Route::get('/attendance/details/{user_id}/{club_id}', [AttendanceController::class, 'viewDetails'])->name('attendance.viewDetails');
     
-    // Activities
+    // Activity
     Route::get('/activities', [ActivityController::class, 'index'])->name('activities.index');
     Route::get('/activities/create', [ActivityController::class, 'create'])->name('activities.create');
     Route::post('/activities', [ActivityController::class, 'store'])->name('activities.store');
@@ -88,5 +88,3 @@ Route::post('/check-email', [UserController::class, 'checkEmail'])->name('check.
 Route::post('/check-name', [UserController::class, 'checkName'])->name('check.name');
 Route::post('/check-ic', [UserController::class, 'checkIC'])->name('check.ic');
 Route::post('/check/email/ic/match', [UserController::class, 'checkEmailAndICMatch'])->name('check.email.ic.match');
-
-
