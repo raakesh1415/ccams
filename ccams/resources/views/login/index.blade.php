@@ -64,7 +64,7 @@
                 <div class="col-12 col-md-6 col-lg-5 d-flex justify-content-center">
                     <div class="card">
                         <div class="card-body">
-                            <h2 class="card-title text-center mb-4">Login</h2>
+                            <h2 class="card-title text-center mb-4">LOG MASUK</h2>
 
                             <!-- Laravel Blade Templating for Messages -->
                             @if (session('success'))
@@ -90,7 +90,7 @@
                                 <div class="mb-3">
                                     <input type="email" id="email" name="email"
                                         class="form-control form-control-lg @error('email') is-invalid @enderror"
-                                        placeholder="Email" value="{{ old('email') }}" required>
+                                        placeholder="E-MEL" value="{{ old('email') }}" required>
                                     @error('email')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -98,20 +98,20 @@
                                 <div class="mb-3">
                                     <input type="password" id="password" name="password"
                                         class="form-control form-control-lg @error('password') is-invalid @enderror"
-                                        placeholder="Password" required>
+                                        placeholder="KATA LALUAN" required>
                                     @error('password')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="d-grid mb-3">
-                                    <button type="submit" class="btn btn-custom btn-lg">LOG IN</button>
+                                    <button type="submit" class="btn btn-custom btn-lg">LOGMASUK</button>
                                 </div>
                             </form><br>
 
                             <div class="text-center">
-                                <a href="{{ route('login.reset') }}" class="text-decoration-none me-3">Forgot
-                                    password?</a>
-                                <a href="{{ route('login.signin') }}" class="text-decoration-none">Create an account</a>
+                                <a href="{{ route('login.reset') }}" class="text-decoration-none me-3">Lupa
+                                    Kata laluan?</a>
+                                <a href="{{ route('login.signin') }}" class="text-decoration-none">Buka akaun?</a>
                             </div>
                         </div>
                     </div>

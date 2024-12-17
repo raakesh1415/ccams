@@ -10,10 +10,12 @@ use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
 
-
+//Root Page
 Route::get('/', [UserController::class, 'showLoginForm'])->name('login'); 
+
 Route::middleware(['auth'])->group(function () {
-    //dashboard
+
+    //Dashboard
     Route::get('/dashboard', [DashboardController::class, 'showUserSummary'])->name('dashboard.index');
 
     // Assessment
@@ -27,18 +29,12 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('assessment/{assessment_id}', [AssessmentController::class, 'destroy'])->name('assessment.destroy');
     Route::get('assessment/{assessment_id}/view', [AssessmentController::class, 'show'])->name('assessment.show');
     
-    
-    //Students
-    //Route::resource('students', StudentController::class);
-    
     // Attendance
     Route::get('/attendance', [AttendanceController::class, 'index'])->name('attendance.index');
     Route::get('/attendance/{clubs}', [AttendanceController::class, 'show'])->name('attendance.show');
     Route::post('/attendance/{clubs}/store', [AttendanceController::class, 'store'])->name('attendance.store');
-    // Route to update a student's attendance
     Route::put('/attendance/{studentId}', [AttendanceController::class, 'update'])->name('attendance.update');
     Route::get('/attendance/details/{user_id}/{club_id}', [AttendanceController::class, 'viewDetails'])->name('attendance.viewDetails');
-    
     
     // Activities
     Route::get('/activities', [ActivityController::class, 'index'])->name('activities.index');
@@ -47,8 +43,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/activities/{activity:activity_id}/edit', [ActivityController::class, 'edit'])->name('activities.edit');
     Route::put('/activities/{activity:activity_id}', [ActivityController::class, 'update'])->name('activities.update');
     Route::delete('/activities/{activity:activity_id}', [ActivityController::class, 'destroy'])->name('activities.destroy');
-    
-    
     
     // Club 
     Route::get('/club/kelab', [ClubController::class, 'showKelabClubs'])->name('club.kelab');
@@ -60,67 +54,36 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/club/{club_id}/edit', [ClubController::class, 'edit'])->name('club.edit');
     Route::post('/club', [ClubController::class, 'store'])->name('club.store');
     Route::put('/club/{club_id}', [ClubController::class, 'update'])->name('club.update');
-    
-    
-    
-    
-    Route::get('/club', function () {
-        return view('club.index');
-    })->name('club.index');
-    
-    Route::get('/club/add', function () { 
-        return view('club.create'); })->name('club.create');
+    Route::get('/club', function () {return view('club.index');})->name('club.index');
+    Route::get('/club/add', function () { return view('club.create'); })->name('club.create');
     
     // Registration
-    Route::get('/registration', function (){
-        return view('registration.index');
-    })->name('registration.index');
-    
-    Route::get('/registration/persatuan', [RegistrationController::class, 'persatuanIndex'])
-        ->name('registration.persatuan');
-    
-    Route::get('/registration/permainan', [RegistrationController::class, 'permainanIndex'])
-        ->name('registration.permainan');
-    
-    Route::get('/registration/beruniform', [RegistrationController::class, 'beruniformIndex'])
-        ->name('registration.beruniform');
-    
-    Route::post('/registration/{clubId}/{clubType}', [RegistrationController::class, 'register'])
-        ->name('registration.register');
-    
-    Route::get('/registration/viewRegister', [RegistrationController::class, 'viewRegister'])
-        ->name('registration.viewRegister');
-    
-    Route::delete('/registration/{registrationId}', [RegistrationController::class, 'unregister'])
-        ->name('registration.unregister');
+    Route::get('/registration', function (){return view('registration.index');})->name('registration.index');
+    Route::get('/registration/persatuan', [RegistrationController::class, 'persatuanIndex'])->name('registration.persatuan');
+    Route::get('/registration/permainan', [RegistrationController::class, 'permainanIndex'])->name('registration.permainan');
+    Route::get('/registration/beruniform', [RegistrationController::class, 'beruniformIndex'])->name('registration.beruniform');
+    Route::post('/registration/{clubId}/{clubType}', [RegistrationController::class, 'register'])->name('registration.register');
+    Route::get('/registration/viewRegister', [RegistrationController::class, 'viewRegister'])->name('registration.viewRegister');
+    Route::delete('/registration/{registrationId}', [RegistrationController::class, 'unregister'])->name('registration.unregister');
     
     // Profile 
-    // Route::get('/profile', function () {
-    //     return view('profile.index');
-    // })->name('profile.index');
-    Route::get('/profile/edit', function () {
-        return view('profile.edit');
-    })->name('profile.edit');
-    
+    Route::get('/profile/edit', function () {return view('profile.edit');})->name('profile.edit');
     Route::get('/profile', [UserController::class, 'showprofile'])->name('profile.index');
     Route::post('/profile/edit', [UserController::class, 'editprofile'])->name('profile.edit');
-
-    //view profile by list
+    //View profile by list
     Route::get('users', [UserController::class, 'index'])->name('users.list');
     Route::get('users/{id}', [UserController::class, 'show'])->name('users.show');
-    
 });
-// login
+
+// Login
 Route::get('/login', [UserController::class, 'showLoginForm'])->name('login.index');
 Route::post('/login', [UserController::class, 'login'])->name('login.submit'); // 
 Route::get('/login', [UserController::class, 'logout'])->name('logout'); // 
 Route::get('/login/signin', [UserController::class, 'create'])->name('login.signin');
 Route::post('/login/signin', [UserController::class, 'store'])->name('signin.store');
 
-//reset password
-Route::get('/login/reset', function () {
-    return view('login/reset');
-})->name('login.reset');
+//Reset password
+Route::get('/login/reset', function () {return view('login/reset');})->name('login.reset');
 Route::post('/reset-password', [UserController::class, 'resetPassword'])->name('login.resetp');
 Route::post('/check-email', [UserController::class, 'checkEmail'])->name('check.email');
 Route::post('/check-name', [UserController::class, 'checkName'])->name('check.name');

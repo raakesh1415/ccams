@@ -60,7 +60,7 @@
                             Papan Pemuka
                         </a>
 
-                        @if (Auth::user()->role === 'student')
+                        @if (Auth::user()->role === 'teacher')
                             <a class="nav-link {{ request()->is('club') ? 'active' : '' }}" href="/club">
                                 <div class="sb-nav-link-icon"><i class="fas fa-university"></i></div>
                                 Kelab
