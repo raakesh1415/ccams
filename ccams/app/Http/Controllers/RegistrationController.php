@@ -39,20 +39,20 @@ class RegistrationController extends Controller
         $club = Club::find($clubId);
 
         if (!$club) {
-            return redirect()->back()->with('error', 'Club not found.');
+            return redirect()->back()->with('error', 'Kelab tidak ditemui.');
         }
 
         // Check if the club is already at capacity
         $currentRegistrations = Registration::where('club_id', $clubId)->count();
         if ($currentRegistrations >= $club->participant_total) {
-            return redirect()->back()->with('error', 'Registration failed: Club capacity reached.');
+            return redirect()->back()->with('error', 'Pendaftaran gagal: Kapasiti kelab dicapai.');
         }
 
         //Check if user is already registerd for this club type
         $existingRegistration = Registration::where('user_id', $userId)->where('club_type', $clubType)->first();
 
         if ($existingRegistration) {
-            return redirect()->back()->with('error', 'You have already registered for ' . $clubType);
+            return redirect()->back()->with('error', 'Anda telah mendaftar untuk ' . $clubType . ' .');
         }
 
         //Register student to club
@@ -62,7 +62,7 @@ class RegistrationController extends Controller
             'club_type' => $clubType,
         ]);
 
-        return redirect()->back()->with('success', 'Successfully registered for this club');
+        return redirect()->back()->with('success', 'Berjaya mendaftar ke kelab ini.');
     }
 
     public function viewRegister()
@@ -82,10 +82,10 @@ class RegistrationController extends Controller
     
         if ($registration) {
             $registration->delete();
-            return redirect()->back()->with('success', 'Successfully unregistered from this club');
+            return redirect()->back()->with('success', 'Berjaya dibatalkan pendaftaran daripada kelab ini.');
         }
     
-        return redirect()->back()->with('error', 'Registration not found.');
+        return redirect()->back()->with('error', 'Pendaftaran tidak ditemui.');
     }
     
 }

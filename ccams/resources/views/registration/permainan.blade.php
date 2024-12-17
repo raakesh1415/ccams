@@ -41,7 +41,7 @@
                                                 method="POST">
                                                 @csrf
                                                 <button type="submit" class="btn btn-dark" title="Register"
-                                                    onclick="return confirm('Are you sure you want to register for this club?');">
+                                                    onclick="return confirm('Adakah anda pasti mahu mendaftar untuk kelab ini?');">
                                                     Mendaftar
                                                 </button>
                                             </form>
