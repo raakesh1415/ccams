@@ -1,7 +1,7 @@
 <x-layout>
     <div class="text-center pt-3 pb-4">
-        <h2>Attendance for {{ $club->club_name }}</h2>
-        <h4>Week 1 to Week 12</h4>
+        <h2>Kedatangan untuk {{ $club->club_name }}</h2>
+        <h4>Minggu {{ $startWeek }} to Minggu {{ $endWeek }}</h4>
 
         <!-- Success Message Modal -->
         @if(session('success'))
@@ -24,88 +24,108 @@
             </div>
         @endif
 
+        <!-- Attendance Filter Form -->
+        <div class="mb-4">
+            <form action="{{ route('attendance.show', ['clubs' => $club->club_id]) }}" method="GET" class="row g-3 align-items-center">
+                <div class="col-auto">
+                    <label for="start_week" class="form-label">Minggu Mula:</label>
+                    <select name="start_week" id="start_week" class="form-select">
+                        @for ($i = 1; $i <= 12; $i++)
+                            <option value="{{ $i }}" {{ $i == $startWeek ? 'selected' : '' }}>Minggu {{ $i }}</option>
+                        @endfor
+                    </select>
+                </div>
+                <div class="col-auto">
+                    <label for="end_week" class="form-label">Minggu Akhir:</label>
+                    <select name="end_week" id="end_week" class="form-select">
+                        @for ($i = 1; $i <= 12; $i++)
+                            <option value="{{ $i }}" {{ $i == $endWeek ? 'selected' : '' }}>Minggu {{ $i }}</option>
+                        @endfor
+                    </select>
+                </div>
+                <div class="col-auto mt-5">
+                    <button type="submit" class="btn btn-primary">Tapis</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Attendance Table -->
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Student Name</th>
-                    @for ($i = 1; $i <= 12; $i++)
-                        <th>Week {{ $i }}</th>
+                    <th>Nama Pelajar</th>
+                    <th>No. IC</th>
+                    @for ($week = $startWeek; $week <= $endWeek; $week++)
+                        <th>Week {{ $week }}</th>
                     @endfor
-                    <th>Update</th> 
-                    <th>View Details</th> <!-- Add Update column -->
+                    <th>Kemaskini</th> 
+                    <th>Lihat Butiran</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($students as $student)
                     <tr>
                         <td>{{ $student->name }}</td>
-                        @for ($week = 1; $week <= 12; $week++)
+                        <td>{{ $student->ic }}</td>
+                        @for ($week = $startWeek; $week <= $endWeek; $week++)
                             <td>
                                 @php
-                                    // Get the attendance status for the current user and week
                                     $attendance = $student->attendances->where('week_number', $week)->first();
                                     $status = $attendance ? $attendance->status : 'N/A';
                                 @endphp
-                                @if($status == 'N/A')
-                                    <span class="badge bg-secondary">{{ $status }}</span>
-                                @else
-                                    <span class="badge 
-                                        @if($status == 'Present') bg-success 
-                                        @elseif($status == 'Absent') bg-danger 
-                                        @else bg-warning @endif">
-                                        {{ $status }}
-                                    </span>
-                                @endif
+                                <span class="badge {{ 
+                                    $status == 'Present' ? 'bg-success' : 
+                                    ($status == 'Absent' ? 'bg-danger' : 
+                                    ($status == 'Excused' ? 'bg-warning' : 'bg-secondary')) 
+                                }}">
+                                    {{ $status }}
+                                </span>
                             </td>
                         @endfor
                         <td>
-                            <!-- Button to open the modal to update attendance for this student -->
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updateAttendanceModal{{ $student->id }}">
-                                Update
+                                Kemaskini
                             </button>
                         </td>
                         <td>
                             <a href="{{ route('attendance.viewDetails', ['user_id' => $student->id, 'club_id' => $club->club_id]) }}" class="btn btn-info">
-                                View Details
+                                Lihat Butiran
                             </a>
                         </td>
                     </tr>
 
-                    <!-- Modal for updating attendance of this student -->
+                    <!-- Modal for updating attendance -->
                     <div class="modal fade" id="updateAttendanceModal{{ $student->id }}" tabindex="-1" aria-labelledby="updateAttendanceModalLabel{{ $student->id }}" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="updateAttendanceModalLabel{{ $student->id }}">Update Attendance for {{ $student->name }}</h5>
+                                    <h5 class="modal-title" id="updateAttendanceModalLabel{{ $student->id }}">Kemaskini Kedatangan untuk {{ $student->name }}</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                @php
-                                    $max_week = 12; // Adjust as necessary.
-                                @endphp
+                                    <form action="{{ route('attendance.update', ['studentId' => $student->id]) }}" method="POST">
+                                        @csrf
+                                        @method('PUT')
+                                        <input type="hidden" name="club_id" value="{{ $club->club_id }}">
 
-                                <form action="{{ route('attendance.update', ['studentId' => $student->id]) }}" method="POST">
-                                    @csrf
-                                    @method('PUT') <!-- Ensure PUT method is used for updating -->
-                                    <input type="hidden" name="club_id" value="{{ $club->club_id }}">
+                                        @for ($week = $startWeek; $week <= $endWeek; $week++)
+                                            <div class="mb-3">
+                                                <label for="week_{{ $week }}">Week {{ $week }}</label>
+                                                @php
+                                                    $attendance = $student->attendances->where('week_number', $week)->first();
+                                                    $status = $attendance ? $attendance->status : null;
+                                                @endphp
+                                                <select name="attendance[{{ $week }}][status]" id="week_{{ $week }}" class="form-select">
+                                                    <option value="" {{ is_null($status) ? 'selected' : '' }}>- Select Status -</option>
+                                                    <option value="Present" {{ $status == 'Present' ? 'selected' : '' }}>✅ Present</option>
+                                                    <option value="Absent" {{ $status == 'Absent' ? 'selected' : '' }}>❌ Absent</option>
+                                                    <option value="Excused" {{ $status == 'Excused' ? 'selected' : '' }}>🟡 Excused</option>
+                                                </select>
+                                            </div>
+                                        @endfor
 
-                                    @for ($week = 1; $week <= $max_week; $week++)
-                                        <div class="mb-3">
-                                            <label for="week_{{ $week }}">Week {{ $week }}</label>
-                                            @php
-                                                $attendance = $student->attendances->where('week_number', $week)->first();
-                                                $status = $attendance ? $attendance->status : null; // Set to null if no attendance record
-                                            @endphp
-                                            <select name="attendance[{{ $week }}][status]" id="week_{{ $week }}" class="form-select">
-                                                <option value="" {{ is_null($status) ? 'selected' : '' }}>- Select Status -</option>
-                                                <option value="Present" {{ $status == 'Present' ? 'selected' : '' }}>✅ Present</option>
-                                                <option value="Absent" {{ $status == 'Absent' ? 'selected' : '' }}>❌ Absent</option>
-                                                <option value="Excused" {{ $status == 'Excused' ? 'selected' : '' }}>🟡 Excused</option>
-                                            </select>
-                                        </div>
-                                    @endfor
-                                    <button type="submit" class="btn btn-primary">Save Attendance</button>
-                                </form>
+                                        <button type="submit" class="btn btn-primary">Save Attendance</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -115,7 +135,7 @@
         </table>
     </div>
 
-    <!-- JavaScript to automatically show the modal if there's a success message -->
+    <!-- Success Modal Trigger -->
     @if(session('success'))
         <script>
             document.addEventListener('DOMContentLoaded', function () {

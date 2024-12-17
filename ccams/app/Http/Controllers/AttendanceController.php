@@ -20,29 +20,25 @@ class AttendanceController extends Controller
     }
 
     // Show attendance for a specific club
-    public function show($clubId)
+    public function show(Request $request, $clubId)
     {
-        // Fetch the club with the given ID
         $club = Club::findOrFail($clubId);
 
-        // Fetch students with their attendance records for the specified club
+        // Set default weeks to 1 and 12 if no filter is applied
+        $startWeek = $request->input('start_week', 1);
+        $endWeek = $request->input('end_week', 12);
+
+        // Fetch students and their attendances for the selected weeks only
         $students = User::where('role', 'student')
-            ->with(['attendances' => function ($query) use ($clubId) {
-                $query->where('club_id', $clubId);
+            ->with(['attendances' => function ($query) use ($clubId, $startWeek, $endWeek) {
+                $query->where('club_id', $clubId)
+                    ->whereBetween('week_number', [$startWeek, $endWeek]);
             }])
             ->get();
 
-        // Status symbols mapping
-        $statusSymbols = [
-            'Present' => '✅',
-            'Absent' => '❌',
-            'Excused' => '🟡',
-            'N/A' => 'N/A'
-        ];
-
-        // Pass the required data to the view
-        return view('attendance.show', compact('club', 'students', 'statusSymbols'));
+        return view('attendance.show', compact('club', 'students', 'startWeek', 'endWeek'));
     }
+
 
     // Store attendance for multiple students
     public function store(Request $request, $clubId)
@@ -114,7 +110,7 @@ class AttendanceController extends Controller
         }
 
         return redirect()->route('attendance.show', ['clubs' => $clubId])
-                        ->with('success', 'Attendance updated successfully!');
+                ->with('success', 'Attendance updated successfully!');
     }
 
 

@@ -1,7 +1,7 @@
 <x-layout>
     <div class="text-center pt-3 pb-4">
-        <h2 class="text-start">Attendance</h2>
-        <h4 class="text-start pt-4">My Clubs</h4>
+        <h2 class="text-start">Kedatangan</h2>
+        <h4 class="text-start pt-4">Kelab Saya</h4>
         
         <div class="row g-4 mt-0">
             @forelse($clubs as $club)
@@ -15,7 +15,7 @@
                         <div class="card-body">
                             <h4 class="card-title">{{ $club->club_name }}</h4>
                             <p class="card-text">{{ $club->club_category }}</p>
-                            <a href="{{ route('attendance.show', ['clubs' => $club->club_id]) }}" class="btn btn-dark">View Attendance</a>
+                            <a href="{{ route('attendance.show', ['clubs' => $club->club_id]) }}" class="btn btn-dark">Tunjuk Kedatangan</a>
                         </div>
                     </div>
                 </div>
