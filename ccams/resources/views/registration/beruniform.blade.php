@@ -15,7 +15,7 @@
         <div class="row mt-4">
             @if ($beruniform->isEmpty())
                 <div class="text-center">
-                    <p><b>No clubs are available for registration at the moment.<b></p>
+                    <p><b>Tiada kelab tersedia untuk pendaftaran pada masa ini.<b></p>
                 </div>
             @else
                 @foreach ($beruniform as $club)
@@ -42,14 +42,14 @@
                                                 @csrf
                                                 <button type="submit" class="btn btn-dark" title="Register"
                                                     onclick="return confirm('Are you sure you want to register for this club?');">
-                                                    Register
+                                                    Mendaftar
                                                 </button>
                                             </form>
                                         </div>
                                         <p class="text-muted mt-2">
-                                            <i class="fas fa-users"></i> {{ $club->participant_total }} Members
+                                            <i class="fas fa-users"></i> {{ $club->participant_total }} Ahli
                                         </p>
-                                        <h5>Description</h5>
+                                        <h5>Keterangan</h5>
                                         <p class="card-text text-justify">{{ $club->club_description }}</p>
                                     </div>
                                 </div>
@@ -61,7 +61,7 @@
         </div>
 
         <div class="text-center mt-4">
-            <a href="{{ route('registration.index') }}" class="btn btn-dark">Return</a>
+            <a href="{{ route('registration.index') }}" class="btn btn-dark">Kembali</a>
         </div>
     </div>
 

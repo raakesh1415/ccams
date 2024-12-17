@@ -1,6 +1,6 @@
 <x-layout>
     <div class="container mt-5">
-        <h2 class="text-center"><b>KELAB / PERSATUAN</b></h2>
+        <h2 class="text-center"><b>PERMAINAN</b></h2>
 
         <!-- Display prompt messages -->
         @if (session('error'))
@@ -11,14 +11,14 @@
             <div class="alert alert-success">{{ session('success') }}</div>
         @endif
 
-        <!-- Kelab Listings -->
+        <!-- Sukan Listings -->
         <div class="row mt-4">
-            @if ($kelab->isEmpty())
+            @if ($permainan->isEmpty())
                 <div class="text-center">
-                    <p><b>No clubs are available for registration at the moment.<b></p>
+                    <p><b>Tiada kelab tersedia untuk pendaftaran pada masa ini.<b></p>
                 </div>
             @else
-                @foreach ($kelab as $club)
+                @foreach ($permainan as $club)
                     <div class="col-md-6 mb-4">
                         <div class="card shadow-sm h-100">
                             <div class="row g-0 h-100">
@@ -42,14 +42,14 @@
                                                 @csrf
                                                 <button type="submit" class="btn btn-dark" title="Register"
                                                     onclick="return confirm('Are you sure you want to register for this club?');">
-                                                    Register
+                                                    Mendaftar
                                                 </button>
                                             </form>
                                         </div>
                                         <p class="text-muted mt-2">
-                                            <i class="fas fa-users"></i> {{ $club->participant_total }} Members
+                                            <i class="fas fa-users"></i> {{ $club->participant_total }} Ahli
                                         </p>
-                                        <h5>Description</h5>
+                                        <h5>Keterangan</h5>
                                         <p class="card-text text-justify">{{ $club->club_description }}</p>
                                     </div>
                                 </div>
@@ -61,7 +61,7 @@
         </div>
 
         <div class="text-center mt-4">
-            <a href="{{ route('registration.index') }}" class="btn btn-dark">Return</a>
+            <a href="{{ route('registration.index') }}" class="btn btn-dark">Kembali</a>
         </div>
     </div>
 

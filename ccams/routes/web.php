@@ -75,11 +75,11 @@ Route::get('/registration', function (){
     return view('registration.index');
 })->name('registration.index');
 
-Route::get('/registration/kelab', [RegistrationController::class, 'kelabIndex'])
-    ->name('registration.kelab');
+Route::get('/registration/persatuan', [RegistrationController::class, 'persatuanIndex'])
+    ->name('registration.persatuan');
 
-Route::get('/registration/sukan', [RegistrationController::class, 'sukanIndex'])
-    ->name('registration.sukan');
+Route::get('/registration/permainan', [RegistrationController::class, 'permainanIndex'])
+    ->name('registration.permainan');
 
 Route::get('/registration/beruniform', [RegistrationController::class, 'beruniformIndex'])
     ->name('registration.beruniform');

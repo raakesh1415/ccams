@@ -1,6 +1,6 @@
 <x-layout>
     <div class="container mt-5">
-        <h2 class="text-center"><b>CLUB TYPES</b></h2>
+        <h2 class="text-center"><b>JENIS KELAB</b></h2>
         <div class="row mt-4">
 
             <!-- Kelab / Persatuan-->
@@ -8,11 +8,11 @@
                 <div class="card h-100 shadow-sm">
                     <img src="{{ asset('images/std_kelab.jpeg') }}" class="card-img-top" alt="Kelab / Persatuan">
                     <div class="card-body d-flex flex-column">
-                        <h3 class="text-center">Kelab / Persatuan</h3>
-                        <p class="card-text text-justify">Encompasses a variety of clubs and associations, including
-                            academic, arts, and cultural clubs, allowing students to develop their interests and talents
-                            beyond the classroom while fostering teamwork and leadership values.</p>
-                        <a href="{{ route('registration.kelab') }}" class="btn btn-dark mt-auto">Explore</a>
+                        <h3 class="text-center">Persatuan</h3>
+                        <p class="card-text text-justify">Merangkumi pelbagai kelab dan persatuan, termasuk
+                            kelab akademik, seni dan kebudayaan, membolehkan pelajar mengembangkan minat dan bakat
+                            mereka di luar bilik darjah sambil memupuk kerja berpasukan dan nilai kepimpinan.</p>
+                        <a href="{{ route('registration.persatuan') }}" class="btn btn-dark mt-auto">Meneroka</a>
                     </div>
                 </div>
             </div>
@@ -22,11 +22,11 @@
                 <div class="card h-100 shadow-sm">
                     <img src="{{ asset('images/std_sukan.png') }}" class="card-img-top" alt="Sukan / Permainan">
                     <div class="card-body d-flex flex-column">
-                        <h3 class="text-center">Sukan / Permainan</h3>
-                        <p class="card-text text-justify">Activities involving sports and games to encourage students to
-                            stay active, healthy, and build sportsmanship. Through sports, students learn discipline,
-                            strategy, and teamwork.</p>
-                        <a href="{{ route('registration.sukan') }}" class="btn btn-dark mt-auto">Explore</a>
+                        <h3 class="text-center">Permainan</h3>
+                        <p class="card-text text-justify">Aktiviti yang melibatkan sukan dan permainan untuk
+                            menggalakkan pelajar untuk kekal aktif, sihat, dan bina semangat kesukanan. Melalui sukan,
+                            pelajar belajar disiplin, strategi, dan kerja berpasukan.</p>
+                        <a href="{{ route('registration.permainan') }}" class="btn btn-dark mt-auto">Meneroka</a>
                     </div>
                 </div>
             </div>
@@ -37,10 +37,10 @@
                     <img src="{{ asset('images/std_beruniform.png') }}" class="card-img-top" alt="Unit Beruniform">
                     <div class="card-body d-flex flex-column">
                         <h3 class="text-center">Unit Beruniform</h3>
-                        <p class="card-text text-justify">Includes units like Scouts, Cadets, and St. John Ambulance
-                            that provide training in physical endurance, leadership, and life skills while instilling
-                            patriotism and discipline among students.</p>
-                        <a href="{{ route('registration.beruniform') }}" class="btn btn-dark mt-auto">Explore</a>
+                        <p class="card-text text-justify">Termasuk unit seperti Pengakap, Kadet dan Ambulans St. John
+                            yang menyediakan latihan dalam ketahanan fizikal, kepimpinan dan kemahiran hidup sambil
+                            menanamkan patriotisme dan disiplin di kalangan pelajar.</p>
+                        <a href="{{ route('registration.beruniform') }}" class="btn btn-dark mt-auto">Meneroka</a>
                     </div>
                 </div>
             </div>

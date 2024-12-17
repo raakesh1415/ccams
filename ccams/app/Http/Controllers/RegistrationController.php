@@ -10,17 +10,17 @@ use Illuminate\Support\Facades\Auth;
 
 class RegistrationController extends Controller
 {
-    public function kelabIndex()
+    public function persatuanIndex()
     {
-        $kelab = Club::where('club_category', 'KelabPersatuan')->get();
-        return view('registration.kelab', compact('kelab'));
+        $persatuan = Club::where('club_category', 'Persatuan')->get();
+        return view('registration.persatuan', compact('persatuan'));
         // kelab => $kelab (assigne $kelab(value) to kelab (key))
     }
 
-    public function sukanIndex()
+    public function permainanIndex()
     {
-        $sukan = Club::where('club_category', 'SukanPermainan')->get();
-        return view('registration.sukan', compact('sukan'));
+        $permainan = Club::where('club_category', 'Permainan')->get();
+        return view('registration.permainan', compact('permainan'));
     }
 
 

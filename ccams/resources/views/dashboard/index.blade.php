@@ -1,13 +1,13 @@
 <x-layout>
     <div class="container mt-5">
-        <h1 class="text-left" style="text-transform: uppercase;"><b><i>WELCOME, {{ $user->name }} !</i></b></h1>
-        <h5 class="text-left">Have a great day! Good Luck!</h5><br>
+        <h1 class="text-left" style="text-transform: uppercase;"><b><i>SELAMAT DATANG, {{ $user->name }} !</i></b></h1>
+        <h5 class="text-left">Semoga hari yang hebat! Semoga berjaya!</h5><br>
 
-        <h2 class="text-left"><b>Your Registered Club</b></h2>
+        <h2 class="text-left"><b>Kelab Berdaftar Anda</b></h2>
 
         @if ($registrations->isEmpty())
             <div class="text-center">
-                <p><b>No clubs are registered.<b></p>
+                <p><b>Tiada kelab didaftarkan.<b></p>
             </div>
         @else
             <div class="row">
@@ -29,7 +29,7 @@
 
                                 <!-- Club Registered Status -->
                                 <div class="text-center mb-1 p-1">
-                                    <span class="bg-success text-white p-2 rounded">Registered</span>
+                                    <span class="bg-success text-white p-2 rounded">Berdaftar</span>
                                 </div>
                             </div>
                         </div>
@@ -39,6 +39,6 @@
         @endif
 
         <br>
-        <h2 class="text-left"><b>Your Planned Activities</b></h2>
+        <h2 class="text-left"><b>Aktiviti Terancang Anda</b></h2>
     </div>
 </x-layout>

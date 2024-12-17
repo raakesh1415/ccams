@@ -1,6 +1,6 @@
 <x-layout>
     <div class="container mt-5">
-        <h2 class="text-center"><b>REGISTERED CLUBS</b></h2>
+        <h2 class="text-center"><b>KELAB BERDAFTAR</b></h2>
 
         <!-- Display success or error messages -->
         @if (session('error'))
@@ -22,7 +22,7 @@
         <!-- Check if there are any registrations -->
         @if ($registrations->isEmpty())
             <div class="text-center">
-                <p><b>No clubs are registered.<b></p>
+                <p><b>Tiada kelab didaftarkan.<b></p>
             </div>
         @else
             <!-- Registered Clubs View -->
