@@ -24,34 +24,52 @@ class AutoAssignClub extends Command
             return;
         }
 
-        // Step 2: Find unregistered students
-        $unregisteredStudents = User::whereDoesntHave('registrations')->get();
+        // Step 2: Find students with role 'student' who haven't registered all club types
+        $unregisteredStudents = User::where('role', 'student') // Filter users with role 'student'
+            ->whereHas('registrations', function ($query) {
+                $query->select('club_type')->distinct();
+            }, '<', 3) // Ensure less than 3 club types registered
+            ->get();
 
         if ($unregisteredStudents->isEmpty()) {
-            $this->info("All students are already registered.");
+            $this->info("All students have already registered for the required club types.");
             return;
         }
 
-        // Step 3: Find clubs with free seating
-        $availableClubs = Club::withCount('registrations')
+        // Step 3: Find clubs with free seating grouped by club type
+        $availableClubsByType = Club::withCount('registrations')
             ->having('capacity', '>', 'registrations_count')
-            ->get();
+            ->get()
+            ->groupBy('club_type'); // Group clubs by their type
 
-        if ($availableClubs->isEmpty()) {
+        if ($availableClubsByType->isEmpty()) {
             $this->error("No clubs with free seating available.");
             return;
         }
 
         // Step 4: Assign students to clubs
         foreach ($unregisteredStudents as $student) {
-            $club = $availableClubs->random();
+            $registeredClubTypes = $student->registrations->pluck('club.club_type')->unique();
 
-            Registration::create([
-                'user_id' => $student->id,
-                'club_id' => $club->id,
-            ]);
+            foreach ($availableClubsByType as $clubType => $clubs) {
+                // Skip already registered club types
+                if ($registeredClubTypes->contains($clubType)) {
+                    continue;
+                }
 
-            $this->info("Student ID {$student->id} assigned to Club ID {$club->id}");
+                // Pick a random club from the available clubs of the current type
+                $club = $clubs->random();
+
+                Registration::create([
+                    'user_id' => $student->id,
+                    'club_id' => $club->id,
+                ]);
+
+                $this->info("Student ID {$student->id} assigned to Club ID {$club->id} (Type: {$clubType})");
+
+                // Update registered club types
+                $registeredClubTypes->push($clubType);
+            }
         }
 
         $this->info("Auto-assignment completed successfully!");
