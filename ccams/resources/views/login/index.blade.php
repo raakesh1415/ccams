@@ -102,7 +102,7 @@
 <body>
     <!-- Header with Logo at the Top -->
     <div class="header">
-        <img src="images/logo-name.png" alt="Logo">
+        <img src="../images/logo-name.png" alt="Logo">
     </div>
 
     <!-- Overlay and Login Form -->

@@ -88,6 +88,7 @@ class UserController extends Controller
 
         return $this->redirectToDashboard($user);
     }
+    
 
     private function redirectToDashboard(User $user)
     {
@@ -104,11 +105,11 @@ class UserController extends Controller
 
 
 
-    // public function logout(): RedirectResponse
-    // {
-    //     auth()->logout(); 
-    //     return redirect()->route('login.index'); 
-    // }
+    public function logout(): RedirectResponse
+    {
+        auth()->logout(); 
+        return redirect()->route('login'); 
+    }
 
 
     public function index()
