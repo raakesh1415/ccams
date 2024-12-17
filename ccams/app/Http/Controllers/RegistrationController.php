@@ -52,7 +52,7 @@ class RegistrationController extends Controller
         $existingRegistration = Registration::where('user_id', $userId)->where('club_type', $clubType)->first();
 
         if ($existingRegistration) {
-            return redirect()->back()->with('error', 'Anda telah mendaftar untuk ' . $clubType . ' .');
+            return redirect()->back()->with('error', 'Anda telah mendaftar untuk ' . $clubType . '.');
         }
 
         //Register student to club
