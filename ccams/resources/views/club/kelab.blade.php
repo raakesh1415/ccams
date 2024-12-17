@@ -1,14 +1,14 @@
 <x-layout>
     <x-slot name="header">
-        <h2>Kelab / Persatuan</h2>
+        <h2>Kelab</h2>
     </x-slot>
 
     <div class="container mt-4">
-        <h2 class="text-center">Explore Kelab / Persatuan Clubs</h2>
+        <h2 class="text-center">Explore Kelab Clubs</h2>
 
-        <!-- Check if there are clubs in the 'Kelab / Persatuan' category -->
+        <!-- Check if there are clubs in the 'Kelab' category -->
         @if($clubs->isEmpty())
-            <p class="text-muted text-center mt-4">No clubs available in the "Kelab / Persatuan" category yet. Be the first to add one!</p>
+            <p class="text-muted text-center mt-4">No clubs available in the "Kelab" category yet. Be the first to add one!</p>
 
             <!-- Add Club Button positioned below the message on the left -->
             <div class="text-start mb-4">
