@@ -19,16 +19,16 @@ class ClubController extends Controller
     
      public function showKelabClubs()
      {
-         // Fetch clubs in the 'Kelab / Persatuan' category
-         $clubs = Club::where('club_category', 'Kelab / Persatuan')->get();
+         // Fetch clubs in the 'Kelab' category
+         $clubs = Club::where('club_category', 'Kelab')->get();
          
          return view('club.kelab', compact('clubs'));
      }
 
      public function showSukanClubs()
     {
-    // Fetch clubs in the 'Sukan / Permainan' category
-    $clubs = Club::where('club_category', 'Sukan / Permainan')->get();
+    // Fetch clubs in the 'Sukan' category
+    $clubs = Club::where('club_category', 'Sukan')->get();
 
     // Pass clubs to the view
     return view('club.sukan', compact('clubs'));
@@ -58,7 +58,7 @@ public function showDetails($clubs_id)
             'club_name' => 'required|string|max:255',
             'club_description' => 'required|string',
             'participant_total' => 'required|integer|min:1',
-            'club_category' => 'required|string|in:Kelab / Persatuan,Sukan / Permainan,Unit Beruniform',
+            'club_category' => 'required|string|in:Kelab,Sukan,Unit Beruniform',
             'club_pic' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
     

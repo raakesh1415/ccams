@@ -7,23 +7,23 @@
     </x-slot>
 
     <div class="container mt-4">
-        <h2 class="text-center mb-4">Explore Activities</h2>
+        <h2 class="text-center mb-4">Aktiviti</h2>
 
         @if ($activities->isEmpty())
             <!-- No Activities View -->
             <div class="text-center mt-5">
                 <img src="{{ asset('images/empty-icon.JPG') }}" alt="No Activities" class="img-fluid mb-3" style="max-width: 150px;">
-                <h3 class="text-muted">No activity yet!</h3>
-                <p class="text-secondary">Once activities are added, they will display here.</p>
+                <h3 class="text-muted">Tiada Aktiviti!</h3>
+                <p class="text-secondary">Setelah aktiviti ditambahkan, ia akan dipaparkan di sini.</p>
                 <a href="{{ route('activities.create') }}" class="btn btn-primary btn-lg">
-                    <i class="fas fa-plus"></i> Add Activity
+                    <i class="fas fa-plus"></i> Tambah Aktiviti
                 </a>
             </div>
         @else
             <!-- Add Activity Button -->
             <div class="text-center mb-4">
                 <a href="{{ route('activities.create') }}" class="btn btn-primary btn-lg">
-                    <i class="fas fa-plus"></i> Add Activity
+                    <i class="fas fa-plus"></i> Tambah Aktiviti
                 </a>
             </div>
 
@@ -48,7 +48,7 @@
                                         data-bs-toggle="modal" 
                                         data-bs-target="#deleteModal" 
                                         data-url="{{ route('activities.destroy', $activity->activity_id) }}">
-                                    <i class="fas fa-trash"></i> Delete
+                                    <i class="fas fa-trash"></i> Padam
                                     </button>
 
                                 </div>
@@ -66,8 +66,8 @@
         <div class="modal-content">
             <div class="modal-body text-center">
                 <i class="fas fa-times-circle text-danger" style="font-size: 50px;"></i>
-                <h5 class="modal-title" id="deleteModalLabel">Are you sure?</h5>
-                <p class="mt-3">Do you really want to delete this activity?<br>This process cannot be undone.</p>
+                <h5 class="modal-title" id="deleteModalLabel">Adakah kamu pasti?</h5>
+                <p class="mt-3">Adakah kamu benar-benar mahu memadamkan aktiviti ini?<br>Proses ini tidak boleh dibuat asal.</p>
                 <div class="d-flex justify-content-center mt-4">
                     <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">Cancel</button>
                     <form id="deleteForm" method="POST" class="mb-0">
