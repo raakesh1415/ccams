@@ -22,12 +22,9 @@ class User extends Authenticatable
         'password',                        
         'ic',
         'last_login_at',
-        // 'year',
-        // 'level',
-        // 'dob',
         'role', // 'student' or 'teacher'
         'peofile_pic',
-        'class'
+        'classroom'
     ];
 
     /**
@@ -99,8 +96,4 @@ class User extends Authenticatable
         return $this->role === 'student';
     }
     // User.php
-    
-
-
-
 }

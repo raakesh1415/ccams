@@ -5,10 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>CCAMS - Sign Up</title>
-
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
     <style>
         body {
             background-image: url('/images/Background.jpg');
@@ -65,7 +63,7 @@
             <div class="row justify-content-center">
                 <div class="col-12 col-md-10 col-lg-8 col-xl-10 d-flex justify-content-center">
                     <div class="signup-card">
-                        <h2 class="text-center mb-4">Sign Up</h2>
+                        <h2 class="text-center mb-4">PENDAFTARAN AKAUN</h2>
 
                         <form id="signupForm" method="POST" action="{{ route('signin.store') }}">
                             @csrf
@@ -73,28 +71,29 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label for="name" class="form-label">Name:</label>
+                                        <label for="name" class="form-label">NAMA:</label>
                                         <input type="text" id="name" name="name" class="form-control"
                                             required>
                                         <small id="nameFeedback" class="form-text text-danger"></small>
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="email" class="form-label">Email:</label>
+                                        <label for="email" class="form-label">E-MEL:</label>
                                         <input type="email" id="email" name="email" class="form-control"
                                             required>
                                         <small id="emailFeedback" class="form-text text-danger"></small>
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="password" class="form-label">Password:</label>
+                                        <label for="password" class="form-label">KATA LALUAN</label>
                                         <input type="password" id="password" name="password" class="form-control"
                                             required>
                                         <small id="passwordFeedback" class="form-text text-warning"></small>
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="password_confirmation" class="form-label">Confirm Password:</label>
+                                        <label for="password_confirmation" class="form-label">PENGESAHAN KATA
+                                            LALUAN:</label>
                                         <input type="password" id="password_confirmation" name="password_confirmation"
                                             class="form-control" required>
                                     </div>
@@ -102,25 +101,25 @@
 
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label for="ic" class="form-label">IC Number:</label>
+                                        <label for="ic" class="form-label">NOMBOR KAD PENGENALAN:</label>
                                         <input type="text" id="ic" name="ic" class="form-control"
                                             required>
                                         <small id="icFeedback" class="form-text text-danger"></small>
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="role" class="form-label">You are:</label>
+                                        <label for="role" class="form-label">ANDA ADALAH:</label>
                                         <select id="role" name="role" class="form-select" required>
-                                            <option value="student">Student</option>
-                                            <option value="teacher">Teacher</option>
+                                            <option value="student">PELAJAR</option>
+                                            <option value="teacher">GURU</option>
                                         </select>
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="class" class="form-label">Please choose your class:</label>
-                                        <input list="classes" id="class" name="class" class="form-control"
-                                            placeholder="Type or select your Class" required>
-                                        <datalist id="classes">
+                                        <label for="classroom" class="form-label">PILIH KELAS ANDA:</label>
+                                        <input list="classrooms" id="classroom" name="classroom" class="form-control"
+                                            placeholder="CARI KELAS ANDA" required>
+                                        <datalist id="classrooms">
                                             <option value="1 AL ABQARIY"></option>
                                             <option value="2 AL ABQARIY"></option>
                                             <option value="3 AL ABQARIY"></option>
@@ -200,14 +199,12 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="d-grid">
-                                <button type="submit" class="btn btn-custom btn-lg">Sign Up</button>
+                                <button type="submit" class="btn btn-custom btn-lg">MENDAFTAR</button>
                             </div>
                         </form>
-
                         <div class="text-center mt-3">
-                            <a href="/" class="text-decoration-none">Already have an account?</a>
+                            <a href="/" class="text-decoration-none">Sudah mempunyai akaun?</a>
                         </div>
                     </div>
                 </div>
