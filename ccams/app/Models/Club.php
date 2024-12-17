@@ -21,3 +21,4 @@ class Club extends Model
         'club_pic'
     ];
 }
+

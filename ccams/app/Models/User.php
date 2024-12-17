@@ -56,7 +56,12 @@ class User extends Authenticatable
      */
     public function clubs()
     {
-        return $this->hasMany(Club::class, 'teacher_id');
+        return $this->hasMany(Club::class, 'club_id');
+    }
+
+    public function activities()
+    {
+        return $this->hasMany(Activity::class, 'activity_id');
     }
 
     /**

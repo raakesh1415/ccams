@@ -2,7 +2,6 @@
     <!-- Taskbar Section -->
     <div class="taskbar">
     <div class="profile-header">
-        <!-- 动态显示用户的头像 -->
         <img src="{{ Auth::user()->profile_pic ? asset('storage/profiles/' . Auth::user()->profile_pic) : asset('images/profile.png') }}" class="profile-image" alt="Profile Image">
 
              class="profile-avatar" 

@@ -1,25 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="icon" href="{{ asset('images/logo-trans.png') }}" type="image/x-icon">
+    <title>CCAMS</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css"
+        rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+    <style>
+        body {
+            background-image: url('/images/Background.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            color: #fff;
+        }
+
+        .header {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .header img {
+            width: 250px;
+        }
+
+        .overlay {
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            width: 100%;
+            padding-top: 20px;
+            flex: 1;
+        }
+
+        .signup-card {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 900px;
+            width: 100%;
+            margin-top: -100px;
+        }
+
+        .signup-card h2 {
+            margin-bottom: 1.5rem;
+            font-weight: bold;
+            color: #333;
+            text-align: center;
+        }
+
+        .form-group label {
+            color: #000;
+        }
+
+        .form-control {
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            padding: 5px;
+        }
+
+        .btn-signup {
+            background-color: #f0b429;
+            border: none;
+            color: #fff;
+            padding: 10px;
+            font-size: 1.1rem;
+            width: 100%;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-signup:hover {
+            background-color: #f0a500;
+        }
+
+        .signup-links {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: #007bff;
+            text-align: center;
+        }
+
+        .signup-links a {
+            color: #007bff;
+            text-align: center;
+        }
+
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .form-column {
+            flex: 1;
+        }
+
+        .separator {
+            margin: 20px 0;
+            border-top: 2px solid #ccc;
+        }
+    </style>
 </head>
-<body class="bg-cover bg-center" style="background-image: url('/images/Background.jpg');">
+<body>
     <!-- Header with Logo at the Top -->
-    <div class="d-flex justify-content-center py-4 bg-dark bg-opacity-75">
-        <img src="../images/logo-name.png" alt="Logo" width="250">
+    <div class="header">
+        <img src="../images/logo-name.png" alt="Logo">
     </div>
 
     <!-- Overlay and Sign-Up Form -->
-    <div class="d-flex justify-content-center align-items-center vh-100">
-        <div class="card p-4" style="max-width: 900px; width: 100%; background-color: rgba(255, 255, 255, 0.9); border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-            <h2 class="text-center font-weight-bold text-dark mb-4">Sign Up</h2>
+    <div class="overlay">
+        <div class="signup-card">
+            <h2>Sign Up</h2>
             <form id="signupForm" method="POST" action="{{ route('signin.store') }}">
                 @csrf
-                <div class="row">
-                    <div class="col-md-6">
+              
+                <div class="form-row">
+                    <div class="form-column">
                         <div class="form-group">
                             <label for="name">Name:</label>
                             <input type="text" id="name" name="name" class="form-control" required>
@@ -41,8 +156,7 @@
                         </div>
                     </div>
 
-                    <!-- 右边部分：额外信息 -->
-                    <div class="col-md-6">
+                    <div class="form-column">
                         <div class="form-group">
                             <label for="ic">IC Number:</label>
                             <input type="text" id="ic" name="ic" class="form-control" required>
@@ -134,15 +248,14 @@
                             <option value="5 DA VINCI"></option>
                             <option value="4 AL FIHRI"></option>
                             <option value="5 AL FIHRI"></option>
-
                             </datalist>
                         </div>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-warning w-100 py-2 mt-3">Sign Up</button>
+                <button type="submit" class="btn btn-signup">Sign Up</button>
             </form>
-            <div class="text-center mt-3">
-                <a href="/" class="text-primary">Already have an account?</a>
+            <div class="signup-links">
+                <a href="/">Already have an account?</a>
             </div>
         </div>
     </div>
@@ -203,22 +316,23 @@
                 const ic = $(this).val();
                 if (ic && ic.length !== 12) {
                     $('#icFeedback').text('IC number must be exactly 12 characters.');
-                } else {
-                    if (ic) {
-                        $.ajax({
-                            url: "{{ route('check.ic') }}", // The route to handle IC validation
-                            method: 'POST',
-                            data: { _token: '{{ csrf_token() }}', ic },
-                            success: function (response) {
-                                if (response.exists) {
-                                    $('#icFeedback').text('IC already exists.');
-                                } else {
-                                    $('#icFeedback').text('');
-                                }
-                            }
-                        });
-                    }
                 }
+                else{
+                    if (ic) {
+                    $.ajax({
+                        url: "{{ route('check.ic') }}", // The route to handle IC validation
+                        method: 'POST',
+                        data: { _token: '{{ csrf_token() }}', ic },
+                        success: function (response) {
+                            if (response.exists) {
+                                $('#icFeedback').text('IC already exists.');
+                            } else {
+                                $('#icFeedback').text('');
+                            }
+                        }
+                    });
+                }
+                }       
             });
 
             // Validate password confirmation

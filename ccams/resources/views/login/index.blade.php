@@ -1,10 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="icon" href="{{ asset('images/logo-trans.png') }}" type="image/x-icon">
+    <title>CCAMS</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css"
+        rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
     <style>
         body {
             background-image: url('/images/Background.jpg');
@@ -24,7 +32,7 @@
             display: flex;
             justify-content: center;
             padding: 20px;
-            background-color: rgba(0, 0, 0, 0.7);
+            background-color: rgba(0, 0, 0, 0.5);
         }
 
         .header img {
@@ -50,7 +58,7 @@
             max-width: 350px;
             width: 100%;
             text-align: center;
-            margin-top: 1px;
+            margin-top: -150px;
         }
 
         .login-card h2 {
@@ -126,9 +134,12 @@
                 <button type="submit" class="btn btn-login">SIGN IN</button>
             </form>
             <div class="login-links">
-                <a href="{{ route('login.reset') }}">Forgot password</a> | 
+                <a href="{{ route('login.reset') }}">Forgot password ?</a> 
+            </div>
+            <div class="login-links">
                 <a href="{{ route('login.signin') }}">Create an account</a>
             </div>
+            
         </div>
     </div>
 

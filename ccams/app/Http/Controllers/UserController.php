@@ -22,6 +22,7 @@ class UserController extends Controller
             'password' => 'required|min:8',
             'ic' => 'required|string|max:12',
             'role' => 'required|string|in:student,teacher', // Ensure role is either student or teacher
+            'class'=> 'required|string|max:255'
         ]);
         
 
@@ -32,6 +33,7 @@ class UserController extends Controller
             'password' => Hash::make($validatedData['password']), // Hash the password
             'ic' => $validatedData['ic'],
             'role' => $validatedData['role'],
+            'class' => $validatedData['class'],
         ]);
 
         return redirect()->route('login.index')->with('success', 'Sign up successfully');
@@ -55,12 +57,12 @@ class UserController extends Controller
 
     public function create()
     {
-        return view('login.signin'); // 假设您的注册视图文件是 signin.blade.php
+        return view('login.signin'); 
     }
 
     public function showLoginForm()
     {
-        return view('login.index'); // 返回登录视图 'login.index'
+        return view('login.index'); 
     }
 
     public function login(Request $request)
@@ -87,7 +89,6 @@ class UserController extends Controller
         return $this->redirectToDashboard($user);
     }
 
-    // 根据用户角色导航到不同的界面
     private function redirectToDashboard(User $user)
     {
         $routes = [
@@ -105,8 +106,8 @@ class UserController extends Controller
 
     // public function logout(): RedirectResponse
     // {
-    //     auth()->logout(); // 使用 Laravel 的 auth() 函数登出
-    //     return redirect()->route('login.index'); // 注销后重定向到登录页面
+    //     auth()->logout(); 
+    //     return redirect()->route('login.index'); 
     // }
 
 
@@ -137,15 +138,14 @@ class UserController extends Controller
 
     public function update(Request $request, int $id)
     {
-        // 验证请求数据
+
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email,' . $id, // 排除当前用户的邮箱进行唯一性验证
+            'email' => 'required|email|unique:users,email,' . $id, 
             'password' => 'nullable|string|min:8|confirmed',
             'role' => 'required|string',
         ]);
-        $user = User::findOrFail($id); // 根据 ID 查找用户
-        // 更新用户信息，如果密码被更改，则进行哈希加密
+        $user = User::findOrFail($id); 
         $user->update([
             'name' => $validated['name'],
             'email' => $validated['email'],
@@ -158,8 +158,8 @@ class UserController extends Controller
 
     public function destroy(int $id)
     {
-        $user = User::findOrFail($id); // 根据 ID 查找用户
-        $user->delete(); // 从数据库删除用户
+        $user = User::findOrFail($id);
+        $user->delete(); 
         return redirect()->route('users.index')->with('success', '用户删除成功');
     }
 
@@ -206,13 +206,17 @@ class UserController extends Controller
     //profile:
     public function showprofile()
     {
+
         $user = Auth::user();
         $user->last_login_at = Carbon::parse($user->last_login_at)->format('Y-m-d H:i:s');
-        $activities = Activity::all();
-        $clubs = Club::all();
-        return view('profile.index', compact('user', 'activities', 'clubs'));
 
+        $activities = $user->activities; 
+        $clubs = $user->clubs; 
+
+        return view('profile.index', compact('user', 'activities', 'clubs'));
     }
+
+
     
 
 // Update the profile
@@ -268,188 +272,3 @@ public function editprofile(Request $request)
     return redirect()->route('profile.index')->with('success', 'Profile updated successfully');
 }
 }
-
-// <?php
-
-// namespace App\Http\Controllers;
-
-// use Carbon\Carbon;
-// use App\Models\User;
-// use App\Models\Activity;
-// use App\Models\Club;
-// use Illuminate\Http\Request;
-// use Illuminate\Support\Facades\Hash;
-// use Illuminate\Support\Facades\Auth;
-
-// class UserController extends Controller
-// {
-//     // 用户注册
-//     public function store(Request $request)
-//     {
-//         $validatedData = $request->validate([
-//             'name' => 'required|string|max:255',
-//             'email' => 'required|email|unique:users,email',
-//             'password' => 'required|min:8',
-//             'ic' => 'required|string|max:12',
-//             'role' => 'required|string|in:student,teacher', // 确保角色是 student 或 teacher
-//         ]);
-
-//         User::create([
-//             'name' => $validatedData['name'],
-//             'email' => $validatedData['email'],
-//             'password' => Hash::make($validatedData['password']),
-//             'ic' => $validatedData['ic'],
-//             'role' => $validatedData['role'],
-//         ]);
-
-//         return redirect()->route('login.index')->with('success', 'Sign up successfully');
-//     }
-
-//     // 用户登录
-//     public function login(Request $request)
-//     {
-//         $request->validate([
-//             'email' => ['required', 'email'],
-//             'password' => ['required'],
-//         ]);
-
-//         $user = User::where('email', $request->email)->first();
-
-//         if (!$user) {
-//             return back()->withErrors(['email' => 'The email address does not exist.']);
-//         }
-
-//         if (!Hash::check($request->password, $user->password)) {
-//             return back()->withErrors(['password' => 'The password you entered is incorrect.']);
-//         }
-
-//         Auth::login($user);
-//         $user->last_login_at = now('UTC');
-//         $user->save();
-
-//         // 防止会话固定攻击
-//         $request->session()->regenerate();
-
-//         // 根据角色导航到不同的界面
-//         return $this->redirectToDashboard($user);
-//     }
-
-//     // 根据用户角色导航到不同的界面
-//     private function redirectToDashboard(User $user)
-//     {
-//         if ($user->role === 'teacher') {
-//             return redirect()->route('teacher.dashboard')->with('success', 'Welcome, Teacher!');
-//         } elseif ($user->role === 'student') {
-//             return redirect()->route('student.dashboard')->with('success', 'Welcome, Student!');
-//         }
-
-//         return redirect()->route('login.index')->with('error', 'Invalid user role!');
-//     }
-
-//     // 教师或学生的控制逻辑
-//     public function dashboard()
-//     {
-//         $user = Auth::user();
-
-//         if ($user->role === 'teacher') {
-//             return view('teacher.dashboard'); // 教师视图
-//         } elseif ($user->role === 'student') {
-//             return view('student.dashboard'); // 学生视图
-//         }
-
-//         abort(403, 'Unauthorized access'); // 如果角色不符合预期
-//     }
-
-//     // 显示登录页面
-//     public function showLoginForm()
-//     {
-//         return view('login.index');
-//     }
-
-//     // 登出
-//     public function logout()
-//     {
-//         Auth::logout();
-//         return redirect()->route('login.index')->with('success', 'Logged out successfully!');
-//     }
-
-//     // 用户信息查看
-//     public function show(int $id)
-//     {
-//         $user = User::findOrFail($id);
-//         return view('users.show', compact('user'));
-//     }
-
-//     // 用户信息更新
-//     public function update(Request $request, int $id)
-//     {
-//         $validated = $request->validate([
-//             'name' => 'required|string|max:255',
-//             'email' => 'required|email|unique:users,email,' . $id,
-//             'password' => 'nullable|string|min:8|confirmed',
-//             'role' => 'required|string',
-//         ]);
-
-//         $user = User::findOrFail($id);
-
-//         $user->update([
-//             'name' => $validated['name'],
-//             'email' => $validated['email'],
-//             'password' => $validated['password'] ? Hash::make($validated['password']) : $user->password,
-//             'role' => $validated['role'],
-//         ]);
-
-//         return redirect()->route('users.index')->with('success', 'User updated successfully');
-//     }
-
-//     // 用户信息删除
-//     public function destroy(int $id)
-//     {
-//         $user = User::findOrFail($id);
-//         $user->delete();
-//         return redirect()->route('users.index')->with('success', 'User deleted successfully');
-//     }
-
-//     // 用户资料显示
-//     public function showProfile()
-//     {
-//         $user = Auth::user();
-//         $user->last_login_at = Carbon::parse($user->last_login_at)->format('Y-m-d H:i:s');
-//         $activities = Activity::all();
-//         $clubs = Club::all();
-//         return view('profile.index', compact('user', 'activities', 'clubs'));
-//     }
-
-//     // 用户资料更新
-//     public function editProfile(Request $request)
-//     {
-//         $request->validate([
-//             'address' => 'nullable|string',
-//             'city' => 'nullable|string',
-//             'country' => 'nullable|string',
-//             'postal_code' => 'nullable|string',
-//             'about_me' => 'nullable|string',
-//             'current_password' => 'nullable|string',
-//             'new_password' => 'nullable|string|confirmed|min:8',
-//         ]);
-
-//         $user = Auth::user();
-
-//         $user->address = $request->address;
-//         $user->city = $request->city;
-//         $user->country = $request->country;
-//         $user->postal_code = $request->postal_code;
-//         $user->about_me = $request->about_me;
-
-//         if ($request->new_password) {
-//             if (!Hash::check($request->current_password, $user->password)) {
-//                 return back()->withErrors(['current_password' => 'Current password is incorrect']);
-//             }
-//             $user->password = Hash::make($request->new_password);
-//         }
-
-//         $user->save();
-
-//         return redirect()->route('profile.index')->with('success', 'Profile updated successfully');
-//     }
-// }

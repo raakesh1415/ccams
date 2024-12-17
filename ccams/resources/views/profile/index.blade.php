@@ -35,6 +35,7 @@
                                 <p><strong>Name:</strong> {{ $user->name }}</p>
                                 <p><strong>Role:</strong> {{ $user->role }}</p>
                                 <p><strong>Email:</strong> {{ $user->email }}</p>
+                                <p><strong>Class:</strong> {{ $user->class }}</p>
                                 <a href="{{ route('profile.edit') }}" class="text-muted small">Edit Profile</a>
                             </div>
                         </div>
@@ -83,7 +84,7 @@
                                     <p>No clubs available.</p>
                                 @else
                                     @foreach ($clubs as $club)
-                                        <p><strong>Club Name:</strong> {{ $clubs->club_name ?? 'Not provided' }}</p>
+                                        <p><strong>Club Name:</strong> {{ $club->club_name ?? 'Not provided' }}</p>
                                     @endforeach
                                 @endif
                             </div>

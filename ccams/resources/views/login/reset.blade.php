@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forgot Password</title>
+    <link rel="icon" href="{{ asset('images/logo-trans.png') }}" type="image/x-icon">
+    <title>CCAMS</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
@@ -20,7 +21,7 @@
         }
 
         .header {
-            background-color: rgba(0, 0, 0, 0.7);
+            background-color: rgba(0, 0, 0, 0.5);
             width: 100%;
             text-align: center;
             padding: 20px 0;
@@ -47,6 +48,7 @@
             text-align: center;
             max-width: 400px;
             width: 100%;
+            margin-top: -100px;
         }
 
         .btn-reset {

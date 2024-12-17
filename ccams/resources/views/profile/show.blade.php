@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Profile</title>
-    <!-- 引入 X-Layout 和 Bootstrap 样式 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/x-layout@latest/dist/x-layout.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
