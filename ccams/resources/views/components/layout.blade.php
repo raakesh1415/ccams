@@ -11,7 +11,8 @@
     <title>CCAMS</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css"
+        rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
 
 </head>
@@ -41,8 +42,6 @@
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                     <li><a class="dropdown-item" href="{{ route('profile.index') }}">Profile</a></li>
-                    <li><a class="dropdown-item" href="#!">Settings</a></li>
-                    <li><a class="dropdown-item" href="#!">Activity Log</a></li>
                     <li>
                         <hr class="dropdown-divider" />
                     </li>
@@ -60,11 +59,11 @@
                         <div class="sb-sidenav-menu-heading">Menu</div>
                         <a class="nav-link {{ request()->is('dashboard') ? 'active' : '' }}" href="/dashboard">
                             <div class="sb-nav-link-icon"><i class="fas fa-th-large"></i></div>
-                            Dashboard
+                            Papan Pemuka
                         </a>
                         <a class="nav-link {{ request()->is('club') ? 'active' : '' }}" href="/club">
                             <div class="sb-nav-link-icon"><i class="fas fa-university"></i></div>
-                            Club
+                            Kelab
                         </a>
                         <!-- Dropdown for Registration -->
                         <!-- request()->is() checks are testing if the current URL matches any of url listed -->
@@ -72,7 +71,7 @@
                             href="#" data-bs-toggle="collapse" data-bs-target="#registrationCollapse"
                             aria-expanded="false" aria-controls="registrationCollapse">
                             <div class="sb-nav-link-icon"><i class="fas fa-clipboard-list"></i></div>
-                            Registration
+                            Pendaftaran
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
                         <div class="collapse {{ request()->is('registration') || request()->is('registration/viewRegister') ? 'show' : '' }}"
@@ -80,23 +79,23 @@
                             <nav class="sb-sidenav-menu-nested nav">
                                 <a class="nav-link {{ request()->is('registration/register') ? 'active' : '' }}"
                                     href="{{ route('registration.index') }}"><i class="fas fa-edit"></i>
-                                    Club Registration</a>
+                                    Kelab Pendaftaran</a>
                                 <a class="nav-link {{ request()->is('registration/view') ? 'active' : '' }}"
-                                    href="{{ route('registration.viewRegister') }}"><i class="fas fa-eye"></i>View
-                                    Registration</a>
+                                    href="{{ route('registration.viewRegister') }}"><i class="fas fa-eye"></i>Melihat
+                                    Pendaftaran</a>
                             </nav>
                         </div>
                         <a class="nav-link {{ request()->is('activities') ? 'active' : '' }}" href="/activities">
                             <div class="sb-nav-link-icon"><i class="fas fa-tasks"></i></div>
-                            Activity
+                            Aktiviti
                         </a>
                         <a class="nav-link {{ request()->is('attendance') ? 'active' : '' }}" href="/attendance">
                             <div class="sb-nav-link-icon"><i class="fas fa-user-check"></i></div>
-                            Attendance
+                            Kehadiran
                         </a>
                         <a class="nav-link {{ request()->is('assessment') ? 'active' : '' }}" href="/assessment">
                             <div class="sb-nav-link-icon"><i class="fas fa-clipboard-list"></i></div>
-                            Assessment
+                            Penilaian
                         </a>
                     </div>
                 </div>
@@ -106,12 +105,6 @@
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-4">
-                    {{-- <div class="header">
-                            {{ $header }}
-                        </div> --}}
-
-                    <!-- Content Section -->
-                    {{-- <div class="content"> --}}
                     {{ $slot }}
                     {{-- </div> --}}
                 </div>
@@ -122,11 +115,6 @@
                 <div class="container-fluid px-4">
                     <div class="d-flex align-items-center justify-content-between small">
                         <div class="text-muted">Copyright &copy; CCAMS 2024</div>
-                        {{-- <div>
-                            <a href="#">Privacy Policy</a>
-                            &middot;
-                            <a href="#">Terms &amp; Conditions</a>
-                        </div> --}}
                     </div>
                 </div>
             </footer>
@@ -163,21 +151,4 @@
     .sb-sidenav-light .sb-sidenav-menu .nav-link.active .sb-nav-link-icon {
         color: #000;
     }
-
-    /* .sb-sidenav-menu .nav-link:hover {
-    background-color: #E5E7EB;
-    color: #000;
-} */
-
-    /* .sb-sidenav-menu .nav-link.active {
-    background-color: #E5E7EB;
-    color: #000;
-    font-weight: bold;
-} */
-
-    /* .sb-sidenav-menu .nav-link.active .sb-nav-link-icon {
-    background-color: #E5E7EB;
-    color: #000;
-    font-weight: bold;
-} */
 </style>
