@@ -21,7 +21,7 @@ class UserController extends Controller
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:8',
             'ic' => 'required|string|max:12',
-            'role' => 'required|string|in:student,teacher', // Ensure role is either student or teacher
+            'role' => 'required|string|in:student,teacher',
             'classroom'=> 'required|string|max:255'
         ]);
         
@@ -35,7 +35,7 @@ class UserController extends Controller
             'classroom' => $validatedData['classroom'],
         ]);
 
-        return redirect()->route('login.index')->with('success', 'Sign up successfully');
+        return redirect()->route('login')->with('success', 'Daftar berjaya');
     }
 
     public function checkEmail(Request $request)
@@ -78,7 +78,7 @@ class UserController extends Controller
         if (!$user || !Hash::check($request->password, $user->password)) {
             return back()->withErrors([
                 'email' => !$user ? 'The email address does not exist.' : null,
-                'password' => $user && !Hash::check($request->password, $user->password) ? 'The password you entered is incorrect.' : null,
+                'password' => $user && !Hash::check($request->password, $user->password) ? 'Kata laluan yang anda masukkan tidak betul.' : null,
             ]);
         }
 
@@ -145,14 +145,14 @@ class UserController extends Controller
             'password' => $validated['password'] ? Hash::make($validated['password']) : $user->password,
             'role' => $validated['role'],
         ]);
-        return redirect()->route('login.index')->with('success', 'successful saved');
+        return redirect()->route('login.index')->with('success', 'Berjaya disimpan');
     }
 
     public function destroy(int $id)
     {
         $user = User::findOrFail($id);
         $user->delete(); 
-        return redirect()->route('users.index')->with('success', '用户删除成功');
+        return redirect()->route('users.index')->with('success', 'Pengguna berjaya dipadamkan.');
     }
 
     // Reset password
@@ -170,13 +170,13 @@ class UserController extends Controller
                     ->first();
         if (!$user) {
             // If the user is not found with the provided email and IC
-            return redirect()->back()->withErrors(['email' => 'Email or IC is incorrect.'])->withInput();
+            return redirect()->back()->withErrors(['email' => 'E-mel atau IC tidak betul.'])->withInput();
         }
         // Update the password
         $user->password = Hash::make($validatedData['Newpassword']); // Hash the new password
         $user->save();
         // Redirect to the login page or display success
-        return redirect()->route('login.index')->with('success', 'Password has been reset successfully!');
+        return redirect()->route('login.index')->with('success', 'Kata laluan telah berjaya ditetapkan semula!');
     }
 
     public function checkEmailAndICMatch(Request $request)
@@ -246,14 +246,13 @@ class UserController extends Controller
     // If a new password is provided, check the current password and update the password field
     if ($request->new_password) {
         if (!Hash::check($request->current_password, $user->password)) {
-            return back()->withErrors(['current_password' => 'Current password is incorrect']);
+            return back()->withErrors(['current_password' => 'Kata laluan semasa tidak betul']);
         }
         $user->password = Hash::make($request->new_password);
     }
 
     // Save the changes to the user model
     $user->save();
-
-    return redirect()->route('profile.index')->with('success', 'Profile updated successfully');
+    return redirect()->route('profile.index')->with('success', 'Profil berjaya dikemas kini');
     }
 }
