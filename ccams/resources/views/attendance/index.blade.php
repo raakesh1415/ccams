@@ -15,7 +15,15 @@
                         <div class="card-body">
                             <h4 class="card-title">{{ $club->club_name }}</h4>
                             <p class="card-text">{{ $club->club_category }}</p>
-                            <a href="{{ route('attendance.show', ['clubs' => $club->club_id]) }}" class="btn btn-dark">Tunjuk Kedatangan</a>
+
+                            @if (Auth::user()->role === 'student')
+                                <!-- For students, go to their individual attendance details page -->
+                                <a href="{{ route('attendance.viewDetails', ['user_id' => Auth::id(), 'club_id' => $club->club_id]) }}" class="btn btn-dark">Tunjuk Kedatangan</a>
+                            @elseif (Auth::user()->role === 'teacher')
+                                <!-- For teachers, go to the attendance page for the club -->
+                                <a href="{{ route('attendance.show', ['clubs' => $club->club_id]) }}" class="btn btn-dark">Tunjuk Kedatangan</a>
+                            @endif
+
                         </div>
                     </div>
                 </div>

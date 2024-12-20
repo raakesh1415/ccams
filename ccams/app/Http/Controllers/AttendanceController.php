@@ -24,12 +24,18 @@ class AttendanceController extends Controller
     public function indexTeacher()
     {
         $user = auth()->user(); // Get the logged-in user
-
-        // Get the clubs associated with the teacher
-        $clubs = $user->clubs; // This uses the `clubs` relationship for teachers
-
+    
+        if ($user->role === 'teacher') {
+            // Assuming you have a relationship method 'clubs' to fetch clubs managed by the teacher
+            $clubs = Club::all();
+        } else {
+            // Handle the case where the user is not a teacher (e.g., show an error or empty data)
+            $clubs = collect();
+        }
+    
         return view('attendance.index', compact('clubs')); // Pass the clubs to the view
     }
+    
     
 
 
