@@ -2,29 +2,40 @@
     <div class="container-fluid px-4 py-4">
         <div class="card">
             <div class="card-header text-center">
-                <h3>Edit Assessment</h3>
+                <h3>Edit Assessment for {{ $club->club_name }}</h3>
             </div>
             <div class="card-body">
-                <form action="{{ route('assessment.update', $assessment->assessment_id) }}" method="POST">
+                <form action="{{ route('assessment.update', ['assessment_id' => $assessment->assessment_id]) }}" method="POST">
                     @csrf
-                    @method('PUT') <!-- Use PUT method for updating -->
-                    {{-- <h2 class="text-center mb-4">Edit Assessment</h2> --}}
+                    @method('PUT')
 
                     <!-- Student Section -->
-                    <h3 class="mb-3">Student Details <small class="text-muted"></small></h3>
+                    <h3 class="mb-3">Student Details</h3>
                     <div class="row mb-3">
                         <div class="col-md-4 mb-2">
                             <label for="user_id" class="form-label">Select Student:</label>
                             <select class="form-select" id="user_id" name="user_id" required>
                                 <option value="">-- Select Student --</option>
-                                @foreach($users as $user)
-                                    <option value="{{ $user->id }}" {{ $assessment->user_id == $user->id ? 'selected' : '' }}>
-                                        {{ $user->name }}
-                                    </option>
+                                @foreach($users as $registration)
+                                    @if ($registration->user)
+                                        <option value="{{ $registration->user->id }}" 
+                                            {{ $assessment->user_id == $registration->user->id ? 'selected' : '' }}>
+                                            {{ $registration->user->name }}
+                                        </option>
+                                    @endif
                                 @endforeach
                             </select>
                         </div>
+                        <!-- Club Section -->
+                        
+                        <div class="mb-3 mb-2">
+                            <div class="col-md-4 mb-2">
+                                <input type="hidden" class="form-control" id="club_id" name="club_id" value="{{ $club->club_id }}">
+                            </div>
+                        </div>
                     </div>
+
+                    <hr>
 
                     <hr>
 

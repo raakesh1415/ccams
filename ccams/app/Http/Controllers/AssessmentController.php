@@ -5,35 +5,70 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Assessment;
 use App\Models\User;
+use App\Models\Registration;
+use App\Models\Club;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class AssessmentController extends Controller
 {
     public function index()
-    {   
-        return view("assessment.index");
-    }
-
-    public function list()
-    {   
-        // $assessments = Assessment::all();
-        $assessment = Assessment::with('user')->get();
-        return view("assessment.list", [
-            'assessment' => $assessment]
-        );
-        
-    }
-
-    public function create()
     {
-        // dd('ok');
-        // return view("assessment.create");
-        $users = User::all(); // Fetch all users
-        return view('assessment.create', compact('users')); // Pass users to the view
+        $userId = Auth::id();
+
+        // Fetch all registered clubs for the user
+        $registrations = Registration::where('user_id', $userId)->with('club')->get();
+        return view("assessment.index", compact('registrations'));
+    }
+
+    public function list($club_id)
+    {
+        $userId = Auth::id();
+
+        // Fetch the specific club registration for the teacher
+        $registration = Registration::where('user_id', $userId)
+            ->where('club_id', $club_id)
+            ->with('club')
+            ->first();
+
+        // Fetch assessments for this club
+        $assessments = Assessment::where('club_id', $club_id)->with('user', 'club')->get();
+
+        return view("assessment.list", [
+            'assessments' => $assessments,
+            'club' => $registration->club
+        ]);
     }
 
 
-    public function store(Request $request) { 
+
+    public function create($club_id)
+    {
+        // First verify the club exists
+        $club = Club::findOrFail($club_id);
+
+        // Get registered students with error handling
+        $registeredUsers = Registration::whereHas('user', function ($query) {
+            $query->where('role', 'student');
+        })
+            ->where('club_id', $club_id)
+            ->with('user')
+            ->get();
+
+        // Debug to check what data you're getting
+        // dd($registeredUsers);  // Uncomment this to check the data
+
+        return view('assessment.create', [
+            'users' => $registeredUsers,
+            'club' => $club,
+            'club_id' => $club_id
+        ]);
+    }
+
+
+
+    public function store(Request $request)
+    {
         // Validate incoming request data
         $data = $request->validate([
             'user_id' => 'required|exists:users,id', // Ensure user_id exists in users table
@@ -44,8 +79,9 @@ class AssessmentController extends Controller
             'contribution' => 'array|required',
             'attendance' => 'required|numeric',
             'comment' => 'required|string',
+            'club_id' => 'required|exists:clubs,club_id',
         ]);
-    
+
         // Define scores for position
         $positionScores = [
             'President' => 10,
@@ -60,13 +96,25 @@ class AssessmentController extends Controller
         ];
         // Get the score for the selected position
         $pos = $positionScores[$data['position']] ?? 0; // Default to 0 if not found
-    
+
 
         // Define scores for engagement
         $engagementScores = [
-            'I1' => 20, 'N1' => 17, 'C1' => 14, 'D1' => 11, 'S1' => 0, 
-            'I2' => 15, 'N2' => 12, 'C2' => 10, 'D2' => 8, 'S2' => 0,
-            'I3' => 10, 'N3' => 8, 'C3' => 6, 'D3' => 4, 'S3' => 0,
+            'I1' => 20,
+            'N1' => 17,
+            'C1' => 14,
+            'D1' => 11,
+            'S1' => 0,
+            'I2' => 15,
+            'N2' => 12,
+            'C2' => 10,
+            'D2' => 8,
+            'S2' => 0,
+            'I3' => 10,
+            'N3' => 8,
+            'C3' => 6,
+            'D3' => 4,
+            'S3' => 0,
         ];
         // Calculate total engagement score
         $eng = 0;
@@ -74,13 +122,25 @@ class AssessmentController extends Controller
             $eng += $engagementScores[$engagement] ?? 0; // Default to 0 if not found
         }
         $eng = min($eng, 20); // Cap at 20 marks
-        
+
 
         // Define scores for achievement
         $achievementScores = [
-            'IC' => 20, 'NC' => 17, 'CC' => 14, 'DC' => 11, 'SC' => 8,
-            'I1' => 19, 'N1' => 16, 'C1' => 13, 'D1' => 10, 'S1' => 7, 
-            'I2' => 18, 'N2' => 15, 'C2' => 12,'D2' => 9, 'S2' => 6,
+            'IC' => 20,
+            'NC' => 17,
+            'CC' => 14,
+            'DC' => 11,
+            'SC' => 8,
+            'I1' => 19,
+            'N1' => 16,
+            'C1' => 13,
+            'D1' => 10,
+            'S1' => 7,
+            'I2' => 18,
+            'N2' => 15,
+            'C2' => 12,
+            'D2' => 9,
+            'S2' => 6,
         ];
         // Calculate total achievement score
         $ach = 0;
@@ -92,8 +152,18 @@ class AssessmentController extends Controller
 
         // Define scores for commitment
         $commitmentScores = [
-            'C1' => 3, 'C2' => 3, 'C3' => 2, 'C4' => 2, 'C5' => 2, 'C6' => 2, 
-            'C7' => 2, 'C8' => 2, 'C9' => 2, 'C10' => 2, 'C11' => 2, 'C12' => 2,
+            'C1' => 3,
+            'C2' => 3,
+            'C3' => 2,
+            'C4' => 2,
+            'C5' => 2,
+            'C6' => 2,
+            'C7' => 2,
+            'C8' => 2,
+            'C9' => 2,
+            'C10' => 2,
+            'C11' => 2,
+            'C12' => 2,
         ];
         // Calculate total commitment score
         $com = 0;
@@ -101,11 +171,14 @@ class AssessmentController extends Controller
             $com += $commitmentScores[$commitment] ?? 0; // Default to 0 if not found
         }
         $com = min($com, 10); // Cap at 10 marks
-    
+
 
         // Define scores for contribution
         $contributionScores = [
-            'CS1' => 10, 'CS2' => 10, 'CS3' => 8, 'CS4' => 5,
+            'CS1' => 10,
+            'CS2' => 10,
+            'CS3' => 8,
+            'CS4' => 5,
         ];
         // Calculate total contribution score
         $con = 0;
@@ -113,7 +186,7 @@ class AssessmentController extends Controller
             $con += $contributionScores[$contribution] ?? 0; // Default to 0 if not found
         }
         $con = min($con, 10); // Cap at 10 marks
-    
+
 
         // Calculate attendance score using the formula
         $attend = ($data['attendance'] / 12) * 40; // Attendance formula
@@ -123,7 +196,7 @@ class AssessmentController extends Controller
         $total = $pos + $eng + $ach + $com + $con + $attend;
         // Cap the total marks at 110
         $data['total_mark'] = min($total, 110); // Max 110 marks
-    
+
         // Prepare data for database insertion
         $assessmentData = [
             'user_id' => $data['user_id'], // Save user_id
@@ -135,13 +208,14 @@ class AssessmentController extends Controller
             'attendance' => $data['attendance'],
             'comment' => $data['comment'],
             'total_mark' => $data['total_mark'],
+            'club_id' => $data['club_id'],
         ];
-    
+
         // Create new assessment record in the database
         Assessment::create($assessmentData);
-    
+
         // Redirect to the assessment list page
-        return redirect()->route('assessment.list')->with('success', 'Assessment saved successfully!');
+        return redirect()->route('assessment.list', ['club_id' => $data['club_id']])->with('success', 'Assessment saved successfully!');
     }
 
     // AssessmentController.php
@@ -152,14 +226,35 @@ class AssessmentController extends Controller
         return view("assessment.show", compact('assessment', 'user'));
     }
 
-    public function edit(Assessment $assessment)
+    public function view($assessment_id)
     {
-        $users = User::all(); // Fetch all users
-        return view("assessment.edit", compact('assessment', 'users')); // Pass assessment and users to the view
+        $assessment = Assessment::findOrFail($assessment_id);
+        $user = $assessment->user; // Assuming there's a relationship set up between Assessment and User
+        return view("assessment.view", compact('assessment', 'user'));
     }
 
-    public function update(Request $request, Assessment $assessment)
+    public function edit($assessment_id)
     {
+        $assessment = Assessment::findOrFail($assessment_id);
+        
+        // Get registered students for this specific club
+        $registeredUsers = Registration::whereHas('user', function ($query) {
+            $query->where('role', 'student');
+        })
+        ->where('club_id', $assessment->club_id)
+        ->with('user')
+        ->get();
+
+        return view("assessment.edit", [
+            'assessment' => $assessment,
+            'users' => $registeredUsers,
+            'club' => $assessment->club
+        ]);
+    }
+
+    public function update(Request $request, $assessment_id)
+    {
+        $assessment = Assessment::findOrFail($assessment_id);
         // Validate incoming request data
         $data = $request->validate([
             'user_id' => 'required|exists:users,id',
@@ -170,6 +265,7 @@ class AssessmentController extends Controller
             'contribution' => 'array|required',
             'attendance' => 'required|numeric',
             'comment' => 'required|string',
+            'club_id' => 'required|exists:clubs,club_id',
         ]);
 
         // Define scores for position
@@ -187,12 +283,24 @@ class AssessmentController extends Controller
         // Get the score for the selected position
         $pos = $positionScores[$data['position']] ?? 0; // Default to 0 if not found
 
-        
+
         // Define scores for engagement
         $engagementScores = [
-            'I1' => 20, 'N1' => 17, 'C1' => 14, 'D1' => 11, 'S1' => 0, 
-            'I2' => 15, 'N2' => 12, 'C2' => 10, 'D2' => 8, 'S2' => 0,
-            'I3' => 10, 'N3' => 8, 'C3' => 6, 'D3' => 4, 'S3' => 0,
+            'I1' => 20,
+            'N1' => 17,
+            'C1' => 14,
+            'D1' => 11,
+            'S1' => 0,
+            'I2' => 15,
+            'N2' => 12,
+            'C2' => 10,
+            'D2' => 8,
+            'S2' => 0,
+            'I3' => 10,
+            'N3' => 8,
+            'C3' => 6,
+            'D3' => 4,
+            'S3' => 0,
         ];
         // Calculate total engagement score
         $eng = 0;
@@ -204,9 +312,21 @@ class AssessmentController extends Controller
 
         // Define scores for achievement
         $achievementScores = [
-            'IC' => 20, 'NC' => 17, 'CC' => 14, 'DC' => 11, 'SC' => 8,
-            'I1' => 19, 'N1' => 16, 'C1' => 13, 'D1' => 10, 'S1' => 7, 
-            'I2' => 18, 'N2' => 15, 'C2' => 12,'D2' => 9, 'S2' => 6,
+            'IC' => 20,
+            'NC' => 17,
+            'CC' => 14,
+            'DC' => 11,
+            'SC' => 8,
+            'I1' => 19,
+            'N1' => 16,
+            'C1' => 13,
+            'D1' => 10,
+            'S1' => 7,
+            'I2' => 18,
+            'N2' => 15,
+            'C2' => 12,
+            'D2' => 9,
+            'S2' => 6,
         ];
         // Calculate total achievement score
         $ach = 0;
@@ -218,8 +338,18 @@ class AssessmentController extends Controller
 
         // Define scores for commitment
         $commitmentScores = [
-            'C1' => 3, 'C2' => 3, 'C3' => 2, 'C4' => 2, 'C5' => 2, 'C6' => 2, 
-            'C7' => 2, 'C8' => 2, 'C9' => 2, 'C10' => 2, 'C11' => 2, 'C12' => 2,
+            'C1' => 3,
+            'C2' => 3,
+            'C3' => 2,
+            'C4' => 2,
+            'C5' => 2,
+            'C6' => 2,
+            'C7' => 2,
+            'C8' => 2,
+            'C9' => 2,
+            'C10' => 2,
+            'C11' => 2,
+            'C12' => 2,
         ];
         // Calculate total commitment score
         $com = 0;
@@ -231,7 +361,10 @@ class AssessmentController extends Controller
 
         // Define scores for contribution
         $contributionScores = [
-            'CS1' => 10, 'CS2' => 10, 'CS3' => 8, 'CS4' => 5,
+            'CS1' => 10,
+            'CS2' => 10,
+            'CS3' => 8,
+            'CS4' => 5,
         ];
         // Calculate total contribution score
         $con = 0;
@@ -255,14 +388,19 @@ class AssessmentController extends Controller
         $assessment->update(array_merge($data, ['total_mark' => $data['total_mark']]));
 
         // Redirect to the assessment list page
-        return redirect()->route('assessment.list')->with('success', 'Assessment updated successfully!');
+        return redirect()->route('assessment.list', ['club_id' => $assessment->club_id])
+        ->with('success', 'Assessment updated successfully!');
     }
 
 
-    public function destroy(Assessment $assessment)
+    public function destroy($assessment_id)
     {
-        // return view("assessment.delete");
+        $assessment = Assessment::findOrFail($assessment_id);
+        $club_id = $assessment->club_id; // Store club_id before deletion
+        
         $assessment->delete();
-        return redirect()->route('assessment.list')->with('success', 'Assessment updated successfully!');
+        
+        return redirect()->route('assessment.list', ['club_id' => $club_id])
+            ->with('success', 'Assessment deleted successfully!');
     }
 }

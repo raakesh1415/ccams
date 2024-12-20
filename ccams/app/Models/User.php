@@ -96,4 +96,9 @@ class User extends Authenticatable
         return $this->role === 'student';
     }
     // User.php
+
+    public function registrations()
+    {
+        return $this->hasMany(Registration::class);
+    }
 }

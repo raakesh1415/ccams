@@ -1,6 +1,6 @@
 // show.blade.php
 <x-layout>
-    {{-- <div class="container-fluid px-4 py-4"> --}}
+    <div class="container-fluid px-4 py-4">
         <div class="card">
             <div class="card-header text-center">
                 <h3>Summary of Assessment</h3>
@@ -20,7 +20,7 @@
                         <p><strong>Year:</strong> 2024</p>
                     </div>
                     <div class="col-md-6">
-                        <p><strong>Class:</strong> {{ $user->classroom }}</p> 
+                        <p><strong>Class:</strong> 5 Sains 1</p> 
                     </div>
                 </div>
 
@@ -278,5 +278,6 @@
                 </div>
             </div>
         </div>
-    {{-- </div> --}}
+    </div>
 </x-layout>
+ 

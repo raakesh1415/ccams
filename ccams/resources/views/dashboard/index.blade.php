@@ -1,5 +1,5 @@
 <x-layout>
-    <div class="container mt-5">
+    <div class="container-fluid px-4 py-4">
         <h1 class="text-left" style="text-transform: uppercase;"><b><i>SELAMAT DATANG, {{ $user->name }} !</i></b></h1>
         <h5 class="text-left">Semoga hari yang hebat! Semoga berjaya!</h5><br>
         <h2 class="text-left"><b>Kelas Berdaftar Anda</b></h2>

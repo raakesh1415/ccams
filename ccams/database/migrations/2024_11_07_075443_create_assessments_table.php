@@ -22,8 +22,10 @@ return new class extends Migration
             $table->text('comment');
             $table->integer('total_mark');
             $table->unsignedBigInteger('user_id');
-            // $table->string('attendance_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('club_id');
+            $table->foreign('club_id')->references('club_id')->on('clubs')->onDelete('cascade');
+            // $table->string('attendance_id');
             // $table->foreign('attendance_id')->references('attendance_id')->on('attendances')->onDelete('cascade');
             $table->timestamps();
         });

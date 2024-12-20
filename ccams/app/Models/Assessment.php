@@ -8,13 +8,14 @@ use Illuminate\Notifications\Notifiable;
 
 class Assessment extends Model
 {
-    use HasFactory; 
+    use HasFactory;
 
     protected $table = 'assessments';
     protected $primaryKey = 'assessment_id'; // Specify your primary key here
 
     protected $fillable = [
         'user_id',
+        'club_id',
         'position',
         'engagement',
         'achievement',
@@ -35,5 +36,10 @@ class Assessment extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function club()
+    {
+        return $this->belongsTo(Club::class, 'club_id');
     }
 }

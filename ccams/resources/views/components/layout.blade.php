@@ -111,6 +111,12 @@
                                 Penilaian
                             </a>
                         @endif
+                        @if (Auth::user()->role === 'student')
+                            <a class="nav-link {{ request()->is('assessment') ? 'active' : '' }}" href="/assessment">
+                                <div class="sb-nav-link-icon"><i class="fas fa-clipboard-list"></i></div>
+                                Penilaian
+                            </a>
+                        @endif
                     </div>
                 </div>
             </nav>
@@ -118,7 +124,7 @@
 
         <div id="layoutSidenav_content">
             <main>
-                <div class="container-fluid px-4">
+                <div class="container-fluid px-4 py-4">
                     {{ $slot }}
                     {{-- </div> --}}
                 </div>

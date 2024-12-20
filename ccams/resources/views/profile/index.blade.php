@@ -1,5 +1,5 @@
 <x-layout>
-    <div class="container py-5 bg-light rounded">
+    <div class="container-fluid py-4 px-4 bg-light rounded">
         <div class="row g-4">
             <!-- Left Column: User Info and Profile Photo -->
             <div class="col-lg-4">

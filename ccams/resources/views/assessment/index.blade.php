@@ -1,49 +1,28 @@
 <x-layout>
-    {{-- <x-slot name="header">
-        
-        <div class="user-profile">
-            <img src="{{ asset('path-to-profile-picture.jpg') }}" alt="User  Profile" class="img-fluid rounded-circle" style="width: 100px; height: 100px;"> <!-- Replace with actual profile picture path -->
-        </div>
-    </x-slot> --}}
-
     <div class="text-center pt-3 pb-4">
-        <h2 class="text-start ">Assessment</h2>
+        <h2 class="text-start">Assessment</h2>
         <h4 class="text-start pt-4">My Clubs</h4>
         <div class="row g-4 mt-0">
+            @foreach ($registrations as $registration)
             <!-- Club 1 -->
             <div class="col-lg-4 col-md-6 col-sm-12">
                 <div class="card club-card">
-                    <img src="{{ asset('images/unitberuniform.jpg') }}" alt="St John's Ambulance" class="card-img-top p-0">
+                    <div class="ratio ratio-16x9"> <!-- Adjusts the aspect ratio to 16: -->
+                        <img src="{{ asset('storage/' . $registration->club->club_pic) }}" alt="Club Image" class="card-img-top img-fluid"> <!-- Ensures the image fits within the container -->
+                    </div>
                     <div class="card-body">
-                        <h5 class="card-title">St John's Ambulance</h5>
-                        <p class="card-text">Uniform Body</p>
-                        <a href="{{ route('assessment.list') }}" class="btn btn-dark">Assessment</a>
+                        <h5 class="card-title">{{ $registration->club->club_name }}</h5>
+                        <p class="card-text">{{ $registration->club_type }}</p>
+                        @if (Auth::user()->role === 'teacher')
+                            <a href="{{ route('assessment.list', $registration->club->club_id) }}" class="btn btn-dark">Assessment</a>
+                        @endif
+                        @if (Auth::user()->role === 'student')
+                            <a href="{{ route('assessment.view') }}" class="btn btn-dark">Assessment</a>
+                        @endif
                     </div>
                 </div>
             </div>
-            <!-- Club 2 -->
-            <div class="col-lg-4 col-md-6 col-sm-12">
-                <div class="card club-card">
-                    <img src="{{ asset('images/persatuan.jpg') }}" alt="Coding & Robotics" class="card-img-top">
-                    <div class="card-body">
-                        <h5 class="card-title">Coding & Robotics</h5>
-                        <p class="card-text">Society</p>
-                        <a href="{{ route('assessment.list') }}" class="btn btn-dark">Assessment</a>
-                    </div>
-                </div>
-            </div>
-            <!-- Club 3 -->
-            <div class="col-lg-4 col-md-6 col-sm-12">
-                <div class="card club-card">
-                    <img src="{{ asset('images/sukanpermainan.jpg') }}" alt="Badminton" class="card-img-top">
-                    <div class="card-body">
-                        <h5 class="card-title">Badminton</h5>
-                        <p class="card-text">Sports & Games</p>
-                        <a href="{{ route('assessment.list') }}" class="btn btn-dark">Assessment</a>
-                    </div>
-                </div>
-            </div>
-            
+            @endforeach
         </div>
     </div>
 </x-layout>
