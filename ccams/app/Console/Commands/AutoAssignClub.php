@@ -7,7 +7,6 @@ use App\Models\User;
 use App\Models\Club;
 use App\Models\Registration;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Auth;
 
 class AutoAssignClub extends Command
 {
@@ -26,11 +25,13 @@ class AutoAssignClub extends Command
         }
 
         // Step 2: Find students with role 'student' who haven't registered all club types
-        $unregisteredStudents = User::where('role', 'student') // Filter users with role 'student'
-            ->whereHas('registrations', function ($query) {
-                $query->select('club_type')->distinct();
-            }, '<', 3) // Ensure less than 3 club types registered
-            ->get();
+        $requiredClubTypes = ['Persatuan', 'Permainan', 'Unit Beruniform']; // Define all club types
+        $unregisteredStudents = User::where('role', 'student')
+            ->get()
+            ->filter(function ($student) use ($requiredClubTypes) {
+                $registeredClubTypes = $student->registrations->pluck('club_type')->unique();
+                return $registeredClubTypes->count() < count($requiredClubTypes); // Find students with missing club types
+            });
 
         if ($unregisteredStudents->isEmpty()) {
             $this->info("All students have already registered for the required club types.");
@@ -38,10 +39,12 @@ class AutoAssignClub extends Command
         }
 
         // Step 3: Find clubs with free seating grouped by club type
-        $availableClubsByType = Club::withCount('registrations')
-            ->having('capacity', '>', 'registrations_count')
+        $availableClubsByType = Club::with('registrations')
             ->get()
-            ->groupBy('club_type'); // Group clubs by their type
+            ->filter(function ($club) {
+                return $club->participant_total > $club->registrations->count(); // Clubs with available seating
+            })
+            ->groupBy('club_category'); // Group by club category (club type)
 
         if ($availableClubsByType->isEmpty()) {
             $this->error("No clubs with free seating available.");
@@ -50,26 +53,32 @@ class AutoAssignClub extends Command
 
         // Step 4: Assign students to clubs
         foreach ($unregisteredStudents as $student) {
-            $registeredClubTypes = $student->registrations->pluck('club.club_type')->unique();
+            $registeredClubTypes = $student->registrations->pluck('club_type')->unique();
 
-            foreach ($availableClubsByType as $clubType => $clubs) {
+            foreach ($requiredClubTypes as $clubType) {
                 // Skip already registered club types
                 if ($registeredClubTypes->contains($clubType)) {
                     continue;
                 }
 
-                // Pick a random club from the available clubs of the current type
-                $club = $clubs->random();
+                // Get clubs with available seating for the current club type
+                $validClubs = $availableClubsByType[$clubType] ?? collect();
+
+                if ($validClubs->isEmpty()) {
+                    $this->info("No available clubs for Club Type: {$clubType}");
+                    continue;
+                }
+
+                // Assign the first available club to the student
+                $club = $validClubs->shift(); // Remove the club from the list to avoid duplicates
 
                 Registration::create([
-                    'user_id' => Auth::id(),
-                    'club_id' => $club->id,
+                    'user_id' => $student->id,
+                    'club_id' => $club->club_id,
+                    'club_type' => $clubType,
                 ]);
 
-                $this->info("Student ID {$student->id} assigned to Club ID {$club->id} (Type: {$clubType})");
-
-                // Update registered club types
-                $registeredClubTypes->push($clubType);
+                $this->info("Student ID {$student->id} assigned to Club ID {$club->club_id} (Type: {$clubType})");
             }
         }
 
