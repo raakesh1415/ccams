@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -67,6 +68,7 @@
         }
     </style>
 </head>
+
 <body>
     <!-- Header -->
     <div class="header">
@@ -76,36 +78,40 @@
     <!-- Content -->
     <div class="overlay">
         <div class="forgot-password-card">
-            <h2 class="mb-4" style="color: black;">Password Reset</h2>
+            <h2 class="mb-4" style="color: black;">LUPA KATA LALUAN?</h2>
             <form action="{{ route('login.resetp') }}" method="POST" novalidate>
                 @csrf
                 <!-- Email Input -->
                 <div class="form-group">
-                    <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email" required>
+                    <input type="email" id="email" name="email" class="form-control"
+                        placeholder="MASUKKAN E-MEL ANDA" required>
                     <div id="emailFeedback" class="text-danger"></div>
                 </div>
 
                 <!-- IC Input -->
                 <div class="form-group">
-                    <input type="text" id="ic" name="ic" class="form-control" placeholder="Enter your IC" required>
+                    <input type="text" id="ic" name="ic" class="form-control"
+                        placeholder="MASUKKAN IC ANDA" required>
                     <div id="icFeedback" class="text-danger"></div>
                 </div>
 
                 <!-- New Password Input -->
                 <div class="form-group">
-                    <input type="password" id="Newpassword" name="Newpassword" class="form-control" placeholder="Enter your new password" required>
+                    <input type="password" id="Newpassword" name="Newpassword" class="form-control"
+                        placeholder="MASUKKAN KATA LALUAN BARU ANDA" required>
                 </div>
 
                 <!-- New Password Confirmation Input -->
                 <div class="form-group">
-                    <input type="password" id="Newpassword_confirmation" name="Newpassword_confirmation" class="form-control" placeholder="Confirm your new password" required>
+                    <input type="password" id="Newpassword_confirmation" name="Newpassword_confirmation"
+                        class="form-control" placeholder="SAHKAN KATA LALUAN BARU ANDA" required>
                     <div id="passwordFeedback" class="text-danger"></div>
                 </div>
 
-                <button type="submit" class="btn btn-reset btn-block" id="submitBtn" disabled>Reset</button>
+                <button type="submit" class="btn btn-reset btn-block" id="submitBtn" disabled>SETSEMULA</button>
             </form>
             <div class="mt-3">
-                <a href="{{ route('login.index') }}" class="text-primary">Back to Login</a>
+                <a href="{{ route('login') }}" class="text-primary">Kembali Ke Log Masuk</a>
             </div>
         </div>
     </div>
@@ -115,17 +121,20 @@
     <script>
         let isEmailValid = false;
         let isICValid = false;
-        let isValidUser = false;  // New variable to track if the email and IC belong to the same user
+        let isValidUser = false; // New variable to track if the email and IC belong to the same user
 
         // Email validation via AJAX
-        $('#email').on('blur', function () {
+        $('#email').on('blur', function() {
             const email = $(this).val();
             if (email) {
                 $.ajax({
                     url: "{{ route('check.email') }}", // Replace with actual route
                     method: 'POST',
-                    data: { _token: '{{ csrf_token() }}', email },
-                    success: function (response) {
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        email
+                    },
+                    success: function(response) {
                         if (response.exists) {
                             $('#emailFeedback').text('');
                             isEmailValid = true;
@@ -140,14 +149,17 @@
         });
 
         // IC validation via AJAX
-        $('#ic').on('blur', function () {
+        $('#ic').on('blur', function() {
             const ic = $(this).val();
             if (ic) {
                 $.ajax({
                     url: "{{ route('check.ic') }}", // Replace with actual route
                     method: 'POST',
-                    data: { _token: '{{ csrf_token() }}', ic },
-                    success: function (response) {
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        ic
+                    },
+                    success: function(response) {
                         if (response.exists) {
                             $('#icFeedback').text('');
                             isICValid = true;
@@ -169,10 +181,14 @@
                 $.ajax({
                     url: "{{ route('check.email.ic.match') }}", // Replace with actual route for matching email and IC
                     method: 'POST',
-                    data: { _token: '{{ csrf_token() }}', email, ic },
-                    success: function (response) {
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        email,
+                        ic
+                    },
+                    success: function(response) {
                         if (response.match) {
-                            $('#emailFeedback, #icFeedback').text('');  // Clear error messages if valid
+                            $('#emailFeedback, #icFeedback').text(''); // Clear error messages if valid
                             isValidUser = true;
                         } else {
                             $('#emailFeedback').text('Email and IC do not match');
@@ -189,7 +205,7 @@
         }
 
         // Validate password match
-        $('#Newpassword, #Newpassword_confirmation').on('input', function () {
+        $('#Newpassword, #Newpassword_confirmation').on('input', function() {
             const password = $('#Newpassword').val();
             const confirmPassword = $('#Newpassword_confirmation').val();
             if (password && confirmPassword && password !== confirmPassword) {
@@ -214,4 +230,5 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

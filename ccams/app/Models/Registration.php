@@ -23,7 +23,7 @@ class Registration extends Model
     public function club()
     {
     // Use club_id that registered under user_id to find certain club
-    return $this->belongsTo(Club::class, 'club_id');
+    return $this->belongsTo(Club::class, 'club_id', 'club_id');
     }
 
     public function user()

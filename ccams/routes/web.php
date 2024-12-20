@@ -83,7 +83,6 @@ Route::middleware(['auth'])->group(function () {
 });
 
 // Login
-Route::get('/login', [UserController::class, 'showLoginForm'])->name('login.index');
 Route::post('/login', [UserController::class, 'login'])->name('login.submit'); // 
 Route::get('/login', [UserController::class, 'logout'])->name('logout'); // 
 Route::get('/login/signin', [UserController::class, 'create'])->name('login.signin');

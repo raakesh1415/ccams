@@ -20,5 +20,12 @@ class Club extends Model
         'club_category',
         'club_pic'
     ];
+
+    //AutoAssignClub
+    public function registrations()
+    {
+        return $this->hasMany(Registration::class, 'club_id', 'club_id');
+    }
+
 }
 

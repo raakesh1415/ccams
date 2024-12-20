@@ -176,7 +176,7 @@ class UserController extends Controller
         $user->password = Hash::make($validatedData['Newpassword']); // Hash the new password
         $user->save();
         // Redirect to the login page or display success
-        return redirect()->route('login.index')->with('success', 'Kata laluan telah berjaya ditetapkan semula!');
+        return redirect()->route('login')->with('success', 'Kata laluan telah berjaya ditetapkan semula!');
     }
 
     public function checkEmailAndICMatch(Request $request)

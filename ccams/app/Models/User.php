@@ -97,6 +97,7 @@ class User extends Authenticatable
     }
     // User.php
 
+    // AutoAssignClub
     public function registrations()
     {
         return $this->hasMany(Registration::class);
