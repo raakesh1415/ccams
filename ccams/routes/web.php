@@ -89,9 +89,7 @@ Route::get('/login/signin', [UserController::class, 'create'])->name('login.sign
 Route::post('/login/signin', [UserController::class, 'store'])->name('signin.store');
 
 //Reset password
-Route::get('/login/reset', function () {
-    return view('login/reset');
-})->name('login.reset');
+Route::get('/login/reset', function(){return view('login.reset');})->name('login.reset');
 Route::post('/reset-password', [UserController::class, 'resetPassword'])->name('login.resetp');
 Route::post('/check-email', [UserController::class, 'checkEmail'])->name('check.email');
 Route::post('/check-name', [UserController::class, 'checkName'])->name('check.name');
