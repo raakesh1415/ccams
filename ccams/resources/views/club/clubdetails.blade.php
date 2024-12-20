@@ -1,6 +1,6 @@
 <x-layout>
     <x-slot name="header">
-        <h2>{{ $clubs->club_name }} - Club Details</h2>
+        <h2>{{ $clubs->club_name }} - Maklumat Kelab</h2>
     </x-slot>
 
     <div class="container mt-4">
@@ -13,20 +13,20 @@
             <!-- Details on the Right -->
             <div class="col-md-8">
                 <h3 class="h4">{{ $clubs->club_name }}</h3>
-                <p class="text-muted"><strong>Category:</strong> {{ $clubs->club_category }}</p>
+                <p class="text-muted"><strong>Kategori:</strong> {{ $clubs->club_category }}</p>
                 <p>{{ $clubs->club_description }}</p>
-                <p class="text-secondary"><strong>Total Participants:</strong> {{ $clubs->participant_total }}</p>
+                <p class="text-secondary"><strong>Jumlah Pelajar:</strong> {{ $clubs->participant_total }}</p>
 
                 <!-- Action Buttons -->
                 <div class="d-flex gap-2 mt-3">
                     <!-- Edit Button -->
                     <a href="{{ route('club.edit', ['club_id' => $clubs->club_id]) }}" class="btn btn-outline-success">
-                        <i class="fas fa-edit"></i> Edit
+                        <i class="fas fa-edit"></i> Ubah
                     </a>
 
                     <!-- Delete Button to Trigger Modal -->
                     <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
-                        <i class="fas fa-trash"></i> Delete
+                        <i class="fas fa-trash"></i> Padam
                     </button>
                 </div>
             </div>
@@ -38,14 +38,14 @@
                 <div class="modal-content">
                     <div class="modal-body text-center">
                         <i class="fas fa-times-circle text-danger" style="font-size: 50px;"></i>
-                        <h5 class="modal-title mt-3" id="deleteModalLabel">Are you sure?</h5>
-                        <p class="mt-3">Do you really want to delete this Club?<br>This process cannot be undone.</p>
+                        <h5 class="modal-title mt-3" id="deleteModalLabel">Adakah kamu pasti?</h5>
+                        <p class="mt-3">Adakah kamu benar-benar mahu memadamkan kelab ini?<br>Proses ini tidak boleh dibatalkan setelah kelab dipadam.</p>
                         <div class="d-flex justify-content-center mt-4">
-                            <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">Batal</button>
                             <form action="{{ route('club.destroy', ['club_id' => $clubs->club_id]) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger">Delete</button>
+                                <button type="submit" class="btn btn-danger">Padam</button>
                             </form>
                         </div>
                     </div>

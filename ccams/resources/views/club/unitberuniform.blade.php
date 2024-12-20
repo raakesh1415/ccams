@@ -4,7 +4,7 @@
     </x-slot>
 
     <div class="container mt-4">
-        <h2 class="text-center">Explore Unit Beruniform Clubs</h2>
+        <h2 class="text-center">Terokai Unit Beruniform</h2>
 
         <!-- Check if there are clubs in the 'Unit Beruniform' category -->
         @if($clubs->isEmpty())
@@ -20,7 +20,7 @@
             <!-- Add Club Button - Positioned on the Left when there are clubs -->
             <div class="text-start mb-4">
                 <a href="/club/add" class="btn btn-outline-dark d-inline-flex align-items-center">
-                    <span class="me-2 fw-bold">+</span>Add Club
+                    <span class="me-2 fw-bold">+</span>Tambah Kelab
                 </a>
             </div>
         @endif
@@ -35,7 +35,7 @@
                         <div class="card-body text-center">
                             <h3 class="card-title h5">{{ $clubs->club_name }}</h3>
                             <p class="card-text text-muted">{{ Str::limit($clubs->club_description, 100) }}</p>
-                            <a href="{{ route('club.details', ['club_id' => $clubs->club_id]) }}" class="btn btn-dark">View Details</a>
+                            <a href="{{ route('club.details', ['club_id' => $clubs->club_id]) }}" class="btn btn-dark">Lihat Maklumat</a>
                         </div>
                     </div>
                 </div>

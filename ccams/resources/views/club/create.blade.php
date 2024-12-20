@@ -1,6 +1,6 @@
 <x-layout>
     <x-slot name="header">
-        <h2 class="mb-4 text-center">{{ isset($clubs) ? 'Edit' : 'Create' }} Club</h2>
+        <h2 class="mb-4 text-center">{{ isset($clubs) ? 'Edit' : 'Create' }} Kelab</h2>
         <div class="user-profile mb-4 text-center">
             <img src="{{ asset('path-to-profile-picture.jpg') }}" alt="User Profile" class="img-fluid rounded-circle shadow" style="max-width: 100px;">
         </div>
@@ -8,7 +8,7 @@
 
     <div class="container my-5">
         <!-- Centered Title -->
-        <h3 class="text-center mb-4">{{ isset($clubs) ? 'Edit' : 'Create' }} a Club</h3>
+        <h3 class="text-center mb-4">{{ isset($clubs) ? 'Ubah' : 'Tambah' }} Maklumat Kelab</h3>
 
         <div class="card shadow-lg border-0 rounded-3 p-4">
             <!-- Form Action for Create or Edit -->
@@ -23,7 +23,7 @@
                     <div class="col-md-6 mb-4">
                         <!-- Club Name -->
                         <div class="mb-3">
-                            <label for="club_name" class="form-label">Club Name</label>
+                            <label for="club_name" class="form-label">Nama</label>
                             <div class="input-group">
                                 <span class="input-group-text bg-dark text-white">
                                     <i class="fas fa-users"></i>
@@ -34,13 +34,13 @@
 
                         <!-- Club Description -->
                         <div class="mb-3">
-                            <label for="club_description" class="form-label">Description</label>
+                            <label for="club_description" class="form-label">Deskripsi</label>
                             <textarea id="club_description" name="club_description" rows="4" class="form-control" required placeholder="Enter club description" style="resize: none;">{{ old('club_description', isset($clubs) ? $clubs->club_description : '') }}</textarea>
                         </div>
 
                         <!-- Participant Total -->
                         <div class="mb-3">
-                            <label for="participant_total" class="form-label">Participants</label>
+                            <label for="participant_total" class="form-label">Jumlah Pelajar</label>
                             <div class="input-group">
                                 <span class="input-group-text bg-dark text-white">
                                     <i class="fas fa-user-friends"></i>
@@ -54,8 +54,8 @@
                     <div class="col-md-6 mb-4">
                         <!-- Club Picture -->
                         <div class="mb-3">
-                            <label for="club_pic" class="form-label">Club Picture</label>
-                            <small class="form-text text-muted">Upload a club image (optional)</small>
+                            <label for="club_pic" class="form-label">Gambar Kelab</label>
+                            <small class="form-text text-muted">Muatnaik Gambar Kelab (Tidak Wajib)</small>
                             <input type="file" id="club_pic" name="club_pic" accept="image/*" class="form-control-file">
                             @if(isset($clubs) && $clubs->club_pic)
                                 <img src="{{ asset('storage/'.$clubs->club_pic) }}" alt="Club Picture" class="img-fluid mt-2" style="max-width: 100px;">
@@ -64,7 +64,7 @@
 
                         <!-- Club Category -->
                         <div class="mb-3">
-                            <label for="club_category" class="form-label">Category</label>
+                            <label for="club_category" class="form-label">Kategori</label>
                             <select id="club_category" name="club_category" class="form-select" required>
                                 <option value="">Select Category</option>
                                 <option value="Kelab" {{ (old('club_category', isset($clubs) ? $clubs->club_category : '') == 'Kelab') ? 'selected' : '' }}>Kelab</option>
@@ -77,7 +77,7 @@
 
                 <!-- Submit Button -->
                 <div class="d-grid gap-2 d-md-flex justify-content-md-center mt-4">
-                    <button type="submit" class="btn btn-dark btn-lg px-4 py-2 shadow-sm rounded-pill">{{ isset($clubs) ? 'Update' : 'Add' }} Club</button>
+                    <button type="submit" class="btn btn-dark btn-lg px-4 py-2 shadow-sm rounded-pill">{{ isset($clubs) ? 'Simpan Maklumat' : 'Tambah' }} Kelab</button>
                 </div>
             </form>
         </div>
