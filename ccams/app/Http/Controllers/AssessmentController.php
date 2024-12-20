@@ -12,13 +12,17 @@ use Illuminate\Support\Facades\Auth;
 
 class AssessmentController extends Controller
 {
+    // Show list of clubs the student is registered to
     public function index()
     {
-        $userId = Auth::id();
+        // Get the currently authenticated student
+        $student = auth()->user();
 
-        // Fetch all registered clubs for the user
-        $registrations = Registration::where('user_id', $userId)->with('club')->get();
-        return view("assessment.index", compact('registrations'));
+        // Fetch the clubs the student is registered to
+        $clubs = $student->clubs;
+
+        // Pass the clubs to the view
+        return view('attendance.index', compact('clubs'));
     }
 
     public function list($club_id)

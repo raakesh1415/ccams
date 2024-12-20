@@ -53,12 +53,7 @@ class User extends Authenticatable
      */
     public function clubs()
     {
-        return $this->hasMany(Club::class, 'club_id');
-    }
-
-    public function activities()
-    {
-        return $this->hasMany(Activity::class, 'activity_id');
+        return $this->hasMany(Club::class, 'teacher_id'); // Assuming 'teacher_id' is the foreign key in the clubs table
     }
 
     /**
@@ -66,16 +61,24 @@ class User extends Authenticatable
      */
     public function clubsAsStudent()
     {
-        return $this->belongsToMany(Club::class, 'club_student', 'user_id', 'club_id')
-                    ->where('role', 'student');
+    return $this->hasManyThrough(Club::class, Registration::class, 'user_id', 'club_id');
     }
+
 
     /**
      * A user can have many attendances.
      */
     public function attendances()
     {
-        return $this->hasMany(Attendance::class, 'user_id'); // Assuming 'user_id' is the foreign key in the attendances table
+        return $this->hasMany(Attendance::class, 'user_id');  // Assuming 'user_id' is the foreign key in the attendances table
+    }
+
+    /**
+     * A student can have many registrations.
+     */
+    public function registrations()
+    {
+        return $this->hasMany(Registration::class, 'user_id');  // Assuming 'user_id' is the foreign key in the registrations table
     }
 
     // Helper Methods
@@ -94,12 +97,5 @@ class User extends Authenticatable
     public function isStudent()
     {
         return $this->role === 'student';
-    }
-    // User.php
-
-    // AutoAssignClub
-    public function registrations()
-    {
-        return $this->hasMany(Registration::class);
     }
 }

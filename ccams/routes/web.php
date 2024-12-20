@@ -29,7 +29,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/assessment/view', [AssessmentController::class, 'view'])->name('assessment.view');
 
     // Attendance
-    Route::get('/attendance', [AttendanceController::class, 'index'])->name('attendance.index');
+    Route::get('/attendance/student', [AttendanceController::class, 'indexStudent'])->name('attendance.indexStudent');
+    Route::get('/attendance/teacher', [AttendanceController::class, 'indexTeacher'])->name('attendance.indexTeacher');
     Route::get('/attendance/{clubs}', [AttendanceController::class, 'show'])->name('attendance.show');
     Route::post('/attendance/{clubs}/store', [AttendanceController::class, 'store'])->name('attendance.store');
     Route::put('/attendance/{studentId}', [AttendanceController::class, 'update'])->name('attendance.update');

@@ -56,7 +56,7 @@
                     <th>Nama Pelajar</th>
                     <th>No. IC</th>
                     @for ($week = $startWeek; $week <= $endWeek; $week++)
-                        <th>Week {{ $week }}</th>
+                        <th>Minggu {{ $week }}</th>
                     @endfor
                     <th>Kemaskini</th> 
                     <th>Lihat Butiran</th>

@@ -9,15 +9,29 @@ use Illuminate\Http\Request;
 
 class AttendanceController extends Controller
 {
-    // Show list of all available clubs for attendance
-    public function index()
+    // For the student view - show only the clubs they are registered to
+    public function indexStudent()
     {
-        // Fetch all clubs (no filtering based on user roles)
-        $clubs = Club::all();
+        $user = auth()->user(); // Get the logged-in user
 
-        // Pass the clubs to the view
-        return view('attendance.index', compact('clubs'));
+        // Get the clubs associated with the student
+        $clubs = $user->clubsAsStudent; // This uses the `clubsAsStudent` relationship
+
+        return view('attendance.index', compact('clubs')); // Pass the clubs to the view
     }
+
+    // For the teacher view - show all clubs they manage
+    public function indexTeacher()
+    {
+        $user = auth()->user(); // Get the logged-in user
+
+        // Get the clubs associated with the teacher
+        $clubs = $user->clubs; // This uses the `clubs` relationship for teachers
+
+        return view('attendance.index', compact('clubs')); // Pass the clubs to the view
+    }
+    
+
 
     // Show attendance for a specific club
     public function show(Request $request, $clubId)

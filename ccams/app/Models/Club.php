@@ -27,5 +27,10 @@ class Club extends Model
         return $this->hasMany(Registration::class, 'club_id', 'club_id');
     }
 
+    // Relationship to Users (students) via Registration
+    public function students()
+    {
+        return $this->hasMany(Registration::class, 'club_id', 'club_id')->with('user');
+    }
 }
 
