@@ -264,12 +264,23 @@
 
             $('#password').on('input', function() {
                 const password = $(this).val();
+                let feedback = '';
+
                 if (password.length < 8) {
-                    $('#passwordFeedback').text('Password must be at least 8 characters.');
+                    feedback = 'Password must be at least 8 characters.';
+                } else if (!/[A-Z]/.test(password)) {
+                    feedback = 'Password must include at least one uppercase letter.';
+                } else if (!/[a-z]/.test(password)) {
+                    feedback = 'Password must include at least one lowercase letter.';
+                } else if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
+                    feedback = 'Password must include at least one special character.';
                 } else {
-                    $('#passwordFeedback').text('');
+                    feedback = '';
                 }
+
+                $('#passwordFeedback').text(feedback);
             });
+
 
             $('#ic').on('blur', function() {
                 const ic = $(this).val();
