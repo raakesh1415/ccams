@@ -1,5 +1,5 @@
 <x-layout>
-    <div class="container-fluid">
+    <div class="container">
         <h1>{{ $club->club_name }} Assessment List</h1>
         <div class="card mb-4">
             {{-- <div class="card-header"> 

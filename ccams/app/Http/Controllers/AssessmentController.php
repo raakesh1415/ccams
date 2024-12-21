@@ -236,12 +236,24 @@ class AssessmentController extends Controller
         return view("assessment.show", compact('assessment', 'user'));
     }
 
-    public function view($assessment_id)
-    {
-        $assessment = Assessment::findOrFail($assessment_id);
-        $user = $assessment->user; // Assuming there's a relationship set up between Assessment and User
-        return view("assessment.view", compact('assessment', 'user'));
+    public function view($club_id)
+{
+    $user_id = Auth::id();
+    $user = Auth::user();
+    
+    // Find the assessment with club information
+    $assessment = Assessment::where('user_id', $user_id)
+                          ->where('club_id', $club_id)
+                          ->with('club') // Eager load the club relationship
+                          ->first();
+    
+    if (!$assessment) {
+        return redirect()->route('assessment.index')
+                        ->with('error', 'No assessment found for this club yet.');
     }
+    
+    return view("assessment.view", compact('assessment', 'user'));
+}
 
     public function edit($assessment_id)
     {

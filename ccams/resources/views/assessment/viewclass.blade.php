@@ -1,5 +1,5 @@
 <x-layout>
-    <div class="container-fluid">
+    <div class="container">
         <h1 class="text-center mb-4">{{ $student->name }} Assessment Details</h1>
         {{-- <div class="card mb-4">
             <div class="card-header text-center">

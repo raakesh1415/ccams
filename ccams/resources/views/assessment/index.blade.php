@@ -1,8 +1,13 @@
 <x-layout>
-    <div class="container-fluid">
+    <div class="container">
+        @if (session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
         <div class="text-center">
-            <h2 class="text-start">Assessment</h2>
-            <h4 class="text-start pt-4">My Clubs</h4>
+            {{-- <h2 class="text-start">Assessment</h2> --}}
+            <h2 class="text-center">My Clubs</h2>
             <div class="row g-4 mt-0">
                 <!-- Classroom -->
                 @if (Auth::user()->role === 'teacher')
@@ -37,7 +42,8 @@
                                         class="btn btn-dark">Assessment</a>
                                 @endif
                                 @if (Auth::user()->role === 'student')
-                                    <a href="{{ route('assessment.view') }}" class="btn btn-dark">Assessment</a>
+                                    <a href="{{ route('assessment.view', $registration->club_id) }}"
+                                        class="btn btn-dark">Assessment</a>
                                 @endif
                             </div>
                         </div>

@@ -1,5 +1,5 @@
 <x-layout>
-    <div class="container-fluid">
+    <div class="container">
         <div class="card">
             <div class="card-header text-center">
                 <h3>Assessment Form for Club {{ $club->club_name }}</h3> <!-- Display the club name -->

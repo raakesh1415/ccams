@@ -90,6 +90,11 @@ class User extends Authenticatable
         return $this->hasMany(Registration::class, 'user_id', 'user_id');
     }
 
+    public function assessments()
+    {
+        return $this->hasMany(Assessment::class, 'assessment_id', 'assessment_id');
+    }
+
     // Helper Methods
 
     /**

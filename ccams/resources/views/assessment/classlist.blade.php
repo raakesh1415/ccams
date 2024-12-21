@@ -1,5 +1,5 @@
 <x-layout>
-    <div class="container-fluid">
+    <div class="container">
         <h1>Class {{ $classroom }} Assessment Overview</h1>
         <div class="card mb-4">
             <div class="card-body">
@@ -44,7 +44,7 @@
                                                 {{ number_format($student->persatuanAssessment->total_mark, 1) }}%
                                             </strong>
                                         @else
-                                            <strong class="text-warning">N/A</strong>
+                                            <strong class="text-warning">Not Assess Yet</strong>
                                         @endif
                                     @else
                                         <span class="text-muted">Not Registered</span>

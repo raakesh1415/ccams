@@ -1,9 +1,9 @@
-// show.blade.php
 <x-layout>
     <div class="container-fluid px-4 py-4">
+        
         <div class="card">
             <div class="card-header text-center">
-                <h3>Summary of Assessment</h3>
+                <h3>Summary Assessment Mark - {{ $assessment->club->club_name }}</h3>
             </div>
             <div class="card-body">
                 <h4 class="card-title pb-3">Student Details</h4>
@@ -11,16 +11,12 @@
                     <div class="col-md-6">
                         <p><strong>Name:</strong> {{ $user->name }}</p>
                         <p><strong>IC No:</strong> {{ $user->ic }}</p> 
+                        <p><strong>Year:</strong> 2024</p>
                     </div>
                     <div class="col-md-6">
                         <p><strong>Address:</strong> {{ $user->address }}</p> 
                         <p><strong>Email:</strong> {{ $user->email }}</p>
-                    </div>
-                    <div class="col-md-6">
-                        <p><strong>Year:</strong> 2024</p>
-                    </div>
-                    <div class="col-md-6">
-                        <p><strong>Class:</strong> 5 Sains 1</p> 
+                        <p><strong>Class:</strong> {{ $user->classroom }}</p> 
                     </div>
                 </div>
 

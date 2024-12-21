@@ -1,6 +1,6 @@
 // show.blade.php
 <x-layout>
-    <div class="container-fluid">
+    <div class="container">
         <div class="card">
             <div class="card-header text-center">
                 <h3>Summary of Assessment</h3>
@@ -11,15 +11,11 @@
                     <div class="col-md-6">
                         <p><strong>Name:</strong> {{ $user->name }}</p>
                         <p><strong>IC No:</strong> {{ $user->ic }}</p> 
+                        <p><strong>Year:</strong> 2024</p>
                     </div>
                     <div class="col-md-6">
                         <p><strong>Address:</strong> {{ $user->address }}</p> 
                         <p><strong>Email:</strong> {{ $user->email }}</p>
-                    </div>
-                    <div class="col-md-6">
-                        <p><strong>Year:</strong> 2024</p>
-                    </div>
-                    <div class="col-md-6">
                         <p><strong>Class:</strong> {{ $user->classroom }}</p> 
                     </div>
                 </div>
