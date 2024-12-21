@@ -101,11 +101,16 @@ class ActivityController extends Controller
     }
 
     public function destroy(Activity $activity)
-{
+    {
     // Delete the activity
     $activity->delete();
 
     // Redirect with a success message
     return redirect()->route('activities.index')->with('success', 'Activity deleted successfully');
-}
-}
+    }
+
+    public function show(Activity $activity)
+    {
+    return view('activities.show', compact('activity'));
+    }
+    }

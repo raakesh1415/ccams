@@ -21,42 +21,50 @@
             </div>
         @else
             <!-- Add Activity Button -->
-            <div class="text-center mb-4">
-                <a href="{{ route('activities.create') }}" class="btn btn-primary btn-lg">
-                    <i class="fas fa-plus"></i> Tambah Aktiviti
-                </a>
-            </div>
+                @if (auth()->user()->role === 'teacher')
+                    <div class="text-center mb-4">
+                        <a href="{{ route('activities.create') }}" class="btn btn-primary btn-lg">
+                            <i class="fas fa-plus"></i> Tambah Aktiviti
+                        </a>
+                    </div>
+                @endif
 
-            <!-- Activities List -->
-            <div class="row justify-content-center">
-                @foreach ($activities as $activity)
-                    <div class="col-md-4 mb-4">
-                        <div class="card shadow-sm">
-                            <img src="{{ $activity->poster ? asset('storage/' . $activity->poster) : asset('images/sample-activity.png') }}" 
-                                 class="card-img-top" 
-                                 alt="Activity Poster" 
-                                 style="height: 400px; object-fit: cover;">
-                            <div class="card-body text-center">
-                                <h5 class="card-title">{{ $activity->activity_name }}</h5>
-                                <p class="card-text text-truncate">{{ Str::limit($activity->description, 100) }}</p>
-                                <div class="d-flex justify-content-center gap-2">
-                                    <a href="{{ route('activities.edit', $activity->activity_id) }}" class="btn btn-outline-success">
-                                        <i class="fas fa-edit"></i> Edit
-                                    </a>
-                                    <button type="button" 
-                                        class="btn btn-outline-danger" 
-                                        data-bs-toggle="modal" 
-                                        data-bs-target="#deleteModal" 
-                                        data-url="{{ route('activities.destroy', $activity->activity_id) }}">
-                                    <i class="fas fa-trash"></i> Padam
-                                    </button>
-
+                <!-- Activities List -->
+                <div class="row justify-content-center">
+                    @foreach ($activities as $activity)
+                        <div class="col-md-4 mb-4">
+                            <div class="card shadow-sm">
+                                <img src="{{ $activity->poster ? asset('storage/' . $activity->poster) : asset('images/sample-activity.png') }}" 
+                                    class="card-img-top" 
+                                    alt="Activity Poster" 
+                                    style="height: 400px; object-fit: cover;">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title">{{ $activity->activity_name }}</h5>
+                                    <p class="card-text text-truncate">{{ Str::limit($activity->description, 100) }}</p>
+                                    <div class="d-flex justify-content-center gap-2">
+                                        @if (auth()->user()->role === 'teacher')
+                                            <a href="{{ route('activities.edit', $activity->activity_id) }}" class="btn btn-outline-success">
+                                                <i class="fas fa-edit"></i> Edit
+                                            </a>
+                                            <button type="button" 
+                                                class="btn btn-outline-danger" 
+                                                data-bs-toggle="modal" 
+                                                data-bs-target="#deleteModal" 
+                                                data-url="{{ route('activities.destroy', $activity->activity_id) }}">
+                                                <i class="fas fa-trash"></i> Padam
+                                            </button>
+                                        @endif
+                                        @if (auth()->user()->role === 'student')
+                                            <a href="{{ route('activities.show', $activity->activity_id) }}" class="btn btn-outline-info">
+                                                <i class="fas fa-eye"></i> Lihat
+                                            </a>
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                @endforeach
-            </div>
+                    @endforeach
+                </div>
         @endif
     </div>
 
