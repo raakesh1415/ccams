@@ -4,21 +4,28 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Club;
+use App\Models\Registration;
 use App\Models\Attendance;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AttendanceController extends Controller
 {
     // For the student view - show only the clubs they are registered to
     public function indexStudent()
     {
-        $user = auth()->user(); // Get the logged-in user
-
-        // Get the clubs associated with the student
-        $clubs = $user->clubsAsStudent; // This uses the `clubsAsStudent` relationship
-
-        return view('attendance.index', compact('clubs')); // Pass the clubs to the view
-    }
+        $userId = auth()->id(); // Get the logged-in user's ID
+    
+        // Fetch all registered clubs for the user with the club details
+        $registrations = Registration::where('user_id', $userId)->with('club')->get();
+    
+        // Extract the clubs from the registrations
+        $clubs = $registrations->map(function ($registration) {
+            return $registration->club; // Ensure this fetches the club related to the registration
+        });
+    
+        return view('attendance.index', compact('clubs'));
+    } 
 
     // For the teacher view - show all clubs they manage
     public function indexTeacher()

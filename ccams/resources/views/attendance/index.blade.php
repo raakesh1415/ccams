@@ -28,7 +28,7 @@
                     </div>
                 </div>
             @empty
-                <p>You do not manage any club.</p>
+                <p>You are not registered to any club.</p>
             @endforelse
         </div>
     </div>

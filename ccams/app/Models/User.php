@@ -78,7 +78,7 @@ class User extends Authenticatable
      */
     public function registrations()
     {
-        return $this->hasMany(Registration::class, 'user_id');  // Assuming 'user_id' is the foreign key in the registrations table
+        return $this->hasMany(Registration::class, 'user_id', 'user_id');
     }
 
     // Helper Methods
