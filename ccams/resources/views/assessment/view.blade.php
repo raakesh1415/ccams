@@ -1,6 +1,5 @@
 <x-layout>
-    <div class="container-fluid px-4 py-4">
-        
+    <div class="container">
         <div class="card">
             <div class="card-header text-center">
                 <h3>Summary Assessment Mark - {{ $assessment->club->club_name }}</h3>
