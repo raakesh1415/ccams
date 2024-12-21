@@ -15,16 +15,6 @@ class AssessmentController extends Controller
     // Show list of clubs the student is registered to
     public function index()
     {
-<<<<<<< Updated upstream
-        // Get the currently authenticated student
-        $student = auth()->user();
-
-        // Fetch the clubs the student is registered to
-        $clubs = $student->clubs;
-
-        // Pass the clubs to the view
-        return view('attendance.index', compact('clubs'));
-=======
         $userId = Auth::id();
         $user = Auth::user();
 
@@ -32,7 +22,6 @@ class AssessmentController extends Controller
         $registrations = Registration::where('user_id', $userId)->with('club')->get();
 
         return view("assessment.index", compact('registrations', 'user'));
->>>>>>> Stashed changes
     }
 
     public function list($club_id)
