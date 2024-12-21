@@ -37,6 +37,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/attendance/{clubs}/store', [AttendanceController::class, 'store'])->name('attendance.store');
     Route::put('/attendance/{studentId}', [AttendanceController::class, 'update'])->name('attendance.update');
     Route::get('/attendance/details/{user_id}/{club_id}', [AttendanceController::class, 'viewDetails'])->name('attendance.viewDetails');
+    
 
     // Activity
     Route::get('/activities', [ActivityController::class, 'index'])->name('activities.index');
@@ -45,6 +46,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/activities/{activity:activity_id}/edit', [ActivityController::class, 'edit'])->name('activities.edit');
     Route::put('/activities/{activity:activity_id}', [ActivityController::class, 'update'])->name('activities.update');
     Route::delete('/activities/{activity:activity_id}', [ActivityController::class, 'destroy'])->name('activities.destroy');
+    Route::get('/activities/{activity}', [ActivityController::class, 'show'])->name('activities.show');
+
 
     // Club 
     Route::get('/club/kelab', [ClubController::class, 'showKelabClubs'])->name('club.kelab');
