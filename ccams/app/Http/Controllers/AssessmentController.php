@@ -94,15 +94,15 @@ class AssessmentController extends Controller
 
         // Define scores for position
         $positionScores = [
-            'President' => 10,
-            'Vice President' => 8,
-            'Secretary' => 8,
-            'Treasurer' => 8,
-            'Vice Secretary' => 6,
-            'Vice Treasurer' => 6,
+            'Pengerusi' => 10,
+            'Naib Pengerusi' => 8,
+            'Setiausaha' => 8,
+            'Bendahari' => 8,
+            'Naib Setiausaha' => 6,
+            'Naib Bendahari' => 6,
             'AJK' => 6,
-            'Active Member' => 4,
-            'Ordinary Member' => 2,
+            'Ahli Aktif' => 4,
+            'Ahli Biasa' => 2,
         ];
         // Get the score for the selected position
         $pos = $positionScores[$data['position']] ?? 0; // Default to 0 if not found
@@ -249,7 +249,7 @@ class AssessmentController extends Controller
     
     if (!$assessment) {
         return redirect()->route('assessment.index')
-                        ->with('error', 'No assessment found for this club yet.');
+                        ->with('error', 'Tiada penilaian ditemui untuk kelab ini lagi.');
     }
     
     return view("assessment.view", compact('assessment', 'user'));
@@ -303,15 +303,15 @@ class AssessmentController extends Controller
 
         // Define scores for position
         $positionScores = [
-            'President' => 10,
-            'Vice President' => 8,
-            'Secretary' => 8,
-            'Treasurer' => 8,
-            'Vice Secretary' => 6,
-            'Vice Treasurer' => 6,
+            'Pengerusi' => 10,
+            'Naib Pengerusi' => 8,
+            'Setiausaha' => 8,
+            'Bendahari' => 8,
+            'Naib Setiausaha' => 6,
+            'Naib Bendahari' => 6,
             'AJK' => 6,
-            'Active Member' => 4,
-            'Ordinary Member' => 2,
+            'Ahli Aktif' => 4,
+            'Ahli Biasa' => 2,
         ];
         // Get the score for the selected position
         $pos = $positionScores[$data['position']] ?? 0; // Default to 0 if not found

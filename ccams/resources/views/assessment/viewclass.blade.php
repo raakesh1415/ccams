@@ -1,64 +1,61 @@
 <x-layout>
     <div class="container">
-        <h1 class="text-center mb-4">{{ $student->name }} Assessment Details</h1>
+        <h1 class="text-center mb-4">Butiran Penilaian - {{ $student->name }}</h1>
         {{-- <div class="card mb-4">
             <div class="card-header text-center">
-                <h4>Student Details</h4>
+                <h4>Butiran Pelajar</h4>
             </div>
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-6">
-                        <p><strong>Name:</strong> {{ $student->name }}</p>
-                        <p><strong>IC No:</strong> {{ $student->ic }}</p>
+                        <p><strong>Nama:</strong> {{ $student->name }}</p>
+                        <p><strong>No IC:</strong> {{ $student->ic }}</p>
                     </div>
                     <div class="col-md-6">
-                        <p><strong>Address:</strong> {{ $student->address }}</p>
+                        <p><strong>Alamat:</strong> {{ $student->address }}</p>
                         <p><strong>Email:</strong> {{ $student->email }}</p>
                     </div>
                     <div class="col-md-6">
-                        <p><strong>Year:</strong> 2024</p>
+                        <p><strong>Tahun:</strong> 2024</p>
                     </div>
                     <div class="col-md-6">
-                        <p><strong>Class:</strong> {{ $student->classroom }}</p>
+                        <p><strong>Kelas:</strong> {{ $student->classroom }}</p>
                     </div>
                 </div>
             </div>
         </div> --}}
 
-
         @if ($permainanAssessment)
-            {{-- <div class="col-xl-4"> --}}
             <div class="card mb-4">
                 <div class="card-header text-center">
-                    {{-- <i class="fas fa-chart-bar me-1"></i> --}}
                     <h4>Permainan - {{ $student->permainanClub }}</h4>
                 </div>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6">
-                            <p><strong>Position:</strong> {{ $permainanAssessment->position }}
+                            <p><strong>Jawatan:</strong> {{ $permainanAssessment->position }}
                                 @switch($permainanAssessment->position)
-                                    @case('President')
+                                    @case('Pengerusi ')
                                         (10)
                                     @break
 
-                                    @case('Vice President')
+                                    @case('Naib Pengerusi ')
                                         (8)
                                     @break
 
-                                    @case('Secretary')
+                                    @case('Setiausaha')
                                         (8)
                                     @break
 
-                                    @case('Treasurer')
+                                    @case('Bendahari')
                                         (8)
                                     @break
 
-                                    @case('Vice Secretary')
+                                    @case('Naib Setiausaha')
                                         (6)
                                     @break
 
-                                    @case('Vice Treasurer')
+                                    @case('Naib Bendahari')
                                         (6)
                                     @break
 
@@ -66,166 +63,166 @@
                                         (6)
                                     @break
 
-                                    @case('Active Member')
+                                    @case('Ahli Aktif')
                                         (4)
                                     @break
 
-                                    @case('Ordinary Member')
+                                    @case('Ahli Biasa')
                                         (2)
                                     @break
 
                                     @default
-                                        Unknown
+                                        Tidak Diketahui
                                 @endswitch
                             </p>
                         </div>
                         <div class="col-md-6">
-                            <p><strong>Attendance:</strong> {{ $permainanAssessment->attendance }} / 12
+                            <p><strong>Kehadiran:</strong> {{ $permainanAssessment->attendance }} / 12
                                 ({{ round(($permainanAssessment->attendance / 12) * 40) }})</p>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
-                            <p><strong>Level of Engagement:</strong></p>
+                            <p><strong>Peringkat Penglibatan:</strong></p>
                             <ul>
                                 @foreach ($permainanAssessment->engagement as $engagement)
                                     <li>
                                         @switch($engagement)
                                             @case('I1')
-                                                International Level (20)
+                                                Tahap Antarabangsa (20)
                                             @break
 
                                             @case('N1')
-                                                National Level (17)
+                                                Tahap Kebangsaan (17)
                                             @break
 
                                             @case('C1')
-                                                Country Level (14)
+                                                Tahap Negeri (14)
                                             @break
 
                                             @case('D1')
-                                                District/Zone Level (11)
+                                                Tahap Daerah/Zon (11)
                                             @break
 
                                             @case('S1')
-                                                School/None Level (0)
+                                                Tahap Sekolah/Tiada (0)
                                             @break
 
                                             @case('I2')
-                                                International Level (15)
+                                                Tahap Antarabangsa (15)
                                             @break
 
                                             @case('N2')
-                                                National Level (12)
+                                                Tahap Kebangsaan (12)
                                             @break
 
                                             @case('C2')
-                                                Country Level (10)
+                                                Tahap Negeri (10)
                                             @break
 
                                             @case('D2')
-                                                District/Zone Level (8)
+                                                Tahap Daerah/Zon (8)
                                             @break
 
                                             @case('S2')
-                                                School/None Level (0)
+                                                Tahap Sekolah/Tiada (0)
                                             @break
 
                                             @case('I3')
-                                                International Level (10)
+                                                Tahap Antarabangsa (10)
                                             @break
 
                                             @case('N3')
-                                                National Level (8)
+                                                Tahap Kebangsaan (8)
                                             @break
 
                                             @case('C3')
-                                                Country Level (6)
+                                                Tahap Negeri (6)
                                             @break
 
                                             @case('D3')
-                                                District/Zone Level (4)
+                                                Tahap Daerah/Zon (4)
                                             @break
 
                                             @case('S3')
-                                                School/None Level (0)
+                                                Tahap Sekolah/Tiada (0)
                                             @break
 
                                             @default
-                                                Unknown
+                                                Tidak Diketahui
                                         @endswitch
                                     </li>
                                 @endforeach
                             </ul>
                         </div>
                         <div class="col-md-6">
-                            <p><strong>Level of Achievement:</strong></p>
+                            <p><strong>Tahap P pencapaian:</strong></p>
                             <ul>
                                 @foreach ($permainanAssessment->achievement as $achievement)
                                     <li>
                                         @switch($achievement)
                                             @case('IC')
-                                                Champion - International Level (20)
+                                                Johan - Tahap Antarabangsa (20)
                                             @break
 
                                             @case('NC')
-                                                Champion - National Level (17)
+                                                Johan - Tahap Kebangsaan (17)
                                             @break
 
                                             @case('CC')
-                                                Champion - Country Level (14)
+                                                Johan - Tahap Negeri (14)
                                             @break
 
                                             @case('DC')
-                                                Champion - District/Zone Level (11)
+                                                Johan - Tahap Daerah/Zon (11)
                                             @break
 
                                             @case('SC')
-                                                Champion - School/None Level (0)
+                                                Johan - Tahap Sekolah/Tiada (0)
                                             @break
 
                                             @case('I1')
-                                                1st Runner Up - International Level (15)
+                                                Naib Johan - Tahap Antarabangsa (15)
                                             @break
 
                                             @case('N1')
-                                                1st Runner Up - National Level (12)
+                                                Naib Johan - Tahap Kebangsaan (12)
                                             @break
 
                                             @case('C1')
-                                                1st Runner Up - Country Level (10)
+                                                Naib Johan - Tahap Negeri (10)
                                             @break
 
                                             @case('D1')
-                                                1st Runner Up - District/Zone Level (8)
+                                                Naib Johan - Tahap Daerah/Zon (8)
                                             @break
 
                                             @case('S1')
-                                                1st Runner Up - School/None Level (0)
+                                                Naib Johan - Tahap Sekolah/Tiada (0)
                                             @break
 
                                             @case('I2')
-                                                2nd Runner Up - International Level (10)
+                                                Ketiga - Tahap Antarabangsa (10)
                                             @break
 
                                             @case('N2')
-                                                2nd Runner Up - National Level (8)
+                                                Ketiga - Tahap Kebangsaan (8)
                                             @break
 
                                             @case('C2')
-                                                2nd Runner Up - Country Level (6)
+                                                Ketiga - Tahap Negeri (6)
                                             @break
 
                                             @case('D2')
-                                                2nd Runner Up - District/Zone Level (4)
+                                                Ketiga - Tahap Daerah/Zon (4)
                                             @break
 
                                             @case('S2')
-                                                2nd Runner Up - School/None Level (0)
+                                                Ketiga - Tahap Sekolah/Tiada (0)
                                             @break
 
                                             @default
-                                                Unknown
+                                                Tidak Diketahui
                                         @endswitch
                                     </li>
                                 @endforeach
@@ -235,62 +232,62 @@
 
                     <div class="row">
                         <div class="col-md-6">
-                            <p><strong>Commitment:</strong></p>
+                            <p><strong>Komitmen:</strong></p>
                             <ul class="row">
                                 @foreach ($permainanAssessment->commitment as $commitment)
                                     <div class="col-md-6">
                                         <li>
                                             @switch($commitment)
                                                 @case('C1')
-                                                    Demonstrate leadership (3)
+                                                    Menunjukkan kepimpinan (3)
                                                 @break
 
                                                 @case('C2')
-                                                    Manage activities (3)
+                                                    Mengurus aktiviti (3)
                                                 @break
 
                                                 @case('C3')
-                                                    Helping teachers/friends (2)
+                                                    Membantu guru/rakan (2)
                                                 @break
 
                                                 @case('C4')
-                                                    Provide equipment (2)
+                                                    Menyediakan peralatan (2)
                                                 @break
 
                                                 @case('C5')
-                                                    Clean the area (2)
+                                                    Membersihkan kawasan (2)
                                                 @break
 
                                                 @case('C6')
-                                                    Punctual (2)
+                                                    Tepat pada masa (2)
                                                 @break
 
                                                 @case('C7')
-                                                    Show interest (2)
+                                                    Menunjukkan minat (2)
                                                 @break
 
                                                 @case('C8')
-                                                    Show seriousness (2)
+                                                    Menunjukkan kesungguhan (2)
                                                 @break
 
                                                 @case('C9')
-                                                    Follow Instructions (2)
+                                                    Mengikuti arahan (2)
                                                 @break
 
                                                 @case('C10')
-                                                    Trying (2)
+                                                    Mencuba (2)
                                                 @break
 
                                                 @case('C11')
-                                                    Give cooperation (2)
+                                                    Memberi kerjasama (2)
                                                 @break
 
                                                 @case('C12')
-                                                    Any observable pure value (2)
+                                                    Sebarang nilai murni yang boleh diperhatikan (2)
                                                 @break
 
                                                 @default
-                                                    Unknown
+                                                    Tidak Diketahui
                                             @endswitch
                                         </li>
                                     </div>
@@ -298,32 +295,29 @@
                             </ul>
                         </div>
                         <div class="col-md-6">
-                            <p><strong>Contribution Service (School Level):</strong></p>
+                            <p><strong>Perkhidmatan Sumbangan (Tahap Sekolah):</strong></p>
                             <ul>
                                 @foreach ($permainanAssessment->contribution as $contribution)
                                     <li>
                                         @switch($contribution)
                                             @case('CS1')
-                                                Students who are registered as program / tournament / competition / carnival /
-                                                course participants (10)
+                                                Murid yang didaftarkan sebagai peserta program / kejohanan / pertandingan / karnival / kursus (10)
                                             @break
 
                                             @case('CS2')
-                                                Involves specific skills-judge / umpire, team coach / technical aspects (10)
+                                                Melibatkan kemahiran khusus-hakim/pengadil, jurulatih pasukan/aspek teknikal (10)
                                             @break
 
                                             @case('CS3')
-                                                Involvement of students involved in activities such as interlude performances
-                                                (8)
+                                                Penglibatan murid yang terlibat dalam aktiviti seperti persembahan selingan (8)
                                             @break
 
                                             @case('CS4')
-                                                Helping in terms of making unit activities successful such as participating in
-                                                performances, cheerleading and related (5)
+                                                Membantu dari segi menjayakan aktiviti unit seperti mengambil bahagian dalam persembahan, kumpulan sorak dan yang berkaitan (5)
                                             @break
 
                                             @default
-                                                Unknown
+                                                Tidak Diketahui
                                         @endswitch
                                     </li>
                                 @endforeach
@@ -333,18 +327,16 @@
 
                     <div class="row">
                         <div class="col-md-6">
-                            <p><strong>Comment:</strong> {{ $permainanAssessment->comment }}</p>
+                            <p><strong>Ulasan:</strong> {{ $permainanAssessment->comment }}</p>
                         </div>
                         <div class="col-md-6">
-                            <p><strong>Total Marks:</strong> {{ $permainanAssessment->total_mark }}%</p>
+                            <p><strong>Jumlah Markah:</strong> {{ $permainanAssessment->total_mark }}%</p>
                         </div>
                     </div>
                 </div>
             </div>
-            {{-- </div> --}}
         @endif
 
-        
         @if ($persatuanAssessment)
             <div class="card mb-4">
                 <div class="card-header text-center">
@@ -353,29 +345,29 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6">
-                            <p><strong>Position:</strong> {{ $persatuanAssessment->position }}
+                            <p><strong>Jawatan:</strong> {{ $persatuanAssessment->position }}
                                 @switch($persatuanAssessment->position)
-                                    @case('President')
+                                    @case('Pengerusi ')
                                         (10)
                                     @break
 
-                                    @case('Vice President')
+                                    @case('Naib Pengerusi ')
                                         (8)
                                     @break
 
-                                    @case('Secretary')
+                                    @case('Setiausaha')
                                         (8)
                                     @break
 
-                                    @case('Treasurer')
+                                    @case('Bendahari')
                                         (8)
                                     @break
 
-                                    @case('Vice Secretary')
+                                    @case('Naib Setiausaha')
                                         (6)
                                     @break
 
-                                    @case('Vice Treasurer')
+                                    @case('Naib Bendahari')
                                         (6)
                                     @break
 
@@ -387,163 +379,163 @@
                                         (4)
                                     @break
 
-                                    @case('Ordinary Member')
+                                    @case('Ahli Biasa')
                                         (2)
                                     @break
 
                                     @default
-                                        Unknown
+                                        Tidak Diketahui
                                 @endswitch
                             </p>
                         </div>
                         <div class="col-md-6">
-                            <p><strong>Attendance:</strong> {{ $persatuanAssessment->attendance }} / 12
+                            <p><strong>Kehadiran:</strong> {{ $persatuanAssessment->attendance }} / 12
                                 ({{ round(($persatuanAssessment->attendance / 12) * 40) }})</p>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-md-6">
-                            <p><strong>Level of Engagement:</strong></p>
+                            <p><strong>Peringkat Penglibatan:</strong></p>
                             <ul>
                                 @foreach ($persatuanAssessment->engagement as $engagement)
                                     <li>
                                         @switch($engagement)
                                             @case('I1')
-                                                International Level (20)
+                                                Tahap Antarabangsa (20)
                                             @break
 
                                             @case('N1')
-                                                National Level (17)
+                                                Tahap Kebangsaan (17)
                                             @break
 
                                             @case('C1')
-                                                Country Level (14)
+                                                Tahap Negeri (14)
                                             @break
 
                                             @case('D1')
-                                                District/Zone Level (11)
+                                                Tahap Daerah/Zon (11)
                                             @break
 
                                             @case('S1')
-                                                School/None Level (0)
+                                                Tahap Sekolah/Tiada (0)
                                             @break
 
                                             @case('I2')
-                                                International Level (15)
+                                                Tahap Antarabangsa (15)
                                             @break
 
                                             @case('N2')
-                                                National Level (12)
+                                                Tahap Kebangsaan (12)
                                             @break
 
                                             @case('C2')
-                                                Country Level (10)
+                                                Tahap Negeri (10)
                                             @break
 
                                             @case('D2')
-                                                District/Zone Level (8)
+                                                Tahap Daerah/Zon (8)
                                             @break
 
                                             @case('S2')
-                                                School/None Level (0)
+                                                Tahap Sekolah/Tiada (0)
                                             @break
 
                                             @case('I3')
-                                                International Level (10)
+                                                Tahap Antarabangsa (10)
                                             @break
 
                                             @case('N3')
-                                                National Level (8)
+                                                Tahap Kebangsaan (8)
                                             @break
 
                                             @case('C3')
-                                                Country Level (6)
+                                                Tahap Negeri (6)
                                             @break
 
                                             @case('D3')
-                                                District/Zone Level (4)
+                                                Tahap Daerah/Zon (4)
                                             @break
 
                                             @case('S3')
-                                                School/None Level (0)
+                                                Tahap Sekolah/Tiada (0)
                                             @break
 
                                             @default
-                                                Unknown
+                                                Tidak Diketahui
                                         @endswitch
                                     </li>
                                 @endforeach
                             </ul>
                         </div>
                         <div class="col-md-6">
-                            <p><strong>Level of Achievement:</strong></p>
+                            <p><strong>Tahap P pencapaian:</strong></p>
                             <ul>
                                 @foreach ($persatuanAssessment->achievement as $achievement)
                                     <li>
                                         @switch($achievement)
                                             @case('IC')
-                                                Champion - International Level (20)
+                                                Johan - Tahap Antarabangsa (20)
                                             @break
 
                                             @case('NC')
-                                                Champion - National Level (17)
+                                                Johan - Tahap Kebangsaan (17)
                                             @break
 
                                             @case('CC')
-                                                Champion - Country Level (14)
+                                                Johan - Tahap Negeri (14)
                                             @break
 
                                             @case('DC')
-                                                Champion - District/Zone Level (11)
+                                                Johan - Tahap Daerah/Zon (11)
                                             @break
 
                                             @case('SC')
-                                                Champion - School/None Level (0)
+                                                Johan - Tahap Sekolah/Tiada (0)
                                             @break
 
                                             @case('I1')
-                                                1st Runner Up - International Level (15)
+                                                Naib Johan - Tahap Antarabangsa (15)
                                             @break
 
                                             @case('N1')
-                                                1st Runner Up - National Level (12)
+                                                Naib Johan - Tahap Kebangsaan (12)
                                             @break
 
                                             @case('C1')
-                                                1st Runner Up - Country Level (10)
+                                                Naib Johan - Tahap Negeri (10)
                                             @break
 
                                             @case('D1')
-                                                1st Runner Up - District/Zone Level (8)
+                                                Naib Johan - Tahap Daerah/Zon (8)
                                             @break
 
                                             @case('S1')
-                                                1st Runner Up - School/None Level (0)
+                                                Naib Johan - Tahap Sekolah/Tiada (0)
                                             @break
 
                                             @case('I2')
-                                                2nd Runner Up - International Level (10)
+                                                Ketiga - Tahap Antarabangsa (10)
                                             @break
 
                                             @case('N2')
-                                                2nd Runner Up - National Level (8)
+                                                Ketiga - Tahap Kebangsaan (8)
                                             @break
 
                                             @case('C2')
-                                                2nd Runner Up - Country Level (6)
+                                                Ketiga - Tahap Negeri (6)
                                             @break
 
                                             @case('D2')
-                                                2nd Runner Up - District/Zone Level (4)
+                                                Ketiga - Tahap Daerah/Zon (4)
                                             @break
 
                                             @case('S2')
-                                                2nd Runner Up - School/None Level (0)
+                                                Ketiga - Tahap Sekolah/Tiada (0)
                                             @break
 
                                             @default
-                                                Unknown
+                                                Tidak Diketahui
                                         @endswitch
                                     </li>
                                 @endforeach
@@ -553,62 +545,62 @@
 
                     <div class="row">
                         <div class="col-md-6">
-                            <p><strong>Commitment:</strong></p>
+                            <p><strong>Komitmen:</strong></p>
                             <ul class="row">
                                 @foreach ($persatuanAssessment->commitment as $commitment)
                                     <div class="col-md-6">
                                         <li>
                                             @switch($commitment)
                                                 @case('C1')
-                                                    Demonstrate leadership (3)
+                                                    Menunjukkan kepimpinan (3)
                                                 @break
 
                                                 @case('C2')
-                                                    Manage activities (3)
+                                                    Mengurus aktiviti (3)
                                                 @break
 
                                                 @case('C3')
-                                                    Helping teachers/friends (2)
+                                                    Membantu guru/rakan (2)
                                                 @break
 
                                                 @case('C4')
-                                                    Provide equipment (2)
+                                                    Menyediakan peralatan (2)
                                                 @break
 
                                                 @case('C5')
-                                                    Clean the area (2)
+                                                    Membersihkan kawasan (2)
                                                 @break
 
                                                 @case('C6')
-                                                    Punctual (2)
+                                                    Tepat pada masa (2)
                                                 @break
 
                                                 @case('C7')
-                                                    Show interest (2)
+                                                    Menunjukkan minat (2)
                                                 @break
 
                                                 @case('C8')
-                                                    Show seriousness (2)
+                                                    Menunjukkan kesungguhan (2)
                                                 @break
 
                                                 @case('C9')
-                                                    Follow Instructions (2)
+                                                    Mengikuti arahan (2)
                                                 @break
 
                                                 @case('C10')
-                                                    Trying (2)
+                                                    Mencuba (2)
                                                 @break
 
                                                 @case('C11')
-                                                    Give cooperation (2)
+                                                    Memberi kerjasama (2)
                                                 @break
 
                                                 @case('C12')
-                                                    Any observable pure value (2)
+                                                    Sebarang nilai murni yang boleh diperhatikan (2)
                                                 @break
 
                                                 @default
-                                                    Unknown
+                                                    Tidak Diketahui
                                             @endswitch
                                         </li>
                                     </div>
@@ -616,32 +608,29 @@
                             </ul>
                         </div>
                         <div class="col-md-6">
-                            <p><strong>Contribution Service (School Level):</strong></p>
+                            <p><strong>Perkhidmatan Sumbangan (Tahap Sekolah):</strong></p>
                             <ul>
                                 @foreach ($persatuanAssessment->contribution as $contribution)
                                     <li>
                                         @switch($contribution)
                                             @case('CS1')
-                                                Students who are registered as program / tournament / competition / carnival /
-                                                course participants (10)
+                                                Murid yang didaftarkan sebagai peserta program / kejohanan / pertandingan / karnival / kursus (10)
                                             @break
 
                                             @case('CS2')
-                                                Involves specific skills-judge / umpire, team coach / technical aspects (10)
+                                                Melibatkan kemahiran khusus-hakim/pengadil, jurulatih pasukan/aspek teknikal (10)
                                             @break
 
                                             @case('CS3')
-                                                Involvement of students involved in activities such as interlude performances
-                                                (8)
+                                                Penglibatan murid yang terlibat dalam aktiviti seperti persembahan selingan (8)
                                             @break
 
                                             @case('CS4')
-                                                Helping in terms of making unit activities successful such as participating in
-                                                performances, cheerleading and related (5)
+                                                Membantu dari segi menjayakan aktiviti unit seperti mengambil bahagian dalam persembahan, kumpulan sorak dan yang berkaitan (5)
                                             @break
 
                                             @default
-                                                Unknown
+                                                Tidak Diketahui
                                         @endswitch
                                     </li>
                                 @endforeach
@@ -651,16 +640,15 @@
 
                     <div class="row">
                         <div class="col-md-6">
-                            <p><strong>Comment:</strong> {{ $persatuanAssessment->comment }}</p>
+                            <p><strong>Ulasan:</strong> {{ $persatuanAssessment->comment }}</p>
                         </div>
                         <div class="col-md-6">
-                            <p><strong>Total Marks:</strong> {{ $persatuanAssessment->total_mark }}%</p>
+                            <p><strong>Jumlah Markah:</strong> {{ $persatuanAssessment->total_mark }}%</p>
                         </div>
                     </div>
                 </div>
             </div>
         @endif
-
 
         @if ($uniformAssessment)
             <div class="card mb-4">
@@ -670,29 +658,29 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6">
-                            <p><strong>Position:</strong> {{ $uniformAssessment->position }}
+                            <p><strong>Jawatan:</strong> {{ $uniformAssessment->position }}
                                 @switch($uniformAssessment->position)
-                                    @case('President')
+                                    @case('Pengerusi ')
                                         (10)
                                     @break
 
-                                    @case('Vice President')
+                                    @case('Naib Pengerusi ')
                                         (8)
                                     @break
 
-                                    @case('Secretary')
+                                    @case('Setiausaha')
                                         (8)
                                     @break
 
-                                    @case('Treasurer')
+                                    @case('Bendahari')
                                         (8)
                                     @break
 
-                                    @case('Vice Secretary')
+                                    @case('Naib Setiausaha')
                                         (6)
                                     @break
 
-                                    @case('Vice Treasurer')
+                                    @case('Naib Bendahari')
                                         (6)
                                     @break
 
@@ -704,163 +692,163 @@
                                         (4)
                                     @break
 
-                                    @case('Ordinary Member')
+                                    @case('Ahli Biasa')
                                         (2)
                                     @break
 
                                     @default
-                                        Unknown
+                                        Tidak Diketahui
                                 @endswitch
                             </p>
                         </div>
                         <div class="col-md-6">
-                            <p><strong>Attendance:</strong> {{ $uniformAssessment->attendance }} / 12
+                            <p><strong>Kehadiran:</strong> {{ $uniformAssessment->attendance }} / 12
                                 ({{ round(($uniformAssessment->attendance / 12) * 40) }})</p>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-md-6">
-                            <p><strong>Level of Engagement:</strong></p>
+                            <p><strong>Peringkat Penglibatan:</strong></p>
                             <ul>
                                 @foreach ($uniformAssessment->engagement as $engagement)
                                     <li>
                                         @switch($engagement)
                                             @case('I1')
-                                                International Level (20)
+                                                Tahap Antarabangsa (20)
                                             @break
 
                                             @case('N1')
-                                                National Level (17)
+                                                Tahap Kebangsaan (17)
                                             @break
 
                                             @case('C1')
-                                                Country Level (14)
+                                                Tahap Negeri (14)
                                             @break
 
                                             @case('D1')
-                                                District/Zone Level (11)
+                                                Tahap Daerah/Zon (11)
                                             @break
 
                                             @case('S1')
-                                                School/None Level (0)
+                                                Tahap Sekolah/Tiada (0)
                                             @break
 
                                             @case('I2')
-                                                International Level (15)
+                                                Tahap Antarabangsa (15)
                                             @break
 
                                             @case('N2')
-                                                National Level (12)
+                                                Tahap Kebangsaan (12)
                                             @break
 
                                             @case('C2')
-                                                Country Level (10)
+                                                Tahap Negeri (10)
                                             @break
 
                                             @case('D2')
-                                                District/Zone Level (8)
+                                                Tahap Daerah/Zon (8)
                                             @break
 
                                             @case('S2')
-                                                School/None Level (0)
+                                                Tahap Sekolah/Tiada (0)
                                             @break
 
                                             @case('I3')
-                                                International Level (10)
+                                                Tahap Antarabangsa (10)
                                             @break
 
                                             @case('N3')
-                                                National Level (8)
+                                                Tahap Kebangsaan (8)
                                             @break
 
                                             @case('C3')
-                                                Country Level (6)
+                                                Tahap Negeri (6)
                                             @break
 
                                             @case('D3')
-                                                District/Zone Level (4)
+                                                Tahap Daerah/Zon (4)
                                             @break
 
                                             @case('S3')
-                                                School/None Level (0)
+                                                Tahap Sekolah/Tiada (0)
                                             @break
 
                                             @default
-                                                Unknown
+                                                Tidak Diketahui
                                         @endswitch
                                     </li>
                                 @endforeach
                             </ul>
                         </div>
                         <div class="col-md-6">
-                            <p><strong>Level of Achievement:</strong></p>
+                            <p><strong>Tahap Pencapaian:</strong></p>
                             <ul>
                                 @foreach ($uniformAssessment->achievement as $achievement)
                                     <li>
                                         @switch($achievement)
                                             @case('IC')
-                                                Champion - International Level (20)
+                                                Johan - Tahap Antarabangsa (20)
                                             @break
 
                                             @case('NC')
-                                                Champion - National Level (17)
+                                                Johan - Tahap Kebangsaan (17)
                                             @break
 
                                             @case('CC')
-                                                Champion - Country Level (14)
+                                                Johan - Tahap Negeri (14)
                                             @break
 
                                             @case('DC')
-                                                Champion - District/Zone Level (11)
+                                                Johan - Tahap Daerah/Zon (11)
                                             @break
 
                                             @case('SC')
-                                                Champion - School/None Level (0)
+                                                Johan - Tahap Sekolah/Tiada (0)
                                             @break
 
                                             @case('I1')
-                                                1st Runner Up - International Level (15)
+                                                Naib Johan - Tahap Antarabangsa (15)
                                             @break
 
                                             @case('N1')
-                                                1st Runner Up - National Level (12)
+                                                Naib Johan - Tahap Kebangsaan (12)
                                             @break
 
                                             @case('C1')
-                                                1st Runner Up - Country Level (10)
+                                                Naib Johan - Tahap Negeri (10)
                                             @break
 
                                             @case('D1')
-                                                1st Runner Up - District/Zone Level (8)
+                                                Naib Johan - Tahap Daerah/Zon (8)
                                             @break
 
                                             @case('S1')
-                                                1st Runner Up - School/None Level (0)
+                                                Naib Johan - Tahap Sekolah/Tiada (0)
                                             @break
 
                                             @case('I2')
-                                                2nd Runner Up - International Level (10)
+                                                Ketiga - Tahap Antarabangsa (10)
                                             @break
 
                                             @case('N2')
-                                                2nd Runner Up - National Level (8)
+                                                Ketiga - Tahap Kebangsaan (8)
                                             @break
 
                                             @case('C2')
-                                                2nd Runner Up - Country Level (6)
+                                                Ketiga - Tahap Negeri (6)
                                             @break
 
                                             @case('D2')
-                                                2nd Runner Up - District/Zone Level (4)
+                                                Ketiga - Tahap Daerah/Zon (4)
                                             @break
 
                                             @case('S2')
-                                                2nd Runner Up - School/None Level (0)
+                                                Ketiga - Tahap Sekolah/Tiada (0)
                                             @break
 
                                             @default
-                                                Unknown
+                                                Tidak Diketahui
                                         @endswitch
                                     </li>
                                 @endforeach
@@ -870,62 +858,62 @@
 
                     <div class="row">
                         <div class="col-md-6">
-                            <p><strong>Commitment:</strong></p>
+                            <p><strong>Komitmen:</strong></p>
                             <ul class="row">
                                 @foreach ($uniformAssessment->commitment as $commitment)
                                     <div class="col-md-6">
                                         <li>
                                             @switch($commitment)
                                                 @case('C1')
-                                                    Demonstrate leadership (3)
+                                                    Menunjukkan kepimpinan (3)
                                                 @break
 
                                                 @case('C2')
-                                                    Manage activities (3)
+                                                    Mengurus aktiviti (3)
                                                 @break
 
                                                 @case('C3')
-                                                    Helping teachers/friends (2)
+                                                    Membantu guru/rakan (2)
                                                 @break
 
                                                 @case('C4')
-                                                    Provide equipment (2)
+                                                    Menyediakan peralatan (2)
                                                 @break
 
                                                 @case('C5')
-                                                    Clean the area (2)
+                                                    Membersihkan kawasan (2)
                                                 @break
 
                                                 @case('C6')
-                                                    Punctual (2)
+                                                    Tepat pada masa (2)
                                                 @break
 
                                                 @case('C7')
-                                                    Show interest (2)
+                                                    Menunjukkan minat (2)
                                                 @break
 
                                                 @case('C8')
-                                                    Show seriousness (2)
+                                                    Menunjukkan kesungguhan (2)
                                                 @break
 
                                                 @case('C9')
-                                                    Follow Instructions (2)
+                                                    Mengikuti arahan (2)
                                                 @break
 
                                                 @case('C10')
-                                                    Trying (2)
+                                                    Mencuba (2)
                                                 @break
 
                                                 @case('C11')
-                                                    Give cooperation (2)
+                                                    Memberi kerjasama (2)
                                                 @break
 
                                                 @case('C12')
-                                                    Any observable pure value (2)
+                                                    Sebarang nilai murni yang boleh diperhatikan (2)
                                                 @break
 
                                                 @default
-                                                    Unknown
+                                                    Tidak Diketahui
                                             @endswitch
                                         </li>
                                     </div>
@@ -933,32 +921,29 @@
                             </ul>
                         </div>
                         <div class="col-md-6">
-                            <p><strong>Contribution Service (School Level):</strong></p>
+                            <p><strong>Khidmatan Sumbangan (Peringkat Sekolah):</strong></p>
                             <ul>
                                 @foreach ($uniformAssessment->contribution as $contribution)
                                     <li>
                                         @switch($contribution)
                                             @case('CS1')
-                                                Students who are registered as program / tournament / competition / carnival /
-                                                course participants (10)
+                                                Murid yang didaftarkan sebagai peserta program / kejohanan / pertandingan / karnival / kursus (10)
                                             @break
 
                                             @case('CS2')
-                                                Involves specific skills-judge / umpire, team coach / technical aspects (10)
+                                                Melibatkan kemahiran khusus-hakim/pengadil, jurulatih pasukan/aspek teknikal (10)
                                             @break
 
                                             @case('CS3')
-                                                Involvement of students involved in activities such as interlude performances
-                                                (8)
+                                                Penglibatan murid yang terlibat dalam aktiviti seperti persembahan selingan (8)
                                             @break
 
                                             @case('CS4')
-                                                Helping in terms of making unit activities successful such as participating in
-                                                performances, cheerleading and related (5)
+                                                Membantu dari segi menjayakan aktiviti unit seperti mengambil bahagian dalam persembahan, kumpulan sorak dan yang berkaitan (5)
                                             @break
 
                                             @default
-                                                Unknown
+                                                Tidak Diketahui
                                         @endswitch
                                     </li>
                                 @endforeach
@@ -968,14 +953,15 @@
 
                     <div class="row">
                         <div class="col-md-6">
-                            <p><strong>Comment:</strong> {{ $uniformAssessment->comment }}</p>
+                            <p><strong>Ulasan:</strong> {{ $uniformAssessment->comment }}</p>
                         </div>
                         <div class="col-md-6">
-                            <p><strong>Total Marks:</strong> {{ $uniformAssessment->total_mark }}%</p>
+                            <p><strong>Jumlah Markah:</strong> {{ $uniformAssessment->total_mark }}%</p>
                         </div>
                     </div>
                 </div>
             </div>
         @endif
 
+    </div>
 </x-layout>

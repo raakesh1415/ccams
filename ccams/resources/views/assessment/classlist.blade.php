@@ -1,17 +1,17 @@
 <x-layout>
     <div class="container">
-        <h1>Class {{ $classroom }} Assessment Overview</h1>
+        <h1>Keseluruhan Penilaian Kelas {{ $classroom }}</h1>
         <div class="card mb-4">
             <div class="card-body">
                 <table id="datatablesSimple">
                     <thead>
                         <tr>
-                            <th>Student Name</th>
+                            <th>Nama Pelajar</th>
                             <th>Permainan</th>
                             <th>Persatuan</th>
                             <th>Unit Beruniform</th>
-                            {{-- <th>Total Average</th> --}}
-                            <th>Action</th>
+                            {{-- <th>Purata Jumlah</th> --}}
+                            <th>Tindakan</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -19,7 +19,7 @@
                             <tr>
                                 <td>{{ $student->name }}</td>
                                 
-                                <!-- Permainan Column -->
+                                <!-- Kolum Permainan -->
                                 <td>
                                     @if($student->permainanClub)
                                         <div class="text-muted mb-1">{{ $student->permainanClub }}</div>
@@ -31,11 +31,11 @@
                                             <strong class="text-warning">N/A</strong>
                                         @endif
                                     @else
-                                        <span class="text-muted">Not Registered</span>
+                                        <span class="text-muted">Tidak Mendaftar</span>
                                     @endif
                                 </td>
                                 
-                                <!-- Persatuan Column -->
+                                <!-- Kolum Persatuan -->
                                 <td>
                                     @if($student->persatuanClub)
                                         <div class="text-muted mb-1">{{ $student->persatuanClub }}</div>
@@ -44,14 +44,14 @@
                                                 {{ number_format($student->persatuanAssessment->total_mark, 1) }}%
                                             </strong>
                                         @else
-                                            <strong class="text-warning">Not Assess Yet</strong>
+                                            <strong class="text-warning">Belum Dinilai</strong>
                                         @endif
                                     @else
-                                        <span class="text-muted">Not Registered</span>
+                                        <span class="text-muted">Tidak Mendaftar</span>
                                     @endif
                                 </td>
                                 
-                                <!-- Unit Beruniform Column -->
+                                <!-- Kolum Unit Beruniform -->
                                 <td>
                                     @if($student->uniformClub)
                                         <div class="text-muted mb-1">{{ $student->uniformClub }}</div>
@@ -63,11 +63,11 @@
                                             <strong class="text-warning">N/A</strong>
                                         @endif
                                     @else
-                                        <span class="text-muted">Not Registered</span>
+                                        <span class="text-muted">Tidak Mendaftar</span>
                                     @endif
                                 </td>
                                 
-                                {{-- <!-- Average Column -->
+                                {{-- <!-- Kolum Purata -->
                                 <td>
                                     @if($student->averageAssessment > 0)
                                         <strong class="text-success">
@@ -81,7 +81,7 @@
                                 <td>
                                     <a href="{{ route('assessment.viewclass', ['student_id' => $student->id]) }}" 
                                        class="btn btn-sm btn-info">
-                                        <span class="fa fa-eye"></span> View
+                                        <span class="fa fa-eye"></span> Lihat
                                     </a>
                                 </td>
                             </tr>
