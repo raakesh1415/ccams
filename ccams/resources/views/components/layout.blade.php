@@ -90,6 +90,13 @@
                             </div>
                         @endif
 
+                        @if (Auth::user()->role === 'teacher')
+                            <a class="nav-link {{ request()->is('attendance/teacher') ? 'active' : '' }}" href="/attendance/teacher">
+                                <div class="sb-nav-link-icon"><i class="fas fa-user-check"></i></div>
+                                Kehadiran (Guru)
+                            </a>
+                        @endif
+
                         @if (Auth::user()->role === 'student')
                             <a class="nav-link {{ request()->is('attendance/student') ? 'active' : '' }}" href="/attendance/student">
                                 <div class="sb-nav-link-icon"><i class="fas fa-user-check"></i></div>
