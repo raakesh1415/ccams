@@ -61,8 +61,5 @@
                     @endforeach
                 </div>
             @endif
-
-            <div class="row my-4"></div>
-            <h2 class="text-left"><b>Aktiviti Terancang Anda</b></h2>
         </div>
 </x-layout>

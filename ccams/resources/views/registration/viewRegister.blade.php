@@ -14,8 +14,8 @@
         <!-- Toggle View Dropdown -->
         <div class="d-flex justify-content-end mb-3">
             <select id="view-toggle" class="form-select" style="width: 170px;">
-                <option value="list" selected>List</option>
-                <option value="card">Card</option>
+                <option value="list" selected>Senarai</option>
+                <option value="card">Kad</option>
             </select>
         </div>
 
@@ -101,7 +101,7 @@
 
         @endif
         <div class="text-center mt-4" style="padding: 10px">
-            <a href="{{ route('registration.index') }}" class="btn btn-dark">Return</a>
+            <a href="{{ route('registration.index') }}" class="btn btn-dark">Kembali</a>
         </div>
     </div>
 

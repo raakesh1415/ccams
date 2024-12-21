@@ -71,7 +71,7 @@ Route::middleware(['auth'])->group(function () {
         return view('registration.index');
     })->name('registration.index');
     Route::get('/registration/persatuan', [RegistrationController::class, 'persatuanIndex'])->name('registration.persatuan');
-    Route::get('/registration/permainan', [RegistrationController::class, 'permainanIndex'])->name('registration.permainan');
+    Route::get('/registration/sukan', [RegistrationController::class, 'sukanIndex'])->name('registration.sukan');
     Route::get('/registration/beruniform', [RegistrationController::class, 'beruniformIndex'])->name('registration.beruniform');
     Route::post('/registration/{clubId}/{clubType}', [RegistrationController::class, 'register'])->name('registration.register');
     Route::get('/registration/viewRegister', [RegistrationController::class, 'viewRegister'])->name('registration.viewRegister');

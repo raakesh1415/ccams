@@ -25,7 +25,7 @@ class AutoAssignClub extends Command
         }
 
         // Step 2: Find students with role 'student' who haven't registered all club types
-        $requiredClubTypes = ['Persatuan', 'Permainan', 'Unit Beruniform']; // Define all club types
+        $requiredClubTypes = ['Persatuan', 'Sukan', 'Unit Beruniform']; // Define all club types
         $unregisteredStudents = User::where('role', 'student')
             ->get()
             ->filter(function ($student) use ($requiredClubTypes) {
