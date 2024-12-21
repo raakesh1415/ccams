@@ -35,7 +35,7 @@
                                 <p><strong>Name:</strong> {{ $user->name }}</p>
                                 <p><strong>Role:</strong> {{ $user->role }}</p>
                                 <p><strong>Email:</strong> {{ $user->email }}</p>
-                                <p><strong>Class:</strong> {{ $user->class }}</p>
+                                <p><strong>Class:</strong> {{ $user->classroom }}</p>
                                 <a href="{{ route('profile.edit') }}" class="text-muted small">Edit Profile</a>
                             </div>
                         </div>

@@ -55,6 +55,7 @@ class UserController extends Controller
         $exists = User::where('ic', $request->ic)->exists();
         return response()->json(['exists' => $exists]);
     }      
+    
 
     public function create()
     {
@@ -102,8 +103,14 @@ class UserController extends Controller
             : redirect()->route('login.index')->with('error', 'Invalid user role!');
     }
 
+    // public function logout(): RedirectResponse
+    // {
+    //     return redirect()->route('login'); 
+    // }
+
     public function logout(): RedirectResponse
     {
+        auth()->logout(); 
         return redirect()->route('login'); 
     }
 
