@@ -2,7 +2,7 @@
     <div class="container">
         <div class="card">
             <div class="card-header text-center">
-                <h3>Ringkasan Markah Penilaian - {{ $assessment->club->club_name }}</h3>
+                <h3>Butiran Markah Penilaian - {{ $assessment->club->club_name }}</h3>
             </div>
             <div class="card-body">
                 <h4 class="card-title pb-3">Butiran Pelajar</h4>
