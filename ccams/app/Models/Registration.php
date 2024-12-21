@@ -22,12 +22,18 @@ class Registration extends Model
 
     public function club()
     {
-    // Use club_id that registered under user_id to find certain club
-    return $this->belongsTo(Club::class, 'club_id', 'club_id');
+        // Use club_id that registered under user_id to find certain club
+        return $this->belongsTo(Club::class, 'club_id', 'club_id');
     }
 
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function assessments()
+    {
+        return $this->hasMany(Assessment::class, 'club_id', 'club_id')
+            ->where('user_id', $this->user_id);
     }
 }

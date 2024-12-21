@@ -15,6 +15,7 @@ class AssessmentController extends Controller
     // Show list of clubs the student is registered to
     public function index()
     {
+<<<<<<< Updated upstream
         // Get the currently authenticated student
         $student = auth()->user();
 
@@ -23,6 +24,15 @@ class AssessmentController extends Controller
 
         // Pass the clubs to the view
         return view('attendance.index', compact('clubs'));
+=======
+        $userId = Auth::id();
+        $user = Auth::user();
+
+        // Fetch all registered clubs for the user
+        $registrations = Registration::where('user_id', $userId)->with('club')->get();
+
+        return view("assessment.index", compact('registrations', 'user'));
+>>>>>>> Stashed changes
     }
 
     public function list($club_id)
@@ -51,7 +61,7 @@ class AssessmentController extends Controller
         // First verify the club exists
         $club = Club::findOrFail($club_id);
 
-        // Get registered students with error handling
+        // Get all registered students
         $registeredUsers = Registration::whereHas('user', function ($query) {
             $query->where('role', 'student');
         })
@@ -59,11 +69,18 @@ class AssessmentController extends Controller
             ->with('user')
             ->get();
 
-        // Debug to check what data you're getting
-        // dd($registeredUsers);  // Uncomment this to check the data
+        // Get IDs of students who already have assessments
+        $assessedUserIds = Assessment::where('club_id', $club_id)
+            ->pluck('user_id')
+            ->toArray();
+
+        // Filter out users who already have assessments
+        $availableUsers = $registeredUsers->filter(function ($registration) use ($assessedUserIds) {
+            return !in_array($registration->user_id, $assessedUserIds);
+        });
 
         return view('assessment.create', [
-            'users' => $registeredUsers,
+            'users' => $availableUsers,
             'club' => $club,
             'club_id' => $club_id
         ]);
@@ -240,18 +257,29 @@ class AssessmentController extends Controller
     public function edit($assessment_id)
     {
         $assessment = Assessment::findOrFail($assessment_id);
-        
-        // Get registered students for this specific club
+
+        // Get all registered students
         $registeredUsers = Registration::whereHas('user', function ($query) {
             $query->where('role', 'student');
         })
-        ->where('club_id', $assessment->club_id)
-        ->with('user')
-        ->get();
+            ->where('club_id', $assessment->club_id)
+            ->with('user')
+            ->get();
+
+        // Get IDs of students who already have assessments, excluding the current assessment
+        $assessedUserIds = Assessment::where('club_id', $assessment->club_id)
+            ->where('assessment_id', '!=', $assessment_id)
+            ->pluck('user_id')
+            ->toArray();
+
+        // Filter out users who already have assessments, except the current user being edited
+        $availableUsers = $registeredUsers->filter(function ($registration) use ($assessedUserIds) {
+            return !in_array($registration->user_id, $assessedUserIds);
+        });
 
         return view("assessment.edit", [
             'assessment' => $assessment,
-            'users' => $registeredUsers,
+            'users' => $availableUsers,
             'club' => $assessment->club
         ]);
     }
@@ -393,7 +421,7 @@ class AssessmentController extends Controller
 
         // Redirect to the assessment list page
         return redirect()->route('assessment.list', ['club_id' => $assessment->club_id])
-        ->with('success', 'Assessment updated successfully!');
+            ->with('success', 'Assessment updated successfully!');
     }
 
 
@@ -401,10 +429,104 @@ class AssessmentController extends Controller
     {
         $assessment = Assessment::findOrFail($assessment_id);
         $club_id = $assessment->club_id; // Store club_id before deletion
-        
+
         $assessment->delete();
-        
+
         return redirect()->route('assessment.list', ['club_id' => $club_id])
             ->with('success', 'Assessment deleted successfully!');
+    }
+
+    public function classlist($classroom)
+    {
+        // Verify the teacher belongs to this classroom
+        if (Auth::user()->classroom !== $classroom) {
+            return redirect()->back()->with('error', 'Unauthorized access');
+        }
+
+        // Get all students in the class
+        $students = User::where('classroom', $classroom)
+            ->where('role', 'student')
+            ->get();
+
+        foreach ($students as $student) {
+            // Get all registrations for the student with club and assessment info
+            $registrations = Registration::where('user_id', $student->id)
+                ->with(['club', 'club.assessments' => function ($query) use ($student) {
+                    $query->where('user_id', $student->id);
+                }])
+                ->get();
+
+            // Get Permainan club info
+            $permainanReg = $registrations->first(function ($reg) {
+                return $reg->club_type === 'Permainan';
+            });
+            $student->permainanClub = $permainanReg ? $permainanReg->club->club_name : null;
+            $student->permainanAssessment = $permainanReg ? $permainanReg->club->assessments->first() : null;
+
+            // Get Persatuan club info
+            $persatuanReg = $registrations->first(function ($reg) {
+                return $reg->club_type === 'Persatuan';
+            });
+            $student->persatuanClub = $persatuanReg ? $persatuanReg->club->club_name : null;
+            $student->persatuanAssessment = $persatuanReg ? $persatuanReg->club->assessments->first() : null;
+
+            // Get Unit Beruniform club info
+            $uniformReg = $registrations->first(function ($reg) {
+                return $reg->club_type === 'Unit Beruniform';
+            });
+            $student->uniformClub = $uniformReg ? $uniformReg->club->club_name : null;
+            $student->uniformAssessment = $uniformReg ? $uniformReg->club->assessments->first() : null;
+
+            // // Calculate average of available assessment marks
+            // $marks = collect([
+            //     $student->permainanAssessment?->total_mark,
+            //     $student->persatuanAssessment?->total_mark,
+            //     $student->uniformAssessment?->total_mark
+            // ])->filter()->values();
+
+            // $student->averageAssessment = $marks->isEmpty() ? 0 : round($marks->avg(), 2);
+        }
+
+        return view('assessment.classlist', compact('students', 'classroom'));
+    }
+
+    public function viewclass($student_id)
+    {
+        $student = User::findOrFail($student_id);
+
+        // Get all registrations for the student
+        $registrations = Registration::where('user_id', $student_id)
+            ->with(['club', 'club.assessments' => function ($query) use ($student_id) {
+                $query->where('user_id', $student_id);
+            }])
+            ->get();
+
+        // Get assessments for each club type
+        $permainanReg = $registrations->first(function ($reg) {
+            return $reg->club_type === 'Permainan';
+        });
+        $permainanAssessment = $permainanReg ? $permainanReg->club->assessments->first() : null;
+
+        $persatuanReg = $registrations->first(function ($reg) {
+            return $reg->club_type === 'Persatuan';
+        });
+        $persatuanAssessment = $persatuanReg ? $persatuanReg->club->assessments->first() : null;
+
+        $uniformReg = $registrations->first(function ($reg) {
+            return $reg->club_type === 'Unit Beruniform';
+        });
+        $uniformAssessment = $uniformReg ? $uniformReg->club->assessments->first() : null;
+
+        // Set club names
+        $student->permainanClub = $permainanReg ? $permainanReg->club->club_name : null;
+        $student->persatuanClub = $persatuanReg ? $persatuanReg->club->club_name : null;
+        $student->uniformClub = $uniformReg ? $uniformReg->club->club_name : null;
+
+        return view('assessment.viewclass', compact(
+            'student',
+            'permainanAssessment',
+            'persatuanAssessment',
+            'uniformAssessment'
+        ));
     }
 }

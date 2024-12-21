@@ -1,5 +1,5 @@
 <x-layout>
-    <div class="container-fluid px-4 py-4">
+    <div class="container-fluid">
         <div class="card">
             <div class="card-header text-center">
                 <h3>Assessment Form for Club {{ $club->club_name }}</h3> <!-- Display the club name -->
@@ -14,20 +14,14 @@
                                 <option value="">-- Select Student --</option>
                                 @forelse ($users as $registration)
                                     @if ($registration->user)
-                                        <option value="{{ $registration->user->id }}">{{ $registration->user->name }}
-                                        </option>
+                                        <option value="{{ $registration->user->id }}">{{ $registration->user->name }}</option>
                                     @endif
                                 @empty
-                                    <option disabled>No students registered</option>
+                                    <option disabled>No available students to assess</option>
                                 @endforelse
                             </select>
-                        </div>
-                        <!-- Club Section -->
-                        
-                        <div class="mb-3 mb-2">
-                            <div class="col-md-4 mb-2">
-                                <input type="hidden" class="form-control" id="club_id" name="club_id" value="{{ $club->club_id }}">
-                            </div>
+                            <!-- Club Section -->
+                            <input type="hidden" class="form-control" id="club_id" name="club_id" value="{{ $club->club_id }}">
                         </div>
                     </div>
                     {{-- <h3 class="mb-3">Student Details <small class="text-muted"></small></h3>

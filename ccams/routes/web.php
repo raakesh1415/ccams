@@ -27,6 +27,8 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/assessment/{assessment_id}', [AssessmentController::class, 'destroy'])->name('assessment.destroy');
     Route::get('/assessment/{assessment_id}/show', [AssessmentController::class, 'show'])->name('assessment.show');
     Route::get('/assessment/view', [AssessmentController::class, 'view'])->name('assessment.view');
+    Route::get('/assessment/classlist/{classroom}', [AssessmentController::class, 'classlist'])->name('assessment.classlist');
+    Route::get('/assessment/viewclass/{student_id}', [AssessmentController::class, 'viewclass'])->name('assessment.viewclass');
 
     // Attendance
     Route::get('/attendance/student', [AttendanceController::class, 'indexStudent'])->name('attendance.indexStudent');

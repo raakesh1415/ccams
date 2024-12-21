@@ -1,5 +1,5 @@
 <x-layout>
-    <div class="container-fluid px-4 py-4">
+    <div class="container-fluid">
         <h1>{{ $club->club_name }} Assessment List</h1>
         <div class="card mb-4">
             {{-- <div class="card-header"> 
@@ -13,6 +13,7 @@
                     <thead>
                         <tr>
                             <th>Name</th>
+                            <th>Class</th>
                             <th>Comment</th>
                             <th>Total Mark</th>
                             <th>Action</th>
@@ -22,6 +23,7 @@
                         @foreach ($assessments as $as)
                             <tr>
                                 <td>{{ $as->user->name ?? 'N/A' }}</td>
+                                <td>{{ $as->user->classroom ?? 'N/A' }}</td>
                                 <td>{{ $as->comment }}</td>
                                 <td>{{ $as->total_mark }}%</td>
                                 <td>

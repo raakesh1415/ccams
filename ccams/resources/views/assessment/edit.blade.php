@@ -1,8 +1,8 @@
 <x-layout>
-    <div class="container-fluid px-4 py-4">
+    <div class="container-fluid">
         <div class="card">
             <div class="card-header text-center">
-                <h3>Edit Assessment for {{ $club->club_name }}</h3>
+                <h3>Edit Assessment for Club {{ $club->club_name }}</h3>
             </div>
             <div class="card-body">
                 <form action="{{ route('assessment.update', ['assessment_id' => $assessment->assessment_id]) }}" method="POST">
@@ -16,26 +16,23 @@
                             <label for="user_id" class="form-label">Select Student:</label>
                             <select class="form-select" id="user_id" name="user_id" required>
                                 <option value="">-- Select Student --</option>
+                                @if($assessment->user)
+                                    <option value="{{ $assessment->user->id }}" selected>
+                                        {{ $assessment->user->name }} (Current)
+                                    </option>
+                                @endif
                                 @foreach($users as $registration)
-                                    @if ($registration->user)
-                                        <option value="{{ $registration->user->id }}" 
-                                            {{ $assessment->user_id == $registration->user->id ? 'selected' : '' }}>
+                                    @if ($registration->user && $registration->user->id !== $assessment->user_id)
+                                        <option value="{{ $registration->user->id }}">
                                             {{ $registration->user->name }}
                                         </option>
                                     @endif
                                 @endforeach
                             </select>
-                        </div>
-                        <!-- Club Section -->
-                        
-                        <div class="mb-3 mb-2">
-                            <div class="col-md-4 mb-2">
-                                <input type="hidden" class="form-control" id="club_id" name="club_id" value="{{ $club->club_id }}">
-                            </div>
-                        </div>
+                            <!-- Club Section -->
+                            <input type="hidden" class="form-control" id="club_id" name="club_id" value="{{ $club->club_id }}">
+                        </div>     
                     </div>
-
-                    <hr>
 
                     <hr>
 
@@ -398,7 +395,7 @@
                 </form>
             </div>
         </div>
-    </div>
+    {{-- </div> --}}
 
     <style>
         .form-check-input:checked {

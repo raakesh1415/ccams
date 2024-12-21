@@ -1,6 +1,6 @@
 // show.blade.php
 <x-layout>
-    {{-- <div class="container-fluid px-4 py-4"> --}}
+    <div class="container-fluid">
         <div class="card">
             <div class="card-header text-center">
                 <h3>Summary of Assessment</h3>
