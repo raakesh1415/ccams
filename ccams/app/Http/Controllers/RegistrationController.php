@@ -17,10 +17,10 @@ class RegistrationController extends Controller
         // kelab => $kelab (assigne $kelab(value) to kelab (key))
     }
 
-    public function permainanIndex()
+    public function sukanIndex()
     {
-        $permainan = Club::where('club_category', 'Permainan')->get();
-        return view('registration.permainan', compact('permainan'));
+        $sukan = Club::where('club_category', 'Sukan')->get();
+        return view('registration.sukan', compact('sukan'));
     }
 
 

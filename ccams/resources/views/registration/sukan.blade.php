@@ -1,6 +1,6 @@
 <x-layout>
     <div class="container mt-5">
-        <h2 class="text-center"><b>PERMAINAN</b></h2>
+        <h2 class="text-center"><b>SUKAN</b></h2>
 
         <!-- Display prompt messages -->
         @if (session('error'))
@@ -13,12 +13,12 @@
 
         <!-- Sukan Listings -->
         <div class="row mt-4">
-            @if ($permainan->isEmpty())
+            @if ($sukan->isEmpty())
                 <div class="text-center">
                     <p><b>Tiada kelab tersedia untuk pendaftaran pada masa ini.<b></p>
                 </div>
             @else
-                @foreach ($permainan as $club)
+                @foreach ($sukan as $club)
                     <div class="col-md-6 mb-4">
                         <div class="card shadow-sm h-100">
                             <div class="row g-0 h-100">
