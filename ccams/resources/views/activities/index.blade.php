@@ -17,9 +17,11 @@
                     style="max-width: 150px;">
                 <h3 class="text-muted">Tiada Aktiviti!</h3>
                 <p class="text-secondary">Setelah aktiviti ditambahkan, ia akan dipaparkan di sini.</p>
-                <a href="{{ route('activities.create') }}" class="btn btn-primary btn-lg">
-                    <i class="fas fa-plus"></i> Tambah Aktiviti
-                </a>
+                @if (auth()->user()->role === 'teacher')
+                    <a href="{{ route('activities.create') }}" class="btn btn-primary btn-lg">
+                        <i class="fas fa-plus"></i> Tambah Aktiviti
+                    </a>
+                @endif
             </div>
         @else
             <!-- Add Activity Button -->
@@ -52,8 +54,7 @@
                                             data-url="{{ route('activities.destroy', $activity->activity_id) }}">
                                             <i class="fas fa-trash"></i> Padam
                                         </button>
-                                    @endif
-                                    @if (auth()->user()->role === 'student')
+                                    @else
                                         <a href="{{ route('activities.show', $activity->activity_id) }}"
                                             class="btn btn-outline-info">
                                             <i class="fas fa-eye"></i> Lihat
