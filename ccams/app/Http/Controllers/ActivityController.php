@@ -29,10 +29,10 @@ class ActivityController extends Controller
             'location' => 'required|string|max:255',
             'date_time' => 'required|date',
             'description' => 'required|string',
-            'participants' => 'nullable|integer|min:1',
-            'poster' => 'required|image|mimes:jpeg,png|max:2048',
-            'category' => 'required|in:Open to All,Club',
-            'duration' => 'required|string|max:100',
+            'participants' => 'nullable|integer',
+            'poster' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'category' => 'required|string',
+            'duration' => 'required|string',
             'club_id' => 'nullable|integer',
         ]);
 
