@@ -403,7 +403,7 @@
                         <div class="col-md-6 mb-2">
                             <label for="attendance" class="form-label">Kehadiran:</label>
                             <input type="text" class="form-control" id="attendance" name="attendance"
-                                value="12">
+                                value="12" required>
                         </div>
                         <div class="col-md-6 mb-2">
                             <label for="comment" class="form-label">Komen:</label>
@@ -434,6 +434,7 @@
             /* Bayangan fokus pilihan */
         }
     </style>
+<<<<<<< Updated upstream
 
     <script>
         document.getElementById('user_id').addEventListener('change', function() {
@@ -452,4 +453,6 @@
             }
         });
     </script>
+=======
+>>>>>>> Stashed changes
 </x-layout>
