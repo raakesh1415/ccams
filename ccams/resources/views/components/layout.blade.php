@@ -11,7 +11,8 @@
     <title>CCAMS</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css"
+        rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
 </head>
@@ -23,7 +24,8 @@
             <img src="{{ asset('images/logo-name.png') }}" alt="CCAMS Logo" class="logo-img" width="130px">
         </a>
         <!-- Sidebar Toggle-->
-        <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars sb-sidenav-light"></i></button>
+        <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i
+                class="fas fa-bars sb-sidenav-light"></i></button>
         <!-- Navbar Search-->
         <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
             <div class="input-group">
@@ -32,7 +34,8 @@
         <!-- Navbar-->
         <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4 ">
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
+                    data-bs-toggle="dropdown" aria-expanded="false">
                     <i class="fas fa-user fa-fw sb-sidenav-light"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
@@ -58,7 +61,8 @@
                         </a>
 
                         @if (Auth::user()->role === 'teacher')
-                            <a class="nav-link {{ request()->is('club') ? 'active' : '' }}" href="/club">
+                            <a class="nav-link {{ str_starts_with(request()->path(), 'club') ? 'active' : '' }}"
+                                href="/club">
                                 <div class="sb-nav-link-icon"><i class="fas fa-university"></i></div>
                                 Kelab
                             </a>
@@ -77,46 +81,56 @@
                                 id="registrationCollapse" aria-labelledby="headingOne"
                                 data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link {{ request()->is('registration/register') ? 'active' : '' }}"
-                                        href="{{ route('registration.index') }}"><i class="fas fa-edit"></i>
-                                        Kelab Pendaftaran</a>
-                                    <a class="nav-link {{ request()->is('registration/view') ? 'active' : '' }}"
-                                        href="{{ route('registration.viewRegister') }}"><i class="fas fa-eye"></i>
-                                        Lihat Pendaftaran</a>
-                                    <a class="nav-link {{ request()->is('activities') ? 'active' : '' }}"
-                                        href="{{ route('activities.index') }}"><i class="fas fa-calendar-alt"></i>
-                                        Lihat Aktiviti</a>
+                                    <a class="nav-link {{ str_starts_with(request()->path(), 'registration/register') ? 'active' : '' }}"
+                                        href="{{ route('registration.index') }}">
+                                        <div class="sb-nav-link-icon"><i class="fas fa-edit"></i></div>
+                                        Kelab Pendaftaran
+                                    </a>
+                                    <a class="nav-link {{ str_starts_with(request()->path(), 'registration/view') ? 'active' : '' }}"
+                                        href="{{ route('registration.viewRegister') }}">
+                                        <div class="sb-nav-link-icon"><i class="fas fa-eye"></i></div>
+                                        Lihat Pendaftaran
+                                    </a>
+                                    <a class="nav-link {{ str_starts_with(request()->path(), 'activities') ? 'active' : '' }}"
+                                        href="{{ route('activities.index') }}">
+                                        <div class="sb-nav-link-icon"><i class="fas fa-calendar-alt"></i></div>
+                                        Lihat Aktiviti
+                                    </a>
                                 </nav>
                             </div>
                         @endif
 
                         @if (Auth::user()->role === 'teacher')
-                            <a class="nav-link {{ request()->is('attendance/teacher') ? 'active' : '' }}" href="/attendance/teacher">
+                            <a class="nav-link {{ str_starts_with(request()->path(), 'attendance/teacher') ? 'active' : '' }}"
+                                href="/attendance/teacher">
                                 <div class="sb-nav-link-icon"><i class="fas fa-user-check"></i></div>
                                 Kehadiran (Guru)
                             </a>
                         @endif
 
                         @if (Auth::user()->role === 'student')
-                            <a class="nav-link {{ request()->is('attendance/student') ? 'active' : '' }}" href="/attendance/student">
+                            <a class="nav-link {{ str_starts_with(request()->path(), 'attendance/student') ? 'active' : '' }}"
+                                href="/attendance/student">
                                 <div class="sb-nav-link-icon"><i class="fas fa-user-check"></i></div>
                                 Kehadiran (Pelajar)
                             </a>
                         @endif
 
                         @if (Auth::user()->role === 'teacher')
-                            <a class="nav-link {{ request()->is('assessment') ? 'active' : '' }}" href="/assessment">
+                            <a class="nav-link {{ str_starts_with(request()->path(), 'assessment') ? 'active' : '' }}"
+                                href="/assessment">
                                 <div class="sb-nav-link-icon"><i class="fas fa-clipboard-list"></i></div>
                                 Penilaian
                             </a>
                         @endif
 
                         @if (Auth::user()->role === 'student')
-                        <a class="nav-link {{ request()->is('assessment') ? 'active' : '' }}" href="/assessment">
-                            <div class="sb-nav-link-icon"><i class="fas fa-clipboard-list"></i></div>
-                            Penilaian
-                        </a>
-                    @endif
+                            <a class="nav-link {{ str_starts_with(request()->path(), 'assessment') ? 'active' : '' }}"
+                                href="/assessment">
+                                <div class="sb-nav-link-icon"><i class="fas fa-clipboard-list"></i></div>
+                                Penilaian
+                            </a>
+                        @endif
                     </div>
                 </div>
             </nav>
@@ -142,7 +156,7 @@
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="{{ asset('js/scripts.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script> 
     <script src="{{ asset('js/datatables-simple-demo.js') }}"></script>
 </body>
 

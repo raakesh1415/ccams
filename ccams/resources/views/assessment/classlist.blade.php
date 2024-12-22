@@ -1,13 +1,13 @@
 <x-layout>
     <div class="container">
-        <h1>Keseluruhan Penilaian Kelas {{ $classroom }}</h1>
+        <h1 class="text-center mb-4">Penilaian Kelas {{ $classroom }}</h1>
         <div class="card mb-4">
             <div class="card-body">
                 <table id="datatablesSimple">
                     <thead>
                         <tr>
                             <th>Nama Pelajar</th>
-                            <th>Permainan</th>
+                            <th>Sukan</th>
                             <th>Persatuan</th>
                             <th>Unit Beruniform</th>
                             {{-- <th>Purata Jumlah</th> --}}
@@ -28,7 +28,7 @@
                                                 {{ number_format($student->permainanAssessment->total_mark, 1) }}%
                                             </strong>
                                         @else
-                                            <strong class="text-warning">N/A</strong>
+                                            <strong class="text-warning">Belum Dinilai Lagi</strong>
                                         @endif
                                     @else
                                         <span class="text-muted">Tidak Mendaftar</span>
@@ -44,7 +44,7 @@
                                                 {{ number_format($student->persatuanAssessment->total_mark, 1) }}%
                                             </strong>
                                         @else
-                                            <strong class="text-warning">Belum Dinilai</strong>
+                                            <strong class="text-warning">Belum Dinilai Lagi</strong>
                                         @endif
                                     @else
                                         <span class="text-muted">Tidak Mendaftar</span>
@@ -60,7 +60,7 @@
                                                 {{ number_format($student->uniformAssessment->total_mark, 1) }}%
                                             </strong>
                                         @else
-                                            <strong class="text-warning">N/A</strong>
+                                            <strong class="text-warning">Belum Dinilai Lagi</strong>
                                         @endif
                                     @else
                                         <span class="text-muted">Tidak Mendaftar</span>

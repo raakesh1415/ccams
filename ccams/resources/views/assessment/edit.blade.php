@@ -2,7 +2,7 @@
     <div class="container">
         <div class="card">
             <div class="card-header text-center">
-                <h3>Edit Penilaian untuk Kelab {{ $club->club_name }}</h3>
+                <h3>Borang Kemas Kini Penilaian untuk Kelab {{ $club->club_name }}</h3>
             </div>
             <div class="card-body">
                 <form action="{{ route('assessment.update', ['assessment_id' => $assessment->assessment_id]) }}" method="POST">
@@ -11,7 +11,7 @@
 
                     <!-- Bahagian Pelajar -->
                     <h3 class="mb-3">Butiran Pelajar</h3>
-                    <div class="row mb-3">
+                    {{-- <div class="row mb-3">
                         <div class="col-md-4 mb-2">
                             <label for="user_id" class="form-label">Pilih Pelajar:</label>
                             <select class="form-select" id="user_id" name="user_id" required>
@@ -32,6 +32,23 @@
                             <!-- Bahagian Kelab -->
                             <input type="hidden" class="form-control" id="club_id" name="club_id" value="{{ $club->club_id }}">
                         </div>     
+                    </div> --}}
+
+                    <div class="row mb-3">
+                        <div class="col-md-4 mb-2">
+                            <input type="hidden" name="user_id" value="{{ $assessment->user->id }}">
+                            <p><strong>Nama:</strong> {{ $assessment->user->name }}</p>
+                            <p><strong>No IC:</strong> {{ $assessment->user->ic }}</p>
+                        </div>
+                        <div class="col-md-4 mb-2">
+                            <p><strong>Alamat:</strong> {{ $assessment->user->address }}</p>
+                            <p><strong>Email:</strong> {{ $assessment->user->email }}</p>
+                        </div>
+                        <div class="col-md-4 mb-2">
+                            <p><strong>Tahun:</strong> 2024</p>
+                            <p><strong>Kelas:</strong> {{ $assessment->user->classroom }}</p>
+                            <input type="hidden" class="form-control" id="club_id" name="club_id"value="{{ $club->club_id }}">
+                        </div>
                     </div>
 
                     <hr>
@@ -256,8 +273,7 @@
                                 <label class="form-check-label" for="runnerUp2Int">18</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox ```html
-                                " name="achievement[]" id="runnerUp2Nat" value="N2"
+                                <input class="form-check-input" type="checkbox" name="achievement[]" id="runnerUp2Nat" value="N2"
                                     {{ is_array($assessment->achievement) && in_array('N2', $assessment->achievement) ? 'checked' : '' }}>
                                 <label class="form-check-label" for="runnerUp2Nat">15</label>
                             </div>
