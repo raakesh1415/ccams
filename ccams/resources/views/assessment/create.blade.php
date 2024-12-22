@@ -223,8 +223,8 @@
                                 <label class="form-check-label" for="champCountry">14</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="achievement[]"
-                                    id="champDist" value="DC">
+                                <input class="form-check-input" type="checkbox" name="achievement[]" id="champDist"
+                                    value="DC">
                                 <label class="form-check-label" for="champDist">11</label>
                             </div>
                             <div class="form-check">
@@ -403,7 +403,7 @@
                         <div class="col-md-6 mb-2">
                             <label for="attendance" class="form-label">Kehadiran:</label>
                             <input type="text" class="form-control" id="attendance" name="attendance"
-                                value="12" required>
+                                value="" required>
                         </div>
                         <div class="col-md-6 mb-2">
                             <label for="comment" class="form-label">Komen:</label>
@@ -434,25 +434,21 @@
             /* Bayangan fokus pilihan */
         }
     </style>
-<<<<<<< Updated upstream
 
     <script>
-        document.getElementById('user_id').addEventListener('change', function() {
-            var userId = this.value;
-            var clubId = document.getElementById('club_id').value;
-
+        function fetchAttendance(userId, clubId) {
             if (userId) {
-                fetch(`/attendance/total-present/${userId}/${clubId}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        document.getElementById('attendance').value = data.totalPresent;
-                    })
-                    .catch(error => console.error('Error fetching total present:', error));
+                fetch(`/attendance/total-present/${userId}/${clubId}`).then(response => response.json()).then(data => {
+                    document.getElementById('attendance').value = data.totalPresent;
+                }).catch(error => console.error('Error fetching total present:', error));
             } else {
                 document.getElementById('attendance').value = '';
             }
+        }
+        document.addEventListener('DOMContentLoaded', function() {
+            var userId = document.querySelector('input[name="user_id"]').value;
+            var clubId = document.getElementById('club_id').value;
+            fetchAttendance(userId, clubId);
         });
     </script>
-=======
->>>>>>> Stashed changes
 </x-layout>
