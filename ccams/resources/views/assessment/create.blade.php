@@ -402,7 +402,8 @@
                     <div class="row mb-4">
                         <div class="col-md-6 mb-2">
                             <label for="attendance" class="form-label">Kehadiran:</label>
-                            <input type="text" class="form-control" id="attendance" name="attendance" value="">
+                            <input type="text" class="form-control" id="attendance" name="attendance"
+                                value="12">
                         </div>
                         <div class="col-md-6 mb-2">
                             <label for="comment" class="form-label">Komen:</label>
