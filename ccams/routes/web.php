@@ -37,7 +37,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/attendance/{clubs}/store', [AttendanceController::class, 'store'])->name('attendance.store');
     Route::put('/attendance/{studentId}', [AttendanceController::class, 'update'])->name('attendance.update');
     Route::get('/attendance/details/{user_id}/{club_id}', [AttendanceController::class, 'viewDetails'])->name('attendance.viewDetails');
-    
+    Route::get('/attendance/total-present/{user_id}/{club_id}', [AttendanceController::class, 'getTotalPresent'])->name('attendance.totalPresent');
 
     // Activity
     Route::get('/activities', [ActivityController::class, 'index'])->name('activities.index');

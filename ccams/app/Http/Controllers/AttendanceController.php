@@ -155,5 +155,15 @@ class AttendanceController extends Controller
 
         return view('attendance.details', compact('student', 'club', 'attendances', 'totalPresent', 'totalAbsent', 'totalExcused'));
     }
+
+    public function getTotalPresent($user_id, $club_id)
+    {
+        $totalPresent = Attendance::where('user_id', $user_id)
+            ->where('club_id', $club_id)
+            ->where('status', 'Present')
+            ->count();
+
+        return response()->json(['totalPresent' => $totalPresent]);
+    }
     
 }

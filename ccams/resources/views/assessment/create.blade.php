@@ -201,8 +201,8 @@
                                 <label class="form-check-label" for="champCountry">14</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="achievement[]" id="champDist"
-                                    value="DC">
+                                <input class="form-check-input" type="checkbox" name="achievement[]"
+                                    id="champDist" value="DC">
                                 <label class="form-check-label" for="champDist">11</label>
                             </div>
                             <div class="form-check">
@@ -369,8 +369,7 @@
                     <div class="row mb-4">
                         <div class="col-md-6 mb-2">
                             <label for="attendance" class="form-label">Kehadiran:</label>
-                            <input type="text" class="form-control" id="attendance" name="attendance"
-                                value="12">
+                            <input type="text" class="form-control" id="attendance" name="attendance" value="">
                         </div>
                         <div class="col-md-6 mb-2">
                             <label for="comment" class="form-label">Komen:</label>
@@ -400,4 +399,22 @@
             /* Bayangan fokus pilihan */
         }
     </style>
+
+    <script>
+        document.getElementById('user_id').addEventListener('change', function() {
+            var userId = this.value;
+            var clubId = document.getElementById('club_id').value;
+
+            if (userId) {
+                fetch(`/attendance/total-present/${userId}/${clubId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        document.getElementById('attendance').value = data.totalPresent;
+                    })
+                    .catch(error => console.error('Error fetching total present:', error));
+            } else {
+                document.getElementById('attendance').value = '';
+            }
+        });
+    </script>
 </x-layout>
