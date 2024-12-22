@@ -44,7 +44,7 @@
                     </select>
                 </div>
                 <div class="col-auto mt-5">
-                    <button type="submit" class="btn btn-primary">Tapis</button>
+                    <button type="submit" class="btn btn-dark">Tapis</button>
                 </div>
             </form>
         </div>
@@ -83,12 +83,12 @@
                             </td>
                         @endfor
                         <td>
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updateAttendanceModal{{ $student->id }}">
+                            <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#updateAttendanceModal{{ $student->id }}">
                                 Kemaskini
                             </button>
                         </td>
                         <td>
-                            <a href="{{ route('attendance.viewDetails', ['user_id' => $student->id, 'club_id' => $club->club_id]) }}" class="btn btn-info">
+                            <a href="{{ route('attendance.viewDetails', ['user_id' => $student->id, 'club_id' => $club->club_id]) }}" class="btn btn-light">
                                 Lihat Butiran
                             </a>
                         </td>
