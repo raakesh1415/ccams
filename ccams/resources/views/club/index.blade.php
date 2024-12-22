@@ -6,9 +6,9 @@
             <!-- Club Type 1 -->
             <div class="col-lg-4 col-md-6 col-sm-12">
                 <div class="card club-card">
-                    <img src="{{ asset('images/persatuan.jpg') }}" alt="Kelab" class="card-img-top p-0">
+                    <img src="{{ asset('images/persatuan.jpg') }}" alt="Persatuan" class="card-img-top p-0">
                     <div class="card-body text-center">
-                        <h4 class="card-title">Kelab</h4>
+                        <h4 class="card-title">Persatuan</h4>
                         <a href="{{ route('club.kelab') }}" class="btn btn-dark mt-2">Lihat Semua</a>
                     </div>
                 </div>

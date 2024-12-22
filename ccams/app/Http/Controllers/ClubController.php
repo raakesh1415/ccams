@@ -20,9 +20,9 @@ class ClubController extends Controller
      public function showKelabClubs()
      {
          // Fetch clubs in the 'Kelab' category
-         $clubs = Club::where('club_category', 'Kelab')->get();
+         $clubs = Club::where('club_category', 'Persatuan')->get(); // Persatuan
          
-         return view('club.kelab', compact('clubs'));
+         return view('club.kelab', compact('clubs')); 
      }
 
      public function showSukanClubs()

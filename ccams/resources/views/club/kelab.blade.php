@@ -4,11 +4,11 @@
     </x-slot>
 
     <div class="container mt-4">
-        <h2 class="text-center">Terokai Kelab</h2>
+        <h2 class="text-center">Terokai Persatuan</h2>
 
         <!-- Check if there are clubs in the 'Kelab' category -->
         @if($clubs->isEmpty())
-            <p class="text-muted text-center mt-4">No clubs available in the "Kelab" category yet. Be the first to add one!</p>
+            <p class="text-muted text-center mt-4">No clubs available in the "Persatuan" category yet. Be the first to add one!</p>
 
             <!-- Add Club Button positioned below the message on the left -->
             <div class="text-start mb-4">

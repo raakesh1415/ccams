@@ -67,7 +67,7 @@
                             <label for="club_category" class="form-label">Kategori</label>
                             <select id="club_category" name="club_category" class="form-select" required>
                                 <option value="">Select Category</option>
-                                <option value="Kelab" {{ (old('club_category', isset($clubs) ? $clubs->club_category : '') == 'Kelab') ? 'selected' : '' }}>Kelab</option>
+                                <option value="Kelab" {{ (old('club_category', isset($clubs) ? $clubs->club_category : '') == 'Persatuan') ? 'selected' : '' }}>Persatuan</option>
                                 <option value="Sukan" {{ (old('club_category', isset($clubs) ? $clubs->club_category : '') == 'Sukan') ? 'selected' : '' }}>Sukan</option>
                                 <option value="Unit Beruniform" {{ (old('club_category', isset($clubs) ? $clubs->club_category : '') == 'Unit Beruniform') ? 'selected' : '' }}>Unit Beruniform</option>
                             </select>
