@@ -24,6 +24,25 @@ class AssessmentController extends Controller
         return view("assessment.index", compact('registrations', 'user'));
     }
 
+    // public function list($club_id)
+    // {
+    //     $userId = Auth::id();
+
+    //     // Fetch the specific club registration for the teacher
+    //     $registration = Registration::where('user_id', $userId)
+    //         ->where('club_id', $club_id)
+    //         ->with('club')
+    //         ->first();
+
+    //     // Fetch assessments for this club
+    //     $assessments = Assessment::where('club_id', $club_id)->with('user', 'club')->get();
+
+    //     return view("assessment.list", [
+    //         'assessments' => $assessments,
+    //         'club' => $registration->club
+    //     ]);
+    // }
+
     public function list($club_id)
     {
         $userId = Auth::id();
@@ -37,56 +56,81 @@ class AssessmentController extends Controller
         // Fetch assessments for this club
         $assessments = Assessment::where('club_id', $club_id)->with('user', 'club')->get();
 
-        return view("assessment.list", [
-            'assessments' => $assessments,
-            'club' => $registration->club
-        ]);
-    }
+        // Get IDs of users who already have assessments
+        $assessedUserIds = $assessments->pluck('user_id')->toArray();
 
-
-
-    public function create($club_id)
-    {
-        // First verify the club exists
-        $club = Club::findOrFail($club_id);
-
-        // Get all registered students
-        $registeredUsers = Registration::whereHas('user', function ($query) {
-            $query->where('role', 'student');
-        })
-            ->where('club_id', $club_id)
+        // Fetch registered users with role 'Student' who are not already assessed
+        $users = Registration::where('club_id', $club_id)
+            ->whereHas('user', function ($query) {
+                $query->where('role', 'student');
+            })
+            ->whereNotIn('user_id', $assessedUserIds)
             ->with('user')
             ->get();
 
-        // Get IDs of students who already have assessments
-        $assessedUserIds = Assessment::where('club_id', $club_id)
-            ->pluck('user_id')
-            ->toArray();
-
-        // Filter out users who already have assessments
-        $availableUsers = $registeredUsers->filter(function ($registration) use ($assessedUserIds) {
-            return !in_array($registration->user_id, $assessedUserIds);
-        });
-
-        return view('assessment.create', [
-            'users' => $availableUsers,
-            'club' => $club,
-            'club_id' => $club_id
+        return view("assessment.list", [
+            'assessments' => $assessments,
+            'club' => $registration->club,
+            'users' => $users // Pass only unassessed students
         ]);
     }
 
+
+
+    // public function create($club_id)
+    // {
+    //     // First verify the club exists
+    //     $club = Club::findOrFail($club_id);
+
+    //     // Get all registered students
+    //     $registeredUsers = Registration::whereHas('user', function ($query) {
+    //         $query->where('role', 'student');
+    //     })
+    //         ->where('club_id', $club_id)
+    //         ->with('user')
+    //         ->get();
+
+    //     // Get IDs of students who already have assessments
+    //     $assessedUserIds = Assessment::where('club_id', $club_id)
+    //         ->pluck('user_id')
+    //         ->toArray();
+
+    //     // Filter out users who already have assessments
+    //     $availableUsers = $registeredUsers->filter(function ($registration) use ($assessedUserIds) {
+    //         return !in_array($registration->user_id, $assessedUserIds);
+    //     });
+
+    //     return view('assessment.create', [
+    //         'users' => $availableUsers,
+    //         'club' => $club,
+    //         'club_id' => $club_id
+    //     ]);
+    // }
+
+    public function create(Request $request, $club_id)
+    {
+        $club = Club::findOrFail($club_id);
+        $userId = $request->input('user_id');
+        $selectedUser = User::findOrFail($userId);
+
+        return view('assessment.create', [
+            'club' => $club,
+            'club_id' => $club_id,
+            'selectedUser' => $selectedUser
+        ]);
+    }
 
 
     public function store(Request $request)
     {
         // Validate incoming request data
         $data = $request->validate([
-            'user_id' => 'required|exists:users,id', // Ensure user_id exists in users table
+            'user_id' => 'required|exists:users,id',
             'position' => 'required',
-            'engagement' => 'array|required',
-            'achievement' => 'array|required',
-            'commitment' => 'array|required',
-            'contribution' => 'array|required',
+            'engagement' => 'array',
+            'achievement' => 'array',
+            'commitment' => 'array',
+            'contribution' => 'array',
             'attendance' => 'required|numeric',
             'comment' => 'required|string',
             'club_id' => 'required|exists:clubs,club_id',
@@ -128,8 +172,12 @@ class AssessmentController extends Controller
         ];
         // Calculate total engagement score
         $eng = 0;
-        foreach ($request->engagement as $engagement) {
-            $eng += $engagementScores[$engagement] ?? 0; // Default to 0 if not found
+        if (!empty($request->engagement)) {
+            foreach ($request->engagement as $engagement) {
+                $eng += $engagementScores[$engagement] ?? 0; // Default to 0 if not found
+            }
+        } else {
+            $data['engagement'] = "";
         }
         $eng = min($eng, 20); // Cap at 20 marks
 
@@ -154,8 +202,12 @@ class AssessmentController extends Controller
         ];
         // Calculate total achievement score
         $ach = 0;
-        foreach ($request->achievement as $achievement) {
-            $ach += $achievementScores[$achievement] ?? 0; // Default to 0 if not found
+        if (!empty($request->achievement)) {
+            foreach ($request->achievement as $achievement) {
+                $ach += $achievementScores[$achievement] ?? 0; // Default to 0 if not found
+            }
+        } else {
+            $data['achievement'] = "";
         }
         $ach = min($ach, 20); // Cap at 10 marks
 
@@ -177,8 +229,12 @@ class AssessmentController extends Controller
         ];
         // Calculate total commitment score
         $com = 0;
-        foreach ($request->commitment as $commitment) {
-            $com += $commitmentScores[$commitment] ?? 0; // Default to 0 if not found
+        if (!empty($request->commitment)) {
+            foreach ($request->commitment as $commitment) {
+                $com += $commitmentScores[$commitment] ?? 0; // Default to 0 if not found
+            }
+        } else {
+            $data['commitment'] = "";
         }
         $com = min($com, 10); // Cap at 10 marks
 
@@ -192,8 +248,12 @@ class AssessmentController extends Controller
         ];
         // Calculate total contribution score
         $con = 0;
-        foreach ($request->contribution as $contribution) {
-            $con += $contributionScores[$contribution] ?? 0; // Default to 0 if not found
+        if (!empty($request->contribution)) {
+            foreach ($request->contribution as $contribution) {
+                $con += $contributionScores[$contribution] ?? 0; // Default to 0 if not found
+            }
+        } else {
+            $data['contribution'] = "";
         }
         $con = min($con, 10); // Cap at 10 marks
 
@@ -225,7 +285,7 @@ class AssessmentController extends Controller
         Assessment::create($assessmentData);
 
         // Redirect to the assessment list page
-        return redirect()->route('assessment.list', ['club_id' => $data['club_id']])->with('success', 'Assessment saved successfully!');
+        return redirect()->route('assessment.list', ['club_id' => $data['club_id']])->with('success', 'Penilaian berjaya disimpan!');
     }
 
     // AssessmentController.php
@@ -237,23 +297,23 @@ class AssessmentController extends Controller
     }
 
     public function view($club_id)
-{
-    $user_id = Auth::id();
-    $user = Auth::user();
-    
-    // Find the assessment with club information
-    $assessment = Assessment::where('user_id', $user_id)
-                          ->where('club_id', $club_id)
-                          ->with('club') // Eager load the club relationship
-                          ->first();
-    
-    if (!$assessment) {
-        return redirect()->route('assessment.index')
-                        ->with('error', 'Tiada penilaian ditemui untuk kelab ini lagi.');
+    {
+        $user_id = Auth::id();
+        $user = Auth::user();
+
+        // Find the assessment with club information
+        $assessment = Assessment::where('user_id', $user_id)
+            ->where('club_id', $club_id)
+            ->with('club') // Eager load the club relationship
+            ->first();
+
+        if (!$assessment) {
+            return redirect()->route('assessment.index')
+                ->with('error', 'Tiada penilaian ditemui untuk kelab ini lagi.');
+        }
+
+        return view("assessment.view", compact('assessment', 'user'));
     }
-    
-    return view("assessment.view", compact('assessment', 'user'));
-}
 
     public function edit($assessment_id)
     {
@@ -292,10 +352,10 @@ class AssessmentController extends Controller
         $data = $request->validate([
             'user_id' => 'required|exists:users,id',
             'position' => 'required',
-            'engagement' => 'array|required',
-            'achievement' => 'array|required',
-            'commitment' => 'array|required',
-            'contribution' => 'array|required',
+            'engagement' => 'array',
+            'achievement' => 'array',
+            'commitment' => 'array',
+            'contribution' => 'array',
             'attendance' => 'required|numeric',
             'comment' => 'required|string',
             'club_id' => 'required|exists:clubs,club_id',
@@ -317,7 +377,6 @@ class AssessmentController extends Controller
         $pos = $positionScores[$data['position']] ?? 0; // Default to 0 if not found
 
 
-        // Define scores for engagement
         $engagementScores = [
             'I1' => 20,
             'N1' => 17,
@@ -337,8 +396,12 @@ class AssessmentController extends Controller
         ];
         // Calculate total engagement score
         $eng = 0;
-        foreach ($request->engagement as $engagement) {
-            $eng += $engagementScores[$engagement] ?? 0; // Default to 0 if not found
+        if (!empty($request->engagement)) {
+            foreach ($request->engagement as $engagement) {
+                $eng += $engagementScores[$engagement] ?? 0; // Default to 0 if not found
+            }
+        } else {
+            $data['engagement'] = "";
         }
         $eng = min($eng, 20); // Cap at 20 marks
 
@@ -363,10 +426,14 @@ class AssessmentController extends Controller
         ];
         // Calculate total achievement score
         $ach = 0;
-        foreach ($request->achievement as $achievement) {
-            $ach += $achievementScores[$achievement] ?? 0; // Default to 0 if not found
+        if (!empty($request->achievement)) {
+            foreach ($request->achievement as $achievement) {
+                $ach += $achievementScores[$achievement] ?? 0; // Default to 0 if not found
+            }
+        } else {
+            $data['achievement'] = "";
         }
-        $ach = min($ach, 20); // Cap at 20 marks
+        $ach = min($ach, 20); // Cap at 10 marks
 
 
         // Define scores for commitment
@@ -386,8 +453,12 @@ class AssessmentController extends Controller
         ];
         // Calculate total commitment score
         $com = 0;
-        foreach ($request->commitment as $commitment) {
-            $com += $commitmentScores[$commitment] ?? 0; // Default to 0 if not found
+        if (!empty($request->commitment)) {
+            foreach ($request->commitment as $commitment) {
+                $com += $commitmentScores[$commitment] ?? 0; // Default to 0 if not found
+            }
+        } else {
+            $data['commitment'] = "";
         }
         $com = min($com, 10); // Cap at 10 marks
 
@@ -401,8 +472,12 @@ class AssessmentController extends Controller
         ];
         // Calculate total contribution score
         $con = 0;
-        foreach ($request->contribution as $contribution) {
-            $con += $contributionScores[$contribution] ?? 0; // Default to 0 if not found
+        if (!empty($request->contribution)) {
+            foreach ($request->contribution as $contribution) {
+                $con += $contributionScores[$contribution] ?? 0; // Default to 0 if not found
+            }
+        } else {
+            $data['contribution'] = "";
         }
         $con = min($con, 10); // Cap at 10 marks
 
@@ -422,7 +497,7 @@ class AssessmentController extends Controller
 
         // Redirect to the assessment list page
         return redirect()->route('assessment.list', ['club_id' => $assessment->club_id])
-            ->with('success', 'Assessment updated successfully!');
+            ->with('success', 'Penilaian berjaya dikemas kini!');
     }
 
 
@@ -434,14 +509,14 @@ class AssessmentController extends Controller
         $assessment->delete();
 
         return redirect()->route('assessment.list', ['club_id' => $club_id])
-            ->with('success', 'Assessment deleted successfully!');
+            ->with('success', 'Penilaian berjaya dipadamkan!');
     }
 
     public function classlist($classroom)
     {
         // Verify the teacher belongs to this classroom
         if (Auth::user()->classroom !== $classroom) {
-            return redirect()->back()->with('error', 'Unauthorized access');
+            return redirect()->back()->with('error', 'Akses tanpa kebenaran!');
         }
 
         // Get all students in the class
@@ -459,7 +534,7 @@ class AssessmentController extends Controller
 
             // Get Permainan club info
             $permainanReg = $registrations->first(function ($reg) {
-                return $reg->club_type === 'Permainan';
+                return $reg->club_type === 'Sukan';
             });
             $student->permainanClub = $permainanReg ? $permainanReg->club->club_name : null;
             $student->permainanAssessment = $permainanReg ? $permainanReg->club->assessments->first() : null;
@@ -504,7 +579,7 @@ class AssessmentController extends Controller
 
         // Get assessments for each club type
         $permainanReg = $registrations->first(function ($reg) {
-            return $reg->club_type === 'Permainan';
+            return $reg->club_type === 'Sukan';
         });
         $permainanAssessment = $permainanReg ? $permainanReg->club->assessments->first() : null;
 

@@ -28,7 +28,7 @@
         @if ($permainanAssessment)
             <div class="card mb-4">
                 <div class="card-header text-center">
-                    <h4>Permainan - {{ $student->permainanClub }}</h4>
+                    <h4>Sukan - {{ $student->permainanClub }}</h4>
                 </div>
                 <div class="card-body">
                     <div class="row">

@@ -9,7 +9,7 @@
                     <h3 class="mb-3">Butiran Pelajar</h3>
                     <div class="row mb-3">
                         <div class="col-md-4 mb-2">
-                            <label for="user_id" class="form-label">Pilih Pelajar:</label>
+                            {{-- <label for="user_id" class="form-label">Pilih Pelajar:</label>
                             <select class="form-select" id="user_id" name="user_id" required>
                                 <option value="">-- Pilih Pelajar --</option>
                                 @forelse ($users as $registration)
@@ -19,72 +19,94 @@
                                 @empty
                                     <option disabled>Tidak ada pelajar yang tersedia untuk dinilai</option>
                                 @endforelse
-                            </select>
-                            <!-- Bahagian Kelab -->
-                            <input type="hidden" class="form-control" id="club_id" name="club_id" value="{{ $club->club_id }}">
+                            </select> --}}
+                            {{-- <div class="row mb-3">
+                                <div class="col-md-4 mb-2">
+                                    <label for="user_name" class="form-label">Nama Pelajar:</label>
+                                    <input type="text" class="form-control" id="user_name" name="user_name" value="{{ $selectedUser->name }}" readonly>
+                                    <input type="hidden" name="user_id" value="{{ $selectedUser->id }}">
+                                </div>
+                            </div> --}}
+
+                            {{-- <div class="row">
+                                <div class="col-md-6"> --}}
+                            <input type="hidden" name="user_id" value="{{ $selectedUser->id }}">
+                            <p><strong>Nama:</strong> {{ $selectedUser->name }}</p>
+                            <p><strong>No IC:</strong> {{ $selectedUser->ic }}</p>
+                        </div>
+                        <div class="col-md-4 mb-2">
+                            <p><strong>Alamat:</strong> {{ $selectedUser->address }}</p>
+                            <p><strong>Email:</strong> {{ $selectedUser->email }}</p>
+                        </div>
+                        <div class="col-md-4 mb-2">
+                            <p><strong>Tahun:</strong> 2024</p>
+                            <p><strong>Kelas:</strong> {{ $selectedUser->classroom }}</p>
+                            <input type="hidden" class="form-control" id="club_id"
+                                name="club_id"value="{{ $club->club_id }}">
                         </div>
                     </div>
 
                     <hr>
 
                     <!-- Bahagian Jawatan -->
-                    <h3 class="mb-3">Jawatan <small class="text-muted">/ 10</small></h3>
+                    <h3 class="mb-3">Jawatan <small class="text-muted">/ 10</small> <span class="text-danger">*</span>
+                    </h3>
                     <div class="row mb-4">
                         <div class="col-md-4">
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="position" id="Pengerusi"
-                                    value="Pengerusi">
+                                    value="Pengerusi" required>
                                 <label class="form-check-label" for="Pengerusi">Pengerusi (10)</label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="position" id="NaibPengerusi"
-                                    value="Naib Pengerusi">
+                                    value="Naib Pengerusi" required>
                                 <label class="form-check-label" for="NaibPengerusi">Naib Pengerusi (8)</label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="position" id="Setiausaha"
-                                    value="Setiausaha">
+                                    value="Setiausaha" required>
                                 <label class="form-check-label" for="Setiausaha">Setiausaha (8)</label>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="position" id="Bendahari"
-                                    value="Bendahari">
+                                    value="Bendahari" required>
                                 <label class="form-check-label" for="Bendahari">Bendahari (8)</label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="position" id="NaibSetiausaha"
-                                    value="Naib Setiausaha">
+                                    value="Naib Setiausaha" required>
                                 <label class="form-check-label" for="NaibSetiausaha">Naib Setiausaha (6)</label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="position" id="NaibBendahari"
-                                    value="Naib Bendahari">
+                                    value="Naib Bendahari" required>
                                 <label class="form-check-label" for="NaibBendahari">Naib Bendahari (6)</label>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="position" id="AJK"
-                                    value="AJK">
+                                    value="AJK" required>
                                 <label class="form-check-label" for="AJK">AJK (6)</label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="position" id="AhliAktif"
-                                    value="Ahli Aktif">
+                                    value="Ahli Aktif" required>
                                 <label class="form-check-label" for="AhliAktif">Ahli Aktif (4)</label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="position" id="AhliBiasa"
-                                    value="Ahli Biasa">
+                                    value="Ahli Biasa" required>
                                 <label class="form-check-label" for="AhliBiasa">Ahli Biasa (2)</label>
                             </div>
                         </div>
                     </div>
                     <hr>
-                    <!-- Bahagian Tahap Penglibatan -->
-                    <h3 class="mb-3">Peringkat Penglibatan <small class="text-muted">/ 20</small></h3>
+                    <!-- Bahagian Peringkat Penglibatan -->
+                    <h3 class="mb-3">Peringkat Penglibatan <small class="text-muted">/ 20</small> </h3>
                     <div class="row mb-4">
                         <div class="col-md-4">
                             <h4 class="h5">Penglibatan 1</h4>
@@ -109,8 +131,8 @@
                                 <label class="form-check-label" for="eng1District">Daerah/Zon (11)</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="engagement[]"
-                                    id="eng1School" value="S1">
+                                <input class="form-check-input" type="checkbox" name="engagement[]" id="eng1School"
+                                    value="S1">
                                 <label class="form-check-label" for="eng1School">Sekolah/Tiada (0)</label>
                             </div>
                         </div>
@@ -127,8 +149,8 @@
                                 <label class="form-check-label" for="eng2National">Kebangsaan (12)</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="engagement[]"
-                                    id="eng2Country" value="C2">
+                                <input class="form-check-input" type="checkbox" name="engagement[]" id="eng2Country"
+                                    value="C2">
                                 <label class="form-check-label" for="eng2Country">Negara (10)</label>
                             </div>
                             <div class="form-check">
@@ -137,8 +159,8 @@
                                 <label class="form-check-label" for="eng2District">Daerah/Zon (8)</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="engagement[]"
-                                    id="eng2School" value="S2">
+                                <input class="form-check-input" type="checkbox" name="engagement[]" id="eng2School"
+                                    value="S2">
                                 <label class="form-check-label" for="eng2School">Sekolah/Tiada (0)</label>
                             </div>
                         </div>
@@ -155,8 +177,8 @@
                                 <label class="form-check-label" for="eng3National">Kebangsaan (8)</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="engagement[]"
-                                    id="eng3Country" value="C3">
+                                <input class="form-check-input" type="checkbox" name="engagement[]" id="eng3Country"
+                                    value="C3">
                                 <label class="form-check-label" for="eng3Country">Negara (6)</label>
                             </div>
                             <div class="form-check">
@@ -165,15 +187,15 @@
                                 <label class="form-check-label" for="eng3District">Daerah/Zon (4)</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="engagement[]"
-                                    id="eng3School" value="S3">
+                                <input class="form-check-input" type="checkbox" name="engagement[]" id="eng3School"
+                                    value="S3">
                                 <label class="form-check-label" for="eng3School">Sekolah/Tiada (0)</label>
                             </div>
                         </div>
                     </div>
                     <hr>
                     <!-- Bahagian Tahap Pencapaian -->
-                    <h3 class="mb-3">Tahap Pencapaian <small class="text-muted">/ 20</small></h3>
+                    <h3 class="mb-3">Tahap Pencapaian <small class="text-muted">/ 20</small> </h3>
                     <div class="row mb-4">
                         <div class="col-md-3">
                             <h4 class="h5">Penglibatan</h4>
@@ -270,7 +292,7 @@
                     </div>
                     <hr>
                     <!-- Bahagian Komitmen -->
-                    <h3 class="mb-3">Komitmen <small class="text-muted">/ 10</small></h3>
+                    <h3 class="mb-3">Komitmen <small class="text-muted">/ 10</small> </h3>
                     <div class="row mb-4">
                         <div class="col-md-4">
                             <div class="form-check">
@@ -281,7 +303,8 @@
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" name="commitment[]"
                                     id="manageActivities" value="C2">
-                                <label class="form-check-label" for="manageActivities">Menguruskan aktiviti (3)</label>
+                                <label class="form-check-label" for="manageActivities">Menguruskan aktiviti
+                                    (3)</label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" name="commitment[]"
@@ -291,7 +314,8 @@
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" name="commitment[]"
                                     id="provideEquipment" value="C4">
-                                <label class="form-check-label" for="provideEquipment">Menyediakan peralatan (2)</label>
+                                <label class="form-check-label" for="provideEquipment">Menyediakan peralatan
+                                    (2)</label>
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -313,17 +337,19 @@
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" name="commitment[]"
                                     id="showSeriousness" value="C8">
-                                <label class="form-check-label" for="showSeriousness">Menunjukkan kesungguhan (2)</label>
+                                <label class="form-check-label" for="showSeriousness">Menunjukkan kesungguhan
+                                    (2)</label>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" name="commitment[]"
-                                    id="followInstructions" value="C9 <label class="form-check-label" for="followInstructions">Mengikuti arahan (2)</label>
+                                    id="followInstructions" value="C9"> <label class="form-check-label"
+                                    for="followInstructions">Mengikuti arahan (2)</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="commitment[]"
-                                    id="trying" value="C10">
+                                <input class="form-check-input" type="checkbox" name="commitment[]" id="trying"
+                                    value="C10">
                                 <label class="form-check-label" for="trying">Mencuba (2)</label>
                             </div>
                             <div class="form-check">
@@ -334,38 +360,45 @@
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" name="commitment[]"
                                     id="observableValue" value="C12">
-                                <label class="form-check-label" for="observableValue">Sebarang nilai murni yang dapat dilihat (2)</label>
+                                <label class="form-check-label" for="observableValue">Sebarang nilai murni yang dapat
+                                    dilihat (2)</label>
                             </div>
                         </div>
                     </div>
                     <hr>
                     <!-- Bahagian Sumbangan SerNaib -->
-                    <h3 class="mb-3">Khidmat Sumbangan (Peringkat Sekolah) <small class="text-muted">/ 10</small></h3>
+                    <h3 class="mb-3">Khidmat Sumbangan (Peringkat Sekolah) <small class="text-muted">/ 10 </small>
+                    </h3>
                     <div class="mb-4">
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" name="contribution[]" id="cs1"
                                 value="CS1">
-                            <label class="form-check-label" for="cs1">Pelajar yang mendaftar sebagai peserta program / pertandingan / karnival / kursus (10)</label>
+                            <label class="form-check-label" for="cs1">Pelajar yang mendaftar sebagai peserta
+                                program / pertandingan / karnival / kursus (10)</label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" name="contribution[]" id="cs2"
                                 value="CS2">
-                            <label class="form-check-label" for="cs2">Melibatkan kemahiran tertentu - juri/penyelia, jurulatih pasukan/aspek teknikal (10)</label>
+                            <label class="form-check-label" for="cs2">Melibatkan kemahiran tertentu -
+                                juri/penyelia, jurulatih pasukan/aspek teknikal (10)</label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" name="contribution[]" id="cs3"
                                 value="CS3">
-                            <label class="form-check-label" for="cs3">Penglibatan pelajar dalam aktiviti seperti persembahan interlude (8)</label>
+                            <label class="form-check-label" for="cs3">Penglibatan pelajar dalam aktiviti seperti
+                                persembahan interlude (8)</label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" name="contribution[]" id="cs4"
                                 value="CS4">
-                            <label class="form-check-label" for="cs4">Membantu dalam menjayakan aktiviti unit seperti menyertai persembahan, sorakan dan berkaitan (5)</label>
+                            <label class="form-check-label" for="cs4">Membantu dalam menjayakan aktiviti unit
+                                seperti menyertai persembahan, sorakan dan berkaitan (5)</label>
                         </div>
                     </div>
                     <hr>
-                    <!-- Bahagian Kehadiran dan Komen -->
-                    <h3 class="mb-3">Kehadiran & Komen <small class="text-muted">/ 40</small></h3>
+                    <!-- Butiran Kehadiran -->
+                    <h3 class="mb-3">Kehadiran & Komen <small class="text-muted">/ 40 </small> <span
+                            class="text-danger">*</span></h3>
                     <div class="row mb-4">
                         <div class="col-md-6 mb-2">
                             <label for="attendance" class="form-label">Kehadiran:</label>
@@ -373,7 +406,8 @@
                         </div>
                         <div class="col-md-6 mb-2">
                             <label for="comment" class="form-label">Komen:</label>
-                            <textarea class="form-control" id="comment" name="comment" rows="1" placeholder="Masukkan komen anda di sini"></textarea>
+                            <textarea class="form-control" id="comment" name="comment" rows="1"
+                                placeholder="Masukkan komen anda di sini" required></textarea>
                         </div>
                     </div>
 
