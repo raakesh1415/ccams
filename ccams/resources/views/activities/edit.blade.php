@@ -42,13 +42,13 @@
                     <!-- Participants -->
                     <div class="mb-3">
                         <label for="participants" class="form-label">Jumlah Peserta</label>
-                        <input type="number" name="participants" id="participants" class="form-control" value="{{ old('participants', $activity->participants) }}">
+                        <input type="number" name="participants" id="participants" class="form-control" value="{{ old('participants', $activity->participants) }}" required>
                     </div>
 
                     <!-- Poster -->
                     <div class="mb-3">
                         <label for="poster" class="form-label">Tambah Poster</label>
-                        <input type="file" name="poster" id="poster" class="form-control" accept="image/*">
+                        <input type="file" name="poster" id="poster" class="form-control" accept="image/*" required>
                         @if ($activity->poster)
                             <img src="{{ asset('storage/' . $activity->poster) }}" alt="Current Poster" class="img-fluid mt-3" style="max-width: 150px;">
                         @endif
