@@ -8,9 +8,7 @@
         <div class="text-center">
             {{-- <h2 class="text-start">Penilaian</h2> --}}
             <h2 class="text-center"><b>PENILAIAN</b></h2>
-            <h4 class="text-start pt-4">
-                <b>Kelab Berdaftar</b>
-            </h4>
+            <h4 class="text-start pt-4"><b>Kelab Berdaftar</b></h4>
             <div class="row g-4 mt-0">
                 <!-- Kelas -->
                 @if (Auth::user()->role === 'teacher')
