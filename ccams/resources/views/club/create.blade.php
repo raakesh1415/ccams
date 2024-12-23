@@ -23,29 +23,65 @@
                     <div class="col-md-6 mb-4">
                         <!-- Club Name -->
                         <div class="mb-3">
-                            <label for="club_name" class="form-label">Nama</label>
+                            <label for="club_name" class="form-label">Nama <span style="color: red;">*</span></label>
                             <div class="input-group">
                                 <span class="input-group-text bg-dark text-white">
                                     <i class="fas fa-users"></i>
                                 </span>
-                                <input type="text" id="club_name" name="club_name" class="form-control" required placeholder="Enter club name" value="{{ old('club_name', isset($clubs) ? $clubs->club_name : '') }}">
+                                <input 
+                                    type="text" 
+                                    id="club_name" 
+                                    name="club_name" 
+                                    class="form-control {{ $errors->has('club_name') ? 'is-invalid' : '' }}" 
+                                    required 
+                                    placeholder="Enter club name" 
+                                    value="{{ old('club_name', isset($clubs) ? $clubs->club_name : '') }}">
+                                @if($errors->has('club_name'))
+                                    <div class="invalid-feedback">
+                                        {{ $errors->first('club_name') }}
+                                    </div>
+                                @endif
                             </div>
                         </div>
 
                         <!-- Club Description -->
                         <div class="mb-3">
-                            <label for="club_description" class="form-label">Deskripsi</label>
-                            <textarea id="club_description" name="club_description" rows="4" class="form-control" required placeholder="Enter club description" style="resize: none;">{{ old('club_description', isset($clubs) ? $clubs->club_description : '') }}</textarea>
+                            <label for="club_description" class="form-label">Deskripsi <span style="color: red;">*</span></label>
+                            <textarea 
+                                id="club_description" 
+                                name="club_description" 
+                                rows="4" 
+                                class="form-control {{ $errors->has('club_description') ? 'is-invalid' : '' }}" 
+                                required 
+                                placeholder="Enter club description" 
+                                style="resize: none;">{{ old('club_description', isset($clubs) ? $clubs->club_description : '') }}</textarea>
+                            @if($errors->has('club_description'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('club_description') }}
+                                </div>
+                            @endif
                         </div>
 
                         <!-- Participant Total -->
                         <div class="mb-3">
-                            <label for="participant_total" class="form-label">Jumlah Pelajar</label>
+                            <label for="participant_total" class="form-label">Jumlah Pelajar <span style="color: red;">*</span></label>
                             <div class="input-group">
                                 <span class="input-group-text bg-dark text-white">
                                     <i class="fas fa-user-friends"></i>
                                 </span>
-                                <input type="number" id="participant_total" name="participant_total" class="form-control" required placeholder="Enter total participants" value="{{ old('participant_total', isset($clubs) ? $clubs->participant_total : '') }}">
+                                <input 
+                                    type="number" 
+                                    id="participant_total" 
+                                    name="participant_total" 
+                                    class="form-control {{ $errors->has('participant_total') ? 'is-invalid' : '' }}" 
+                                    required 
+                                    placeholder="Enter total participants" 
+                                    value="{{ old('participant_total', isset($clubs) ? $clubs->participant_total : '') }}">
+                                @if($errors->has('participant_total'))
+                                    <div class="invalid-feedback">
+                                        {{ $errors->first('participant_total') }}
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -64,13 +100,18 @@
 
                         <!-- Club Category -->
                         <div class="mb-3">
-                            <label for="club_category" class="form-label">Kategori</label>
-                            <select id="club_category" name="club_category" class="form-select" required>
+                            <label for="club_category" class="form-label">Kategori <span style="color: red;">*</span></label>
+                            <select id="club_category" name="club_category" class="form-select {{ $errors->has('club_category') ? 'is-invalid' : '' }}" required>
                                 <option value="">Select Category</option>
                                 <option value="Persatuan" {{ (old('club_category', isset($clubs) ? $clubs->club_category : '') == 'Persatuan') ? 'selected' : '' }}>Persatuan</option>
                                 <option value="Sukan" {{ (old('club_category', isset($clubs) ? $clubs->club_category : '') == 'Sukan') ? 'selected' : '' }}>Sukan</option>
                                 <option value="Unit Beruniform" {{ (old('club_category', isset($clubs) ? $clubs->club_category : '') == 'Unit Beruniform') ? 'selected' : '' }}>Unit Beruniform</option>
                             </select>
+                            @if($errors->has('club_category'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('club_category') }}
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>
