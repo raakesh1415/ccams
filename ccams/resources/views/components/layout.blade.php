@@ -101,7 +101,7 @@
                         @endif
 
                         @if (Auth::user()->role === 'teacher')
-                            <a class="nav-link {{ str_starts_with(request()->path(), 'attendance/teacher') ? 'active' : '' }}"
+                            <a class="nav-link {{ str_starts_with(request()->path(), 'attendance') ? 'active' : '' }}"
                                 href="/attendance/teacher">
                                 <div class="sb-nav-link-icon"><i class="fas fa-user-check"></i></div>
                                 Kehadiran
@@ -109,7 +109,7 @@
                         @endif
 
                         @if (Auth::user()->role === 'student')
-                            <a class="nav-link {{ str_starts_with(request()->path(), 'attendance/student') ? 'active' : '' }}"
+                            <a class="nav-link {{ str_starts_with(request()->path(), 'attendance') ? 'active' : '' }}"
                                 href="/attendance/student">
                                 <div class="sb-nav-link-icon"><i class="fas fa-user-check"></i></div>
                                 Kehadiran
