@@ -23,7 +23,7 @@
                         <div class="card shadow-sm h-100">
                             <div class="row g-0 h-100">
                                 <div class="col-md-4 h-100">
-                                    <div class="image-container h-100">
+                                    <div class="ratio ratio-1x1">
                                         <img src="{{ asset('storage/' . $club->club_pic) }}"
                                             class="img-fluid rounded-start w-100 h-100" alt="{{ $club->club_name }}"
                                             style="object-fit: cover;">
