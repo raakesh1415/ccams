@@ -74,7 +74,6 @@
                             </div>
                         </div>
                     </div>
-
                     <!-- Club Section -->
                     <div class="col-md-6">
                         <div class="card border-0 shadow-sm">

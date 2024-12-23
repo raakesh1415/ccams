@@ -89,7 +89,7 @@
                                         <label for="password" class="form-label">KATA LALUAN</label>
                                         <input type="password" id="password" name="password" class="form-control"
                                             required>
-                                        <small id="passwordFeedback" class="form-text text-warning"></small>
+                                        <small id="passwordFeedback" class="form-text text-danger"></small>
                                     </div>
 
                                     <div class="mb-3">
