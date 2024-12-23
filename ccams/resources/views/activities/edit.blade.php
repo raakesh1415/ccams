@@ -69,7 +69,7 @@
                         <input type="text" name="duration" id="duration" class="form-control" value="{{ old('duration', $activity->duration) }}" required>
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Kemaskini Aktiviti</button>
+                    <button type="submit" class="btn btn-dark btn-lg">Kemaskini Aktiviti</button>
                 </form>
             </div>
         </div>

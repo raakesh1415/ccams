@@ -89,7 +89,7 @@
                         @enderror
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Tambah Aktiviti</button>
+                    <button type="submit" class="btn btn-dark btn-lg">Tambah Aktiviti</button>
                 </form>
             </div>
         </div>
