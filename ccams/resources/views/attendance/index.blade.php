@@ -19,7 +19,7 @@
                                 @endif
                             </div>
                             <div class="card-body">
-                                <h4 class="card-title">{{ $club->club_name }}</h4>
+                                <h5 class="card-title">{{ $club->club_name }}</h5>
                                 <p class="card-text">{{ $club->club_category }}</p>
 
                                 @if (Auth::user()->role === 'student')
