@@ -22,6 +22,7 @@
             <div class="section">
                 <h4>Maklumat Pengguna</h4>
                 <div class="form-group">
+                    <label for="username">Nama Pengguna</label>
                     <input type="text" id="username" name="username" value="{{ Auth::user()->name }}" readonly>
                 </div>
                 <div class="form-group">
