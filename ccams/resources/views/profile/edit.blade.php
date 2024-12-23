@@ -2,10 +2,10 @@
     <!-- Taskbar Section -->
     <div class="taskbar">
     <div class="profile-header">
-        <img src="{{ Auth::user()->profile_pic ? asset('storage/profiles/' . Auth::user()->profile_pic) : asset('images/profile.png') }}" class="profile-image" alt="Profile Image">
+        <img src="{{ Auth::user()->profile_pic ? asset('storage/profiles/' . Auth::user()->profile_pic) : asset('images/profile.png') }}" class="profile-image" alt="Gambar Profil">
 
              class="profile-avatar" 
-             alt="Profile Avatar">
+             alt="Avatar Profil">
         <h2>{{ Auth::user()->username }}</h2>
         <span class="user-role">{{ Auth::user()->role }}</span>
     </div>  
@@ -20,64 +20,64 @@
 
             <!-- User Information Section -->
             <div class="section">
-                <h4>User Information</h4>
+                <h4>Maklumat Pengguna</h4>
                 <div class="form-group">
-                    <label for="username">Username</label>
+                    <label for="username">Nama Pengguna</label>
                     <input type="text" id="username" name="username" value="{{ Auth::user()->name }}" readonly>
                 </div>
                 <div class="form-group">
-                    <label for="email">Email Address</label>
+                    <label for="email">Alamat E-mel</label>
                     <input type="email" id="email" name="email" value="{{ Auth::user()->email }}" readonly>
-                    <small>Email visible to other course participants</small>
+                    <small>E-mel boleh dilihat oleh peserta kursus lain</small>
                 </div>
             </div>
 
             <!-- Photo Upload Section -->
             <div class="form-group">
-                <label for="profile_pic">Profile Photo</label>
+                <label for="profile_pic">Foto Profil</label>
                 <input type="file" id="profile_pic" name="profile_pic" accept="image/*" class="form-control">
             </div>
 
             <!-- Display current profile photo if exists -->
             @if (Auth::user()->profile_pic)
                 <div class="mt-3">
-                    <p>Current Photo:</p>
-                    <img src="{{ asset('storage/profiles/' . Auth::user()->profile_pic) }}" alt="Current Profile Photo" class="img-fluid" style="max-width: 200px;">
+                    <p>Foto Semasa:</p>
+                    <img src="{{ asset('storage/profiles/' . Auth::user()->profile_pic) }}" alt="Foto Profil Semasa" class="img-fluid" style="max-width: 200px;">
                 </div>
             @else
-                <p>No photo uploaded yet.</p>
+                <p>Tiada foto dimuat naik lagi.</p>
             @endif
 
             <!-- Contact Information Section -->
             <div class="section">
-                <h4>Contact Information</h4>
+                <h4>Maklumat Hubungan</h4>
                 <div class="form-group">
-                    <label for="address">Address</label>
-                    <input type="text" id="address" name="address" value="{{ Auth::user()->address }}" placeholder="Enter your address">
+                    <label for="address">Alamat</label>
+                    <input type="text" id="address" name="address" value="{{ Auth::user()->address }}" placeholder="Masukkan alamat anda">
                 </div>
                 <div class="form-group">
-                    <label for="city">City</label>
-                    <input type="text" id="city" name="city" value="{{ Auth::user()->city }}" placeholder="Enter your city">
+                    <label for="city">Bandar</label>
+                    <input type="text" id="city" name="city" value="{{ Auth::user()->city }}" placeholder="Masukkan bandar anda">
                 </div>
                 <div class="form-group">
-                    <label for="country">Country</label>
-                    <input type="text" id="country" name="country" value="{{ Auth::user()->country }}" placeholder="Enter your country">
+                    <label for="country">Negara</label>
+                    <input type="text" id="country" name="country" value="{{ Auth::user()->country }}" placeholder="Masukkan negara anda">
                 </div>
                 <div class="form-group">
-                    <label for="postal_code">Postal Code</label>
-                    <input type="text" id="postal_code" name="postal_code" value="{{ Auth::user()->postal_code }}" placeholder="Enter your postal code">
+                    <label for="postal_code">Poskod</label>
+                    <input type="text" id="postal_code" name="postal_code" value="{{ Auth::user()->postal_code }}" placeholder="Masukkan poskod anda">
                 </div>
             </div>
             <!-- About Me Section -->
             <div class="section">
-                <h4>About Me</h4>
+                <h4>Tentang Saya</h4>
                 <div class="form-group">
-                    <textarea name="about_me" id="about_me" rows="4" placeholder="Briefly describe yourself">{{ Auth::user()->about_me }}</textarea>
+                    <textarea name="about_me" id="about_me" rows="4" placeholder="Terangkan tentang diri anda">{{ Auth::user()->about_me }}</textarea>
                 </div>
             </div>
 
             <!-- Save Button -->
-            <button type="submit" class="save-button">Save</button>
+            <button type="submit" class="save-button">Simpan</button>
         </form>
 
         <!-- Display success message if any -->
