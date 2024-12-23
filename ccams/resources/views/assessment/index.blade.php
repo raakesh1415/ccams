@@ -1,5 +1,5 @@
 <x-layout>
-    <div class="container">
+    <div class="container-fluid">
         @if (session('error'))
             <div class="alert alert-danger">
                 {{ session('error') }}
@@ -7,7 +7,10 @@
         @endif
         <div class="text-center">
             {{-- <h2 class="text-start">Penilaian</h2> --}}
-            <h2 class="text-center">KELAB BERDAFTAR</h2>
+            <h2 class="text-center"><b>PENILAIAN</b></h2>
+            <h4 class="text-start pt-4">
+                <b>Kelab Berdaftar</b>
+            </h4>
             <div class="row g-4 mt-0">
                 <!-- Kelas -->
                 @if (Auth::user()->role === 'teacher')

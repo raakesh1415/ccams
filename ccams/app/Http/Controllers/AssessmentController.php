@@ -177,7 +177,7 @@ class AssessmentController extends Controller
                 $eng += $engagementScores[$engagement] ?? 0; // Default to 0 if not found
             }
         } else {
-            $data['engagement'] = "";
+            $data['engagement'] = "[]";
         }
         $eng = min($eng, 20); // Cap at 20 marks
 
@@ -207,7 +207,7 @@ class AssessmentController extends Controller
                 $ach += $achievementScores[$achievement] ?? 0; // Default to 0 if not found
             }
         } else {
-            $data['achievement'] = "";
+            $data['achievement'] = "[]";
         }
         $ach = min($ach, 20); // Cap at 10 marks
 
@@ -234,7 +234,7 @@ class AssessmentController extends Controller
                 $com += $commitmentScores[$commitment] ?? 0; // Default to 0 if not found
             }
         } else {
-            $data['commitment'] = "";
+            $data['commitment'] = "[]";
         }
         $com = min($com, 10); // Cap at 10 marks
 
@@ -253,7 +253,7 @@ class AssessmentController extends Controller
                 $con += $contributionScores[$contribution] ?? 0; // Default to 0 if not found
             }
         } else {
-            $data['contribution'] = "";
+            $data['contribution'] = "[]";
         }
         $con = min($con, 10); // Cap at 10 marks
 
@@ -288,7 +288,7 @@ class AssessmentController extends Controller
         return redirect()->route('assessment.list', ['club_id' => $data['club_id']])->with('success', 'Penilaian berjaya disimpan!');
     }
 
-    // AssessmentController.php
+
     public function show($assessment_id)
     {
         $assessment = Assessment::findOrFail($assessment_id);
@@ -401,7 +401,7 @@ class AssessmentController extends Controller
                 $eng += $engagementScores[$engagement] ?? 0; // Default to 0 if not found
             }
         } else {
-            $data['engagement'] = "";
+            $data['engagement'] = "[]";
         }
         $eng = min($eng, 20); // Cap at 20 marks
 
@@ -431,7 +431,7 @@ class AssessmentController extends Controller
                 $ach += $achievementScores[$achievement] ?? 0; // Default to 0 if not found
             }
         } else {
-            $data['achievement'] = "";
+            $data['achievement'] = "[]";
         }
         $ach = min($ach, 20); // Cap at 10 marks
 
@@ -458,7 +458,7 @@ class AssessmentController extends Controller
                 $com += $commitmentScores[$commitment] ?? 0; // Default to 0 if not found
             }
         } else {
-            $data['commitment'] = "";
+            $data['commitment'] = "[]";
         }
         $com = min($com, 10); // Cap at 10 marks
 
@@ -477,7 +477,7 @@ class AssessmentController extends Controller
                 $con += $contributionScores[$contribution] ?? 0; // Default to 0 if not found
             }
         } else {
-            $data['contribution'] = "";
+            $data['contribution'] = "[]";
         }
         $con = min($con, 10); // Cap at 10 marks
 

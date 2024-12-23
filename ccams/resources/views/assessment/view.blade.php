@@ -1,5 +1,5 @@
 <x-layout>
-    <div class="container">
+    <div class="container-fluid">
         <div class="card">
             <div class="card-header text-center">
                 <h3>Butiran Markah Penilaian - {{ $assessment->club->club_name }}</h3>
@@ -67,6 +67,7 @@
                     <div class="col-md-6">
                         <p><strong>Peringkat Penglibatan:</strong></p>
                         <ul>
+                            @if(is_array($assessment->engagement) || is_object($assessment->engagement))
                             @foreach ($assessment->engagement as $engagement)
                                 <li>
                                     @switch($engagement)
@@ -120,11 +121,15 @@
                                     @endswitch
                                 </li>
                             @endforeach
+                            @else 
+                                <li>Tidak Diketahui</li> 
+                            @endif
                         </ul>
                     </div>
                     <div class="col-md-6">
                         <p><strong>Tahap Pencapaian:</strong></p>
                         <ul>
+                            @if(is_array($assessment->achievement) || is_object($assessment->achievement))
                             @foreach ($assessment->achievement as $achievement)
                                 <li>
                                     @switch($achievement)
@@ -178,6 +183,9 @@
                                     @endswitch
                                 </li>
                             @endforeach
+                            @else 
+                                <li>Tidak Diketahui</li> 
+                            @endif
                         </ul>
                     </div>
                 </div>
@@ -186,6 +194,7 @@
                     <div class="col-md-6">
                         <p><strong>Komitmen:</strong></p>
                         <ul class="row">
+                            @if(is_array($assessment->commitment) || is_object($assessment->commitment))
                             @foreach ($assessment->commitment as $commitment)
                                 <div class="col-md-6">
                                     <li>
@@ -232,11 +241,17 @@
                                     </li>
                                 </div>
                             @endforeach
+                            @else 
+                                <div class="col-md-6">
+                                    <li>Tidak Diketahui</li> 
+                                </div>
+                            @endif
                         </ul>
                     </div>
                     <div class="col-md-6">
                         <p><strong>Khidmatan Sumbangan (Peringkat Sekolah):</strong></p>
                         <ul>
+                            @if(is_array($assessment->contribution) || is_object($assessment->contribution))
                             @foreach ($assessment->contribution as $contribution)
                                 <li>
                                     @switch($contribution)
@@ -257,6 +272,9 @@
                                     @endswitch
                                 </li>
                             @endforeach
+                            @else 
+                                <li>Tidak Diketahui</li> 
+                            @endif
                         </ul>
                     </div>
                 </div>

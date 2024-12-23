@@ -1,5 +1,15 @@
 <x-layout>
-    <div class="container">
+    <div class="container-fluid">
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+        @if (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
         <div class="card">
             <div class="card-header text-center">
                 <h3>Borang Penilaian untuk Kelab {{ $club->club_name }}</h3> <!-- Display the club name -->

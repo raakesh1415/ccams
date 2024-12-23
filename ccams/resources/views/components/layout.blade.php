@@ -104,7 +104,7 @@
                             <a class="nav-link {{ str_starts_with(request()->path(), 'attendance/teacher') ? 'active' : '' }}"
                                 href="/attendance/teacher">
                                 <div class="sb-nav-link-icon"><i class="fas fa-user-check"></i></div>
-                                Kehadiran (Guru)
+                                Kehadiran
                             </a>
                         @endif
 
@@ -112,7 +112,7 @@
                             <a class="nav-link {{ str_starts_with(request()->path(), 'attendance/student') ? 'active' : '' }}"
                                 href="/attendance/student">
                                 <div class="sb-nav-link-icon"><i class="fas fa-user-check"></i></div>
-                                Kehadiran (Pelajar)
+                                Kehadiran
                             </a>
                         @endif
 

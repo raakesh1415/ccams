@@ -1,5 +1,5 @@
 <x-layout>
-    <div class="container">
+    <div class="container-fluid">
         <div class="card">
             <div class="card-header text-center">
                 <h3>Borang Kemas Kini Penilaian untuk Kelab {{ $club->club_name }}</h3>
@@ -54,56 +54,56 @@
                     <hr>
 
                     <!-- Bahagian Jawatan -->
-                    <h3 class="mb-3">Jawatan <small class="text-muted">/ 10</small></h3>
+                    <h3 class="mb-3">Jawatan <small class="text-muted">/ 10</small> <span class="text-danger">*</span></h3>
                     <div class="row mb-4">
                         <div class="col-md-4">
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="position" id="president" value="Pengerusi" 
-                                    {{ $assessment->position === 'Pengerusi' ? 'checked' : '' }}>
+                                    {{ $assessment->position === 'Pengerusi' ? 'checked' : '' }} @required(true)>
                                 <label class="form-check-label" for="president">Pengerusi (10)</label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="position" id="vicePresident" value="Naib Pengerusi" 
-                                    {{ $assessment->position === 'Naib Pengerusi' ? 'checked' : '' }}>
+                                    {{ $assessment->position === 'Naib Pengerusi' ? 'checked' : '' }} @required(true)>
                                 <label class="form-check-label" for="vicePresident">Naib Pengerusi (8)</label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="position" id="secretary" value="Setiausaha" 
-                                    {{ $assessment->position === 'Setiausaha' ? 'checked' : '' }}>
+                                    {{ $assessment->position === 'Setiausaha' ? 'checked' : '' }} @required(true)>
                                 <label class="form-check-label" for="secretary">Setiausaha (8)</label>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="position" id="treasurer" value="Bendahari" 
-                                    {{ $assessment->position === 'Bendahari' ? 'checked' : '' }}>
+                                    {{ $assessment->position === 'Bendahari' ? 'checked' : '' }} @required(true)>
                                 <label class="form-check-label" for="treasurer">Bendahari (8)</label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="position" id="viceSecretary" value="Naib Setiausaha" 
-                                    {{ $assessment->position === 'Naib Setiausaha' ? 'checked' : '' }}>
+                                    {{ $assessment->position === 'Naib Setiausaha' ? 'checked' : '' }} @required(true)>
                                 <label class="form-check-label" for="viceSecretary">Naib Setiausaha (6)</label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="position" id="viceTreasurer" value="Naib Bendahari" 
-                                    {{ $assessment->position === 'Naib Bendahari' ? 'checked' : '' }}>
+                                    {{ $assessment->position === 'Naib Bendahari' ? 'checked' : '' }} @required(true)>
                                 <label class="form-check-label" for="viceTreasurer">Naib Bendahari (6)</label>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="position" id="ajk" value="AJK" 
-                                    {{ $assessment->position === 'AJK' ? 'checked ' : '' }}>
+                                    {{ $assessment->position === 'AJK' ? 'checked ' : '' }} @required(true)>
                                 <label class="form-check-label" for="ajk">AJK (6)</label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="position" id="activeMember" value="Ahli Aktif" 
-                                    {{ $assessment->position === 'Ahli Aktif' ? 'checked' : '' }}>
+                                    {{ $assessment->position === 'Ahli Aktif' ? 'checked' : '' }} @required(true)>
                                 <label class="form-check-label" for="activeMember">Ahli Aktif (4)</label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="position" id="ordinaryMember" value="Ahli Biasa" 
-                                    {{ $assessment->position === 'Ahli Biasa' ? 'checked' : '' }}>
+                                    {{ $assessment->position === 'Ahli Biasa' ? 'checked' : '' }} @required(true)>
                                 <label class="form-check-label" for="ordinaryMember">Ahli Biasa (2)</label>
                             </div>
                         </div>
@@ -393,15 +393,16 @@
                     <hr>
 
                     <!-- Bahagian Kehadiran dan Komen -->
-                    <h3 class="mb-3">Kehadiran & Komen <small class="text-muted">/ 40</small></h3>
+                    <h3 class="mb-3">Kehadiran & Komen <small class="text-muted">/ 40</small> <span class="text-danger">*</span></h3>
                     <div class="row mb-4">
                         <div class="col-md-6 mb-2">
                             <label for="attendance" class="form-label">Kehadiran:</label>
-                            <input type="text" class="form-control" id="attendance" name="attendance" value="{{ $assessment->attendance }}">
+                            {{-- <input type="text" class="form-control" id="attendance" name="attendance" value="{{ $assessment->attendance }}" required disabled> --}}
+                            <input type="text" class="form-control" id="attendance" name="attendance" value="" @required(true)>
                         </div>
                         <div class="col-md-6 mb-2">
                             <label for="comment" class="form-label">Komen:</label>
-                            <textarea class="form-control" id="comment" name="comment" rows="1" placeholder="Masukkan komen anda di sini">{{ $assessment->comment }}</textarea>
+                            <textarea class="form-control" id="comment" name="comment" rows="1" placeholder="Masukkan komen anda di sini" @required(true)>{{ $assessment->comment }}</textarea>
                         </div>
                     </div>
 
@@ -424,4 +425,21 @@
             box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.25); /* Bayangan fokus pilihan */
         }
     </style>
+
+    <script>
+        function fetchAttendance(userId, clubId) {
+            if (userId) {
+                fetch(`/attendance/total-present/${userId}/${clubId}`).then(response => response.json()).then(data => {
+                    document.getElementById('attendance').value = data.totalPresent;
+                }).catch(error => console.error('Error fetching total present:', error));
+            } else {
+                document.getElementById('attendance').value = '';
+            }
+        }
+        document.addEventListener('DOMContentLoaded', function() {
+            var userId = document.querySelector('input[name="user_id"]').value;
+            var clubId = document.getElementById('club_id').value;
+            fetchAttendance(userId, clubId);
+        });
+    </script>
 </x-layout>

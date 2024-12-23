@@ -1,5 +1,5 @@
 <x-layout>
-    <div class="container">
+    <div class="container-fluid">
         @if (session('success'))
             <div class="alert alert-success">
                 {{ session('success') }}
@@ -10,7 +10,7 @@
                 {{ session('error') }}
             </div>
         @endif
-        <h1 class="text-center mb-4">Penilaian {{ $club->club_name }}</h1>
+        <h2 class="text-center mb-4">Penilaian {{ $club->club_name }}</h2>
         <div class="card mb-4">
             <div class="card-body">
                 <table id="datatablesSimple">

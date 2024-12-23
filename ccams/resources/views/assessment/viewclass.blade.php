@@ -1,6 +1,6 @@
 <x-layout>
-    <div class="container">
-        <h1 class="text-center mb-4">Butiran Penilaian - {{ $student->name }}</h1>
+    <div class="container-fluid">
+        <h2 class="text-center mb-4">Butiran Penilaian - {{ $student->name }}</h2>
         {{-- <div class="card mb-4">
             <div class="card-header text-center">
                 <h4>Butiran Pelajar</h4>
@@ -85,6 +85,7 @@
                         <div class="col-md-6">
                             <p><strong>Peringkat Penglibatan:</strong></p>
                             <ul>
+                                @if(is_array($permainanAssessment->engagement) || is_object($permainanAssessment->engagement))
                                 @foreach ($permainanAssessment->engagement as $engagement)
                                     <li>
                                         @switch($engagement)
@@ -153,11 +154,15 @@
                                         @endswitch
                                     </li>
                                 @endforeach
+                                @else 
+                                    <li>Tidak Diketahui</li> 
+                                @endif
                             </ul>
                         </div>
                         <div class="col-md-6">
                             <p><strong>Tahap P pencapaian:</strong></p>
                             <ul>
+                                @if(is_array($permainanAssessment->achievement) || is_object($permainanAssessment->achievement))
                                 @foreach ($permainanAssessment->achievement as $achievement)
                                     <li>
                                         @switch($achievement)
@@ -226,6 +231,9 @@
                                         @endswitch
                                     </li>
                                 @endforeach
+                                @else 
+                                    <li>Tidak Diketahui</li> 
+                                @endif
                             </ul>
                         </div>
                     </div>
@@ -234,6 +242,7 @@
                         <div class="col-md-6">
                             <p><strong>Komitmen:</strong></p>
                             <ul class="row">
+                                @if(is_array($permainanAssessment->commitment) || is_object($permainanAssessment->commitment))
                                 @foreach ($permainanAssessment->commitment as $commitment)
                                     <div class="col-md-6">
                                         <li>
@@ -292,11 +301,17 @@
                                         </li>
                                     </div>
                                 @endforeach
+                                @else 
+                                    <div class="col-md-6">
+                                        <li>Tidak Diketahui</li> 
+                                    </div>
+                                @endif
                             </ul>
                         </div>
                         <div class="col-md-6">
                             <p><strong>Perkhidmatan Sumbangan (Tahap Sekolah):</strong></p>
                             <ul>
+                                @if(is_array($permainanAssessment->contribution) || is_object($permainanAssessment->contribution))
                                 @foreach ($permainanAssessment->contribution as $contribution)
                                     <li>
                                         @switch($contribution)
@@ -321,6 +336,9 @@
                                         @endswitch
                                     </li>
                                 @endforeach
+                                @else 
+                                    <li>Tidak Diketahui</li> 
+                                @endif
                             </ul>
                         </div>
                     </div>
@@ -398,6 +416,7 @@
                         <div class="col-md-6">
                             <p><strong>Peringkat Penglibatan:</strong></p>
                             <ul>
+                                @if(is_array($persatuanAssessment->engagement) || is_object($persatuanAssessment->engagement))
                                 @foreach ($persatuanAssessment->engagement as $engagement)
                                     <li>
                                         @switch($engagement)
@@ -466,11 +485,15 @@
                                         @endswitch
                                     </li>
                                 @endforeach
+                                @else 
+                                    <li>Tidak Diketahui</li> 
+                                @endif
                             </ul>
                         </div>
                         <div class="col-md-6">
-                            <p><strong>Tahap P pencapaian:</strong></p>
+                            <p><strong>Tahap Pencapaian:</strong></p>
                             <ul>
+                                @if(is_array($persatuanAssessment->achievement) || is_object($persatuanAssessment->achievement))
                                 @foreach ($persatuanAssessment->achievement as $achievement)
                                     <li>
                                         @switch($achievement)
@@ -539,6 +562,9 @@
                                         @endswitch
                                     </li>
                                 @endforeach
+                                @else 
+                                    <li>Tidak Diketahui</li> 
+                                @endif
                             </ul>
                         </div>
                     </div>
@@ -547,6 +573,7 @@
                         <div class="col-md-6">
                             <p><strong>Komitmen:</strong></p>
                             <ul class="row">
+                                @if(is_array($persatuanAssessment->commitment) || is_object($persatuanAssessment->commitment))
                                 @foreach ($persatuanAssessment->commitment as $commitment)
                                     <div class="col-md-6">
                                         <li>
@@ -605,11 +632,17 @@
                                         </li>
                                     </div>
                                 @endforeach
+                                @else 
+                                    <div class="col-md-6">
+                                        <li>Tidak Diketahui</li> 
+                                    </div>
+                                @endif
                             </ul>
                         </div>
                         <div class="col-md-6">
-                            <p><strong>Perkhidmatan Sumbangan (Tahap Sekolah):</strong></p>
+                            <p><strong>Perkhidmatan Sumbangan (Peringkat Sekolah):</strong></p>
                             <ul>
+                                @if(is_array($persatuanAssessment->contribution) || is_object($persatuanAssessment->contribution))
                                 @foreach ($persatuanAssessment->contribution as $contribution)
                                     <li>
                                         @switch($contribution)
@@ -634,6 +667,9 @@
                                         @endswitch
                                     </li>
                                 @endforeach
+                                @else 
+                                    <li>Tidak Diketahui</li> 
+                                @endif
                             </ul>
                         </div>
                     </div>
@@ -711,6 +747,7 @@
                         <div class="col-md-6">
                             <p><strong>Peringkat Penglibatan:</strong></p>
                             <ul>
+                                @if(is_array($uniformAssessment->engagement) || is_object($uniformAssessment->engagement))
                                 @foreach ($uniformAssessment->engagement as $engagement)
                                     <li>
                                         @switch($engagement)
@@ -779,11 +816,15 @@
                                         @endswitch
                                     </li>
                                 @endforeach
+                                @else 
+                                    <li>Tidak Diketahui</li> 
+                                @endif
                             </ul>
                         </div>
                         <div class="col-md-6">
                             <p><strong>Tahap Pencapaian:</strong></p>
                             <ul>
+                                @if(is_array($uniformAssessment->achievement) || is_object($uniformAssessment->achievement))
                                 @foreach ($uniformAssessment->achievement as $achievement)
                                     <li>
                                         @switch($achievement)
@@ -852,6 +893,9 @@
                                         @endswitch
                                     </li>
                                 @endforeach
+                                @else 
+                                    <li>Tidak Diketahui</li> 
+                                @endif
                             </ul>
                         </div>
                     </div>
@@ -860,6 +904,7 @@
                         <div class="col-md-6">
                             <p><strong>Komitmen:</strong></p>
                             <ul class="row">
+                                @if(is_array($uniformAssessment->commitment) || is_object($uniformAssessment->commitment))
                                 @foreach ($uniformAssessment->commitment as $commitment)
                                     <div class="col-md-6">
                                         <li>
@@ -918,11 +963,17 @@
                                         </li>
                                     </div>
                                 @endforeach
+                                @else 
+                                    <div class="col-md-6">
+                                        <li>Tidak Diketahui</li> 
+                                    </div>
+                                @endif
                             </ul>
                         </div>
                         <div class="col-md-6">
                             <p><strong>Khidmatan Sumbangan (Peringkat Sekolah):</strong></p>
                             <ul>
+                                @if(is_array($uniformAssessment->contribution) || is_object($uniformAssessment->contribution))
                                 @foreach ($uniformAssessment->contribution as $contribution)
                                     <li>
                                         @switch($contribution)
@@ -947,6 +998,9 @@
                                         @endswitch
                                     </li>
                                 @endforeach
+                                @else 
+                                    <li>Tidak Diketahui</li> 
+                                @endif
                             </ul>
                         </div>
                     </div>
