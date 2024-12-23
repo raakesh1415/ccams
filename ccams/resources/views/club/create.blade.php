@@ -8,7 +8,7 @@
 
     <div class="container my-5">
         <!-- Centered Title -->
-        <h3 class="text-center mb-4">{{ isset($clubs) ? 'Ubah' : 'Tambah' }} Maklumat Kelab</h3>
+        <h3 class="text-center mb-4">{{ isset($clubs) ? 'Kemaskini' : 'Tambah' }} Maklumat Kelab</h3>
 
         <div class="card shadow-lg border-0 rounded-3 p-4">
             <!-- Form Action for Create or Edit -->
