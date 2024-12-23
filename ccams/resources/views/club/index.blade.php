@@ -10,7 +10,7 @@
                         <img src="{{ asset('images/persatuan.jpg') }}" alt="Persatuan" class="card-img-top img-fluid">
                     </div>
                     <div class="card-body text-center">
-                        <h4 class="card-title">Persatuan</h4>
+                        <h5 class="card-title">Persatuan</h5>
                         <a href="{{ route('club.kelab') }}" class="btn btn-dark mt-2">Lihat Semua</a>
                     </div>
                 </div>
@@ -22,7 +22,7 @@
                         <img src="{{ asset('images/sukanpermainan.jpg') }}" alt="Sukan" class="card-img-top img-fluid">
                     </div>
                     <div class="card-body text-center">
-                        <h4 class="card-title">Sukan</h4>
+                        <h5 class="card-title">Sukan</h5>
                         <a href="{{ route('club.sukan') }}" class="btn btn-dark mt-2">Lihat Semua</a>
                     </div>
                 </div>
@@ -34,7 +34,7 @@
                         <img src="{{ asset('images/unitberuniform.jpg') }}" alt="Unit Beruniform" class="card-img-top img-fluid">
                     </div>
                     <div class="card-body text-center">
-                        <h4 class="card-title">Unit Beruniform</h4>
+                        <h5 class="card-title">Unit Beruniform</h5>
                         <a href="{{ route('club.unitberuniform') }}" class="btn btn-dark mt-2">Lihat Semua</a>
                     </div>
                 </div>
