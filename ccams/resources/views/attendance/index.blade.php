@@ -10,7 +10,7 @@
                 @forelse($clubs as $club)
                     <div class="col-lg-4 col-md-6 col-sm-12">
                         <div class="card club-card">
-                            <div class="ratio ratio-16x9">
+                            <div class="ratio ratio-4x3">
                                 @if ($club->club_pic && file_exists(storage_path('app/public/' . $club->club_pic)))
                                     <img src="{{ asset('storage/' . $club->club_pic) }}" alt="{{ $club->club_name }}"
                                         class="img-fluid fixed-club-img">
