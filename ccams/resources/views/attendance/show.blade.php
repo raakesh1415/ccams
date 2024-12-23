@@ -83,7 +83,7 @@
                             </td>
                         @endfor
                         <td>
-                            <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#updateAttendanceModal{{ $student->id }}">
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updateAttendanceModal{{ $student->id }}">
                                 Kemaskini
                             </button>
                         </td>
