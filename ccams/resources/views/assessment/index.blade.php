@@ -14,7 +14,7 @@
                 @if (Auth::user()->role === 'teacher')
                     <div class="col-lg-4 col-md-6 col-sm-12">
                         <div class="card club-card">
-                            <div class="ratio ratio-16x9">
+                            <div class="ratio ratio-4x3">
                                 <img src="{{ asset('storage/class_pics/class.png') }}" alt="Gambar Kelas"
                                     class="card-img-top img-fluid">
                             </div>
@@ -31,7 +31,7 @@
                     <!-- Kelab -->
                     <div class="col-lg-4 col-md-6 col-sm-12">
                         <div class="card club-card">
-                            <div class="ratio ratio-16x9"> <!-- Menyesuaikan nisbah aspek kepada 16:9 -->
+                            <div class="ratio ratio-4x3"> <!-- Menyesuaikan nisbah aspek kepada 16:9 -->
                                 <img src="{{ asset('storage/' . $registration->club->club_pic) }}" alt="Gambar Kelab"
                                     class="card-img-top img-fluid"> <!-- Memastikan gambar sesuai dalam bekas -->
                             </div>
