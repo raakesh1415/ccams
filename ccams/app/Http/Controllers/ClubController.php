@@ -148,7 +148,7 @@ public function destroy($id)
     return redirect()->route('club.index')->with('success', 'Club deleted successfully!');
 }
 
-public function search(Request $request)
+public function searchPersatuan(Request $request)
 {
     try {
         // Retrieve the search query and category from the request
@@ -173,6 +173,43 @@ public function search(Request $request)
         return back()->with('error', 'Error during search: ' . $e->getMessage());
     }
 }
+
+public function searchSukan(Request $request)
+{
+    try {
+        $search = $request->input('search');
+
+        // Get clubs based on search query
+        $clubs = Club::where('club_category', 'Sukan')
+            ->when($search, function ($query) use ($search) {
+                return $query->where('club_name', 'LIKE', "%{$search}%");
+            })
+            ->get();
+
+        return view('club.sukan', ['clubs' => $clubs]);
+    } catch (\Exception $e) {
+        return back()->with('error', 'Error during search: ' . $e->getMessage());
+    }
+}
+
+public function searchUnitBeruniform(Request $request)
+{
+    try {
+        $search = $request->input('search');
+
+        // Get clubs based on search query
+        $clubs = Club::where('club_category', 'Unit Beruniform')
+            ->when($search, function ($query) use ($search) {
+                return $query->where('club_name', 'LIKE', "%{$search}%");
+            })
+            ->get();
+
+        return view('club.unitberuniform', ['clubs' => $clubs]);
+    } catch (\Exception $e) {
+        return back()->with('error', 'Error during search: ' . $e->getMessage());
+    }
+}
+
 
     
 }

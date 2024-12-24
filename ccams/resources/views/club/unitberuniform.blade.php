@@ -13,14 +13,15 @@
             <!-- Add Club Button and Search Bar Container -->
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <a href="/club/add" class="btn btn-outline-dark d-inline-flex align-items-center">
-                    <span class="me-2 fw-bold">+</span>Add Club
+                    <span class="me-2 fw-bold">+</span>Tambah Kelab
                 </a>
-                <form action="{{ route('club.search') }}" method="GET" class="d-flex">
-                    <input type="text" name="search" class="form-control me-2" placeholder="Cari sukan...">
+                <form action="{{ route('club.searchUnitBeruniform') }}" method="GET" class="d-flex">
+                    <input type="text" name="search" class="form-control me-2" placeholder="Cari kelab...">
                     <button type="submit" class="btn btn-outline-dark">
                         <i class="fas fa-search"></i>
                     </button>
                 </form>
+                
             </div>
         @else
             <!-- Add Club Button and Search Bar Container -->
@@ -28,8 +29,8 @@
                 <a href="/club/add" class="btn btn-outline-dark d-inline-flex align-items-center">
                     <span class="me-2 fw-bold">+</span>Tambah Kelab
                 </a>
-                <form action="{{ route('club.search') }}" method="GET" class="d-flex">
-                    <input type="text" name="search" class="form-control me-2" placeholder="Cari sukan...">
+                <form action="{{ route('club.searchUnitBeruniform') }}" method="GET" class="d-flex">
+                    <input type="text" name="search" class="form-control me-2" placeholder="Cari kelab...">
                     <button type="submit" class="btn btn-outline-dark">
                         <i class="fas fa-search"></i>
                     </button>
