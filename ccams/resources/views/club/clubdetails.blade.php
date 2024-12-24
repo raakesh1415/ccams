@@ -55,4 +55,41 @@
 
     
     </div>
+
+        <!-- Registered Students Section -->
+        <div class="mt-4 shadow-sm border rounded p-4">
+            <h4 class="mb-3">Senarai Pelajar Berdaftar</h4>
+            
+            @if($clubs->registrations->whereIn('user.role', ['student'])->isEmpty())                <p class="text-muted">Tiada pelajar berdaftar buat masa ini.</p>
+            @else
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Nama Pelajar</th>
+                                <th>Kelas</th>
+                                <th>Email</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($clubs->registrations as $registration)
+                                <tr>
+                                    <td>{{ $registration->user->name }}</td>
+                                    <td>{{ $registration->user->classroom }}</td>
+                                    <td>{{ $registration->user->email }}</td>
+                                    <td>
+                                        <a href="{{ route('club.student', $registration->user->id) }}" 
+                                            class="btn btn-outline-info btn-sm">
+                                             <i class="fas fa-eye"></i>
+                                         </a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            @endif
+        </div>
+    
+
 </x-layout>

@@ -65,6 +65,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/club/add', function () {
         return view('club.create');
     })->name('club.create');
+    Route::get('/club/student/{id}', [UserController::class, 'showStudentProfile'])->name('club.student');    
+    Route::get('/club/search', [ClubController::class, 'search'])->name('club.search');
+
 
     // Registration
     Route::get('/registration', function () {
