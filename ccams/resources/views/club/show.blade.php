@@ -8,13 +8,10 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-4 text-center">
-                        @if($user->profile_pic)
-                            <img src="{{ asset('storage/' . $user->profile_pic) }}" class="rounded-circle mb-3" 
-                                 style="width: 150px; height: 150px; object-fit: cover;">
-                        @else
-                            <img src="{{ asset('images/default-avatar.png') }}" class="rounded-circle mb-3" 
-                                 style="width: 150px; height: 150px; object-fit: cover;">
-                        @endif
+                        <img src="{{ $user->profile_pic ? asset('storage/profiles/' . $user->profile_pic) : asset('images/profile.png') }}" 
+                             class="rounded-circle mb-3" 
+                             alt="Gambar Profil"
+                             style="width: 150px; height: 150px; object-fit: cover;">
                     </div>
                     <div class="col-md-8">
                         <h3>{{ $user->name }}</h3>
@@ -32,37 +29,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-
-        <!-- Club Memberships -->
-        <div class="card shadow-sm mb-4">
-            <div class="card-header">
-                <h4 class="mb-0">Keahlian Kelab</h4>
-            </div>
-            <div class="card-body">
-                @if($user->registrations->isEmpty())
-                    <p class="text-muted">Tiada keahlian kelab buat masa ini.</p>
-                @else
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Nama Kelab</th>
-                                    <th>Kategori</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($user->registrations as $registration)
-                                    <tr>
-                                        <td>{{ $registration->club->club_name }}</td>
-                                        <td>{{ $registration->club->club_category }}</td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                @endif
             </div>
         </div>
 
