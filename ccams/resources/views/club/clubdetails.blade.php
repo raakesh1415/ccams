@@ -76,7 +76,7 @@
                     <tr>
                         <th>Nama Pelajar</th>
                         <th>Kelas</th>
-                        <th>Email</th>
+                        <th>No. IC</th>
                         <th>Tindakan</th>
                     </tr>
                 </thead>
@@ -85,7 +85,7 @@
                         <tr>
                             <td>{{ $registration->user->name }}</td>
                             <td>{{ $registration->user->classroom }}</td>
-                            <td>{{ $registration->user->email }}</td>
+                            <td>{{ $registration->user->ic }}</td>
                             <td>
                                 <a href="{{ route('club.student', $registration->user->id) }}" 
                                     class="btn btn-outline-info btn-sm">
