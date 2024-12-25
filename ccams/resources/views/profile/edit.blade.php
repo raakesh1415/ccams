@@ -48,34 +48,63 @@
             <!-- Contact Information Section -->
             <div class="section">
                 <h4>Maklumat Hubungan</h4>
-                <div class="form-group">
-                    <label for="address">Alamat</label>
-                    <input type="text" id="address" name="address" value="{{ Auth::user()->address }}" placeholder="Masukkan alamat anda">
-                </div>
-                <div class="form-group">
-                    <label for="city">Bandar</label>
-                    <input type="text" id="city" name="city" value="{{ Auth::user()->city }}" placeholder="Masukkan bandar anda">
-                </div>
-                <div class="form-group">
-                    <label for="country">Negara</label>
-                    <input type="text" id="country" name="country" value="{{ Auth::user()->country }}" placeholder="Masukkan negara anda">
-                </div>
-                <div class="form-group">
-                    <label for="postal_code">Poskod</label>
-                    <input type="text" id="postal_code" name="postal_code" value="{{ Auth::user()->postal_code }}" placeholder="Masukkan poskod anda">
-                </div>
-            </div>
-            <!-- About Me Section -->
-            <div class="section">
-                <h4>Tentang Saya</h4>
-                <div class="form-group">
-                    <textarea name="about_me" id="about_me" rows="4" placeholder="Terangkan tentang diri anda">{{ Auth::user()->about_me }}</textarea>
-                </div>
+                <form id="contact-form">
+                    <!-- Alamat -->
+                    <div class="form-group">
+                        <label for="address">Alamat</label>
+                        <input type="text" id="address" name="address" value="{{ Auth::user()->address }}" placeholder="Masukkan alamat anda" required>
+                    </div>
+
+                    <!-- Bandar -->
+                    <div class="form-group">
+                        <label for="city">Bandar</label>
+                        <select id="city" name="city" class="form-control" required>
+                            <option value="">Pilih bandar anda</option>
+                            <option value="Kuala Lumpur" {{ Auth::user()->city == 'Kuala Lumpur' ? 'selected' : '' }}>Kuala Lumpur</option>
+                            <option value="George Town" {{ Auth::user()->city == 'George Town' ? 'selected' : '' }}>George Town</option>
+                            <option value="Johor Bahru" {{ Auth::user()->city == 'Johor Bahru' ? 'selected' : '' }}>Johor Bahru</option>
+                            <option value="Ipoh" {{ Auth::user()->city == 'Ipoh' ? 'selected' : '' }}>Ipoh</option>
+                            <option value="Shah Alam" {{ Auth::user()->city == 'Shah Alam' ? 'selected' : '' }}>Shah Alam</option>
+                            <option value="Kota Kinabalu" {{ Auth::user()->city == 'Kota Kinabalu' ? 'selected' : '' }}>Kota Kinabalu</option>
+                            <option value="Kuching" {{ Auth::user()->city == 'Kuching' ? 'selected' : '' }}>Kuching</option>
+                            <option value="Petaling Jaya" {{ Auth::user()->city == 'Petaling Jaya' ? 'selected' : '' }}>Petaling Jaya</option>
+                            <option value="Seremban" {{ Auth::user()->city == 'Seremban' ? 'selected' : '' }}>Seremban</option>
+                            <option value="Melaka" {{ Auth::user()->city == 'Melaka' ? 'selected' : '' }}>Melaka</option>
+                            <option value="Alor Setar" {{ Auth::user()->city == 'Alor Setar' ? 'selected' : '' }}>Alor Setar</option>
+                            <option value="Kuala Terengganu" {{ Auth::user()->city == 'Kuala Terengganu' ? 'selected' : '' }}>Kuala Terengganu</option>
+                            <option value="Kuantan" {{ Auth::user()->city == 'Kuantan' ? 'selected' : '' }}>Kuantan</option>
+                            <option value="Miri" {{ Auth::user()->city == 'Miri' ? 'selected' : '' }}>Miri</option>
+                            <option value="Sandakan" {{ Auth::user()->city == 'Sandakan' ? 'selected' : '' }}>Sandakan</option>
+                            <option value="Sibu" {{ Auth::user()->city == 'Sibu' ? 'selected' : '' }}>Sibu</option>
+                            <option value="Iskandar Puteri" {{ Auth::user()->city == 'Iskandar Puteri' ? 'selected' : '' }}>Iskandar Puteri</option>
+                            <option value="Putrajaya" {{ Auth::user()->city == 'Putrajaya' ? 'selected' : '' }}>Putrajaya</option>
+                            <option value="Labuan" {{ Auth::user()->city == 'Labuan' ? 'selected' : '' }}>Labuan</option>
+                        </select>
+                    </div>
+
+                    <!-- Negara -->
+                    <div class="form-group">
+                        <label for="country">Negara</label>
+                        <input type="text" id="country" name="country" value="Malaysia" placeholder="Masukkan negara anda" readonly>
+                    </div>
+
+                    <!-- Poskod -->
+                    <div class="form-group">
+                        <label for="postal_code">Poskod</label>
+                        <input type="text" id="postal_code" name="postal_code" value="{{ Auth::user()->postal_code }}" placeholder="Masukkan poskod anda" required>
+                    </div>
+
+                    <!-- Tentang Saya -->
+                    <h4>Tentang Saya</h4>
+                    <div class="form-group">
+                        <textarea name="about_me" id="about_me" rows="4" placeholder="Terangkan tentang diri anda" required>{{ Auth::user()->about_me }}</textarea>
+                    </div>
+
+                    <!-- Save Button -->
+                    <button type="submit" class="save-button">Simpan</button>
+                </form>
             </div>
 
-            <!-- Save Button -->
-            <button type="submit" class="save-button">Simpan</button>
-        </form>
 
         <!-- Display success message if any -->
         @if(session('success'))
