@@ -10,7 +10,7 @@
                     <!-- Class Image-->
                     <div class="position-relative">
                         <img src="{{ asset('storage/class_pics/class.png') }}" alt="Club Image" class="card-img-top"
-                            style="height: 250px; object-fit: cover;">
+                            style="height: 180px; object-fit: fill;">
                     </div>
 
                     <div class="card-body">
@@ -40,7 +40,7 @@
                                 <!-- Club Image with Badge -->
                                 <div class="position-relative">
                                     <img src="{{ asset('storage/' . $registration->club->club_pic) }}" alt="Club Image"
-                                        class="card-img-top" style="height: 250px; object-fit: cover;">
+                                        class="card-img-top" style="height: 180px; object-fit: fill;">
                                     <div class="position-absolute top-0 start-0 m-2">
                                         <span
                                             class="bg-dark text-white p-2 rounded">{{ $registration->club_type }}</span>

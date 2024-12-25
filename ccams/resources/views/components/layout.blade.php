@@ -91,13 +91,16 @@
                                         <div class="sb-nav-link-icon"><i class="fas fa-eye"></i></div>
                                         Lihat Pendaftaran
                                     </a>
-                                    <a class="nav-link {{ str_starts_with(request()->path(), 'activities') ? 'active' : '' }}"
-                                        href="{{ route('activities.index') }}">
-                                        <div class="sb-nav-link-icon"><i class="fas fa-calendar-alt"></i></div>
-                                        Lihat Aktiviti
-                                    </a>
                                 </nav>
                             </div>
+                        @endif
+
+                        @if (Auth::user()->role === 'student' || Auth::user()->role === 'teacher')
+                            <a class="nav-link {{ str_starts_with(request()->path(), 'activities') ? 'active' : '' }}"
+                                href="{{ route('activities.index') }}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-calendar-alt"></i></div>
+                                Aktiviti
+                            </a>
                         @endif
 
                         @if (Auth::user()->role === 'teacher')
@@ -154,9 +157,11 @@
     </div>
 
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
+    </script>
     <script src="{{ asset('js/scripts.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
+        crossorigin="anonymous"></script>
     <script src="{{ asset('js/datatables-simple-demo.js') }}"></script>
 </body>
 

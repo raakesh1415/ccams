@@ -37,7 +37,7 @@
                                     style="flex-shrink: 0; margin-right: 1rem; padding: 0; width: 200px; height: 130px; overflow: hidden; border-radius: 5px">
                                     <img src="{{ asset('storage/' . $registration->club->club_pic) }}" alt="Club Image"
                                         class="club-image"
-                                        style="width: 100%; height: 100%; object-fit: cover; padding: 0;">
+                                        style="width: 100%; height: 100%; object-fit: fill; padding: 0;">
                                 </div>
                                 <!-- Club Details -->
                                 <div class="flex-grow-1 p-3">
@@ -75,7 +75,7 @@
                             </div>
                             <!-- Club Image -->
                             <img src="{{ asset('storage/' . $registration->club->club_pic) }}" alt="Club Image"
-                                class="card-img-top" style="height: 180px; object-fit: cover;">
+                                class="card-img-top" style="height: 180px; object-fit: fill;">
                             <!-- Card Body -->
                             <div class="card-body d-flex flex-column justify-content-between">
                                 <h4 class="card-title">{{ $registration->club->club_name }}</h4>
