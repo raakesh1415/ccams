@@ -8,34 +8,36 @@
                 <p><b>Tiada kelab didaftarkan.<b></p>
             </div>
         @else
-        <div class="row g-3">
-            @foreach ($registrations as $registration)
-                <div class="col-lg-4 col-md-6 col-sm-12">
-                    <div class="card shadow-sm h-100">
-                        <!-- Club Image with Badge -->
-                        <div class="position-relative">
-                            <img src="{{ asset('storage/' . $registration->club->club_pic) }}" alt="Club Image"
-                                class="card-img-top" style="height: 180px; object-fit: fill;">
-                            <div class="position-absolute top-0 start-0 m-2">
-                                <span class="bg-dark text-white p-2 rounded">{{ $registration->club_type }}</span>
+            <div class="row g-3">
+                @foreach ($registrations as $registration)
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="card shadow-sm h-100">
+                            <!-- Club Image with Badge -->
+                            <div class="position-relative">
+                                <img src="{{ asset('storage/' . $registration->club->club_pic) }}" alt="Club Image"
+                                    class="card-img-top" style="height: 180px; object-fit: fill;">
+                                <div class="position-absolute top-0 start-0 m-2">
+                                    <span class="bg-dark text-white p-2 rounded">{{ $registration->club_type }}</span>
+                                </div>
                             </div>
-                        </div>
-        
-                        <div class="card-body d-flex flex-column">
-                            <!-- Club Name -->
-                            <h4 class="card-title text-center text-dark">{{ $registration->club->club_name }}</h4>
-        
-                            <!-- Club Registered Status -->
-                            <div class="text-center mt-auto">
-                                <a href="{{ route('dashboard.club.show', $registration->club->club_id) }}" class="btn btn-success text-white px-4 py-2 rounded text-decoration-none">
-                                    Berdaftar
-                                </a>
+
+                            <div class="card-body d-flex flex-column">
+                                <!-- Club Name -->
+                                <h4 class="card-title text-center text-dark">{{ $registration->club->club_name }}</h4>
+                                <br>
+
+                                <!-- Club Registered Status -->
+                                <div class="text-center mt-auto">
+                                    <a href="{{ route('dashboard.club.show', $registration->club->club_id) }}"
+                                        class="bg-success text-white p-2 rounded text-decoration-none">
+                                        Berdaftar
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            @endforeach
-        </div>
+                @endforeach
+            </div>
         @endif
     </div>
 </x-layout>

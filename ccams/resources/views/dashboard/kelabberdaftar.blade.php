@@ -1,32 +1,29 @@
 <x-layout>
-    <x-slot name="header">
-        <div class="d-flex justify-content-between align-items-center">
-            <h2>{{ $clubs->club_name }} - Maklumat Kelab</h2>
-            <a href="{{ url()->previous() }}" class="btn btn-dark">
-                <i class="fas fa-arrow-left"></i> Kembali
-            </a>
-        </div>
-    </x-slot>
+    <div class="container-fluid d-flex justify-content-center align-items-center">
+        <div class="text-center w-100">
+            <h2 class="text-center" style="text-transform: uppercase;"><b>{{ $clubs->club_name }}</b></h2>
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
 
-    <div class="container mt-4">
-        <div class="d-flex flex-column gap-4">
-            <!-- Club Info Box -->
-            <div class="shadow-sm border rounded p-4 d-flex align-items-stretch" style="min-height: 300px;">
-                <div class="row w-100">
-                    <!-- Image on the Left -->
-                    <div class="col-md-4 text-center">
-                        <img src="{{ asset('storage/' . $clubs->club_pic) }}" class="img-fluid rounded" alt="Club Image" style="object-fit: cover; width: 100%; max-height: 300px;">
-                    </div>
-
-                    <!-- Details on the Right -->
-                    <div class="col-md-8 d-flex flex-column justify-content-between">
-                        <div>
-                            <h3 class="h4">{{ $clubs->club_name }}</h3>
-                            <p class="text-muted"><strong>Kategori:</strong> {{ $clubs->club_category }}</p>
-                            <p>{{ $clubs->club_description }}</p>
-                            <p class="text-secondary"><strong>Jumlah Pelajar:</strong> {{ $clubs->participant_total }}</p>
+                <div class="col-12 mx-auto">
+                    <div class="card h-100 shadow-sm">
+                        <img src="{{ asset('storage/' . $clubs->club_pic) }}" class="card-img-top" alt="Gambar Kelab"
+                            style="max-width: 100%; height: 350px;">
+                        <div class="card-body d-flex flex-column">
+                            <h2 class="text-center" style="font-size: 1.5rem;">
+                                {{ $clubs->club_category }}</h2>
+                            <p class="text-muted mt-2">
+                                <i class="fas fa-users"></i>{{ $clubs->participant_total }} Ahli
+                            </p>
+                            <h2 style="font-size: 1.3rem;">Keterangan</h2>
+                            <p class="card-text text-center" style="font-size: 1.2rem;">{{ $clubs->club_description }}
+                            </p>
                         </div>
                     </div>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-4 mx-auto">
+                    <a href="{{ route('dashboard.index') }}" class="btn btn-dark w-100">Kembali</a>
                 </div>
             </div>
         </div>
