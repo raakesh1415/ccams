@@ -16,7 +16,9 @@ class ActivityController extends Controller
         $user = auth()->user();
 
         if ($filter == 'registered') {
-            $activities = Activity::whereIn('club_id', $user->clubs->pluck('club_id'))->get();
+            $activities = Activity::whereIn('club_id', $user->clubs->pluck('club_id'))
+                                  ->where('category', '!=', 'Open to All')
+                                  ->get();
         } else {
             $activities = Activity::where('category', 'Open to All')->get();
         }

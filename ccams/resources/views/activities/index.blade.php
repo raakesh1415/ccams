@@ -14,8 +14,8 @@
         <div class="text-center mb-4">
             <form action="{{ route('activities.index') }}" method="GET" class="d-inline-block">
                 <select name="filter" id="filter" class="form-select" onchange="this.form.submit()">
-                    <option value="all" {{ request('filter') == 'all' ? 'selected' : '' }}>Open to All</option>
-                    <option value="registered" {{ request('filter') == 'registered' ? 'selected' : '' }}>Clubs I'm Registered To</option>
+                    <option value="all" {{ request('filter') == 'all' ? 'selected' : '' }}>Terbuka Kepada Semua</option>
+                    <option value="registered" {{ request('filter') == 'registered' ? 'selected' : '' }}>Kelab Didaftar</option>
                 </select>
             </form>
         </div>
@@ -53,6 +53,11 @@
                             <div class="card-body text-center">
                                 <h5 class="card-title">{{ $activity->activity_name }}</h5>
                                 <p class="card-text text-truncate">{{ Str::limit($activity->description, 100) }}</p>
+                                
+                                @if ($activity->category !== 'Open to All' && $activity->club_id)
+                                    <p class="card-text"><strong>Club:</strong> {{ $activity->club->club_name }}</p>
+                                @endif
+
                                 <div class="d-flex justify-content-center gap-2">
                                     @if (auth()->user()->role === 'teacher')
                                         <a href="{{ route('activities.edit', $activity->activity_id) }}"
