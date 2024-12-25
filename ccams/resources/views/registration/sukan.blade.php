@@ -1,5 +1,5 @@
 <x-layout>
-    <div class="container">
+    <div class="container-fluid">
         <h2 class="text-center fw-bold">SUKAN</h2>
 
         @if (session('error'))
