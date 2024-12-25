@@ -13,6 +13,7 @@ class ActivityController extends Controller
     public function index(Request $request)
     {
         $filter = $request->input('filter', 'all');
+        $viewType = $request->input('view', 'card');
         $user = auth()->user();
 
         if ($filter == 'registered') {
@@ -23,7 +24,7 @@ class ActivityController extends Controller
             $activities = Activity::where('category', 'Open to All')->get();
         }
 
-        return view('activities.index', compact('activities'));
+        return view('activities.index', compact('activities', 'viewType'));
     }
 
     // Show the create form
