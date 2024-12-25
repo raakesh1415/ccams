@@ -81,7 +81,7 @@
                                 id="registrationCollapse" aria-labelledby="headingOne"
                                 data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link {{ str_starts_with(request()->path(), 'registration/register') ? 'active' : '' }}"
+                                    <a class="nav-link {{ request()->routeIs('registration.index') || request()->is('registration') ? 'active' : '' }}"
                                         href="{{ route('registration.index') }}">
                                         <div class="sb-nav-link-icon"><i class="fas fa-edit"></i></div>
                                         Kelab Pendaftaran

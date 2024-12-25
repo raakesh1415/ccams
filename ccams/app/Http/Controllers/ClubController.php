@@ -210,6 +210,11 @@ public function searchUnitBeruniform(Request $request)
     }
 }
 
+public function showRegisteredClub($club_id)
+{
+    $clubs = Club::findOrFail($club_id);
+    return view('dashboard.kelabberdaftar', compact('clubs'));
+}
 
     
 }

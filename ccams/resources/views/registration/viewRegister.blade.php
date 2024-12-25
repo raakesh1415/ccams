@@ -1,5 +1,5 @@
 <x-layout>
-    <div class="container mt-5">
+    <div class="container-fluid">
         <h2 class="text-center"><b>KELAB BERDAFTAR</b></h2>
 
         <!-- Display success or error messages -->

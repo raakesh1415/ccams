@@ -11,12 +11,18 @@
         <h2 class="text-center mb-4"><b>AKTIVITI</b></h2>
 
         <!-- Filter Options -->
-        <div class="text-center mb-4">
+        <div class="d-flex justify-content-end mb-4">
             <form action="{{ route('activities.index') }}" method="GET" class="d-inline-block">
-                <select name="filter" id="filter" class="form-select" onchange="this.form.submit()">
-                    <option value="all" {{ request('filter') == 'all' ? 'selected' : '' }}>Terbuka Kepada Semua</option>
-                    <option value="registered" {{ request('filter') == 'registered' ? 'selected' : '' }}>Kelab Didaftar</option>
-                </select>
+                <div class="d-flex">
+                    <select name="filter" id="filter" class="form-select me-2" style="min-width: 250px;" onchange="this.form.submit()">
+                        <option value="all" {{ request('filter') == 'all' ? 'selected' : '' }}>Terbuka Kepada Semua</option>
+                        <option value="registered" {{ request('filter') == 'registered' ? 'selected' : '' }}>Kelab Didaftar</option>
+                    </select>
+                    <select name="view" id="view" class="form-select" style="min-width: 200px;" onchange="this.form.submit()">
+                        <option value="card" {{ request('view') == 'card' ? 'selected' : '' }}>Card View</option>
+                        <option value="list" {{ request('view') == 'list' ? 'selected' : '' }}>List View</option>
+                    </select>
+                </div>
             </form>
         </div>
 
@@ -44,43 +50,73 @@
             @endif
 
             <!-- Activities List -->
-            <div class="row justify-content-center">
-                @foreach ($activities as $activity)
-                    <div class="col-md-4 mb-4">
-                        <div class="card shadow-sm">
-                            <img src="{{ $activity->poster ? asset('storage/' . $activity->poster) : asset('images/sample-activity.png') }}"
-                                class="card-img-top" alt="Activity Poster" style="height: 400px; object-fit: cover;">
-                            <div class="card-body text-center">
-                                <h5 class="card-title">{{ $activity->activity_name }}</h5>
-                                <p class="card-text text-truncate">{{ Str::limit($activity->description, 100) }}</p>
-                                
-                                @if ($activity->category !== 'Open to All' && $activity->club_id)
-                                    <p class="card-text"><strong>Club:</strong> {{ $activity->club->club_name }}</p>
-                                @endif
-
-                                <div class="d-flex justify-content-center gap-2">
-                                    @if (auth()->user()->role === 'teacher')
-                                        <a href="{{ route('activities.edit', $activity->activity_id) }}"
-                                            class="btn btn-outline-success">
-                                            <i class="fas fa-edit"></i> Kemaskini
-                                        </a>
-                                        <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
-                                            data-bs-target="#deleteModal"
-                                            data-url="{{ route('activities.destroy', $activity->activity_id) }}">
-                                            <i class="fas fa-trash"></i> Padam
-                                        </button>
-                                    @else
-                                        <a href="{{ route('activities.show', $activity->activity_id) }}"
-                                            class="btn btn-outline-info">
-                                            <i class="fas fa-eye"></i> Lihat
-                                        </a>
+            @if ($viewType == 'list')
+                <div class="list-group">
+                    @foreach ($activities as $activity)
+                        <div class="list-group-item list-group-item-action py-4 d-flex justify-content-between align-items-center">
+                            <div>
+                                <a href="{{ route('activities.show', $activity->activity_id) }}" class="text-decoration-none text-dark">
+                                    <h5 class="mb-1">{{ $activity->activity_name }}</h5>
+                                    <small>{{ \Carbon\Carbon::parse($activity->date_time)->format('d M Y, h:i A') }}</small>
+                                    <p class="mb-1">{{ Str::limit($activity->description, 100) }}</p>
+                                    @if ($activity->category !== 'Open to All' && $activity->club_id)
+                                        <small><strong>Club:</strong> {{ $activity->club->club_name }}</small>
                                     @endif
+                                </a>
+                            </div>
+                            <div class="d-flex gap-2">
+                                @if (auth()->user()->role === 'teacher')
+                                    <a href="{{ route('activities.edit', $activity->activity_id) }}" class="btn btn-outline-success btn-md">
+                                        <i class="fas fa-edit"></i> Kemaskini
+                                    </a>
+                                    <button type="button" class="btn btn-outline-danger btn-md" data-bs-toggle="modal"
+                                        data-bs-target="#deleteModal" data-url="{{ route('activities.destroy', $activity->activity_id) }}">
+                                        <i class="fas fa-trash"></i> Padam
+                                    </button>
+                                @endif
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            @else
+                <div class="row justify-content-center">
+                    @foreach ($activities as $activity)
+                        <div class="col-md-4 mb-4">
+                            <div class="card shadow-sm">
+                                <img src="{{ $activity->poster ? asset('storage/' . $activity->poster) : asset('images/sample-activity.png') }}"
+                                    class="card-img-top" alt="Activity Poster" style="height: 400px; object-fit: cover;">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title">{{ $activity->activity_name }}</h5>
+                                    <p class="card-text text-truncate">{{ Str::limit($activity->description, 100) }}</p>
+                                    
+                                    @if ($activity->category !== 'Open to All' && $activity->club_id)
+                                        <p class="card-text"><strong>Club:</strong> {{ $activity->club->club_name }}</p>
+                                    @endif
+
+                                    <div class="d-flex justify-content-center gap-2">
+                                        @if (auth()->user()->role === 'teacher')
+                                            <a href="{{ route('activities.edit', $activity->activity_id) }}"
+                                                class="btn btn-outline-success">
+                                                <i class="fas fa-edit"></i> Kemaskini
+                                            </a>
+                                            <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
+                                                data-bs-target="#deleteModal"
+                                                data-url="{{ route('activities.destroy', $activity->activity_id) }}">
+                                                <i class="fas fa-trash"></i> Padam
+                                            </button>
+                                        @else
+                                            <a href="{{ route('activities.show', $activity->activity_id) }}"
+                                                class="btn btn-outline-info">
+                                                <i class="fas fa-eye"></i> Lihat
+                                            </a>
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                @endforeach
-            </div>
+                    @endforeach
+                </div>
+            @endif
         @endif
     </div>
 
