@@ -8,10 +8,10 @@
         <div class="text-center">
             {{-- <h2 class="text-start">Penilaian</h2> --}}
             <h2 class="text-center"><b>PENILAIAN</b></h2>
-            <h4 class="text-start pt-4"><b>Kelab Berdaftar</b></h4>
-            <div class="row g-4 mt-0">
-                <!-- Kelas -->
-                @if (Auth::user()->role === 'teacher')
+            @if (Auth::user()->role === 'teacher')
+                <h4 class="text-start pt-4"><b>Kelas Berdaftar</b></h4>
+                <div class="row g-4 mt-0">
+                    <!-- Kelas -->
                     <div class="col-lg-4 col-md-6 col-sm-12">
                         <div class="card club-card">
                             <div class="ratio ratio-4x3">
@@ -26,7 +26,10 @@
                             </div>
                         </div>
                     </div>
-                @endif
+                </div>
+            @endif
+            <h4 class="text-start pt-4"><b>Kelab Berdaftar</b></h4>
+            <div class="row g-4 mt-0">
                 @foreach ($registrations as $registration)
                     <!-- Kelab -->
                     <div class="col-lg-4 col-md-6 col-sm-12">
@@ -40,11 +43,11 @@
                                 <p class="card-text">{{ $registration->club_type }}</p>
                                 @if (Auth::user()->role === 'teacher')
                                     <a href="{{ route('assessment.list', $registration->club->club_id) }}"
-                                        class="btn btn-dark">Penilaian</a>
+                                        class="btn btn-dark">Lihat Penilaian</a>
                                 @endif
                                 @if (Auth::user()->role === 'student')
                                     <a href="{{ route('assessment.view', $registration->club_id) }}"
-                                        class="btn btn-dark">Penilaian</a>
+                                        class="btn btn-dark">Lihat Penilaian</a>
                                 @endif
                             </div>
                         </div>

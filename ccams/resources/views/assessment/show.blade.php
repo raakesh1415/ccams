@@ -1,9 +1,19 @@
 <x-layout>
-    <div class="container">
-        <div class="card">
-            <div class="card-header text-center">
+    <div class="container-fluid">
+        <div class="row align-items-center mb-3">
+            <div class="col-auto pr-0">
+                <a href="{{ url()->previous() }}" class="btn btn-dark">
+                    <i class="fas fa-arrow-left"></i> Kembali
+                </a>
+            </div>
+            <div class="col text-center px-0">
                 <h3>Butiran Penilaian - {{ $user->name }}</h3>
             </div>
+        </div>
+        <div class="card">
+            {{-- <div class="card-header text-center">
+                <h3>Butiran Penilaian - {{ $user->name }}</h3>
+            </div> --}}
             <div class="card-body">
                 <h4 class="card-title pb-3">Butiran Pelajar</h4>
                 <div class="row">

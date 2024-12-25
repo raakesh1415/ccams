@@ -1,7 +1,18 @@
 <x-layout>
     <div class="container-fluid">
-        <h2 class="text-center mb-4">Butiran Penilaian - {{ $student->name }}</h2>
-        {{-- <div class="card mb-4">
+        <div class="row align-items-center mb-3">
+            <div class="col-auto pr-0">
+                <a href="{{ url()->previous() }}" class="btn btn-dark">
+                    <i class="fas fa-arrow-left"></i> Kembali
+                </a>
+            </div>
+            <div class="col text-center px-0">
+                <h2 class="text-center">Butiran Penilaian - {{ $student->name }}</h2>
+            </div>
+        </div>
+        
+        {{-- <h2 class="text-center mb-4">Butiran Penilaian - {{ $student->name }}</h2> --}}
+        <div class="card mb-4">
             <div class="card-header text-center">
                 <h4>Butiran Pelajar</h4>
             </div>
@@ -23,7 +34,7 @@
                     </div>
                 </div>
             </div>
-        </div> --}}
+        </div>
 
         @if ($permainanAssessment)
             <div class="card mb-4">
@@ -1015,6 +1026,10 @@
                     </div>
                 </div>
             </div>
+        @endif
+
+        @if($uniformAssessment == null && $permainanAssessment == null && $persatuanAssessment == null) 
+            <h4 class="text-center text-secondary mt-5 pt-4 pl-5">Penilaian Belum Dinilai Lagi</h4>
         @endif
 
     </div>

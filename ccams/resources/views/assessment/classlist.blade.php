@@ -1,6 +1,16 @@
 <x-layout>
     <div class="container-fluid">
-        <h2 class="text-center mb-4">Penilaian Kelas {{ $classroom }}</h2>
+        <div class="row align-items-center mb-3">
+            <div class="col-auto pr-0">
+                <a href="{{ route('assessment.index') }}" class="btn btn-dark">
+                    <i class="fas fa-arrow-left"></i> Kembali
+                </a>
+            </div>
+            <div class="col text-center px-0">
+                <h2 class="text-center">Penilaian Kelas {{ $classroom }}</h2>
+            </div>
+        </div>
+        {{-- <h2 class="text-center mb-4">Penilaian Kelas {{ $classroom }}</h2> --}}
         <div class="card mb-4">
             <div class="card-body">
                 <table id="datatablesSimple">
@@ -31,7 +41,7 @@
                                             <strong class="text-danger">Belum Dinilai Lagi</strong>
                                         @endif
                                     @else
-                                        <span class="text-muted">Tidak Mendaftar</span>
+                                        <span class="text-muted">Belum Mendaftar</span>
                                     @endif
                                 </td>
                                 
@@ -47,7 +57,7 @@
                                             <strong class="text-danger">Belum Dinilai Lagi</strong>
                                         @endif
                                     @else
-                                        <span class="text-muted">Tidak Mendaftar</span>
+                                        <span class="text-muted">Belum Mendaftar</span>
                                     @endif
                                 </td>
                                 
@@ -63,7 +73,7 @@
                                             <strong class="text-danger">Belum Dinilai Lagi</strong>
                                         @endif
                                     @else
-                                        <span class="text-muted">Tidak Mendaftar</span>
+                                        <span class="text-muted">Belum Mendaftar</span>
                                     @endif
                                 </td>
                                 
@@ -80,8 +90,8 @@
 
                                 <td>
                                     <a href="{{ route('assessment.viewclass', ['student_id' => $student->id]) }}" 
-                                       class="btn btn-sm btn-info">
-                                        <span class="fa fa-eye"></span> Lihat
+                                       class="btn btn-sm btn-outline-info">
+                                        <span class="fa fa-eye"></span> View
                                     </a>
                                 </td>
                             </tr>

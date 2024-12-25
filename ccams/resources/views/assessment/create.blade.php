@@ -1,11 +1,22 @@
 <x-layout>
     <div class="container-fluid">
-        <div class="card">
-            <div class="card-header text-center">
-                <h3>Borang Penilaian untuk Kelab {{ $club->club_name }}</h3> <!-- Display the club name -->
+        <div class="row align-items-center mb-3">
+            <div class="col-auto pr-0">
+                <a href="{{ url()->previous() }}" class="btn btn-dark">
+                    <i class="fas fa-arrow-left"></i> Kembali
+                </a>
             </div>
+            <div class="col text-center px-0">
+                <h3>Borang Penilaian untuk Kelab {{ $club->club_name }}</h3>
+            </div>
+        </div>
+        <div class="card">
+            {{-- <div class="card-header text-center">
+                <h3>Borang Penilaian untuk Kelab {{ $club->club_name }}</h3>
+            </div> --}}
             <div class="card-body">
-                <form action="{{ route('assessment.store', $club_id) }}" method="POST"> @csrf <!-- Bahagian Pelajar -->
+                <form action="{{ route('assessment.store', $club_id) }}" method="POST" id="positionForm" novalidate> @csrf
+                    <!-- Bahagian Pelajar -->
                     <h3 class="mb-3">Butiran Pelajar</h3>
                     <div class="row mb-3">
                         <div class="col-md-4 mb-2">
@@ -104,6 +115,9 @@
                             </div>
                         </div>
                     </div>
+                    <div class="text-danger" id="radioError" style="display: none;">Sila pilih jawatan.</div>
+
+
                     <hr>
                     <!-- Bahagian Peringkat Penglibatan -->
                     <h3 class="mb-3">Peringkat Penglibatan <small class="text-muted">/ 20</small> </h3>
@@ -451,4 +465,28 @@
             fetchAttendance(userId, clubId);
         });
     </script>
+
+    <script>
+        document.getElementById('positionForm').addEventListener('submit', function(event) {
+            const radioButtons = document.getElementsByName('position');
+            let isChecked = false;
+
+            // Check if any radio button is selected
+            for (const radioButton of radioButtons) {
+                if (radioButton.checked) {
+                    isChecked = true;
+                    break;
+                }
+            }
+
+            const errorDiv = document.getElementById('radioError');
+            if (!isChecked) {
+                event.preventDefault(); // Prevent form submission
+                errorDiv.style.display = 'block'; // Show custom error message
+            } else {
+                errorDiv.style.display = 'none'; // Hide custom error message
+            }
+        });
+    </script>
+
 </x-layout>

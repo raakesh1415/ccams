@@ -10,11 +10,21 @@
                 {{ session('error') }}
             </div>
         @endif
-        <h2 class="text-center mb-4">Penilaian {{ $club->club_name }}</h2>
+        
+        <div class="row align-items-center mb-4">
+            <div class="col-auto">
+                <a href="{{ route('assessment.index') }}" class="btn btn-dark">
+                    <i class="fas fa-arrow-left"></i> Kembali
+                </a>
+            </div>
+            <div class="col text-center">
+                <h2 class="mb-0">Penilaian {{ $club->club_name }}</h2>
+            </div>
+        </div>
         <div class="card mb-4">
             <div class="card-body">
                 <table id="datatablesSimple">
-                    <a href="#" class="ms-1 btn btn-md btn-success float-end" data-bs-toggle="modal"
+                    <a href="#" class="ms-1 btn btn-md btn-outline-success float-end" data-bs-toggle="modal"
                         data-bs-target="#createAssessmentModal">
                         <span class="fa fa-plus"></span> Tambah Penilaian
                     </a>
@@ -36,10 +46,10 @@
                                 <td>{{ $as->total_mark }}%</td>
                                 <td>
                                     <a href="{{ route('assessment.show', ['assessment_id' => $as->assessment_id]) }}"
-                                        class="btn btn-sm btn-info"><span class="fa fa-eye"></span></a>
+                                        class="btn btn-sm btn-outline-info"><span class="fa fa-eye"></span></a>
                                     <a href="{{ route('assessment.edit', ['assessment_id' => $as->assessment_id]) }}"
-                                        class="btn btn-sm btn-warning"><span class="fa fa-edit"></span></a>
-                                    <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
+                                        class="btn btn-sm btn-outline-warning"><span class="fa fa-edit"></span></a>
+                                    <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal"
                                         data-bs-target="#deleteModal{{ $as->assessment_id }}">
                                         <i class="fas fa-trash"></i>
                                     </button>
