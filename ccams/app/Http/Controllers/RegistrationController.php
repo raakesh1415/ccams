@@ -41,17 +41,17 @@ class RegistrationController extends Controller
             return redirect()->back()->with('error', 'Kelab tidak ditemui.');
         }
 
-        // Check if the club is already at capacity
-        $currentRegistrations = Registration::where('club_id', $clubId)->count();
-        if ($currentRegistrations >= $club->participant_total) {
-            return redirect()->back()->with('error', 'Pendaftaran gagal: Kapasiti kelab dicapai.');
-        }
-
         //Check if user is already registerd for this club type
         $existingRegistration = Registration::where('user_id', $userId)->where('club_type', $clubType)->first();
 
         if ($existingRegistration) {
             return redirect()->back()->with('error', 'Anda telah mendaftar untuk ' . $clubType . '.');
+        }
+
+        // Check if the club is already at capacity
+        $currentRegistrations = Registration::where('club_id', $clubId)->count();
+        if ($currentRegistrations >= $club->participant_total) {
+            return redirect()->back()->with('error', 'Pendaftaran gagal: Kapasiti kelab dicapai.');
         }
 
         //Register student to club

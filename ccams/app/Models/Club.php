@@ -21,7 +21,13 @@ class Club extends Model
         'club_pic'
     ];
 
-    //AutoAssignClub
+    // Relationship to Activities
+    public function activities()
+    {
+        return $this->hasMany(Activity::class, 'club_id', 'club_id');
+    }
+
+    // Relationship to Registrations
     public function registrations()
     {
         return $this->hasMany(Registration::class, 'club_id', 'club_id');
@@ -33,6 +39,8 @@ class Club extends Model
     //     return $this->hasMany(Registration::class, 'club_id', 'club_id')->with('user');
     // }
 
+    // Relationship to Assessments
+    
     public function assessments()
     {
         return $this->hasMany(Assessment::class, 'club_id', 'club_id');

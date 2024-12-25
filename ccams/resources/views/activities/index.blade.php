@@ -18,7 +18,7 @@
                 <h3 class="text-muted">Tiada Aktiviti!</h3>
                 <p class="text-secondary">Setelah aktiviti ditambahkan, ia akan dipaparkan di sini.</p>
                 @if (auth()->user()->role === 'teacher')
-                    <a href="{{ route('activities.create') }}" class="btn btn-primary btn-lg">
+                    <a href="{{ route('activities.create') }}" class="btn btn-dark btn-lg">
                         <i class="fas fa-plus"></i> Tambah Aktiviti
                     </a>
                 @endif
@@ -27,7 +27,7 @@
             <!-- Add Activity Button -->
             @if (auth()->user()->role === 'teacher')
                 <div class="text-center mb-4">
-                    <a href="{{ route('activities.create') }}" class="btn btn-primary btn-lg">
+                    <a href="{{ route('activities.create') }}" class="btn btn-dark btn-lg">
                         <i class="fas fa-plus"></i> Tambah Aktiviti
                     </a>
                 </div>
@@ -47,7 +47,7 @@
                                     @if (auth()->user()->role === 'teacher')
                                         <a href="{{ route('activities.edit', $activity->activity_id) }}"
                                             class="btn btn-outline-success">
-                                            <i class="fas fa-edit"></i> Edit
+                                            <i class="fas fa-edit"></i> Kemaskini
                                         </a>
                                         <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
                                             data-bs-target="#deleteModal"

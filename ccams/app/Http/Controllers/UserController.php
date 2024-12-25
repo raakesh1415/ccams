@@ -137,6 +137,13 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         return view('profile.show', compact('user')); 
     }
+
+    public function showStudentProfile(int $id)
+    {
+    $user = User::findOrFail($id);
+    return view('club.show', compact('user'));
+    }
+
     public function edit(int $id)
     {
         $user = User::findOrFail($id); 

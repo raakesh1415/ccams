@@ -148,5 +148,68 @@ public function destroy($id)
     return redirect()->route('club.index')->with('success', 'Club deleted successfully!');
 }
 
+public function searchPersatuan(Request $request)
+{
+    try {
+        // Retrieve the search query and category from the request
+        $search = $request->input('search');
+        $category = $request->input('category', 'Persatuan'); // Default to 'Persatuan' if not provided
+
+        // Validate the category input to ensure it's valid
+        if (!in_array($category, ['Persatuan', 'Sukan', 'Unit Beruniform'])) {
+            return back()->with('error', 'Invalid category specified.');
+        }
+
+        // Get clubs based on the search query and category
+        $clubs = Club::where('club_category', $category)
+            ->when($search, function ($query) use ($search) {
+                return $query->where('club_name', 'LIKE', "%{$search}%");
+            })
+            ->get();
+
+        // Return the appropriate view based on the category
+        return view('club.kelab', ['clubs' => $clubs, 'category' => $category]);
+    } catch (\Exception $e) {
+        return back()->with('error', 'Error during search: ' . $e->getMessage());
+    }
+}
+
+public function searchSukan(Request $request)
+{
+    try {
+        $search = $request->input('search');
+
+        // Get clubs based on search query
+        $clubs = Club::where('club_category', 'Sukan')
+            ->when($search, function ($query) use ($search) {
+                return $query->where('club_name', 'LIKE', "%{$search}%");
+            })
+            ->get();
+
+        return view('club.sukan', ['clubs' => $clubs]);
+    } catch (\Exception $e) {
+        return back()->with('error', 'Error during search: ' . $e->getMessage());
+    }
+}
+
+public function searchUnitBeruniform(Request $request)
+{
+    try {
+        $search = $request->input('search');
+
+        // Get clubs based on search query
+        $clubs = Club::where('club_category', 'Unit Beruniform')
+            ->when($search, function ($query) use ($search) {
+                return $query->where('club_name', 'LIKE', "%{$search}%");
+            })
+            ->get();
+
+        return view('club.unitberuniform', ['clubs' => $clubs]);
+    } catch (\Exception $e) {
+        return back()->with('error', 'Error during search: ' . $e->getMessage());
+    }
+}
+
+
     
 }

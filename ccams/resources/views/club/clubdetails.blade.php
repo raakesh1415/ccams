@@ -19,15 +19,24 @@
 
                 <!-- Action Buttons -->
                 <div class="d-flex gap-2 mt-3">
-                    <!-- Edit Button -->
-                    <a href="{{ route('club.edit', ['club_id' => $clubs->club_id]) }}" class="btn btn-outline-success">
-                        <i class="fas fa-edit"></i> Ubah
-                    </a>
+                    @php
+                        // Check if the logged-in teacher is registered to this club
+                        $isRegisteredTeacher = $clubs->registrations->contains(function ($registration) {
+                            return $registration->user->id === Auth::id() && Auth::user()->role === 'teacher';
+                        });
+                    @endphp
 
-                    <!-- Delete Button to Trigger Modal -->
-                    <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
-                        <i class="fas fa-trash"></i> Padam
-                    </button>
+                    @if($isRegisteredTeacher)
+                        <!-- Edit Button -->
+                        <a href="{{ route('club.edit', ['club_id' => $clubs->club_id]) }}" class="btn btn-outline-success">
+                            <i class="fas fa-edit"></i> Ubah
+                        </a>
+
+                        <!-- Delete Button to Trigger Modal -->
+                        <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                            <i class="fas fa-trash"></i> Padam
+                        </button>
+                    @endif
                 </div>
             </div>
         </div>
@@ -52,7 +61,49 @@
                 </div>
             </div>
         </div>
+    </div>
 
-    
+    <!-- Registered Students Section -->
+    <div class="mt-4 shadow-sm border rounded p-4">
+        <h4 class="mb-3">Senarai Pelajar Berdaftar</h4>
+
+        @php
+            // Filter registrations to include only students
+            $studentRegistrations = $clubs->registrations->filter(function ($registration) {
+                return $registration->user->role === 'student';
+            });
+        @endphp
+
+        @if($studentRegistrations->isEmpty())
+            <p class="text-muted">Tiada pelajar berdaftar buat masa ini.</p>
+        @else
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Nama Pelajar</th>
+                            <th>Kelas</th>
+                            <th>No. IC</th>
+                            <th>Tindakan</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($studentRegistrations as $registration)
+                            <tr>
+                                <td>{{ $registration->user->name }}</td>
+                                <td>{{ $registration->user->classroom }}</td>
+                                <td>{{ $registration->user->ic }}</td>
+                                <td>
+                                    <a href="{{ route('club.student', $registration->user->id) }}" 
+                                        class="btn btn-outline-info btn-sm">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        @endif
     </div>
 </x-layout>
