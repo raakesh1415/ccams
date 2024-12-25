@@ -9,7 +9,7 @@ class Activity extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'activity_id'; // Set ac_id as the primary key
+    protected $primaryKey = 'activity_id'; // Set activity_id as the primary key
     public $incrementing = true; // Indicate it's an auto-incrementing key
     protected $keyType = 'int'; // Set the key type to integer
 
@@ -22,12 +22,25 @@ class Activity extends Model
         'poster',
         'category',
         'duration',
-       // 'club_id' // Assuming you want to associate activities with clubs
+        'club_id', // Add club_id to the fillable properties
+        'registration_id' // Add registration_id to the fillable properties
     ];
 
-    // This method ensures Laravel uses 'ac_id' for route model binding
+    // This method ensures Laravel uses 'activity_id' for route model binding
     public function getRouteKeyName()
     {
         return 'activity_id';
+    }
+
+    // Define the relationship with the Club model
+    public function club()
+    {
+        return $this->belongsTo(Club::class, 'club_id', 'club_id');
+    }
+
+    // Define the relationship with the Registration model
+    public function registration()
+    {
+        return $this->belongsTo(Registration::class, 'registration_id', 'registration_id');
     }
 }

@@ -13,6 +13,8 @@ class CreateActivitiesTable extends Migration
     {
         Schema::create('activities', function (Blueprint $table) {
             $table->id("activity_id");
+            $table->unsignedBigInteger('club_id');
+            $table->unsignedBigInteger('registration_id');
             $table->string('activity_name');
             $table->string('location');
             $table->dateTime('date_time');
@@ -22,6 +24,10 @@ class CreateActivitiesTable extends Migration
             $table->string('category');
             $table->string('duration');
             $table->timestamps();
+            
+            //Foreign key constraint
+            $table->foreign('club_id')->references('club_id')->on('clubs')->onDelete('cascade');
+            $table->foreign('registration_id')->references('registration_id')->on('registrations')->onDelete('cascade');
         });
     }
 
