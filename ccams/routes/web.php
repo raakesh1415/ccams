@@ -12,10 +12,12 @@ use App\Http\Controllers\DashboardController;
 //Root Page
 Route::get('/', [UserController::class, 'showLoginForm'])->name('login');
 
+
 Route::middleware(['auth'])->group(function () {
 
     //Dashboard
     Route::get('/dashboard', [DashboardController::class, 'showUserSummary'])->name('dashboard.index');
+    Route::get('/dashboard/club/{club_id}', [ClubController::class, 'showRegisteredClub'])->name('dashboard.club.show');
 
     // Assessment
     Route::get('/assessment', [AssessmentController::class, 'index'])->name('assessment.index');
