@@ -25,8 +25,8 @@
                             <td>Minggu {{ $attendance->week_number }}</td>
                             <td>
                                 <span class="badge 
-                                    @if($attendance->status == 'Present') bg-success 
-                                    @elseif($attendance->status == 'Absent') bg-danger 
+                                    @if($attendance->status == 'Hadir') bg-success 
+                                    @elseif($attendance->status == 'T. Hadir') bg-danger 
                                     @else bg-warning @endif">
                                     {{ $attendance->status }}
                                 </span>
@@ -39,9 +39,9 @@
             <div class="mt-4">
                 <h5>Rumusan Kedatangan:</h5>
                 <ul class="list-group">
-                    <li class="list-group-item">Total Present: <strong>{{ $totalPresent }}</strong></li>
-                    <li class="list-group-item">Total Absent: <strong>{{ $totalAbsent }}</strong></li>
-                    <li class="list-group-item">Total Excused: <strong>{{ $totalExcused }}</strong></li>
+                    <li class="list-group-item">Jumlah Hadir: <strong>{{ $totalPresent }}</strong></li>
+                    <li class="list-group-item">Jumlah Tidak Hadir: <strong>{{ $totalAbsent }}</strong></li>
+                    <li class="list-group-item">Jumlah Dikecuali: <strong>{{ $totalExcused }}</strong></li>
                 </ul>
             </div>
         @endif
