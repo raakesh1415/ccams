@@ -74,9 +74,9 @@
                                     $status = $attendance ? $attendance->status : 'N/A';
                                 @endphp
                                 <span class="badge {{ 
-                                    $status == 'Present' ? 'bg-success' : 
-                                    ($status == 'Absent' ? 'bg-danger' : 
-                                    ($status == 'Excused' ? 'bg-warning' : 'bg-secondary')) 
+                                    $status == 'Hadir' ? 'bg-success' : 
+                                    ($status == 'T. Hadir' ? 'bg-danger' : 
+                                    ($status == 'Dikecuali' ? 'bg-warning' : 'bg-secondary')) 
                                 }}">
                                     {{ $status }}
                                 </span>
@@ -110,21 +110,21 @@
 
                                         @for ($week = $startWeek; $week <= $endWeek; $week++)
                                             <div class="mb-3">
-                                                <label for="week_{{ $week }}">Week {{ $week }}</label>
+                                                <label for="week_{{ $week }}">Minggu {{ $week }}</label>
                                                 @php
                                                     $attendance = $student->attendances->where('week_number', $week)->first();
                                                     $status = $attendance ? $attendance->status : null;
                                                 @endphp
                                                 <select name="attendance[{{ $week }}][status]" id="week_{{ $week }}" class="form-select">
-                                                    <option value="" {{ is_null($status) ? 'selected' : '' }}>- Select Status -</option>
-                                                    <option value="Present" {{ $status == 'Present' ? 'selected' : '' }}>✅ Present</option>
-                                                    <option value="Absent" {{ $status == 'Absent' ? 'selected' : '' }}>❌ Absent</option>
-                                                    <option value="Excused" {{ $status == 'Excused' ? 'selected' : '' }}>🟡 Excused</option>
+                                                    <option value="" {{ is_null($status) ? 'selected' : '' }}>- Pilih Status -</option>
+                                                    <option value="Hadir" {{ $status == 'Present' ? 'selected' : '' }}>✅ Hadir</option>
+                                                    <option value="T. Hadir" {{ $status == 'Absent' ? 'selected' : '' }}>❌ T. Hadir</option>
+                                                    <option value="Dikecuali" {{ $status == 'Excused' ? 'selected' : '' }}>🟡 Dikecuali</option>
                                                 </select>
                                             </div>
                                         @endfor
 
-                                        <button type="submit" class="btn btn-primary">Save Attendance</button>
+                                        <button type="submit" class="btn btn-primary">Simpan Rekod</button>
                                     </form>
                                 </div>
                             </div>

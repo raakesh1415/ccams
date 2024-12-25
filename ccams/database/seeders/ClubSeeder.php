@@ -115,73 +115,73 @@ class ClubSeeder extends Seeder
             ['club_name' => 'Bola Sepak', 
             'club_description' => 'Latihan fizikal dan strategi.', 
             'participant_total' => 200, 
-            'club_category' => 'Sukan', 
+            'club_category' => 'Permainan', 
             'club_pic' => 'club_pics/bola_sepak.jpg'],
 
             ['club_name' => 'Badminton', 
             'club_description' => 'Menguasai kemahiran badminton.', 
             'participant_total' => 150, 
-            'club_category' => 'Sukan', 
+            'club_category' => 'Permainan', 
             'club_pic' => 'club_pics/badminton.jpeg'],
 
             ['club_name' => 'Petanque', 
             'club_description' => 'Memahirkan teknik Sukan petanque.', 
             'participant_total' => 80, 
-            'club_category' => 'Sukan', 
+            'club_category' => 'Permainan', 
             'club_pic' => 'club_pics/petanque.jpg'],
             
             ['club_name' => 'Bola Jaring', 
             'club_description' => 'Memahirkan teknik Sukan Bola Jaring.', 
             'participant_total' => 80, 
-            'club_category' => 'Sukan', 
+            'club_category' => 'Permainan', 
             'club_pic' => 'club_pics/bolajaring.jpg'],
 
             ['club_name' => 'Bola Keranjang', 
             'club_description' => 'Memahirkan teknik Sukan Bola Keranjang.', 
             'participant_total' => 80, 
-            'club_category' => 'Sukan', 
+            'club_category' => 'Permainan', 
             'club_pic' => 'club_pics/bolakeranjang.jpg'],
 
             ['club_name' => 'Bola Tampar', 
             'club_description' => 'Memahirkan teknik Sukan Bola Tampar.', 
             'participant_total' => 80, 
-            'club_category' => 'Sukan', 
+            'club_category' => 'Permainan', 
             'club_pic' => 'club_pics/bolatampar.jpeg'],
 
             ['club_name' => 'Dodgeball', 
             'club_description' => 'Memahirkan teknik Sukan Dodgeball.', 
             'participant_total' => 80, 
-            'club_category' => 'Sukan', 
+            'club_category' => 'Permainan', 
             'club_pic' => 'club_pics/dodgeball.jpg'],
 
             ['club_name' => 'Ping Pong', 
             'club_description' => 'Memahirkan teknik Sukan Ping Pong.', 
             'participant_total' => 80, 
-            'club_category' => 'Sukan', 
+            'club_category' => 'Permainan', 
             'club_pic' => 'club_pics/pingpong.jpg'],
 
             ['club_name' => 'Sepak Takraw', 
             'club_description' => 'Memahirkan teknik Sukan Sepak Takraw', 
             'participant_total' => 80, 
-            'club_category' => 'Sukan', 
+            'club_category' => 'Permainan', 
             'club_pic' => 'club_pics/sepaktakraw.jpeg'],
 
             ['club_name' => 'Catur', 
             'club_description' => 'Memahirkan teknik Sukan Catur', 
             'participant_total' => 80, 
-            'club_category' => 'Sukan', 
+            'club_category' => 'Permainan', 
             'club_pic' => 'club_pics/catur.jpeg'],
 
             ['club_name' => 'Kabaddi', 
             'club_description' => 'Memahirkan teknik Sukan Kabaddi', 
             'participant_total' => 80, 
-            'club_category' => 'Sukan', 
+            'club_category' => 'Permainan', 
             'club_pic' => 'club_pics/kabaddi.jpg'],
 
             ['club_name' => 'Bola Baling', 
             'club_description' => 'Memahirkan teknik Sukan Bola Baling', 
             'participant_total' => 80, 
-            'club_category' => 'Sukan', 
+            'club_category' => 'Permainan', 
             'club_pic' => 'club_pics/bolabaling.jpg'],
 
             //Unit Beruniform
@@ -247,9 +247,10 @@ class ClubSeeder extends Seeder
             ]);
         }
 
+
+    }
+}
 //      You guys can seed the club table. Just copy the image inside the 'public\sample_images' into 'public/storage/club_pics' folder. then run command:
 //      php artisan db:seed --class=ClubSeeder
 //      If error, make sure to link the storage first by running
 //      php artisan storage:link
-    }
-}

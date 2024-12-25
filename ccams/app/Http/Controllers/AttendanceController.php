@@ -43,28 +43,29 @@ class AttendanceController extends Controller
         return view('attendance.index', compact('clubs'));
     }
     
-    
-
 
     // Show attendance for a specific club
-    public function show(Request $request, $clubId)
+    public function show($clubId, Request $request)
     {
-        $club = Club::findOrFail($clubId);
+        // Fetch the club along with its registered students and their attendance
+        $club = Club::with(['students' => function ($query) {
+            $query->where('role', 'student'); // Ensure only students are fetched
+        }, 'students.attendances'])
+            ->findOrFail($clubId);
 
-        // Set default weeks to 1 and 12 if no filter is applied
-        $startWeek = $request->input('start_week', 1);
-        $endWeek = $request->input('end_week', 12);
+        // Get the start and end weeks from the request or use defaults
+        $startWeek = $request->query('start_week', 1); // Default to week 1
+        $endWeek = $request->query('end_week', 12);   // Default to week 12
 
-        // Fetch students and their attendances for the selected weeks only
-        $students = User::where('role', 'student')
-            ->with(['attendances' => function ($query) use ($clubId, $startWeek, $endWeek) {
-                $query->where('club_id', $clubId)
-                    ->whereBetween('week_number', [$startWeek, $endWeek]);
-            }])
-            ->get();
-
-        return view('attendance.show', compact('club', 'students', 'startWeek', 'endWeek'));
+        // Pass the club and related data to the view
+        return view('attendance.show', [
+            'club' => $club,
+            'students' => $club->students, // Students filtered by the role
+            'startWeek' => $startWeek,
+            'endWeek' => $endWeek,
+        ]);
     }
+
 
 
     // Store attendance for multiple students
@@ -149,9 +150,9 @@ class AttendanceController extends Controller
         $attendances = $student->attendances->where('club_id', $club_id);
 
         // Calculate totals
-        $totalPresent = $attendances->where('status', 'Present')->count();
-        $totalAbsent = $attendances->where('status', 'Absent')->count();
-        $totalExcused = $attendances->where('status', 'Excused')->count();
+        $totalPresent = $attendances->where('status', 'Hadir')->count();
+        $totalAbsent = $attendances->where('status', 'T. Hadir')->count();
+        $totalExcused = $attendances->where('status', 'Dikecuali')->count();
 
         return view('attendance.details', compact('student', 'club', 'attendances', 'totalPresent', 'totalAbsent', 'totalExcused'));
     }

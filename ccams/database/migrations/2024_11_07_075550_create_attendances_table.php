@@ -13,7 +13,7 @@ class CreateAttendancesTable extends Migration
             $table->unsignedBigInteger('user_id'); // Foreign Key to Students table
             $table->unsignedBigInteger('club_id');    // Foreign Key to Clubs table
             $table->unsignedTinyInteger('week_number'); // Week 1-12
-            $table->enum('status', ['Present', 'Absent', 'Excused']); // Attendance status
+            $table->enum('status', ['Hadir', 'T. Hadir', 'Dikecuali']); // Attendance status
             $table->timestamps();
 
             // Set up foreign keys
