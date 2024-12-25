@@ -1,5 +1,5 @@
 <x-layout>
-    <div class="container-fluid px-4 py-4">
+    <div class="container-fluid">
         <h1 class="text-left" style="text-transform: uppercase;"><b><i>SELAMAT DATANG, {{ $user->name }} !</i></b></h1>
         <h5 class="text-left">Semoga hari yang hebat! Semoga berjaya!</h5><br>
         <h2 class="text-left"><b>Kelab Berdaftar Anda</b></h2>
@@ -13,10 +13,10 @@
                     <div class="col-lg-4 col-md-6 col-sm-12">
                         <div class="card shadow-sm h-100">
                             <!-- Club Image with Badge -->
-                            <div class="position-relative">
+                            <div class="ratio ratio-16x9">
                                 <img src="{{ asset('storage/' . $registration->club->club_pic) }}" alt="Club Image"
-                                    class="card-img-top" style="height: 180px; object-fit: fill;">
-                                <div class="position-absolute top-0 start-0 m-2">
+                                    class="card-img-top img-fluid">
+                                <div class="position-absolute top-0 start-0 m-2 pt-2">
                                     <span class="bg-dark text-white p-2 rounded">{{ $registration->club_type }}</span>
                                 </div>
                             </div>
