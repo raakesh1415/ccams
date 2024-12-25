@@ -10,6 +10,16 @@
     <div class="container mt-4">
         <h2 class="text-center mb-4"><b>AKTIVITI</b></h2>
 
+        <!-- Filter Options -->
+        <div class="text-center mb-4">
+            <form action="{{ route('activities.index') }}" method="GET" class="d-inline-block">
+                <select name="filter" id="filter" class="form-select" onchange="this.form.submit()">
+                    <option value="all" {{ request('filter') == 'all' ? 'selected' : '' }}>Open to All</option>
+                    <option value="registered" {{ request('filter') == 'registered' ? 'selected' : '' }}>Clubs I'm Registered To</option>
+                </select>
+            </form>
+        </div>
+
         @if ($activities->isEmpty())
             <!-- No Activities View -->
             <div class="text-center mt-5">

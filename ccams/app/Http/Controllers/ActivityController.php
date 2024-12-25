@@ -3,22 +3,32 @@
 namespace App\Http\Controllers;
 
 use App\Models\Activity;
+use App\Models\Club;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class ActivityController extends Controller
 {
     // Show the activities list
-    public function index()
+    public function index(Request $request)
     {
-        $activities = Activity::all();
+        $filter = $request->input('filter', 'all');
+        $user = auth()->user();
+
+        if ($filter == 'registered') {
+            $activities = Activity::whereIn('club_id', $user->clubs->pluck('club_id'))->get();
+        } else {
+            $activities = Activity::where('category', 'Open to All')->get();
+        }
+
         return view('activities.index', compact('activities'));
     }
 
     // Show the create form
     public function create()
     {
-        return view('activities.create');
+        $clubs = auth()->user()->clubs; // Assuming the user model has a relationship with clubs
+        return view('activities.create', compact('clubs'));
     }
 
     // Handle form submission
@@ -34,6 +44,7 @@ class ActivityController extends Controller
             'category' => 'required|string',
             'duration' => 'required|string',
             'club_id' => 'nullable|integer',
+            'registration_id' => 'nullable|integer',
         ]);
 
         $posterPath = null;
@@ -51,6 +62,7 @@ class ActivityController extends Controller
             'category' => $request->input('category'),
             'duration' => $request->input('duration'),
             'club_id' => $request->input('club_id'),
+            'registration_id' => $request->input('registration_id') ?? auth()->user()->id,
         ]);
 
         return redirect()->route('activities.index')->with('success', 'Activity added successfully!');
@@ -59,7 +71,8 @@ class ActivityController extends Controller
     // Show the edit form with the current activity data
     public function edit(Activity $activity)
     {
-        return view('activities.edit', compact('activity'));
+        $clubs = auth()->user()->clubs; // Assuming the user model has a relationship with clubs
+        return view('activities.edit', compact('activity', 'clubs'));
     }
 
     // Handle the form submission and update the activity
@@ -75,6 +88,7 @@ class ActivityController extends Controller
             'category' => 'required|string',
             'duration' => 'required|string',
             'club_id' => 'nullable|integer',
+            'registration_id' => 'nullable|integer',
         ]);
 
         $updateData = [
@@ -86,6 +100,7 @@ class ActivityController extends Controller
             'category' => $request->input('category'),
             'duration' => $request->input('duration'),
             'club_id' => $request->input('club_id'),
+            'registration_id' => $request->input('registration_id') ?? auth()->user()->id,
         ];
 
         if ($request->hasFile('poster')) {
@@ -102,15 +117,15 @@ class ActivityController extends Controller
 
     public function destroy(Activity $activity)
     {
-    // Delete the activity
-    $activity->delete();
+        // Delete the activity
+        $activity->delete();
 
-    // Redirect with a success message
-    return redirect()->route('activities.index')->with('success', 'Activity deleted successfully');
+        // Redirect with a success message
+        return redirect()->route('activities.index')->with('success', 'Activity deleted successfully');
     }
 
     public function show(Activity $activity)
     {
-    return view('activities.show', compact('activity'));
+        return view('activities.show', compact('activity'));
     }
-    }
+}

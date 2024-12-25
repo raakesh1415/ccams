@@ -58,9 +58,22 @@
                     <div class="mb-3">
                         <label for="category" class="form-label">Kategori</label>
                         <select name="category" id="category" class="form-select" required>
-                            <option value="Terbuka Kepada Semua" {{ $activity->category == 'Open to All' ? 'selected' : '' }}>Open to All</option>
-                            <option value="Kelab" {{ $activity->category == 'Club' ? 'selected' : '' }}>Club</option>
+                            <option value="Open to All" {{ $activity->category == 'Open to All' ? 'selected' : '' }}>Open to All</option>
+                            <option value="Club" {{ $activity->category == 'Club' ? 'selected' : '' }}>Club</option>
                         </select>
+                    </div>
+
+                    <!-- Clubs Dropdown -->
+                    <div class="mb-3" id="clubDropdown" style="display: none;">
+                        <label for="club_id" class="form-label">Pilih Kelab <span class="text-danger">*</span></label>
+                        <select name="club_id" id="club_id" class="form-select">
+                            @foreach($clubs as $club)
+                                <option value="{{ $club->club_id }}" {{ $activity->club_id == $club->club_id ? 'selected' : '' }}>{{ $club->club_name }}</option>
+                            @endforeach
+                        </select>
+                        @error('club_id')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
                     </div>
 
                     <!-- Duration -->
@@ -69,9 +82,28 @@
                         <input type="text" name="duration" id="duration" class="form-control" value="{{ old('duration', $activity->duration) }}" required>
                     </div>
 
+                    <!-- Registration ID (hidden) -->
+                    <input type="hidden" name="registration_id" value="{{ auth()->user()->id }}">
+
                     <button type="submit" class="btn btn-dark btn-lg">Kemaskini Aktiviti</button>
                 </form>
             </div>
         </div>
     </div>
+
+    <script>
+        document.getElementById('category').addEventListener('change', function() {
+            var clubDropdown = document.getElementById('clubDropdown');
+            if (this.value === 'Club') {
+                clubDropdown.style.display = 'block';
+            } else {
+                clubDropdown.style.display = 'none';
+            }
+        });
+
+        // Show the club dropdown if the category is already "Club"
+        if (document.getElementById('category').value === 'Club') {
+            document.getElementById('clubDropdown').style.display = 'block';
+        }
+    </script>
 </x-layout>

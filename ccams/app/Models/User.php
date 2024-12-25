@@ -51,13 +51,9 @@ class User extends Authenticatable
     /**
      * A user (teacher) can manage many clubs.
      */
-    // public function clubs()
-    // {
-    //     return $this->hasMany(Club::class, 'teacher_id'); // Assuming 'teacher_id' is the foreign key in the clubs table
-    // }
     public function clubs()
     {
-        return $this->hasMany(Club::class, 'club_id');
+        return $this->belongsToMany(Club::class, 'registrations', 'user_id', 'club_id');
     }
 
     public function activities()

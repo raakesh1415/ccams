@@ -80,6 +80,19 @@
                         @enderror
                     </div>
 
+                    <!-- Clubs Dropdown -->
+                    <div class="mb-3" id="clubDropdown" style="display: none;">
+                        <label for="club_id" class="form-label">Pilih Kelab <span class="text-danger">*</span></label>
+                        <select name="club_id" id="club_id" class="form-select">
+                            @foreach($clubs as $club)
+                                <option value="{{ $club->club_id }}">{{ $club->club_name }}</option>
+                            @endforeach
+                        </select>
+                        @error('club_id')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+
                     <!-- Duration -->
                     <div class="mb-3">
                         <label for="duration" class="form-label">Durasi <span class="text-danger">*</span></label>
@@ -89,9 +102,23 @@
                         @enderror
                     </div>
 
+                    <!-- Registration ID (hidden) -->
+                    <input type="hidden" name="registration_id" value="{{ auth()->user()->id }}">
+
                     <button type="submit" class="btn btn-dark btn-lg">Tambah Aktiviti</button>
                 </form>
             </div>
         </div>
     </div>
+
+    <script>
+        document.getElementById('category').addEventListener('change', function() {
+            var clubDropdown = document.getElementById('clubDropdown');
+            if (this.value === 'Club') {
+                clubDropdown.style.display = 'block';
+            } else {
+                clubDropdown.style.display = 'none';
+            }
+        });
+    </script>
 </x-layout>
