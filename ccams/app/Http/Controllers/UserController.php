@@ -116,12 +116,19 @@ class UserController extends Controller
 
     public function index()
     {
+        // $user = Auth::user();
+        // $user->last_login_at = Carbon::parse($user->last_login_at)->format('Y-m-d H:i:s');
+
+        // $activities = $user->activities; 
+        // $clubs = $user->clubs; 
+
+        // return view('profile.index', compact('user', 'activities', 'clubs'));
     $users = User::all(); 
     foreach ($users as $user) {
         $user->last_login_at = Carbon::parse($user->last_login_at)->format('Y-m-d H:i:s');
     }
-    $activities = Activity::all();
-    $clubs = Club::all();
+    $activities = $user->activities; 
+    $clubs = $user->clubs; 
     return view('profile.list', compact('users', 'activities', 'clubs'));
     }
 
@@ -229,6 +236,8 @@ class UserController extends Controller
     // Get the current authenticated user
     $user = Auth::user();
     if ($request->hasFile('profile_pic')) {
+
+        
         if ($user->profile_pic) {
             Storage::delete('public/' . $user->profile_pic);
         }

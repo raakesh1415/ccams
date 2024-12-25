@@ -11,8 +11,7 @@
             @foreach($users as $user)
                 <div class="user-card">
                     <div class="user-header">
-                        <h2 class="user-name">{{ $user->name }} ({{ $user->role }})  </h2>
-                        <button class="edit-profile-btn" onclick="window.location.href='/profile/edit/{{ $user->id }}'">Edit Profile</button>
+                        <h2 class="user-name">{{ $user->name }} ({{ $user->role }})</h2>
                     </div>
 
                     <div class="user-details">
@@ -71,7 +70,7 @@
         </div>
     @endif
 
-    <!-- Add some CSS styles for the layout -->
+    <!-- Add CSS for horizontal layout -->
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -87,13 +86,14 @@
         }
 
         .user-list-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
+            display: flex;
+            overflow-x: auto;
             padding: 20px;
+            gap: 20px;
         }
 
         .user-card {
+            flex: 0 0 300px;
             background-color: #ffffff;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             border-radius: 10px;
@@ -118,19 +118,6 @@
             font-size: 1.5rem;
             color: #007bff;
             margin: 0;
-        }
-
-        .edit-profile-btn {
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            padding: 5px 10px;
-            cursor: pointer;
-        }
-
-        .edit-profile-btn:hover {
-            background-color: #0056b3;
         }
 
         .user-details h3 {

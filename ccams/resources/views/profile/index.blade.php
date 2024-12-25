@@ -11,7 +11,7 @@
                              style="width: 150px; height: 150px;">
                         <h3 class="card-title mb-1">{{ $user->name }}</h3>
                         <p class="text-muted mb-3">{{ Auth::user()->role }}</p>
-                        <a href="/profile/edit" class="btn btn-primary btn-sm">Edit Profil</a>
+                        <a href="/profile/edit" class="btn btn-primary btn-sm"><span class="fa fa-edit"></span> Profil</a>
                     </div>
                 </div>
 
@@ -36,7 +36,7 @@
                                 <p><strong>Peranan:</strong> {{ $user->role }}</p>
                                 <p><strong>E-mel:</strong> {{ $user->email }}</p>
                                 <p><strong>Kelas:</strong> {{ $user->classroom }}</p>
-                                <a href="{{ route('profile.edit') }}" class="text-muted small">Edit Profil</a>
+                                <p><strong>No. KP:</strong> {{ $user->ic ?? 'Tidak diberikan' }}</p>
                             </div>
                         </div>
                     </div>

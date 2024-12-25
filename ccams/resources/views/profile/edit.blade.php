@@ -3,37 +3,18 @@
     <div class="taskbar">
     <div class="profile-header">
         <img src="{{ Auth::user()->profile_pic ? asset('storage/profiles/' . Auth::user()->profile_pic) : asset('images/profile.png') }}" class="profile-image" alt="Gambar Profil">
-
-             class="profile-avatar" 
-             alt="Avatar Profil">
         <h2>{{ Auth::user()->username }}</h2>
         <span class="user-role">{{ Auth::user()->role }}</span>
     </div>  
 </div>
-
     <!-- Edit Profile Container -->
     <div class="edit-profile-container">
         <!-- Edit Profile Form -->
         <form method="POST" action="{{ route('profile.edit') }}" enctype="multipart/form-data">
             @csrf
             @method('POST')
-
-            <!-- User Information Section -->
-            <div class="section">
-                <h4>Maklumat Pengguna</h4>
-                <div class="form-group">
-                    <label for="username">Nama Pengguna</label>
-                    <input type="text" id="username" name="username" value="{{ Auth::user()->name }}" readonly>
-                </div>
-                <div class="form-group">
-                    <label for="email">Alamat E-mel</label>
-                    <input type="email" id="email" name="email" value="{{ Auth::user()->email }}" readonly>
-                    <small>E-mel boleh dilihat oleh peserta kursus lain</small>
-                </div>
-            </div>
-
-            <!-- Photo Upload Section -->
-            <div class="form-group">
+             <!-- Photo Upload Section -->
+             <div class="form-group">
                 <label for="profile_pic">Foto Profil</label>
                 <input type="file" id="profile_pic" name="profile_pic" accept="image/*" class="form-control">
             </div>
@@ -48,6 +29,22 @@
                 <p>Tiada foto dimuat naik lagi.</p>
             @endif
 
+            <!-- User Information Section -->
+            <div class="section">
+                <h4>Maklumat Pengguna</h4>
+                <div class="form-group">
+                    <label for="username">Nama Pengguna</label>
+                    <input type="text" id="username" name="username" value="{{ Auth::user()->name }}" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="email">Alamat E-mel</label>
+                    <input type="email" id="email" name="email" value="{{ Auth::user()->email }}" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="ic">No. KP</label>
+                    <input type="number" id="ic" name="ic" value="{{ Auth::user()->ic }}" readonly>
+                </div>
+            </div>
             <!-- Contact Information Section -->
             <div class="section">
                 <h4>Maklumat Hubungan</h4>
@@ -156,7 +153,7 @@
         }
 
         .save-button {
-            background-color: #b5003c;
+            background-color: #28a745;
             color: #fff;
             padding: 10px 20px;
             border: none;
@@ -172,7 +169,7 @@
         }
 
         .save-button:hover {
-            background-color: #a00035;
+            background-color: #28a745;
         }
 
         .alert {

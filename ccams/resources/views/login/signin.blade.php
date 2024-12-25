@@ -103,7 +103,7 @@
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="ic" class="form-label">NOMBOR KAD PENGENALAN:</label>
-                                        <input type="text" id="ic" name="ic" class="form-control"
+                                        <input type="number" id="ic" name="ic" class="form-control"
                                             required>
                                         <small id="icFeedback" class="form-text text-danger"></small>
                                     </div>
@@ -285,7 +285,7 @@
             $('#ic').on('blur', function() {
                 const ic = $(this).val();
                 if (ic && ic.length !== 12) {
-                    $('#icFeedback').text('IC number must be exactly 12 characters.');
+                    $('#icFeedback').text('IC number must be exactly 12 numbers.');
                 } else {
                     if (ic) {
                         $.ajax({
