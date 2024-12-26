@@ -66,7 +66,7 @@
             <div id="club-card-view" class="row mt-4" style="display: none;">
                 @foreach ($registrations as $registration)
                     <div class="col-md-4 mb-4">
-                        <div class="card shadow-sm h-100 position-relative">
+                        <div class="card shadow-sm position-relative">
                             <!-- Badge for Club Type -->
                             <div class="position-absolute" style="top: 10px; left: 10px;">
                                 <span class="bg-dark text-white p-2 rounded" style="font-size: 1rem;">
@@ -75,7 +75,7 @@
                             </div>
                             <!-- Club Image -->
                             <img src="{{ asset('storage/' . $registration->club->club_pic) }}" alt="Club Image"
-                                class="card-img-top" style="height: 180px; object-fit: fill;">
+                                class="card-img-top" style="height: 200px; object-fit: fill;">
                             <!-- Card Body -->
                             <div class="card-body d-flex flex-column justify-content-between">
                                 <h4 class="card-title">{{ $registration->club->club_name }}</h4>
