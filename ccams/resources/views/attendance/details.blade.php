@@ -1,7 +1,21 @@
 <x-layout>
-    <div class="text-center pt-3 pb-4">
-        <h2>Butiran Kedatangan untuk {{ $student->name }} (Club: {{ $club->club_name }})</h2>
+    <div class="d-flex justify-content-between align-items-center pt-3 pb-4">
+        <div>
+            @if(auth()->user()->role == 'student')
+                <a href="{{ route('attendance.indexStudent') }}" class="btn btn-dark">Kembali</a>
+            @elseif(auth()->user()->role == 'teacher')
+                <a href="{{ route('attendance.indexTeacher') }}" class="btn btn-dark">Kembali</a>
+            @else
+                <a href="{{ route('dashboard.index') }}" class="btn btn-dark">Kembali</a>
+            @endif
+        </div>
+        <div class="text-center">
+            <h2>Butiran Kedatangan untuk {{ $student->name }} (Club: {{ $club->club_name }})</h2>
+        </div>
+        <div></div> <!-- Empty div to balance the layout -->
+    </div>
 
+    <div class="text-center pt-3 pb-4">
         <div class="mb-4">
             <p><strong>Name:</strong> {{ $student->name }}</p>
             <p><strong>E-mel:</strong> {{ $student->email }}</p>
