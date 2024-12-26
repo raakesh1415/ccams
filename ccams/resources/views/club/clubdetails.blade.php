@@ -34,7 +34,7 @@
                             @if($isRegisteredTeacher)
                                 <!-- Edit Button -->
                                 <a href="{{ route('club.edit', ['club_id' => $clubs->club_id]) }}" class="btn btn-outline-success">
-                                    <i class="fas fa-edit"></i> Ubah
+                                    <i class="fas fa-edit"></i> Kemaskini
                                 </a>
 
                                 <!-- Delete Button to Trigger Modal -->
