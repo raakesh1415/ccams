@@ -40,7 +40,7 @@
             </div>
         @endif
 
-        <h2 class="text-left mt-5" style="font-size: 2rem;"><b>Aktiviti Kelab Anda</b></h2>
+        <h2 class="text-left mt-5" style="font-size: 2rem;"><b>Aktiviti Akan Datang</b></h2>
         @if ($activities->isEmpty())
             <div class="text-center">
                 <p style="font-size: 1.25rem;"><b>Tiada aktiviti untuk kelab berdaftar.<b></p>
@@ -57,12 +57,17 @@
                                     <h5 class="mb-1" style="font-size: 1.25rem;">{{ $activity->activity_name }}</h5>
                                     <small style="font-size: 1rem;">{{ \Carbon\Carbon::parse($activity->date_time)->format('d M Y, h:i A') }}</small>
                                     <p class="mb-1" style="font-size: 1rem;">{{ Str::limit($activity->description, 100) }}</p>
-                                    @if ($activity->category !== 'Open to All' && $activity->club_id)
+                                    @if ($activity->category === 'Open to All')
+                                        <small style="font-size: 1rem;"><strong>Terbuka Kepada Semua</strong></small>
+                                    @elseif ($activity->club_id)
                                         <small style="font-size: 1rem;"><strong>Kelab:</strong> {{ $activity->club->club_name }}</small>
                                     @endif
                                 </a>
                             </div>
                         </div>
+                        <a href="{{ route('activities.show', $activity->activity_id) }}" class="btn btn-outline-info btn-md">
+                            <i class="fas fa-eye"></i> Lihat
+                        </a>
                     </div>
                 @endforeach
             </div>

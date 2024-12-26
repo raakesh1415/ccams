@@ -78,6 +78,9 @@
                                         <i class="fas fa-trash"></i> Padam
                                     </button>
                                 @endif
+                                <a href="{{ route('activities.show', $activity->activity_id) }}" class="btn btn-outline-info btn-md">
+                                    <i class="fas fa-eye"></i> Lihat
+                                </a>
                             </div>
                         </div>
                     @endforeach
@@ -92,8 +95,11 @@
                                 <div class="card-body text-center">
                                     <h5 class="card-title">{{ $activity->activity_name }}</h5>
                                     <p class="card-text text-truncate">{{ Str::limit($activity->description, 100) }}</p>
+                                    <small>{{ \Carbon\Carbon::parse($activity->date_time)->format('d M Y, h:i A') }}</small>
                                     
-                                    @if ($activity->category !== 'Open to All' && $activity->club_id)
+                                    @if ($activity->category === 'Open to All')
+                                        <p class="card-text"><strong>Terbuka Kepada Semua</strong></p>
+                                    @elseif ($activity->club_id)
                                         <p class="card-text"><strong>Kelab:</strong> {{ $activity->club->club_name }}</p>
                                     @endif
 
@@ -108,12 +114,11 @@
                                                 data-url="{{ route('activities.destroy', $activity->activity_id) }}">
                                                 <i class="fas fa-trash"></i> Padam
                                             </button>
-                                        @else
-                                            <a href="{{ route('activities.show', $activity->activity_id) }}"
-                                                class="btn btn-outline-info">
-                                                <i class="fas fa-eye"></i> Lihat
-                                            </a>
                                         @endif
+                                        <a href="{{ route('activities.show', $activity->activity_id) }}"
+                                            class="btn btn-outline-info">
+                                            <i class="fas fa-eye"></i> Lihat
+                                        </a>
                                     </div>
                                 </div>
                             </div>
