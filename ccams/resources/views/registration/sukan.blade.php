@@ -2,6 +2,7 @@
     <div class="container-fluid">
         <h2 class="text-center fw-bold">SUKAN</h2>
 
+        {{-- Alerts --}}
         @if (session('error'))
             <div class="alert alert-danger">{{ session('error') }}</div>
         @endif
@@ -10,6 +11,22 @@
             <div class="alert alert-success">{{ session('success') }}</div>
         @endif
 
+        {{-- Search Form --}}
+        <form action="{{ route('registration.searchSukan') }}" method="GET" class="mt-4">
+            <div class="row justify-content-end">
+                <div class="col-md-3">
+                    <div class="input-group">
+                        <input type="text" name="search" class="form-control" placeholder="Cari kelab..."
+                            value="{{ request('query') }}">
+                        <button class="btn btn-dark" type="submit">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        {{-- Clubs List --}}
         <div class="row mt-4">
             @if ($sukan->isEmpty())
                 <div class="text-center">
@@ -55,6 +72,7 @@
             @endif
         </div>
 
+        {{-- Back Button --}}
         <div class="text-center mt-4">
             <a href="{{ route('registration.index') }}" class="btn btn-dark">Kembali</a>
         </div>

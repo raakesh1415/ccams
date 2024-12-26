@@ -86,4 +86,63 @@ class RegistrationController extends Controller
         return redirect()->back()->with('error', 'Pendaftaran tidak ditemui.');
     }
     
+    public function searchPersatuan(Request $request)
+    {
+        try {
+            $search = $request->input('search');
+    
+            // Get clubs based on search query
+            $clubs = Club::where('club_category', 'Persatuan')
+                ->when($search, function ($query) use ($search) {
+                    return $query->where('club_name', 'LIKE', "%{$search}%");
+                })
+                ->get();
+    
+            return view('registration.persatuan', ['persatuan' => $clubs]);
+        } catch (\Exception $e) {
+            return back()->with('error', 'Error during search: ' . $e->getMessage());
+        }
+    }
+
+    public function searchSukan(Request $request)
+{
+    try {
+        $search = $request->input('search');
+
+        // Get clubs based on search query
+        $clubs = Club::where('club_category', 'Sukan')
+            ->when($search, function ($query) use ($search) {
+                return $query->where('club_name', 'LIKE', "%{$search}%");
+            })
+            ->get();
+
+        return view('registration.sukan', ['sukan' => $clubs]);
+    } catch (\Exception $e) {
+        return back()->with('error', 'Error during search: ' . $e->getMessage());
+    }
+}
+
+public function searchUnitBeruniform(Request $request)
+{
+    try {
+        $search = $request->input('search');
+
+        // Get clubs based on search query
+        $clubs = Club::where('club_category', 'Unit Beruniform')
+            ->when($search, function ($query) use ($search) {
+                return $query->where('club_name', 'LIKE', "%{$search}%");
+            })
+            ->get();
+
+        return view('registration.beruniform', ['beruniform' => $clubs]);
+    } catch (\Exception $e) {
+        return back()->with('error', 'Error during search: ' . $e->getMessage());
+    }
+}
+
+    
+
+    
+    
+
 }

@@ -75,15 +75,17 @@ Route::middleware(['auth'])->group(function () {
 
 
     // Registration
-    Route::get('/registration', function () {
-        return view('registration.index');
-    })->name('registration.index');
+    Route::get('/registration', function () {return view('registration.index');})->name('registration.index');
     Route::get('/registration/persatuan', [RegistrationController::class, 'persatuanIndex'])->name('registration.persatuan');
     Route::get('/registration/sukan', [RegistrationController::class, 'sukanIndex'])->name('registration.sukan');
     Route::get('/registration/beruniform', [RegistrationController::class, 'beruniformIndex'])->name('registration.beruniform');
     Route::post('/registration/{clubId}/{clubType}', [RegistrationController::class, 'register'])->name('registration.register');
     Route::get('/registration/viewRegister', [RegistrationController::class, 'viewRegister'])->name('registration.viewRegister');
     Route::delete('/registration/{registrationId}', [RegistrationController::class, 'unregister'])->name('registration.unregister');
+    Route::get('/registration/persatuan/search', [RegistrationController::class, 'searchPersatuan'])->name('registration.searchPersatuan');
+    Route::get('/registration/sukan/search', [RegistrationController::class, 'searchSukan'])->name('registration.searchSukan');
+    Route::get('/registration/beruniform/search', [RegistrationController::class, 'searchUnitBeruniform'])->name('registration.searchUnitBeruniform');
+
 
     // Profile 
     Route::get('/profile/edit', function () {

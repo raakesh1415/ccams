@@ -2,13 +2,12 @@
     <div class="container-fluid">
         <div class="text-center pb-4">
             <h2 class="text-center"><b>TEROKAI KELAB</b></h2>
-            <h4 class="text-start pt-4"><b>Jenis Kelab</b></h4>
             <div class="row g-4 mt-0">
                 <!-- Club Type 1 -->
                 <div class="col-lg-4 col-md-6 col-sm-12">
                     <div class="card club-card">
                         <div class="ratio ratio-4x3">
-                            <img src="{{ asset('images/persatuan.jpg') }}" alt="Persatuan" class="card-img-top p-0">
+                            <img src="{{ asset('images/std_kelab.jpeg') }}" alt="Persatuan" class="card-img-top p-0">
                         </div>
                         <div class="card-body text-center">
                             <h4 class="card-title">Persatuan</h4>
@@ -20,7 +19,7 @@
                 <div class="col-lg-4 col-md-6 col-sm-12">
                     <div class="card club-card">
                         <div class="ratio ratio-4x3">
-                            <img src="{{ asset('images/sukanpermainan.jpg') }}" alt="Sukan" class="card-img-top p-0">
+                            <img src="{{ asset('images/std_sukan.png') }}" alt="Sukan" class="card-img-top p-0">
                         </div>
                         <div class="card-body text-center">
                             <h4 class="card-title">Sukan</h4>
@@ -32,7 +31,7 @@
                 <div class="col-lg-4 col-md-6 col-sm-12">
                     <div class="card club-card">
                         <div class="ratio ratio-4x3">
-                            <img src="{{ asset('images/unitberuniform.jpg') }}" alt="Unit Beruniform"
+                            <img src="{{ asset('images/std_beruniform.png') }}" alt="Unit Beruniform"
                                 class="card-img-top p-0">
                         </div>
                         <div class="card-body text-center">

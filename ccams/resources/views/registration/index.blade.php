@@ -1,6 +1,6 @@
 <x-layout>
     <div class="container-fluid">
-        <h2 class="text-center"><b>JENIS KELAB</b></h2>
+        <h2 class="text-center"><b>PENDAFTARAN</b></h2>
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mt-4">
 
             <!-- Kelab / Persatuan -->
@@ -13,7 +13,7 @@
                         <p class="card-text" style="text-align:justify">Merangkumi pelbagai kelab dan persatuan,
                             termasuk kelab akademik, seni dan kebudayaan, membolehkan pelajar mengembangkan minat dan
                             bakat mereka di luar bilik darjah sambil memupuk kerja berpasukan dan nilai kepimpinan.</p>
-                        <a href="{{ route('registration.persatuan') }}" class="btn btn-dark mt-auto">Meneroka</a>
+                        <a href="{{ route('registration.persatuan') }}" class="btn btn-dark mt-auto">Lihat Semua</a>
                     </div>
                 </div>
             </div>
@@ -28,7 +28,7 @@
                         <p class="card-text" style="text-align:justify">Aktiviti yang melibatkan sukan dan permainan
                             untuk menggalakkan pelajar untuk kekal aktif, sihat, dan bina semangat kesukanan. Melalui
                             sukan, pelajar belajar disiplin, strategi, dan kerja berpasukan.</p>
-                        <a href="{{ route('registration.sukan') }}" class="btn btn-dark mt-auto">Meneroka</a>
+                        <a href="{{ route('registration.sukan') }}" class="btn btn-dark mt-auto">Lihat Semua</a>
                     </div>
                 </div>
             </div>
@@ -43,7 +43,7 @@
                         <p class="card-text" style="text-align:justify">Termasuk unit seperti Pengakap, Kadet dan
                             Ambulans St. John yang menyediakan latihan dalam ketahanan fizikal, kepimpinan dan kemahiran
                             hidup sambil menanamkan patriotisme dan disiplin di kalangan pelajar.</p>
-                        <a href="{{ route('registration.beruniform') }}" class="btn btn-dark mt-auto">Meneroka</a>
+                        <a href="{{ route('registration.beruniform') }}" class="btn btn-dark mt-auto">Lihat Semua</a>
                     </div>
                 </div>
             </div>
