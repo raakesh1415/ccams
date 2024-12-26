@@ -107,18 +107,23 @@
                                         @if (auth()->user()->role === 'teacher')
                                             <a href="{{ route('activities.edit', $activity->activity_id) }}"
                                                 class="btn btn-outline-success">
-                                                <i class="fas fa-edit"></i> Kemaskini
+                                                <i class="fas fa-edit"></i>
                                             </a>
                                             <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
                                                 data-bs-target="#deleteModal"
                                                 data-url="{{ route('activities.destroy', $activity->activity_id) }}">
-                                                <i class="fas fa-trash"></i> Padam
+                                                <i class="fas fa-trash"></i>
                                             </button>
+                                            <a href="{{ route('activities.show', $activity->activity_id) }}"
+                                                class="btn btn-outline-info">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                        @else
+                                            <a href="{{ route('activities.show', $activity->activity_id) }}"
+                                                class="btn btn-outline-info">
+                                                <i class="fas fa-eye"></i> Lihat
+                                            </a>
                                         @endif
-                                        <a href="{{ route('activities.show', $activity->activity_id) }}"
-                                            class="btn btn-outline-info">
-                                            <i class="fas fa-eye"></i> Lihat
-                                        </a>
                                     </div>
                                 </div>
                             </div>
