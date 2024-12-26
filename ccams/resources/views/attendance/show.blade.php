@@ -67,10 +67,12 @@
         <div class="mt-auto">
             <form action="{{ route('attendance.show', ['clubs' => $club->club_id]) }}" method="GET" class="row g-3 align-items-center">
                 <div class="col-auto">
-                    <input type="text" name="search" class="form-control" placeholder="Cari Nama Pelajar" value="{{ request('search') }}">
-                </div>
-                <div class="col-auto">
-                    <button type="submit" class="btn btn-dark">Cari</button>
+                    <div class="input-group">
+                        <input type="text" name="search" class="form-control" placeholder="Cari Nama Pelajar" value="{{ request('search') }}">
+                        <button class="btn btn-dark" type="submit">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
                 </div>
             </form>
         </div>
