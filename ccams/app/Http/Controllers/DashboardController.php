@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Club;
+use App\Models\Activity;
 use App\Models\Registration;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -17,11 +18,16 @@ class DashboardController extends Controller
         
         // Retrieve user details
         $user = User::findOrFail(Auth::id());
+
+        // Retrieve activities based on the clubs the user is registered to
+        $clubIds = $registrations->pluck('club_id');
+        $activities = Activity::whereIn('club_id', $clubIds)->get();
         
-        // Pass both registrations and user details to the view
+        // Pass registrations, user details, and activities to the view
         return view('dashboard.index', [
             'registrations' => $registrations,
-            'user' => $user
+            'user' => $user,
+            'activities' => $activities
         ]);
     }
 }

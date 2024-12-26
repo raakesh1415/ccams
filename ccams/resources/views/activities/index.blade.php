@@ -19,8 +19,8 @@
                         <option value="registered" {{ request('filter') == 'registered' ? 'selected' : '' }}>Kelab Didaftar</option>
                     </select>
                     <select name="view" id="view" class="form-select" style="min-width: 200px;" onchange="this.form.submit()">
-                        <option value="card" {{ request('view') == 'card' ? 'selected' : '' }}>Card View</option>
-                        <option value="list" {{ request('view') == 'list' ? 'selected' : '' }}>List View</option>
+                        <option value="card" {{ request('view') == 'card' ? 'selected' : '' }}>Kad</option>
+                        <option value="list" {{ request('view') == 'list' ? 'selected' : '' }}>Senarai</option>
                     </select>
                 </div>
             </form>
@@ -54,15 +54,19 @@
                 <div class="list-group">
                     @foreach ($activities as $activity)
                         <div class="list-group-item list-group-item-action py-4 d-flex justify-content-between align-items-center">
-                            <div>
-                                <a href="{{ route('activities.show', $activity->activity_id) }}" class="text-decoration-none text-dark">
-                                    <h5 class="mb-1">{{ $activity->activity_name }}</h5>
-                                    <small>{{ \Carbon\Carbon::parse($activity->date_time)->format('d M Y, h:i A') }}</small>
-                                    <p class="mb-1">{{ Str::limit($activity->description, 100) }}</p>
-                                    @if ($activity->category !== 'Open to All' && $activity->club_id)
-                                        <small><strong>Club:</strong> {{ $activity->club->club_name }}</small>
-                                    @endif
-                                </a>
+                            <div class="d-flex align-items-center">
+                                <img src="{{ $activity->poster ? asset('storage/' . $activity->poster) : asset('images/sample-activity.png') }}" 
+                                     alt="Activity Poster" class="img-fluid me-3" style="width: 100px; height: 100px; object-fit: cover;">
+                                <div>
+                                    <a href="{{ route('activities.show', $activity->activity_id) }}" class="text-decoration-none text-dark">
+                                        <h5 class="mb-1">{{ $activity->activity_name }}</h5>
+                                        <small>{{ \Carbon\Carbon::parse($activity->date_time)->format('d M Y, h:i A') }}</small>
+                                        <p class="mb-1">{{ Str::limit($activity->description, 100) }}</p>
+                                        @if ($activity->category !== 'Open to All' && $activity->club_id)
+                                            <small><strong>Kelab:</strong> {{ $activity->club->club_name }}</small>
+                                        @endif
+                                    </a>
+                                </div>
                             </div>
                             <div class="d-flex gap-2">
                                 @if (auth()->user()->role === 'teacher')
@@ -90,7 +94,7 @@
                                     <p class="card-text text-truncate">{{ Str::limit($activity->description, 100) }}</p>
                                     
                                     @if ($activity->category !== 'Open to All' && $activity->club_id)
-                                        <p class="card-text"><strong>Club:</strong> {{ $activity->club->club_name }}</p>
+                                        <p class="card-text"><strong>Kelab:</strong> {{ $activity->club->club_name }}</p>
                                     @endif
 
                                     <div class="d-flex justify-content-center gap-2">

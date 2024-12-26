@@ -14,10 +14,12 @@
         <div class="row gy-4">
             <!-- Left: Poster -->
             <div class="col-md-6 d-flex justify-content-center">
-                <img src="{{ $activity->poster ? asset('storage/' . $activity->poster) : asset('images/default-poster.jpg') }}" 
-                     class="img-fluid rounded shadow-lg" 
-                     alt="Activity Poster" 
-                     style="max-height: 400px; object-fit: cover;">
+                <div class="ratio ratio-1x1 w-100" style="max-width: 400px;">
+                    <img src="{{ $activity->poster ? asset('storage/' . $activity->poster) : asset('images/default-poster.jpg') }}" 
+                         class="rounded shadow-lg w-100 h-100" 
+                         alt="{{ $activity->activity_name }} Poster" 
+                         style="object-fit: cover;">
+                </div>
             </div>
 
             <!-- Right: Details -->
@@ -30,7 +32,7 @@
                     <p class="text-dark"><strong>Kelab:</strong> {{ $activity->club->club_name }}</p>
                 @endif
                 <p class="text-dark"><strong>Durasi:</strong> {{ $activity->duration }}</p>
-                <p class="text-dark"><strong>Jumlah Peserta:</strong> {{ $activity->participants ?? 'Open to all' }}</p>
+                <p class="text-dark"><strong>Jumlah Peserta:</strong> {{ $activity->participants ?? __('Open to all') }}</p>
                 <p class="text-dark"><strong>Penerangan:</strong></p>
                 <p class="text-dark">{{ $activity->description }}</p>
                 
