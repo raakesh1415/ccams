@@ -12,7 +12,7 @@
                             <h2 class="text-center" style="font-size: 1.5rem;">
                                 {{ $clubs->club_category }}</h2>
                             <p class="text-muted mt-2">
-                                <i class="fas fa-users"></i>{{ $clubs->participant_total }} Ahli
+                                <i class="fas fa-users me-2"></i>{{ $clubs->participant_total }} Ahli
                             </p>
                             <h2 style="font-size: 1.3rem;">Keterangan</h2>
                             <p class="card-text text-center" style="font-size: 1.2rem;">{{ $clubs->club_description }}

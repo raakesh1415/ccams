@@ -45,13 +45,13 @@ class RegistrationController extends Controller
         $existingRegistration = Registration::where('user_id', $userId)->where('club_type', $clubType)->first();
 
         if ($existingRegistration) {
-            return redirect()->back()->with('error', 'Anda telah mendaftar untuk ' . $clubType . '.');
+            return redirect()->back()->with('error', 'Anda telah mendaftar untuk ' . $clubType);
         }
 
         // Check if the club is already at capacity
         $currentRegistrations = Registration::where('club_id', $clubId)->count();
         if ($currentRegistrations >= $club->participant_total) {
-            return redirect()->back()->with('error', 'Pendaftaran gagal: Kapasiti kelab dicapai.');
+            return redirect()->back()->with('error', 'Pendaftaran gagal: Kapasiti kelab dicapai');
         }
 
         //Register student to club
@@ -61,7 +61,7 @@ class RegistrationController extends Controller
             'club_type' => $clubType,
         ]);
 
-        return redirect()->back()->with('success', 'Berjaya mendaftar ke ' . $club->club_name .'.');
+        return redirect()->back()->with('success', 'Berjaya mendaftar ke ' . $club->club_name);
     }
 
     public function viewRegister()
@@ -80,10 +80,10 @@ class RegistrationController extends Controller
     
         if ($registration) {
             $registration->delete();
-            return redirect()->back()->with('success', 'Berjaya dibatalkan pendaftaran daripada ' . $registration->club->club_name . '.');
+            return redirect()->back()->with('success', 'Berjaya membatalkan pendaftaran daripada ' . $registration->club->club_name);
         }
     
-        return redirect()->back()->with('error', 'Pendaftaran tidak ditemui.');
+        return redirect()->back()->with('error', 'Pendaftaran tidak ditemui');
     }
     
     public function searchPersatuan(Request $request)
@@ -139,10 +139,4 @@ public function searchUnitBeruniform(Request $request)
         return back()->with('error', 'Error during search: ' . $e->getMessage());
     }
 }
-
-    
-
-    
-    
-
 }

@@ -14,20 +14,19 @@
         <!-- Toggle View Dropdown -->
         <div class="d-flex justify-content-end mb-3">
             <select id="view-toggle" class="form-select" style="width: 170px;">
-                <option value="list" selected>Senarai</option>
-                <option value="card">Kad</option>
+                <option value="card" selected>Kad</option>
+                <option value="list">Senarai</option>
             </select>
         </div>
 
         <!-- Check if there are any registrations -->
         @if ($registrations->isEmpty())
             <div class="text-center">
-                <p><b>Tiada kelab didaftarkan.<b></p>
+                <p><b>Tiada kelab didaftarkan.</b></p>
             </div>
         @else
-            <!-- Registered Clubs View -->
-            <div id="club-list-view" class="row mt-4">
-                <!-- List View -->
+            <!-- List View -->
+            <div id="club-list-view" class="row mt-4" style="display: none;">
                 @foreach ($registrations as $registration)
                     <div class="col-12 mb-4 list-view">
                         <div class="card shadow-sm h-100 rounded-3">
@@ -40,22 +39,50 @@
                                         style="width: 100%; height: 100%; object-fit: fill; padding: 0;">
                                 </div>
                                 <!-- Club Details -->
-                                <div class="flex-grow-1 p-3">
-                                    <h4 class="card-title">{{ $registration->club->club_name }}</h4>
+                                <div class="flex-grow-1 p-4">
+                                    <h5 class="card-title">{{ $registration->club->club_name }}</h5>
                                     <p style="font-size: 1.1rem;">{{ $registration->club_type }}</p>
                                 </div>
                                 <!-- Delete Button with Trash Icon -->
-                                <form
+                                <form id="unregistrationForm-{{ $registration->registration_id }}"
                                     action="{{ route('registration.unregister', ['registrationId' => $registration->registration_id]) }}"
                                     method="POST" style="display: inline; padding: 20px;">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger" title="Unregister"
-                                        style="font-size: 1.2rem; padding: 0.4rem 0.6rem;"
-                                        onclick="return confirm('Adakah anda pasti mahu membatalkan pendaftaran daripada kelab ini?');">
+                                    <button type="button" class="btn btn-danger"
+                                        style="font-size: 1.2rem; padding: 0.4rem 0.6rem;" data-bs-toggle="modal"
+                                        data-bs-target="#confirmationModal-{{ $registration->registration_id }}">
                                         <i class="fas fa-trash-alt"></i>
                                     </button>
                                 </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Confirmation Modal for List View -->
+                    <div class="modal fade" id="confirmationModal-{{ $registration->registration_id }}" tabindex="-1"
+                        aria-labelledby="confirmationModalLabel-{{ $registration->registration_id }}"
+                        aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-body text-center">
+                                    <i class="fa fa-question-circle text-black" style="font-size: 50px;"></i>
+                                    <h5 class="modal-title mt-3"
+                                        id="confirmationModalLabel-{{ $registration->registration_id }}">
+                                        PENGESAHAN PEMBATALAN
+                                    </h5>
+                                    <p class="mt-3">Adakah anda pasti mahu membatalkan pendaftaran daripada
+                                        <strong>{{ $registration->club->club_name }}</strong>?
+                                    </p>
+                                    <div class="d-flex justify-content-center mt-4">
+                                        <button type="button" class="btn btn-secondary me-2"
+                                            data-bs-dismiss="modal">Tidak</button>
+                                        <button type="button" class="btn btn-danger"
+                                            onclick="document.getElementById('unregistrationForm-{{ $registration->registration_id }}').submit();">
+                                            Pasti
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -63,32 +90,29 @@
             </div>
 
             <!-- Card View -->
-            <div id="club-card-view" class="row mt-4" style="display: none;">
+            <div id="club-card-view" class="row mt-4">
                 @foreach ($registrations as $registration)
-                    <div class="col-md-4 mb-4">
-                        <div class="card shadow-sm position-relative">
-                            <!-- Badge for Club Type -->
-                            <div class="position-absolute" style="top: 10px; left: 10px;">
-                                <span class="bg-dark text-white p-2 rounded" style="font-size: 1rem;">
-                                    {{ $registration->club_type }}
-                                </span>
-                            </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="card club-card">
                             <!-- Club Image -->
-                            <img src="{{ asset('storage/' . $registration->club->club_pic) }}" alt="Club Image"
-                                class="card-img-top" style="height: 200px; object-fit: fill;">
+                            <div class="ratio ratio-4x3"> <!-- Menyesuaikan nisbah aspek kepada 16:9 -->
+                                <img src="{{ asset('storage/' . $registration->club->club_pic) }}" alt="Gambar Kelab"
+                                    class="card-img-top img-fluid"> <!-- Memastikan gambar sesuai dalam bekas -->
+                            </div>
                             <!-- Card Body -->
-                            <div class="card-body d-flex flex-column justify-content-between">
-                                <h4 class="card-title">{{ $registration->club->club_name }}</h4>
-                                <div class="d-flex justify-content-end">
+                            <div class="card-body">
+                                <h5 class="card-title text-center">{{ $registration->club->club_name }}</h5>
+                                <p class="card-text text-center">{{ $registration->club_type }}</p>
+                                <div class="d-flex justify-content-center">
                                     <!-- Trash Icon Button -->
-                                    <form
+                                    <form id="unregistrationForm-card-{{ $registration->registration_id }}"
                                         action="{{ route('registration.unregister', ['registrationId' => $registration->registration_id]) }}"
                                         method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm" title="Unregister"
-                                            style="font-size: 1.2rem; padding: 0.4rem 0.6rem;"
-                                            onclick="return confirm('Adakah anda pasti mahu membatalkan pendaftaran daripada kelab ini?');">
+                                        <button type="button" class="btn btn-danger"
+                                            style="font-size: 1.2rem; padding: 0.4rem 0.6rem;" data-bs-toggle="modal"
+                                            data-bs-target="#confirmationModal-card-{{ $registration->registration_id }}">
                                             <i class="fas fa-trash-alt"></i>
                                         </button>
                                     </form>
@@ -96,16 +120,41 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- Confirmation Modal for Card View -->
+                    <div class="modal fade" id="confirmationModal-card-{{ $registration->registration_id }}"
+                        tabindex="-1"
+                        aria-labelledby="confirmationModalLabel-card-{{ $registration->registration_id }}"
+                        aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-body text-center">
+                                    <i class="fa fa-question-circle text-black" style="font-size: 50px;"></i>
+                                    <h5 class="modal-title mt-3"
+                                        id="confirmationModalLabel-card-{{ $registration->registration_id }}">
+                                        PENGESAHAN PEMBATALAN
+                                    </h5>
+                                    <p class="mt-3">Adakah anda pasti mahu membatalkan pendaftaran daripada
+                                        <strong>{{ $registration->club->club_name }}</strong>?
+                                    </p>
+                                    <div class="d-flex justify-content-center mt-4">
+                                        <button type="button" class="btn btn-secondary me-2"
+                                            data-bs-dismiss="modal">Tidak</button>
+                                        <button type="button" class="btn btn-danger"
+                                            onclick="document.getElementById('unregistrationForm-card-{{ $registration->registration_id }}').submit();">
+                                            Pasti
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 @endforeach
             </div>
-
         @endif
-        <div class="text-center mt-4" style="padding: 10px">
-            <a href="{{ route('registration.index') }}" class="btn btn-dark">Kembali</a>
-        </div>
     </div>
 
-    <!-- Add Script to Toggle Views -->
+    <!-- Script to Toggle Views -->
     <script>
         document.getElementById('view-toggle').addEventListener('change', function() {
             const listView = document.getElementById('club-list-view');
