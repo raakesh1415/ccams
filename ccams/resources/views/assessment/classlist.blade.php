@@ -91,7 +91,7 @@
                                 <td>
                                     <a href="{{ route('assessment.viewclass', ['student_id' => $student->id]) }}" 
                                        class="btn btn-sm btn-outline-info">
-                                        <span class="fa fa-eye"></span> View
+                                        <span class="fa fa-eye"></span> Lihat
                                     </a>
                                 </td>
                             </tr>
