@@ -92,4 +92,35 @@
             </div>
         </div>
     </div>
+
+  <!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <!-- Icon and Title -->
+                <i class="fas fa-times-circle text-danger" style="font-size: 50px;"></i>
+                <h5 class="modal-title mt-3" id="deleteModalLabel">Adakah kamu pasti?</h5>
+                <p class="mt-3">
+                    Adakah kamu benar-benar mahu memadamkan kelab ini?<br>
+                    Proses ini tidak boleh dibatalkan setelah kelab dipadam.
+                </p>
+
+                <!-- Buttons -->
+                <div class="d-flex justify-content-center mt-4">
+                    <!-- Cancel Button -->
+                    <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">Batal</button>
+
+                    <!-- Delete Button -->
+                    <form action="{{ route('club.destroy', ['club_id' => $clubs->club_id]) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">Padam</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 </x-layout>
