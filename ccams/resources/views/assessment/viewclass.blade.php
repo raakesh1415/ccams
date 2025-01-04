@@ -171,7 +171,7 @@
                             </ul>
                         </div>
                         <div class="col-md-6">
-                            <p><strong>Tahap P pencapaian:</strong></p>
+                            <p><strong>Tahap Pencapaian:</strong></p>
                             <ul>
                                 @if(is_array($permainanAssessment->achievement) || is_object($permainanAssessment->achievement))
                                 @foreach ($permainanAssessment->achievement as $achievement)
