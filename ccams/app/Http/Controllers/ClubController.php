@@ -58,7 +58,7 @@ public function showDetails($clubs_id)
             'club_name' => 'required|string|max:255',
             'club_description' => 'required|string',
             'participant_total' => 'required|integer|min:1',
-            'club_category' => 'required|string|in:Kelab,Sukan,Unit Beruniform',
+            'club_category' => 'required|string|in:Persatuan,Sukan,Unit Beruniform',
             'club_pic' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
     
