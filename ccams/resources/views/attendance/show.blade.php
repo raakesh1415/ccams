@@ -147,9 +147,9 @@
                                                 @endphp
                                                 <select name="attendance[{{ $week }}][status]" id="week_{{ $week }}" class="form-select">
                                                     <option value="" {{ is_null($status) ? 'selected' : '' }}>- Pilih Status -</option>
-                                                    <option value="Hadir" {{ $status == 'Present' ? 'selected' : '' }}>✅ Hadir</option>
-                                                    <option value="T. Hadir" {{ $status == 'Absent' ? 'selected' : '' }}>❌ T. Hadir</option>
-                                                    <option value="Dikecuali" {{ $status == 'Excused' ? 'selected' : '' }}>🟡 Dikecuali</option>
+                                                    <option value="Hadir" {{ $status == 'Hadir' ? 'selected' : '' }}>✅ Hadir</option>
+                                                    <option value="T. Hadir" {{ $status == 'T. Hadir' ? 'selected' : '' }}>❌ T. Hadir</option>
+                                                    <option value="Dikecuali" {{ $status == 'Dikecuali' ? 'selected' : '' }}>🟡 Dikecuali</option>
                                                 </select>
                                             </div>
                                         @endfor
