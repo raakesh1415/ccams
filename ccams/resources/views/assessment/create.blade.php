@@ -424,6 +424,8 @@
                             <textarea class="form-control" id="comment" name="comment" rows="1"
                                 placeholder="Masukkan komen anda di sini" required></textarea>
                         </div>
+                        <div class="text-danger" id="attendanceError" style="display: none;">Ruang kehadiran diperlukan.</div>
+                        <div class="text-danger" id="commentError" style="display: none;">Ruang komen diperlukan.</div>
                     </div>
 
                     <!-- Butang Hantar -->
@@ -486,6 +488,34 @@
             } else {
                 errorDiv.style.display = 'none'; // Hide custom error message
             }
+        });
+
+        document.getElementById('positionForm').addEventListener('submit', function(event) {
+            let attendance = document.getElementById('attendance').value.trim();
+            let comment = document.getElementById('comment').value.trim();
+            
+            let attendanceError = document.getElementById('attendanceError');
+            let commentError = document.getElementById('commentError');
+
+            let isValid = true;
+
+            if (attendance === '') {
+                event.preventDefault();
+                attendanceError.style.display = 'block';
+                isValid = false;
+            } else {
+                attendanceError.style.display = 'none';
+            }
+
+            if (comment === '') {
+                event.preventDefault();
+                commentError.style.display = 'block';
+                isValid = false;
+            } else {
+                commentError.style.display = 'none';
+            }
+
+            return isValid;
         });
     </script>
 
